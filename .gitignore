@@ -89,3 +89,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 /.vs/AlpycaClient/v16/.suo
+/PackageTesting/tenv/Scripts
+/PackageTesting/tenv/pyvenv.cfg
+/PackageTesting
