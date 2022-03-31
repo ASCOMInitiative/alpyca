@@ -5,8 +5,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a7a25108-7bae-4ce4-8d13-1c1d81c6f2b4}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Test_Alpyca.py</StartupFile>
-    <SearchPath>src</SearchPath>
+    <StartupFile>devtest.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
@@ -21,46 +22,44 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="alpaca\__pycache__\camera.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\covercalibrator.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\Device.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\discovery.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\filterwheel.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\focuser.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\management.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\observingconditions.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\safetymonitor.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\switch.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\telescope.cpython-37.pyc" />
+    <Content Include="alpaca\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="LICENSE.txt" />
     <Content Include="pyproject.toml" />
     <None Include="RBD-Notes.txt" />
     <Content Include="README.md" />
-    <Content Include="requirements.txt" />
-    <Content Include="setup.cfg" />
-    <Content Include="src\alpaca\__pycache__\camera.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\covercalibrator.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\Device.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\discovery.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\filterwheel.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\focuser.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\management.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\observingconditions.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\safetymonitor.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\switch.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\telescope.cpython-37.pyc" />
-    <Content Include="src\alpaca\__pycache__\__init__.cpython-37.pyc" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\" />
-    <Folder Include="src\alpaca\" />
-    <Folder Include="src\alpaca\__pycache__\" />
+    <Folder Include="alpaca\" />
+    <Folder Include="alpaca\__pycache__\" />
+    <Folder Include="PyTest\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\alpaca\camera.py" />
-    <Compile Include="src\alpaca\covercalibrator.py" />
-    <Compile Include="src\alpaca\device.py" />
-    <Compile Include="src\alpaca\discovery.py" />
-    <Compile Include="src\alpaca\dome.py" />
-    <Compile Include="src\alpaca\filterwheel.py" />
-    <Compile Include="src\alpaca\focuser.py" />
-    <Compile Include="src\alpaca\management.py" />
-    <Compile Include="src\alpaca\observingconditions.py" />
-    <Compile Include="src\alpaca\rotator.py" />
-    <Compile Include="src\alpaca\safetymonitor.py" />
-    <Compile Include="src\alpaca\switch.py" />
-    <Compile Include="src\alpaca\telescope.py" />
-    <Compile Include="src\alpaca\__init__.py" />
-    <Compile Include="Test_Alpyca.py" />
+    <Compile Include="alpaca\camera.py" />
+    <Compile Include="alpaca\covercalibrator.py" />
+    <Compile Include="alpaca\device.py" />
+    <Compile Include="alpaca\discovery.py" />
+    <Compile Include="alpaca\dome.py" />
+    <Compile Include="alpaca\filterwheel.py" />
+    <Compile Include="alpaca\focuser.py" />
+    <Compile Include="alpaca\management.py" />
+    <Compile Include="alpaca\observingconditions.py" />
+    <Compile Include="alpaca\rotator.py" />
+    <Compile Include="alpaca\safetymonitor.py" />
+    <Compile Include="alpaca\switch.py" />
+    <Compile Include="alpaca\telescope.py" />
+    <Compile Include="alpaca\__init__.py" />
+    <Compile Include="devtest.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="venv\">
