@@ -92,3 +92,4 @@ dmypy.json
 /PackageTesting/tenv/Scripts
 /PackageTesting/tenv/pyvenv.cfg
 /PackageTesting
+/.vs
