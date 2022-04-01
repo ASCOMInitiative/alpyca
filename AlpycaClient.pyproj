@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a7a25108-7bae-4ce4-8d13-1c1d81c6f2b4}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>devtest.py</StartupFile>
+    <StartupFile>simconf.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -15,6 +15,9 @@
     <InterpreterId>MSBuild|venv|$(MSBuildProjectFullPath)</InterpreterId>
     <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+    <TestFramework>pytest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>.</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -35,6 +38,7 @@
     <Content Include="alpaca\__pycache__\telescope.cpython-37.pyc" />
     <Content Include="alpaca\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="LICENSE.txt" />
+    <Content Include="poetry.lock" />
     <Content Include="pyproject.toml" />
     <None Include="RBD-Notes.txt" />
     <Content Include="README.md" />
@@ -60,6 +64,10 @@
     <Compile Include="alpaca\telescope.py" />
     <Compile Include="alpaca\__init__.py" />
     <Compile Include="devtest.py" />
+    <Compile Include="simconf.py" />
+    <None Include="PyTest\test_safetymonitor.py">
+      <SubType>Code</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="venv\">

@@ -93,3 +93,5 @@ dmypy.json
 /PackageTesting/tenv/pyvenv.cfg
 /PackageTesting
 /.vs
+/OmniSimSettings.lnk
+/RBD-Notes.txt
