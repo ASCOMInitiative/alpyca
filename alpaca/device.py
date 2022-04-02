@@ -123,14 +123,14 @@ class Device(object):
         return [i.strip() for i in self._get("driverinfo").split(",")]
 
     @property
-    def DriverVersion(self) -> str:
+    def DriverVersion(self) -> float:
         """Get string containing only the major and minor version of the driver."""
-        return self._get("driverversion")
+        return float(self._get("driverversion"))
 
     @property
     def InterfaceVersion(self) -> int:
         """ASCOM Device interface version number that this device supports."""
-        return self._get("interfaceversion")
+        return int(self._get("interfaceversion"))
     
     @property
     def Name(self) -> str:

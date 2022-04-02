@@ -31,7 +31,7 @@ class Focuser(Device):
         return self._get("ismoving")
 
     @property
-    def MaxIncrememt(self) -> int:
+    def MaxIncrement(self) -> int:
         """Maximum number of steps allowed in one Move() operation. 
 
         Notes:
@@ -56,7 +56,7 @@ class Focuser(Device):
     @property
     def Position(self) -> int:
         """Current focuser position, in steps."""
-        return self._get("maxstep")
+        return self._get("position")
 
     @property
     def StepSize(self) -> int:
@@ -116,4 +116,4 @@ class Focuser(Device):
             between relative and absolute focusers.
 
         """
-        self._put("halt", Position=Position)
+        self._put("move", Position=Position)

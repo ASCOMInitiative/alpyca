@@ -70,10 +70,12 @@
     <Compile Include="PyTest\test_device.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PyTest\test_filterwheel.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PyTest\test_focuser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="simconf.py" />
     <None Include="PyTest\test_safetymonitor.py">
       <SubType>Code</SubType>
     </None>

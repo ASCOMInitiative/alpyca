@@ -1,24 +1,28 @@
 #
 # PyTest Unit tests for Device superclass
 # For simplicity this uses the SafetyMonitor device. 
-# Connected is tested, then the common properties are read,
-# Rather than test for exact strings, this test just makes
-# certain that no errors occur when reading them.
-#
+# The strings are static and not accessible via the 
+# OmniSim XML settings file. 
 import pytest
-import simconf
+import conftest
 
-from alpaca.device import Device
+from alpaca.safetymonitor import SafetyMonitor
+dev_name = "SafetyMonitor"   # Use this Alpaca device as the source (not in XML config)
 
-def test_device():
-    d = Device(f"{simconf.addr()}", "SafetyMonitor", 0, "http")
-    d.Connected = True
-    print("Checking common static properties:")
-    print(f"  Description:      {d.Description}")
-    print(f"  DriverInfo:       {d.DriverInfo}")
-    print(f"  DriverVersion:    {d.DriverVersion}")
-    print(f"  InterfaceVersion: {d.InterfaceVersion}")
-    print(f"  Name:             {d.Name}")
-    print(f"  SupportedActions: {d.SupportedActions}")
-    d.Connected = False
+def test_device(device, disconn):
+    print("Checking Device superclass common static properties (using SafetyMonitor):")
+    print(f"  Connected:        {device.Connected}")
+    assert device.Connected
+    print(f"  Description:      {device.Description}")
+    assert device.Description == "ASCOM SafetyMonitor Simulator Driver"
+    print(f"  DriverInfo:       {device.DriverInfo}")
+    assert device.DriverInfo == ['SafetyMonitor Simulator Drivers']
+    print(f"  DriverVersion:    {device.DriverVersion}")
+    assert device.DriverVersion == 0.1
+    print(f"  InterfaceVersion: {device.InterfaceVersion}")
+    assert device.InterfaceVersion == 2
+    print(f"  Name:             {device.Name}")
+    assert device.Name == "Alpaca SafetyMonitor Sim"
+    print(f"  SupportedActions: {device.SupportedActions}")
+    assert device.SupportedActions == []
 
