@@ -1,13 +1,14 @@
 # PyTest Unit tests for SafetyMonitor
+import sys
 import pytest
 import simconf
+import conftest
 
 from alpaca.safetymonitor import SafetyMonitor
+conftest.setname("SafetyMonitor")
 
-def test_Safe():
+def test_Safe(device, settings, disconn):
+    assert device.IsSafe == settings['SafetyMonitor']   # This is the setting not the class (same name, typ)
 
-    s = SafetyMonitor(f"{simconf.addr()}", 0)
-    s.Connected = True
-    settings = simconf.settings("SafetyMonitor")
-    assert f"{s.IsSafe}" == settings['SafetyMonitor']   # Comparing strings, bool("False") == True!
-    s.Connected = False
+def test_Boo(device, settings, disconn):
+    assert device.IsSafe == settings['SafetyMonitor']
