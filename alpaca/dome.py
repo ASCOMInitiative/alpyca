@@ -1,4 +1,13 @@
+from enum import Enum
 from alpaca.device import Device
+from typing import List, Any
+
+class ShutterState(Enum):
+    shutterOpen = 0
+    shutterClosed = 1
+    shutterOpening = 2
+    shutterClosing = 3
+    shutterError = 4
 
 class Dome(Device):
     """ASCOM Standard IDomeV2 Interface"""
