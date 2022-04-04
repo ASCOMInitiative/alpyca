@@ -40,6 +40,7 @@
     <Content Include="LICENSE.txt" />
     <Content Include="poetry.lock" />
     <Content Include="pyproject.toml" />
+    <Content Include="requirements.txt" />
     <None Include="RBD-Notes.txt" />
     <Content Include="README.md" />
   </ItemGroup>
@@ -49,6 +50,9 @@
     <Folder Include="PyTest\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="alpaca\exceptions.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="alpaca\camera.py" />
     <Compile Include="conftest.py">
       <SubType>Code</SubType>
@@ -67,6 +71,9 @@
     <Compile Include="alpaca\telescope.py" />
     <Compile Include="alpaca\__init__.py" />
     <Compile Include="devtest.py" />
+    <Compile Include="PyTest\test_camera.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PyTest\test_device.py">
       <SubType>Code</SubType>
     </Compile>

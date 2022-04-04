@@ -338,7 +338,7 @@ class Camera(Device):
         return self._get("lastexposurestarttime")
 
     @property
-    def MaxAdu(self) -> int:
+    def MaxADU(self) -> int:
         """Camera's maximum ADU value."""
         return self._get("maxadu")
 

@@ -16,12 +16,16 @@ def test_props(device, settings, disconn):
     assert d.StepSize == s["StepSize"]
     assert d.TempCompAvailable == s["TempCompAvailable"]
     assert d.TempComp == s["TempComp"]
+    assert s['TempProbe'], "Simulator must have the Temperature Probe enabled"
     print(f"Temp is variable currently {d.Temperature}")
 
-def test_motion(device, disconn):
+def test_motion(device, settings, disconn):
     d = device
+    s = settings
     print("Test Focuser motion and Halt")
-    assert d.Absolute               # Test is for Absolute mode
+    assert d.Absolute, "Simulator must have Absolute mode ON"
+    assert s['Synchronous'] == False, "Simulator must have Synchronous OFF"
+    assert s['CanHalt'], "Simulator must have Halt() enabled"
     newpos = int(d.MaxStep / 2)
     print(f"Test: Absolute mode - Start Move from {d.Position} to {newpos}")
     d.Move(newpos)

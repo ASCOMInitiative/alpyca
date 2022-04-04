@@ -75,7 +75,7 @@ def test_altaz(device, disconn):
         time.sleep(0.5)
         print('.', end = '')
     assert d.Azimuth == 90
-    print(f'. -> OK {d.Azimuth}')
+    print(f'. OK, azimuth is {d.Azimuth}')
 
 
 def test_park(device, disconn):

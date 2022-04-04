@@ -1,8 +1,11 @@
 from enum import Enum
+from threading import Lock
 from datetime import datetime
 from typing import List, Any
 import dateutil.parser
 import requests
+import random
+from alpaca.exceptions import *
 
 API_VERSION = 1
 
@@ -19,6 +22,8 @@ class Device(object):
         protocol (str): Protocol (http vs https) used to communicate with Alpaca server.
         api_version (int): Alpaca API version.
         base_url (str): Basic URL to easily append with commands.
+
+    Notes: Sets a random number for ClientID that lasts 
 
     """
 
@@ -41,6 +46,12 @@ class Device(object):
             self.device_type,
             self.device_number
         )
+    #
+    # CLASS VARIABLES - SHARED ACROSS DEVICE INSTANCES
+    #
+    client_id = random.randint(0, 65535)
+    client_trans_id = 1
+    ctid_lock = Lock()
 
     def Action(self, ActionString: str, *Parameters) -> str:
         """Access functionality beyond the built-in capabilities of the ASCOM device interfaces.
@@ -154,7 +165,18 @@ class Device(object):
             **data: Data to send with request.
         
         """
-        response = requests.get("%s/%s" % (self.base_url, attribute), params = kvpair)
+        url = f"{self.base_url}/{attribute}"
+        qparams = {
+                "ClientTransactionID": f"{Device.client_trans_id}",
+                "ClientID": f"{Device.client_id}" 
+                }
+        qparams.update(kvpair)
+        try:
+            Device.ctid_lock.acquire()
+            response = requests.get("%s/%s" % (self.base_url, attribute), params = qparams)
+            Device.client_trans_id += 1
+        finally:
+            Device.ctid_lock.release()
         self.__check_error(response)
         return response.json()["Value"]
 
@@ -166,22 +188,60 @@ class Device(object):
             **data: Data to send with request.
         
         """
-        response = requests.put("%s/%s" % (self.base_url, attribute), data=data)
+        url = f"{self.base_url}/{attribute}"
+        pdata = {
+                "ClientTransactionID": f"{Device.client_trans_id}",
+                "ClientID": f"{Device.client_id}" 
+                }
+        pdata.update(data)
+        try:
+            Device.ctid_lock.acquire()
+            response = requests.put("%s/%s" % (self.base_url, attribute), data=pdata)
+            Device.client_trans_id += 1
+        finally:
+            Device.ctid_lock.release()
         self.__check_error(response)
         return response.json()
 
     def __check_error(self, response: requests.Response) -> None:
-        """Check response from Alpaca server for Errors.
+        """Alpaca exception handler (ASCOM exception types)
 
         Args:
             response (Response): Response from Alpaca server to check.
 
+        Notes:
+            Depending on the error number, the appropriate ASCOM exception type
+            will be raised. See the ASCOM Alpaca API Reference for the reserved
+            error codes and their corresponding exceptions.
+
         """
-        j = response.json()
-        if j["ErrorNumber"] != 0:
-            raise NumericError(j["ErrorNumber"], j["ErrorMessage"])
-        elif response.status_code == 400 or response.status_code == 500:
-            raise ErrorMessage(j["Value"])
+        if response.status_code in range(200, 204):
+            j = response.json()
+            n = j["ErrorNumber"]
+            m = j["ErrorMessage"]
+            if n != 0:
+                if n == 0x0400:
+                    raise NotImplementedException(n, m)
+                elif n == 0x0401:
+                    raise InvalidValueException(n, m)
+                elif n == 0x0402:
+                    raise ValueNotSetException(n, m)
+                elif n == 0x0407:
+                    raise NotConnectedException(n, m)
+                elif n == 0x0408:
+                    raise ParkedException(n, m)
+                elif n == 0x0409:
+                    raise SlavedException(n, m)
+                elif n == 0x040B:
+                    raise InvalidOperationException(n, m)
+                elif n == 0x040c:
+                    raise ActionNotImplementedException(n, m)
+                elif n >= 0x500 and n <= 0xFFF:
+                    raise DriverException(n, m)
+                else: # unknown 0x400-0x4FF
+                    raise UnknownAscomException(n, m)
+        else:
+            raise AlpacaRequestException(response.status_code, f"{response.text} (URL {response.url})")
 
 
 

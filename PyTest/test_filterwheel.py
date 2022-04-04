@@ -19,6 +19,7 @@ def test_props(device, settings, disconn):
 def test_motion(device, settings, disconn):
     d = device
     s = settings
+    assert settings['Slots'] > 4, "This test requires at least 4 filters"
     print("Test FilterWheel motion:")
     if d.Position != 0:
         print(f"  Return from slot {d.Position} to 0")
