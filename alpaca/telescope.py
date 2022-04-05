@@ -78,7 +78,7 @@ class Telescope(Device):
             Alignment mode of the mount (Alt/Az, Polar, German Polar).
         
         """
-        return self._get("alignmentmode")
+        return AlignmentModes(self._get("alignmentmode"))
 
     @property
     def Altitude(self) -> float:
@@ -332,7 +332,7 @@ class Telescope(Device):
             (Enum EquatorialCoordinateType)
 
         """
-        return self._get("equatorialsystem")
+        return EquatorialCoordinateType(self._get("equatorialsystem"))
 
     @property
     def FocalLength(self) -> float:
@@ -413,17 +413,16 @@ class Telescope(Device):
         """Set or return the mount's pointing state.
 
         Args:
-            SideOfPier (int): New pointing state. 0 = pierEast, 1 = pierWest
+            SideOfPier (enum PierSide): New pointing state
         
         Returns:
             Side of pier if not set.
         
-            **TODO** Make sure enum is handled correctly
         """
-        return self._get("sideofpier")
+        return PierSide(self._get("sideofpier"))
     @SideOfPier.setter
     def SideOfPier(self, SideOfPier: PierSide):
-        self._put("sideofpier", SideOfPier=SideOfPier)
+        self._put("sideofpier", SideOfPier=SideOfPier.value)
 
     @property
     def SiderealTime(self) -> float:
@@ -577,10 +576,10 @@ class Telescope(Device):
         **TODO** Verify enum usage both ways
 
         """
-        return self._get("trackingrate")
+        return DriveRates(self._get("trackingrate"))
     @TrackingRate.setter
     def TrackingRate(self, TrackingRate: DriveRates):
-        self._put("trackingrate", TrackingRate=TrackingRate)
+        self._put("trackingrate", TrackingRate=TrackingRate.value)
 
     @property
     def TrackingRates(self) -> List[DriveRates]:
@@ -689,7 +688,7 @@ class Telescope(Device):
             Duration (int): Duration of the guide-rate motion (milliseconds).
         
         """
-        self._put("pulseguide", Direction=Direction, Duration=Duration)
+        self._put("pulseguide", Direction=Direction.value, Duration=Duration)
 
     def SetPark(self) -> None:
         """Set the telescope's park position to its current position."""

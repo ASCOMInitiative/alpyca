@@ -27,24 +27,27 @@ class CoverCalibrator(Device):
         protocol: str = "http"
     ):
         """Initialize Camera object."""
-        super().__init__(address, "covercalibraor", device_number, protocol)
+        super().__init__(address, "covercalibrator", device_number, protocol)
 
     @property
     def Brightness(self) -> int:
         """The current calibrator brightness (0 = MaxBrightness)"""
-        return self.get("brightness")
+        return self._get("brightness")
     @Brightness.setter
     def Brightness(self, BrightnessVal: int):
         self._put("brightness", Brightness=BrightnessVal)
 
+    @property
     def CalibratorState(self) -> CalibratorStatus:
         """The state of the calibration device (enum CalibratorStatus)"""
-        return self._get("calibratorstate")
+        return CalibratorStatus(self._get("calibratorstate"))
 
+    @property
     def CoverState(self) -> CoverStatus:
         """The state of the device cover (enum CoverStatus)"""
-        return self._get("coverstate")
+        return CoverStatus(self._get("coverstate"))
 
+    @property
     def MaxBrightness(self) -> int:
         """The state of the device cover (enum CoverStatus)"""
         return self._get("maxbrightness")
@@ -58,7 +61,7 @@ class CoverCalibrator(Device):
             is safely off, CalibratorState will return Off.
 
         """
-        self._put("calibratoroff:)")
+        self._put("calibratoroff")
 
     def CalibratorOn(self, BrightnessVal: int) -> None:
         """Turns the calibrator on if the device has calibration capability

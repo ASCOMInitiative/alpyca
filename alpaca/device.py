@@ -5,7 +5,7 @@ from typing import List, Any
 import dateutil.parser
 import requests
 import random
-from alpaca.exceptions import *
+from alpaca.exceptions import *     # Sorry Python purists
 
 API_VERSION = 1
 
@@ -46,12 +46,13 @@ class Device(object):
             self.device_type,
             self.device_number
         )
-    #
+    # ------------------------------------------------
     # CLASS VARIABLES - SHARED ACROSS DEVICE INSTANCES
-    #
+    # ------------------------------------------------
     client_id = random.randint(0, 65535)
     client_trans_id = 1
     ctid_lock = Lock()
+    # ------------------------------------------------
 
     def Action(self, ActionString: str, *Parameters) -> str:
         """Access functionality beyond the built-in capabilities of the ASCOM device interfaces.
@@ -157,7 +158,7 @@ class Device(object):
 # HTTP/JSON Communications
 # ========================
 
-    def _get(self, attribute: str, **kvpair) -> str:
+    def _get(self, attribute: str, **data) -> str:
         """Send an HTTP GET request to an Alpaca server and check response for errors.
 
         Args:
@@ -166,14 +167,14 @@ class Device(object):
         
         """
         url = f"{self.base_url}/{attribute}"
-        qparams = {
+        pdata = {
                 "ClientTransactionID": f"{Device.client_trans_id}",
                 "ClientID": f"{Device.client_id}" 
                 }
-        qparams.update(kvpair)
+        pdata.update(data)
         try:
             Device.ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), params = qparams)
+            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata)
             Device.client_trans_id += 1
         finally:
             Device.ctid_lock.release()
@@ -201,7 +202,7 @@ class Device(object):
         finally:
             Device.ctid_lock.release()
         self.__check_error(response)
-        return response.json()
+        return response.json()  # TODO Is this right? json()?
 
     def __check_error(self, response: requests.Response) -> None:
         """Alpaca exception handler (ASCOM exception types)

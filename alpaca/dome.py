@@ -169,7 +169,7 @@ class Dome(Device):
             Status (enum ShutterState) of the dome shutter or roll-off roof.
 
         """
-        return self._get("shutterstatus")
+        return ShutterState(self._get("shutterstatus"))
 
     @property
     def Slaved(self) -> bool:

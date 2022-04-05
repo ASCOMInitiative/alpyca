@@ -2,6 +2,7 @@ from alpaca.device import Device
 from alpaca.telescope import GuideDirections
 from enum import Enum
 from typing import List, Any
+import requests
 
 class CameraStates(Enum):
     cameraIdle      = 0
@@ -87,7 +88,7 @@ class Camera(Device):
             Current camera operational state (enum CameraStates).
         
         """
-        return self._get("camerastate")
+        return CameraStates(self._get("camerastate"))
 
     @property
     def CameraXSize(self) -> int:
@@ -279,35 +280,35 @@ class Camera(Device):
         select the correct de-serialisation data class.
 
         Returns:
-            Array of integers containing the exposure pixel values.
+            list of lists (of lists) forming a two (or three) dimensional array of integers.
 
-        **TODO** Form the array in Python
+        **TODO** Currently only JSON format. Handle ImageBytes format.
 
         """
-        return self._get("imagearray")
+        return self._get_imagedata("imagearray")
 
-    @property
-    def ImageArrayVariant(self) -> List[int]:
-        """Return an array of integers containing the exposure pixel values.
+    #@property
+    #def ImageArrayVariant(self) -> List[int]:
+    #    """Return an array of integers containing the exposure pixel values.
 
-        Return an array of 32bit integers containing the pixel values from the last
-        exposure. This call can return either a 2 dimension (monochrome images) or 3
-        dimension (colour or multi-plane images) array of size NumX * NumY or NumX *
-        NumY * NumPlanes. Where applicable, the size of NumPlanes has to be determined
-        by inspection of the returned Array. This call can return values as 
-        short(16bit) integers, int(32bit) integers or double floating point values. 
-        The nature of the returned values is given in the Type parameter: 0 = Unknown, 
-        1 = short(16bit), 2 = int(32bit), 3 = Double. The number of planes is given in
-        the returned Rank value. PLEASE REFER TO ALPACA DOCUMENTATION FOR MORE DETAILS
-        INCLUDING COLOR/BAYER FORMATTING AND HIGH-SPEED IMAGEBYTES IMAGE DATA.
+    #    Return an array of 32bit integers containing the pixel values from the last
+    #    exposure. This call can return either a 2 dimension (monochrome images) or 3
+    #    dimension (colour or multi-plane images) array of size NumX * NumY or NumX *
+    #    NumY * NumPlanes. Where applicable, the size of NumPlanes has to be determined
+    #    by inspection of the returned Array. This call can return values as 
+    #    short(16bit) integers, int(32bit) integers or double floating point values. 
+    #    The nature of the returned values is given in the Type parameter: 0 = Unknown, 
+    #    1 = short(16bit), 2 = int(32bit), 3 = Double. The number of planes is given in
+    #    the returned Rank value. PLEASE REFER TO ALPACA DOCUMENTATION FOR MORE DETAILS
+    #    INCLUDING COLOR/BAYER FORMATTING AND HIGH-SPEED IMAGEBYTES IMAGE DATA.
 
-        Returns:
-            Array of integers containing the pixel values from the last exposure.
+    #    Returns:
+    #        list of lists (of lists) forming a two (or three) dimensional array of integers.
 
-        **TODO** Form the array in Python
+    #    **TODO** Currently only JSON format. Handle ImageBytes format.
         
-        """
-        return self._get("imagearrayvariant")
+    #    """
+    #    return self._get("imagearrayvariant")
 
     @property
     def ImageReady(self) -> bool:
@@ -467,7 +468,7 @@ class Camera(Device):
         """Type of information returned by the the camera sensor (monochrome or colour).
         
         Returns: Enum SensorTypes: 
-            0 = Monochrome, 
+            0 = Monochrome 
             1 = Colour (not requiring Bayer decoding)
             2 = RGGB   (Bayer encoding)
             3 = CMYG   (Bayer encoding)
@@ -475,7 +476,7 @@ class Camera(Device):
             5 = LRGB   TRUESENSE Bayer encoding
        
         """
-        return self._get("sensortype")
+        return SensorTypes(self._get("sensortype"))
     
     @property
     def SetCCDTemperature(self) -> float:
@@ -579,3 +580,63 @@ class Camera(Device):
         """
         self._put("stopexposure")
 
+# === LOW LEVEL ROUTINES TO GET IMAGE DATA WITH OPTIONAL IMAGEBYTES ===
+
+    def _get_imagedata(self, attribute: str, **data) -> str:
+        """TBD
+
+        Args:
+            attribute (str): Attribute to get from server.
+            **data: Data to send with request.
+        
+        """
+        url = f"{self.base_url}/{attribute}"
+        hdrs = {'accept' : 'application/imagebytes'}
+        pdata = {
+                "ClientTransactionID": f"{Device.client_trans_id}",
+                "ClientID": f"{Device.client_id}" 
+                }
+        pdata.update(data)
+        try:
+            Device.ctid_lock.acquire()
+            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
+            Device.client_trans_id += 1
+        finally:
+            Device.ctid_lock.release()
+        ct = response.headers.get('content-type')   # case insensitive
+        if ct == 'application/imageBytes':
+            print('imageBytes, feassemble this into the Python array format.')
+        else:
+            #plain JSON respose treat as usual
+            self.__check_error(response)
+            return response.json()["Value"]
+
+    # NB: EXCEPTION HANDLING REPEATED IN DEVICE.PY = TODO Why couldn't I use that method???
+    def __check_error(self, response: requests.Response) -> None:
+        if response.status_code in range(200, 204):
+            j = response.json()
+            n = j["ErrorNumber"]
+            m = j["ErrorMessage"]
+            if n != 0:
+                if n == 0x0400:
+                    raise NotImplementedException(n, m)
+                elif n == 0x0401:
+                    raise InvalidValueException(n, m)
+                elif n == 0x0402:
+                    raise ValueNotSetException(n, m)
+                elif n == 0x0407:
+                    raise NotConnectedException(n, m)
+                elif n == 0x0408:
+                    raise ParkedException(n, m)
+                elif n == 0x0409:
+                    raise SlavedException(n, m)
+                elif n == 0x040B:
+                    raise InvalidOperationException(n, m)
+                elif n == 0x040c:
+                    raise ActionNotImplementedException(n, m)
+                elif n >= 0x500 and n <= 0xFFF:
+                    raise DriverException(n, m)
+                else: # unknown 0x400-0x4FF
+                    raise UnknownAscomException(n, m)
+        else:
+            raise AlpacaRequestException(response.status_code, f"{response.text} (URL {response.url})")

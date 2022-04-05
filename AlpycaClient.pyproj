@@ -74,6 +74,9 @@
     <Compile Include="PyTest\test_camera.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PyTest\test_covercalibrator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PyTest\test_device.py">
       <SubType>Code</SubType>
     </Compile>

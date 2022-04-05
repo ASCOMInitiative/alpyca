@@ -10,7 +10,7 @@ def device(request):
     n = getattr(request.module, "dev_name")
     print(f'Setup: for {n}')
     c = getattr(sys.modules[f"alpaca.{n.lower()}"], n)  # Creates a device class by string name :-)
-    d =  c('70.167.219.235:32323', 0)                        # Created an instance of the class
+    d =  c('localhost:32323', 0)                        # Created an instance of the class
     d.Connected = True
     print(f"Setup: Connected to {n} OK")
     return d
