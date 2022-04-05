@@ -1,5 +1,6 @@
 from alpaca.device import Device
 from alpaca.telescope import GuideDirections
+from alpaca.exceptions import *
 from enum import Enum
 from typing import List, Any
 import requests
@@ -604,8 +605,9 @@ class Camera(Device):
         finally:
             Device.ctid_lock.release()
         ct = response.headers.get('content-type')   # case insensitive
-        if ct == 'application/imageBytes':
-            print('imageBytes, feassemble this into the Python array format.')
+        if ct == 'application/imagebytes':
+            print('imageBytes, reassemble this into the Python array format.')
+            return []
         else:
             #plain JSON respose treat as usual
             self.__check_error(response)
