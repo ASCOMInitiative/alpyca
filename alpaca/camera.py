@@ -4,6 +4,7 @@ from alpaca.exceptions import *
 from enum import Enum
 from typing import List, Any
 import requests
+from requests import Response
 
 class CameraStates(Enum):
     cameraIdle      = 0
@@ -21,6 +22,72 @@ class SensorTypes(Enum):    # **TODO** This is singular in the spec
     CMYG2           = 4
     LRGB            = 5
 
+class ImageElementTypes(Enum):
+    Unknown = 0
+    Int16 = 1
+    Int32 = 2
+    Double = 3
+    # Remainder unused in 2002 Alpaca
+    Single = 4
+    UInt64 = 5
+    Byte = 6
+    Int64 = 7
+    UInt16 = 8
+    UInt32 = 9
+
+
+class ImageMetadata(object):
+    """Metadata describing the returned ImageArray data
+
+        ** TODO ** see https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+
+    """
+    def __init__(
+        self,
+        metadata_version: int,
+        image_element_type: ImageElementTypes,
+        transmission_element_type: ImageElementTypes,
+        rank: int,
+        num_x: int,
+        num_y: int,
+        num_z: int
+    ):
+        self.metavers = metadata_version
+        self.imgtype = image_element_type
+        self.xmtype = transmission_element_type
+        self.rank = rank
+        self.x_size = x_size
+        self.y_size = y_size
+        self.z_size = z_size
+
+    @property
+    def MetadataVersion(self):
+        return self.metavers
+
+    @property
+    def ImageElementType(self) -> ImageElementTypes: 
+        return self.imgtype
+
+    @property
+    def TransmissionElementType(self) -> ImageElementTypes: 
+        return self.xmtype
+
+    @property
+    def Rank(self):
+        return self.rank
+
+    @property
+    def Dimension1(self):
+        return self.x_size
+
+    @property
+    def Dimension2(self):
+        return self.y_size
+
+    @property
+    def Dimension3(self):
+        return self.z_size
+
 
 
 class Camera(Device):
@@ -34,6 +101,7 @@ class Camera(Device):
     ):
         """Initialize Camera object."""
         super().__init__(address, "camera", device_number, protocol)
+        self.image_desc = None      # Only if ImageBytes
 
     @property
     def BayerOffsetX(self) -> int:
@@ -287,6 +355,10 @@ class Camera(Device):
 
         """
         return self._get_imagedata("imagearray")
+
+    @property
+    def ImageArrayInfo() -> ImageMetadata:
+        return self.image_desc
 
     #@property
     #def ImageArrayVariant(self) -> List[int]:
@@ -582,6 +654,7 @@ class Camera(Device):
         self._put("stopexposure")
 
 # === LOW LEVEL ROUTINES TO GET IMAGE DATA WITH OPTIONAL IMAGEBYTES ===
+#     https://www.w3resource.com/python/python-bytes.php#byte-string
 
     def _get_imagedata(self, attribute: str, **data) -> str:
         """TBD
@@ -604,41 +677,73 @@ class Camera(Device):
             Device.client_trans_id += 1
         finally:
             Device.ctid_lock.release()
-        ct = response.headers.get('content-type')   # case insensitive
-        if ct == 'application/imagebytes':
-            print('imageBytes, reassemble this into the Python array format.')
-            return []
-        else:
-            #plain JSON respose treat as usual
-            self.__check_error(response)
-            return response.json()["Value"]
 
-    # NB: EXCEPTION HANDLING REPEATED IN DEVICE.PY = TODO Why couldn't I use that method???
-    def __check_error(self, response: requests.Response) -> None:
-        if response.status_code in range(200, 204):
+        if response.status_code not in range(200, 204):                 # HTTP level errors 
+            raise AlpacaRequestException(response.status_code, 
+                    f"{response.reason}: {response.text} (URL {response.url})")
+
+        ct = response.headers.get('content-type')   # case insensitive
+        #
+        # IMAGEBYTES
+        #
+        if ct == 'application/imagebytes':
+            print('imagebytes, reassemble this into the Python array format.')
+            n = int.from_bytes(b[4:8], 'little')
+            if n != 0:
+                m = response.text[44:].decode(encoding='UTF-8')
+                raise_alpaca_if(n, m)               # WIll raise here
+
+            # ImageBytes is valid, now for the fun part
+            img_desc = ImageMetadata(
+                int.from_bytes(response.content[0:4], 'little'),        # Meta version
+                int.from_bytes(response.content[20:24], 'little'),      # Image element type
+                int.from_bytes(response.content[28:32], 'little'),      # Xmsn element type
+                int.from_bytes(response.content[28:32], 'little'),      # Rank
+                int.from_bytes(response.content[32:36], 'little'),      # Dimension 1
+                int.from_bytes(response.content[36:40], 'little'),      # Dimension 2
+                int.from_bytes(response.content[40:44], 'little')       # Dimension 3
+                )
+
+            return []
+        #
+        # JSON IMAGE DATA
+        #
+        else:
             j = response.json()
             n = j["ErrorNumber"]
             m = j["ErrorMessage"]
-            if n != 0:
-                if n == 0x0400:
-                    raise NotImplementedException(n, m)
-                elif n == 0x0401:
-                    raise InvalidValueException(n, m)
-                elif n == 0x0402:
-                    raise ValueNotSetException(n, m)
-                elif n == 0x0407:
-                    raise NotConnectedException(n, m)
-                elif n == 0x0408:
-                    raise ParkedException(n, m)
-                elif n == 0x0409:
-                    raise SlavedException(n, m)
-                elif n == 0x040B:
-                    raise InvalidOperationException(n, m)
-                elif n == 0x040c:
-                    raise ActionNotImplementedException(n, m)
-                elif n >= 0x500 and n <= 0xFFF:
-                    raise DriverException(n, m)
-                else: # unknown 0x400-0x4FF
-                    raise UnknownAscomException(n, m)
-        else:
-            raise AlpacaRequestException(response.status_code, f"{response.text} (URL {response.url})")
+            raise_alpaca_if(n, m)                   # Raise Alpaca Exception if non-zero Alpaca error
+            return j["Value"]
+
+
+def raise_alpaca_if(n, m):
+    """If non-zero Alpaca error, raise the appropriate Alpaca exception
+
+    Parameters:
+        n: Error number from JSON response
+        m: Message text for exception
+
+    Returns:
+        Nothing if n==0, raises if n != 0
+
+    """
+    if n == 0x0400:
+        raise NotImplementedException(n, m)
+    elif n == 0x0401:
+        raise InvalidValueException(n, m)
+    elif n == 0x0402:
+        raise ValueNotSetException(n, m)
+    elif n == 0x0407:
+        raise NotConnectedException(n, m)
+    elif n == 0x0408:
+        raise ParkedException(n, m)
+    elif n == 0x0409:
+        raise SlavedException(n, m)
+    elif n == 0x040B:
+        raise InvalidOperationException(n, m)
+    elif n == 0x040c:
+        raise ActionNotImplementedException(n, m)
+    elif n >= 0x500 and n <= 0xFFF:
+        raise DriverException(n, m)
+    else: # unknown 0x400-0x4FF
+        raise UnknownAscomException(n, m)
