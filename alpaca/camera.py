@@ -5,6 +5,7 @@ from enum import Enum
 from typing import List, Any
 import requests
 from requests import Response
+import array
 
 class CameraStates(Enum):
     cameraIdle      = 0
@@ -22,7 +23,7 @@ class SensorTypes(Enum):    # **TODO** This is singular in the spec
     CMYG2           = 4
     LRGB            = 5
 
-class ImageElementTypes(Enum):
+class ImageArrayElementTypes(Enum):
     Unknown = 0
     Int16 = 1
     Int32 = 2
@@ -45,8 +46,8 @@ class ImageMetadata(object):
     def __init__(
         self,
         metadata_version: int,
-        image_element_type: ImageElementTypes,
-        transmission_element_type: ImageElementTypes,
+        image_element_type: ImageArrayElementTypes,
+        transmission_element_type: ImageArrayElementTypes,
         rank: int,
         num_x: int,
         num_y: int,
@@ -56,20 +57,20 @@ class ImageMetadata(object):
         self.imgtype = image_element_type
         self.xmtype = transmission_element_type
         self.rank = rank
-        self.x_size = x_size
-        self.y_size = y_size
-        self.z_size = z_size
+        self.x_size = num_x
+        self.y_size = num_y
+        self.z_size = num_z
 
     @property
     def MetadataVersion(self):
         return self.metavers
 
     @property
-    def ImageElementType(self) -> ImageElementTypes: 
+    def ImageElementType(self) -> ImageArrayElementTypes: 
         return self.imgtype
 
     @property
-    def TransmissionElementType(self) -> ImageElementTypes: 
+    def TransmissionElementType(self) -> ImageArrayElementTypes: 
         return self.xmtype
 
     @property
@@ -97,11 +98,12 @@ class Camera(Device):
         self,
         address: str,
         device_number: int,
-        protocol: str = "http"
+        protocol: str = "http",
+        img_desc: ImageMetadata = None
     ):
         """Initialize Camera object."""
         super().__init__(address, "camera", device_number, protocol)
-        self.image_desc = None      # Only if ImageBytes
+        self.img_desc = None
 
     @property
     def BayerOffsetX(self) -> int:
@@ -357,8 +359,8 @@ class Camera(Device):
         return self._get_imagedata("imagearray")
 
     @property
-    def ImageArrayInfo() -> ImageMetadata:
-        return self.image_desc
+    def ImageArrayInfo(self) -> ImageMetadata:
+        return self.img_desc
 
     #@property
     #def ImageArrayVariant(self) -> List[int]:
@@ -688,25 +690,69 @@ class Camera(Device):
         #
         if ct == 'application/imagebytes':
             print('imagebytes, reassemble this into the Python array format.')
+            b = response.content
             n = int.from_bytes(b[4:8], 'little')
             if n != 0:
                 m = response.text[44:].decode(encoding='UTF-8')
-                raise_alpaca_if(n, m)               # WIll raise here
+                raise_alpaca_if(n, m)               # Will raise here
 
             # ImageBytes is valid, now for the fun part
-            img_desc = ImageMetadata(
-                int.from_bytes(response.content[0:4], 'little'),        # Meta version
-                int.from_bytes(response.content[20:24], 'little'),      # Image element type
-                int.from_bytes(response.content[28:32], 'little'),      # Xmsn element type
-                int.from_bytes(response.content[28:32], 'little'),      # Rank
-                int.from_bytes(response.content[32:36], 'little'),      # Dimension 1
-                int.from_bytes(response.content[36:40], 'little'),      # Dimension 2
-                int.from_bytes(response.content[40:44], 'little')       # Dimension 3
+            self.img_desc = ImageMetadata(
+                int.from_bytes(b[0:4], 'little'),        # Meta version
+                int.from_bytes(b[20:24], 'little'),      # Image element type
+                int.from_bytes(b[24:28], 'little'),      # Xmsn element type
+                int.from_bytes(b[28:32], 'little'),      # Rank
+                int.from_bytes(b[32:36], 'little'),      # Dimension 1
+                int.from_bytes(b[36:40], 'little'),      # Dimension 2
+                int.from_bytes(b[40:44], 'little')       # Dimension 3
                 )
+            
 
-            return []
+            if self.img_desc.TransmissionElementType == ImageArrayElementTypes.Int16.value:
+                bytes = 2
+                signed = True                       # signed int 16
+            elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.UInt16.value:
+                bytes = 2
+                signed = False                      # unsigned int 16
+            elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.Int32.value:
+                bytes = 4
+                signed = True                       # signed long int 32
+            elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.Double.value:
+                bytes = 8
+                signed = None                       # double precision 64
+            else:
+               raise InvalidValueException("Unknown or unsupported ImageBytes Transmission Array Element Type")
+            #
+            # Assemble byte stream back into indexable machine data types
+            #
+            a = []  
+            for i in range(44, len(b), bytes):
+                a.append(int.from_bytes(b[i:i+bytes], 'little', signed=signed))
+            #a = array.array(tcode)
+            #a.frombytes(b[int.from_bytes(b[16:20],'little'):])  # Image data in TransmissionElementTypes
+            #
+            # Convert to common Python nested list "array". I  *think* this will convert from the 
+            # posibly squeezed transmission element types to Python's 'int' which is always 
+            #
+            l = []
+            rows = self.img_desc.Dimension1
+            cols = self.img_desc.Dimension2
+            if self.img_desc.Rank == 3:
+                for i in range(rows):
+                    rowidx = i * cols * planes
+                    r = []
+                    for j in range(cols):
+                        colidx = j * planes
+                        r.append(a[colidx:colidx+planes])
+                    l.append(r)
+            else:
+                for i in range(rows):
+                    rowidx = i * cols
+                    l.append(a[rowidx:rowidx+cols])
+
+            return l
         #
-        # JSON IMAGE DATA
+        # JSON IMAGE DATA -> List of Lists (row major)
         #
         else:
             j = response.json()
