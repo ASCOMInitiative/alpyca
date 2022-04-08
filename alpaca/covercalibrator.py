@@ -31,11 +31,8 @@ class CoverCalibrator(Device):
 
     @property
     def Brightness(self) -> int:
-        """The current calibrator brightness (0 = MaxBrightness)"""
+        """The current calibrator brightness (0 - MaxBrightness)"""
         return self._get("brightness")
-    @Brightness.setter
-    def Brightness(self, BrightnessVal: int):
-        self._put("brightness", Brightness=BrightnessVal)
 
     @property
     def CalibratorState(self) -> CalibratorStatus:

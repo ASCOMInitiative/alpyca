@@ -14,20 +14,7 @@ dev_name = "Camera"                     # Device-independent fixtures use this v
 #
 # Grab the camera settings for the pytest.mark.skipif() decisions 
 #
-def cam_settings():
-    data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/Camera/v1/Instance-0.xml"
-    tree = ET.parse(data_file)
-    root = tree.getroot()
-    s = {}
-    for i in root.iter("SettingsPair"):
-        k = i.find('Key').text
-        v = i.find('Value').text
-        try:
-            s[k] = ast.literal_eval(v)
-        except:
-            s[k] = v
-    return s
-c_sets = cam_settings()
+c_sets = conftest.get_settings('Camera')
 
 def test_props(device, settings, disconn):
     d = device

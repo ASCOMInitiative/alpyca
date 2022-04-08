@@ -92,6 +92,9 @@
     <Compile Include="PyTest\test_focuser.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PyTest\test_rotator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <None Include="PyTest\test_safetymonitor.py">
       <SubType>Code</SubType>
     </None>

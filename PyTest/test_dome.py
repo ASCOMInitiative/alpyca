@@ -26,28 +26,28 @@ def test_shutter(device, disconn):
     print("Test shutter motion:")
     assert d.CanSetShutter
     assert d.ShutterStatus != ShutterState.shutterError
-    if d.ShutterStatus != ShutterState.shutterClosed.value:
+    if d.ShutterStatus != ShutterState.shutterClosed:
         print("  Closing the shutter")
         d.CloseShutter()
-        while d.ShutterStatus != ShutterState.shutterClosed.value:
+        while d.ShutterStatus != ShutterState.shutterClosed:
             time.sleep(0.5)
             print('.', end = '')
         print('.')
-        assert d.ShutterStatus == ShutterState.shutterClosed.value
+        assert d.ShutterStatus == ShutterState.shutterClosed
     print("  Opening the shutter")
     d.OpenShutter()
-    while d.ShutterStatus != ShutterState.shutterOpen.value:
+    while d.ShutterStatus != ShutterState.shutterOpen:
         time.sleep(0.5)
         print('.', end = '')
     print('.')
-    assert d.ShutterStatus == ShutterState.shutterOpen.value
+    assert d.ShutterStatus == ShutterState.shutterOpen
     print("  Closing the shutter")
     d.CloseShutter()
-    while d.ShutterStatus != ShutterState.shutterClosed.value:
+    while d.ShutterStatus != ShutterState.shutterClosed:
         time.sleep(0.5)
         print('.', end = '')
     print('.')
-    assert d.ShutterStatus == ShutterState.shutterClosed.value
+    assert d.ShutterStatus == ShutterState.shutterClosed
 
 def test_altaz(device, disconn):
     d = device

@@ -42,3 +42,19 @@ def disconn(request):
     n = getattr(request.module, "dev_name")
     print(f"Teardown: {n} Disconnected")
 
+#
+# Common function to get settings for @pytest.mark.skipif() decorators
+#
+def get_settings(device: str):
+    data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{device}/v1/Instance-0.xml"
+    tree = ET.parse(data_file)
+    root = tree.getroot()
+    s = {}
+    for i in root.iter("SettingsPair"):
+        k = i.find('Key').text
+        v = i.find('Value').text
+        try:
+            s[k] = ast.literal_eval(v)
+        except:
+            s[k] = v
+    return s
