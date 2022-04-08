@@ -28,7 +28,7 @@ class ImageArrayElementTypes(Enum):
     Int16 = 1
     Int32 = 2
     Double = 3
-    # Remainder unused in 2002 Alpaca
+    # Remainder unused in 2022 Alpaca
     Single = 4
     UInt64 = 5
     Byte = 6
@@ -63,14 +63,58 @@ class ImageMetadata(object):
 
     @property
     def MetadataVersion(self):
+        """The version of metadata, currently 1"""
         return self.metavers
 
     @property
     def ImageElementType(self) -> ImageArrayElementTypes: 
+        """The ddta type of the pixels in originally acquired image
+
+        Returns:
+            Enum ImageArrayElementTypes
+                Unknown = 0
+                Int16 = 1
+                Int32 = 2
+                Double = 3
+                # Remainder unused in 2022 Alpaca
+                Single = 4
+                UInt64 = 5
+                Byte = 6
+                Int64 = 7
+                UInt16 = 8
+                UInt32 = 9
+        Notes:
+            Within Python, the returned image pixels themselves will be either 
+            int or float. 
+
+        """
         return self.imgtype
 
     @property
     def TransmissionElementType(self) -> ImageArrayElementTypes: 
+        """The ddta type of the pixels in the transmitted image bytes stream
+
+        Returns:
+            Enum ImageArrayElementTypes
+                Unknown = 0
+                Int16 = 1
+                Int32 = 2
+                Double = 3
+                # Remainder unused in 2022 Alpaca
+                Single = 4
+                UInt64 = 5
+                Byte = 6
+                Int64 = 7
+                UInt16 = 8
+                UInt32 = 9
+        Notes:
+            Within Python, the returned image pixels themselves will be either 
+            int or float.
+            To save transmission time camera may choose to use a smaller data 
+            type than the original image if the pixel values would all be 
+            representative in that data type without a loss of precision.
+
+        """
         return self.xmtype
 
     @property
@@ -332,58 +376,53 @@ class Camera(Device):
         return self._get("heatsinktemperature")
 
     @property
-    def ImageArray(self) -> List[int]:
-        """Return an array of integers containing the exposure pixel values.
+    def ImageArray(self) -> List[int]:      # TODO This could be Float
+        """Return a multidimensional list containing the exposure pixel values.
 
-        Return an array of 32bit integers containing the pixel values from the last
-        exposure. This call can return either a 2 dimension (monochrome images) or 3
-        dimension (colour or multi-plane images) array of size NumX * NumY or NumX *
-        NumY * NumPlanes. Where applicable, the size of NumPlanes has to be determined
-        by inspection of the returned Array. Since 32bit integers are always returned
-        by this call, the returned JSON Type value (0 = Unknown, 1 = short(16bit),
-        2 = int(32bit), 3 = Double) is always 2. The number of planes is given in the
-        returned Rank value. When de-serialising to an object it helps enormously to
-        know the array Rank beforehand so that the correct data class can be used. This
-        can be achieved through a regular expression or by direct parsing of the
-        returned JSON string to extract the Type and Rank values before de-serialising.
-        This regular expression accomplishes the extraction into two named groups Type
-        and Rank ^*"Type":(?<Type>\d*),"Rank":(?<Rank>\d*) which can then be used to
-        select the correct de-serialisation data class.
+        Notes:
+            Automatically adapts to servers returning either JSON image data or the much
+            faster ImageBytes format. In either case the returned nested list array 
+            contains standard Python int or float pixel values. See
+            https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+            See self.ImageArrayInfo for metadata covering the returned image data.
 
         Returns:
             list of lists (of lists) forming a two (or three) dimensional array of integers.
 
-        **TODO** Currently only JSON format. Handle ImageBytes format.
+        """
+        return self._get_imagedata("imagearray")
+
+    @property
+    def ImageArrayVariant(self) -> List[int]:
+        """Return a multidimensional list containing the exposure pixel values.
+
+        Notes:
+            Automatically adapts to servers returning either JSON image data or the much
+            faster ImageBytes format. In either case the returned nested list array 
+            contains standard Python int or float pixel values. See
+            https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+            See self.ImageArrayInfo for metadata covering the returned image data.
+            Synonym of ImageArray in Alpaca
+
+        Returns:
+            list of lists (of lists) forming a two (or three) dimensional array of integers.
 
         """
         return self._get_imagedata("imagearray")
 
     @property
     def ImageArrayInfo(self) -> ImageMetadata:
+        """Get image metadata sucn as dimensions, data type, rank.
+
+        Notes:
+            If no image or if the image was not transmitted via ImageBytesis,
+            this returns None. 
+           
+        Returns:
+            ImageMetadata object containing ImageBytes info about the image
+
+        """
         return self.img_desc
-
-    #@property
-    #def ImageArrayVariant(self) -> List[int]:
-    #    """Return an array of integers containing the exposure pixel values.
-
-    #    Return an array of 32bit integers containing the pixel values from the last
-    #    exposure. This call can return either a 2 dimension (monochrome images) or 3
-    #    dimension (colour or multi-plane images) array of size NumX * NumY or NumX *
-    #    NumY * NumPlanes. Where applicable, the size of NumPlanes has to be determined
-    #    by inspection of the returned Array. This call can return values as 
-    #    short(16bit) integers, int(32bit) integers or double floating point values. 
-    #    The nature of the returned values is given in the Type parameter: 0 = Unknown, 
-    #    1 = short(16bit), 2 = int(32bit), 3 = Double. The number of planes is given in
-    #    the returned Rank value. PLEASE REFER TO ALPACA DOCUMENTATION FOR MORE DETAILS
-    #    INCLUDING COLOR/BAYER FORMATTING AND HIGH-SPEED IMAGEBYTES IMAGE DATA.
-
-    #    Returns:
-    #        list of lists (of lists) forming a two (or three) dimensional array of integers.
-
-    #    **TODO** Currently only JSON format. Handle ImageBytes format.
-        
-    #    """
-    #    return self._get("imagearrayvariant")
 
     @property
     def ImageReady(self) -> bool:
@@ -685,72 +724,70 @@ class Camera(Device):
                     f"{response.reason}: {response.text} (URL {response.url})")
 
         ct = response.headers.get('content-type')   # case insensitive
+        m = 'little'
         #
         # IMAGEBYTES
         #
         if ct == 'application/imagebytes':
-            print('imagebytes, reassemble this into the Python array format.')
             b = response.content
-            n = int.from_bytes(b[4:8], 'little')
+            n = int.from_bytes(b[4:8], m)
             if n != 0:
                 m = response.text[44:].decode(encoding='UTF-8')
                 raise_alpaca_if(n, m)               # Will raise here
-
-            # ImageBytes is valid, now for the fun part
             self.img_desc = ImageMetadata(
-                int.from_bytes(b[0:4], 'little'),        # Meta version
-                int.from_bytes(b[20:24], 'little'),      # Image element type
-                int.from_bytes(b[24:28], 'little'),      # Xmsn element type
-                int.from_bytes(b[28:32], 'little'),      # Rank
-                int.from_bytes(b[32:36], 'little'),      # Dimension 1
-                int.from_bytes(b[36:40], 'little'),      # Dimension 2
-                int.from_bytes(b[40:44], 'little')       # Dimension 3
+                int.from_bytes(b[0:4], m),          # Meta version
+                int.from_bytes(b[20:24], m),        # Image element type
+                int.from_bytes(b[24:28], m),        # Xmsn element type
+                int.from_bytes(b[28:32], m),        # Rank
+                int.from_bytes(b[32:36], m),        # Dimension 1
+                int.from_bytes(b[36:40], m),        # Dimension 2
+                int.from_bytes(b[40:44], m)         # Dimension 3
                 )
-            
-
+            #
+            # Bless you Kelly Bundy and Mark Ransom
+            # https://stackoverflow.com/questions/71774719/native-array-frombytes-not-numpy-mysterious-behavior/71776522#71776522
+            #
             if self.img_desc.TransmissionElementType == ImageArrayElementTypes.Int16.value:
-                bytes = 2
-                signed = True                       # signed int 16
+                tcode = 'h'
             elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.UInt16.value:
-                bytes = 2
-                signed = False                      # unsigned int 16
+                tcode = 'H'
             elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.Int32.value:
-                bytes = 4
-                signed = True                       # signed long int 32
+                tcode = 'l'
             elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.Double.value:
-                bytes = 8
-                signed = None                       # double precision 64
+                tcode = 'd'
+            # Extension types for future. 64-bit pixels are unlikely to be seen on the wire
+            elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.Byte.value:
+                tcode = 'B'     # Unsigned
+            elif self.img_desc.TransmissionElementType == ImageArrayElementTypes.UInt32.value:
+                tcode = 'L'
             else:
-               raise InvalidValueException("Unknown or unsupported ImageBytes Transmission Array Element Type")
+               raise InvalidValueException("Unknown or as-yet unsupported ImageBytes Transmission Array Element Type")
             #
             # Assemble byte stream back into indexable machine data types
             #
-            a = []  
-            for i in range(44, len(b), bytes):
-                a.append(int.from_bytes(b[i:i+bytes], 'little', signed=signed))
-            #a = array.array(tcode)
-            #a.frombytes(b[int.from_bytes(b[16:20],'little'):])  # Image data in TransmissionElementTypes
+            a = array.array(tcode)
+            data_start = int.from_bytes(b[16:20],m)
+            a.frombytes(b[data_start:])     # 'h', 'H', 16-bit ints 2 bytes get turned into Python 32-bit ints
             #
-            # Convert to common Python nested list "array". I  *think* this will convert from the 
-            # posibly squeezed transmission element types to Python's 'int' which is always 
+            # Convert to common Python nested list "array". 
             #
             l = []
             rows = self.img_desc.Dimension1
             cols = self.img_desc.Dimension2
             if self.img_desc.Rank == 3:
                 for i in range(rows):
-                    rowidx = i * cols * planes
+                    rowidx = i * cols * 3
                     r = []
                     for j in range(cols):
-                        colidx = j * planes
-                        r.append(a[colidx:colidx+planes])
+                        colidx = j * 3
+                        r.append(a[colidx:colidx+3])
                     l.append(r)
             else:
                 for i in range(rows):
                     rowidx = i * cols
                     l.append(a[rowidx:rowidx+cols])
 
-            return l
+            return l                                # Nested lists 
         #
         # JSON IMAGE DATA -> List of Lists (row major)
         #
@@ -759,8 +796,23 @@ class Camera(Device):
             n = j["ErrorNumber"]
             m = j["ErrorMessage"]
             raise_alpaca_if(n, m)                   # Raise Alpaca Exception if non-zero Alpaca error
-            return j["Value"]
-
+            l = j["Value"]                          # Nested lists
+            if type(l[0][0]) == list:               # Test & pick up color plane
+                r = 3
+                d3 = len(l[0][0])
+            else:
+                r = 2
+                d3 = 0
+            self.img_desc = ImageMetadata(
+                1,                                  # Meta version
+                ImageArrayElementTypes.Int32,       # Image element type
+                ImageArrayElementTypes.Int32,       # Xmsn element type
+                r,                                  # Rank
+                len(l),                             # Dimension 1
+                len(l[0]),                          # Dimension 2
+                d3                                  # Dimension 3
+            )
+            return l
 
 def raise_alpaca_if(n, m):
     """If non-zero Alpaca error, raise the appropriate Alpaca exception
@@ -791,5 +843,5 @@ def raise_alpaca_if(n, m):
         raise ActionNotImplementedException(n, m)
     elif n >= 0x500 and n <= 0xFFF:
         raise DriverException(n, m)
-    else: # unknown 0x400-0x4FF
-        raise UnknownAscomException(n, m)
+    else:
+        pass
