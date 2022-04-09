@@ -23,7 +23,6 @@ class Switch(Device):
         """
         return self._get("maxswitch")
 
-    @property
     def CanWrite(self, Id: int) -> bool:
         """Indicate whether the specified switch device can be written to.
 
@@ -100,6 +99,21 @@ class Switch(Device):
         
         """
         return self._get("getswitchvalue", ID=Id)
+
+    def MaxSwitchValue(self, Id: int) -> str:
+        """Get the maximum value of the specified switch device as a double.
+
+        Notes:
+            Devices are numbered from 0 to MaxSwitch - 1.
+
+        Args:
+            Id (int): The device number.
+        
+        Returns:
+            Maximum value of the specified switch device as a double.
+        
+        """
+        return self._get("maxswitchvalue", ID=Id)
 
     def MinSwitchValue(self, Id: int) -> str:
         """Get the minimum value of the specified switch device as a double.

@@ -3,7 +3,6 @@ import random
 import time
 
 from alpaca.covercalibrator import *            # Sorry Python purists (typ.)
-from alpaca.exceptions import *
 
 dev_name = "CoverCalibrator"
 

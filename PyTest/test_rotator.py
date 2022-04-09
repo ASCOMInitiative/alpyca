@@ -1,15 +1,8 @@
 import conftest
-import random
 import time
 
 from alpaca.rotator import Rotator
-from alpaca.exceptions import *         # Sorry Python purists
 dev_name = "Rotator"
-
-#
-# Grab the rotator settings for the pytest.mark.skipif() decisions 
-#
-c_sets = conftest.get_settings('Rotator')
 
 def test_reversal(device, settings, disconn):
     d = device
