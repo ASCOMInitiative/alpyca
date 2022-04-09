@@ -10,8 +10,8 @@ def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test FilterWheel properties: Names and Offsets must be enabled")
-    assert settings["ImplementsNames"]
-    assert settings["ImplementsOffsets"]
+    assert settings["ImplementsNames"], "Test requires Names to be enabled in OmniSim"
+    assert settings["ImplementsOffsets"], "Test requires Offsets to be enabled in OmniSim"
     for i in range(0, settings['Slots']):
         assert d.Names[i] == settings[f'FilterNames {i}']
         assert d.FocusOffsets[i] == settings[f'FocusOffsets {i}']

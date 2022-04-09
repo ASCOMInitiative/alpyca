@@ -15,12 +15,12 @@ class Rotator(Device):
     @property
     def CanReverse(self) -> bool:
         """Indicates whether the rotator supports the Reverse method"""
-        self._get("canreverse")
+        return self._get("canreverse")
 
     @property
     def IsMoving(self) -> bool:
         """Indicates whether the rotator is currently moving"""
-        self._get("ismoving")
+        return self._get("ismoving")
 
     @property
     def MechanicalPosition(self) -> bool:
@@ -30,7 +30,7 @@ class Rotator(Device):
             Position is in degrees counterclockwise
         
         """
-        self._get("mechanicalposition")
+        return self._get("mechanicalposition")
 
     @property
     def Position(self) -> bool:
@@ -42,7 +42,7 @@ class Rotator(Device):
             MechanicalPosition.
             
         """
-        self._get("position")
+        return self._get("position")
 
     @property
     def Reverse(self) -> bool:
@@ -53,7 +53,7 @@ class Rotator(Device):
             to cause rotation opposite to equatorial PositionAngle, i.e. clockwise.
             
         """
-        self._get("reverse")
+        return self._get("reverse")
     @Reverse.setter
     def Reverse(self, ReverseState: bool):
         self._put("reverse", Reverse=ReverseState)
@@ -66,7 +66,7 @@ class Rotator(Device):
             If this is not available, may throw a NotImplemented exception
             
         """
-        self._get("stepsize")
+        return self._get("stepsize")
 
     @property
     def TargetPosition(self) -> float:
@@ -77,7 +77,7 @@ class Rotator(Device):
             return from a call to Move() or MoveAbsolute().
             
         """
-        self._get("targetposition")
+        return self._get("targetposition")
 
     def Halt(self) -> None:
         """Immediately stop any Rotator motion"""
@@ -114,4 +114,32 @@ class Rotator(Device):
             property becomes False.
         
         """
-        self._put("move", Position=Position)
+        self._put("moveabsolute", Position=Position)
+
+    def MoveMechanical(self, Position: float) -> None:
+        """Starts rotation to the given mechanical position (degrees)
+
+        Notes:
+            Calling Move causes the TargetPosition property to change to the value of 
+            the Position parameter then starts rotation to TargetPosition. This moves
+            without regard to the SyncOffset, that is, to the mechanical rotator angle
+
+            Asynchronous: The method returns as soon as the rotation operation has
+            been successfully started, with the IsMoving property True. After the
+            requested angle is successfully reached and motion stops, the IsMoving 
+            property becomes False.
+        
+        """
+        self._put("movemechanical", Position=Position)
+
+    def Sync(self, Position: float) -> None:
+        """Syncs the rotator to the specified position angle (degrees) without moving it. 
+
+
+        Notes:
+            Moves the rotator to the requested mechanical angle, independent of any 
+            sync offset that may have been set. This method is to address requirements 
+            that need a physical rotation angle such as taking sky flats.
+
+        """
+        self._put("sync", Position=Position)
