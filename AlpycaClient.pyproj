@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a7a25108-7bae-4ce4-8d13-1c1d81c6f2b4}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>ImageTests.py</StartupFile>
+    <StartupFile>devtest.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -96,6 +96,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PyTest\test_switch.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PyTest\test_telescope.py">
       <SubType>Code</SubType>
     </Compile>
     <None Include="PyTest\test_safetymonitor.py">

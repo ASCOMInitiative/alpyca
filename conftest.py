@@ -12,7 +12,7 @@ def device(request):
     c = getattr(sys.modules[f"alpaca.{n.lower()}"], n)  # Creates a device class by string name :-)
     d =  c('localhost:32323', 0)                        # Created an instance of the class
     d.Connected = True
-    print(f"Setup: Connected to {n} OK")
+    print(f"Setup: Connected to OmniSim {n} OK")
     return d
 #
 # Grabs the settings for the device from the OmniSim settings data *once*.
@@ -31,7 +31,7 @@ def settings(request):
             s[k] = ast.literal_eval(v)
         except:
             s[k] = v
-    print(f"Setup: {n} Settings retrieved")
+    print(f"Setup: {n} OminSim Settings retrieved")
     return s
 
 @pytest.fixture(scope="module")

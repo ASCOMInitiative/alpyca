@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List, Any
 import dateutil.parser
 from alpaca.device import Device
+from alpaca.exceptions import *
 
 class AlignmentModes(Enum):
     algAltAz        = 0
@@ -219,7 +220,7 @@ class Telescope(Device):
         return self._get("cansetpierside")
 
     @property
-    def CanSetRightAscension(self) -> bool:
+    def CanSetRightAscensionRate(self) -> bool:
         """Indicate whether the RightAscensionRate property can be changed.
 
         Returns:
@@ -629,14 +630,14 @@ class Telescope(Device):
             l.append(Rate(j["Maximum"], j["Minimum"]))
         return l
 
-    def CanMoveAxis(self, Axis: int) -> bool:
-        """Indicate whether the telescope can move the requested axis.
+    def CanMoveAxis(self, Axis: TelescopeAxes) -> bool:
+        """Indicate whether the telescope can move about the requested axis.
 
         Returns:
-            True if this telescope can move the requested axis.
+            True if this telescope can move about the requested axis.
 
         """
-        return self._get("canmoveaxis", Axis=Axis)
+        return self._get("canmoveaxis", Axis=Axis.value)
 
     def DestinationSideOfPier(self, RightAscension: float, Declination: float) -> PierSide:
         """Predict the pointing state (PierSide) after a German equatorial mount slews to given coordinates.
@@ -672,7 +673,7 @@ class Telescope(Device):
             Rate (float): The rate of motion (deg/sec) about the specified axis
 
         """
-        self._put("moveaxis", Axis=Axis, Rate=Rate)
+        self._put("moveaxis", Axis=Axis.value, Rate=Rate)
 
     def Park(self) -> None:
         """Park the mount."""
@@ -695,15 +696,8 @@ class Telescope(Device):
         self._put("setpark")
 
     def SlewToAltAz(self, Azimuth: float, Altitude: float) -> None:
-        """Slew synchronously to the given local horizontal coordinates.
-
-        Args:
-            Azimuth (float): Azimuth coordinate (degrees, North-referenced, positive
-                East/clockwise).
-            Altitude (float): Altitude coordinate (degrees, positive up).
-
-        """
-        self._put("slewtoaltaz", Azimuth=Azimuth, Altitude=Altitude)
+        """DEPRECATED - Do not use this via Alpaca"""
+        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToAltAzAsync(self, Azimuth: float, Altitude: float) -> None:
         """Slew asynchronously to the given local horizontal coordinates.
@@ -717,16 +711,8 @@ class Telescope(Device):
         self._put("slewtoaltazasync", Azimuth=Azimuth, Altitude=Altitude)
 
     def SlewToCoordinates(self, RightAscension: float, Declination: float) -> None:
-        """Slew synchronously to the given equatorial coordinates.
-
-        Args:
-            RightAscension (float): Right Ascension coordinate (hours).
-            Declination (float): Declination coordinate (degrees).
-
-        """
-        self._put(
-            "slewtocoordinates", RightAscension=RightAscension, Declination=Declination
-        )
+        """DEPRECATED - Do not use this via Alpaca"""
+        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToCoordinatesAsync(self, RightAscension: float, Declination: float):
         """Slew asynchronously to the given equatorial coordinates.
@@ -739,8 +725,8 @@ class Telescope(Device):
         self._put("slewtocoordinatesasync", RightAscension=RightAscension, Declination=Declination)
 
     def SlewToTarget(self) -> None:
-        """Slew synchronously to the TargetRightAscension and TargetDeclination coordinates."""
-        self._put("slewtotarget")
+        """DEPRECATED - Do not use this via Alpaca"""
+        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToTargetAsync(self) -> None:
         """Asynchronously slew to the TargetRightAscension and TargetDeclination coordinates."""
@@ -773,6 +759,6 @@ class Telescope(Device):
         """Sync to the TargetRightAscension and TargetDeclination coordinates."""
         self._put("synctotarget")
 
-    def UnPark(self) -> None:
+    def Unpark(self) -> None:
         """Unpark the mount."""
         self._put("unpark")

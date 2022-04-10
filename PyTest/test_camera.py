@@ -3,8 +3,6 @@ import os
 import pytest
 import conftest
 import time
-import ast
-import xml.etree.ElementTree as ET
 
 from alpaca.camera import *             # Sorry Python purists (typ.)
 from alpaca.exceptions import *
@@ -90,13 +88,13 @@ def test_disabled_gains_offsets(device, settings, disconn):
         v = d.Offset
     with pytest.raises(NotImplementedException, match='.*GainMax.*'):
         v = d.GainMax
-    with pytest.raises(NotImplementedException, match='.*GainMax.*'):       # Sim 0.1.1) returns error for GainMax
+    with pytest.raises(NotImplementedException, match='.*GainMax.*'):       # Sim (0.1.2) returns error for GainMax
         v = d.GainMin
     with pytest.raises(NotImplementedException, match='.*Gains.*'):
         v = d.Gains
     with pytest.raises(NotImplementedException, match='.*OffsetMax.*'):
         v = d.OffsetMax
-    with pytest.raises(NotImplementedException, match='.*OffsetMax.*'):     # Sim 0.1.1) returns error for OffsetMax
+    with pytest.raises(NotImplementedException, match='.*OffsetMax.*'):     # Sim (0.1.2) returns error for OffsetMax
         v = d.OffsetMin
     with pytest.raises(NotImplementedException, match='.*Offsets.*'):
         v = d.Offsets
