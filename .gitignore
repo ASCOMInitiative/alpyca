@@ -98,3 +98,4 @@ dmypy.json
 /TestResults
 /devtest.py
 /3-color-sample.fits
+/.pypirc
