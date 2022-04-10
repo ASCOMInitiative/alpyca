@@ -1,5 +1,6 @@
 import conftest
 import time
+import platform
 
 from alpaca.rotator import Rotator
 dev_name = "Rotator"
@@ -16,7 +17,10 @@ def test_reversal(device, settings, disconn):
     old = d.Reverse
     d.Reverse = not d.Reverse
     assert d.Reverse !=  old
-    assert d.StepSize == 1.0   # Fixed value in OmniSim (BUG Shows 0.8)
+    if platform.system == "Windows":
+        assert d.StepSize == 1.0   # BUG Fixed value in OmniSim (Shows 0.8)
+    else:
+        assert d.StepSize == 0.75  # BUG Fixed value in OmniSim (Shows 0.8)
 
 def test_offset(device, settings, disconn):
     d = device

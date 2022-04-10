@@ -1,6 +1,7 @@
 import pytest
 import os
 import sys
+import platform
 import ast
 import xml.etree.ElementTree as ET
 
@@ -20,7 +21,12 @@ def device(request):
 @pytest.fixture(scope="module")
 def settings(request):
     n = getattr(request.module, "dev_name")
-    data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{n}/v1/Instance-0.xml"
+    if platform.system() == "Windows":
+        data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{n}/v1/Instance-0.xml"
+    else:                       # TODO No MacOS
+        if n != "Camera":       # Daniel will fix this (10-Apr_2022)
+            n = n.lower()
+        data_file = f"{os.getenv('HOME')}/.config/ascom/alpaca/ascom-alpaca-simulator/{n}/v1/instance-0.xml"
     tree = ET.parse(data_file)
     root = tree.getroot()
     s = {}
@@ -46,7 +52,12 @@ def disconn(request):
 # Common function to get settings for @pytest.mark.skipif() decorators
 #
 def get_settings(device: str):
-    data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{device}/v1/Instance-0.xml"
+    if platform.system() == "Windows":
+        data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{device}/v1/Instance-0.xml"
+    else:                       # TODO No MacOS
+        if device != "Camera":       # Daniel will fix this (10-Apr_2022)
+            device = device.lower()
+        data_file = f"{os.getenv('HOME')}/.config/ascom/alpaca/ascom-alpaca-simulator/{device}/v1/instance-0.xml"
     tree = ET.parse(data_file)
     root = tree.getroot()
     s = {}

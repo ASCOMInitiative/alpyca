@@ -169,7 +169,10 @@ def test_park_home(device, settings, disconn):
         print('.', end = '')
     print('.')
     print(f"  Parking complete at Alt={d.Altitude:.3f} Azm={d.Azimuth:.3f}")
-    assert abs(d.Azimuth - tgtAz) < 0.1
+    ea = abs(d.Azimuth - tgtAz)
+    if ea > 180:
+        ea = 360 - ea
+    assert ea < 0.1
     assert abs(d.Altitude - tgtAlt) < 0.1
     print("  Unpark then find home")
     d.Unpark()
@@ -182,7 +185,10 @@ def test_park_home(device, settings, disconn):
         print('.', end = '')
     print('.')
     print(f"  FindHome complete at Alt={d.Altitude:.3f} Azm={d.Azimuth:.3f}")
-    assert abs(d.Azimuth - tgtAz) < 0.1
+    ea = abs(d.Azimuth - tgtAz)
+    if ea > 180:
+        ea = 360 - ea
+    assert ea < 0.1
     assert abs(d.Altitude - tgtAlt) < 0.1
 
 def test_moveaxis(device, settings, disconn):
