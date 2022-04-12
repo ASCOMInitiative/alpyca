@@ -1,13 +1,13 @@
 from alpaca.device import Device
 from alpaca.telescope import GuideDirections
 from alpaca.exceptions import *
-from enum import Enum
+from enum import IntEnum
 from typing import List, Any
 import requests
 from requests import Response
 import array
 
-class CameraStates(Enum):
+class CameraStates(IntEnum):
     cameraIdle      = 0
     cameraWaiting   = 1
     cameraExposing  = 2
@@ -15,7 +15,7 @@ class CameraStates(Enum):
     cameraDownload  = 4
     cameraError     = 5
 
-class SensorTypes(Enum):    # **TODO** This is singular in the spec
+class SensorTypes(IntEnum):    # **TODO** This is singular in the spec
     Monochrome      = 0
     Color           = 1
     RGGB            = 2
@@ -23,7 +23,7 @@ class SensorTypes(Enum):    # **TODO** This is singular in the spec
     CMYG2           = 4
     LRGB            = 5
 
-class ImageArrayElementTypes(Enum):
+class ImageArrayElementTypes(IntEnum):
     Unknown = 0
     Int16 = 1
     Int32 = 2

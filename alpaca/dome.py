@@ -1,8 +1,8 @@
-from enum import Enum
+from enum import IntEnum
 from alpaca.device import Device
 from typing import List, Any
 
-class ShutterState(Enum):
+class ShutterState(IntEnum):
     shutterOpen = 0
     shutterClosed = 1
     shutterOpening = 2

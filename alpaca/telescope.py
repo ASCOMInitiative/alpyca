@@ -1,40 +1,40 @@
-from enum import Enum
+from enum import IntEnum
 from datetime import datetime
 from typing import List, Any
 import dateutil.parser
 from alpaca.device import Device
 from alpaca.exceptions import *
 
-class AlignmentModes(Enum):
+class AlignmentModes(IntEnum):
     algAltAz        = 0
     algPolar        = 1
     algGermanPolar  = 2
 
-class DriveRates(Enum):
+class DriveRates(IntEnum):
     driveSidereal   = 0
     drivelunar      = 1
     driveSolar      = 2
     driveKing       = 3
 
-class EquatorialCoordinateType(Enum):
+class EquatorialCoordinateType(IntEnum):
     equOther        = 0
     equTopocentric  = 1
     equJ2000        = 2
     equJ2050        = 3
     equLocalTopocentric = 1     # OBSOLETE, use Topocentric
 
-class GuideDirections(Enum):    # Shared by Camera
+class GuideDirections(IntEnum):    # Shared by Camera
     guideNorth      = 0
     guideSouth      = 1
     guideEast       = 2
     guideWest       = 3
 
-class PierSide(Enum):
+class PierSide(IntEnum):
     pierEast        = 0
     pierWest        = 1
     pierUnknown     = -1
 
-class TelescopeAxes(Enum):
+class TelescopeAxes(IntEnum):
     axisPrimary     = 0
     axisSecondary   = 1
     axisTertiary    = 2

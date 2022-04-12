@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 from alpaca.device import Device
 
-class CalibratorStatus(Enum):
+class CalibratorStatus(IntEnum):
     NotPresent = 0
     Off = 1
     NotReady = 2
@@ -9,7 +9,7 @@ class CalibratorStatus(Enum):
     Unknown = 4
     Error = 5
 
-class CoverStatus(Enum):
+class CoverStatus(IntEnum):
     NotPresent = 0
     Closed = 1
     Moving = 2
