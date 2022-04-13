@@ -46,26 +46,21 @@ extensions = [
 ]
 
 # Autodoc settings (override defaults)
+# https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#configuration
 autoclass_content = 'both'          # Concatenate class and __init__ 
-autodoc_member_order = 'groupwise'  # Methods then Properties
+autodoc_class_signature = 'mixed'   # Display signature with class name!
+autodoc_member_order = 'groupwise'  # Required due to superclass, else mixes things up
 autodoc_typehints = 'signature'
 autodoc_typehints_format = 'short'
 autodoc_default_options = {
     'show-inheritance': True
 }
 
-# Napoleon specific settings (most are the defaults)
-# These for 'cloud' theme, makes notes and examples 
-# far less overwhelming
+# Napoleon specific settings 
 napoleon_use_admonition_for_examples = True
 napoleon_use_admonition_for_notes = True        # Notes in shaded block :-)
 napoleon_use_admonition_for_references = True
-# napoleon_use_ivar = False
-# napoleon_use_param = True
-# napoleon_use_rtype = True
 napoleon_preprocess_types = True
-# napoleon_type_aliases = None
-# napoleon_attr_annotations = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -79,9 +74,10 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
+# a list of builtin themes and the link below for a more comprehensive list.
+# The link below leads to the chosen style and all of its features are shown.
 #
-html_theme = 'cloud'
+html_theme = 'sphinx_rtd_theme'  # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

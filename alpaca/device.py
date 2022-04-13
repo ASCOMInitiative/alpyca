@@ -49,9 +49,9 @@ class Device(object):
     # ------------------------------------------------
     # CLASS VARIABLES - SHARED ACROSS DEVICE INSTANCES
     # ------------------------------------------------
-    client_id = random.randint(0, 65535)
-    client_trans_id = 1
-    ctid_lock = Lock()
+    _client_id = random.randint(0, 65535)
+    _client_trans_id = 1
+    _ctid_lock = Lock()
     # ------------------------------------------------
 
     def Action(self, ActionString: str, *Parameters) -> str:
@@ -176,16 +176,16 @@ class Device(object):
         """
         url = f"{self.base_url}/{attribute}"
         pdata = {
-                "ClientTransactionID": f"{Device.client_trans_id}",
-                "ClientID": f"{Device.client_id}" 
+                "ClientTransactionID": f"{Device._client_trans_id}",
+                "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
         try:
-            Device.ctid_lock.acquire()
+            Device._ctid_lock.acquire()
             response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata)
-            Device.client_trans_id += 1
+            Device._client_trans_id += 1
         finally:
-            Device.ctid_lock.release()
+            Device._ctid_lock.release()
         self.__check_error(response)
         return response.json()["Value"]
 
@@ -199,16 +199,16 @@ class Device(object):
         """
         url = f"{self.base_url}/{attribute}"
         pdata = {
-                "ClientTransactionID": f"{Device.client_trans_id}",
-                "ClientID": f"{Device.client_id}" 
+                "ClientTransactionID": f"{Device._client_trans_id}",
+                "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
         try:
-            Device.ctid_lock.acquire()
+            Device._ctid_lock.acquire()
             response = requests.put("%s/%s" % (self.base_url, attribute), data=pdata)
-            Device.client_trans_id += 1
+            Device._client_trans_id += 1
         finally:
-            Device.ctid_lock.release()
+            Device._ctid_lock.release()
         self.__check_error(response)
         return response.json()  # TODO Is this right? json()?
 

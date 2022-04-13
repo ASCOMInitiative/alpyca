@@ -1,21 +1,23 @@
 from alpaca.device import Device
 from alpaca.telescope import GuideDirections
 from alpaca.exceptions import *
-from enum import IntEnum
+from alpaca.docenum import DocIntEnum
 from typing import List, Any
 import requests
 from requests import Response
 import array
 
-class CameraStates(IntEnum):
-    cameraIdle      = 0
-    cameraWaiting   = 1
-    cameraExposing  = 2
-    cameraReading   = 3
-    cameraDownload  = 4
-    cameraError     = 5
+class CameraStates(DocIntEnum):
+    """Current condition of the Camera"""
+    cameraIdle      = 0, 'Inactive'
+    cameraWaiting   = 1, 'Waiting for ??'
+    cameraExposing  = 2, 'Acquiring photons'
+    cameraReading   = 3, 'Reading from the sensor'
+    cameraDownload  = 4, 'Downloading the image data'
+    cameraError     = 5, 'An error condition exists'
 
-class SensorTypes(IntEnum):    # **TODO** This is singular in the spec
+class SensorTypes(DocIntEnum):    # **TODO** This is singular in the ASCOM spec
+    """Type of sensor in the Camera. Names should be self-explanatory."""
     Monochrome      = 0
     Color           = 1
     RGGB            = 2
@@ -23,24 +25,22 @@ class SensorTypes(IntEnum):    # **TODO** This is singular in the spec
     CMYG2           = 4
     LRGB            = 5
 
-class ImageArrayElementTypes(IntEnum):
+class ImageArrayElementTypes(DocIntEnum):
+    """The native data type of ImageArray pixels"""
     Unknown = 0
     Int16 = 1
     Int32 = 2
     Double = 3
-    # Remainder unused in 2022 Alpaca
-    Single = 4
-    UInt64 = 5
-    Byte = 6
-    Int64 = 7
-    UInt16 = 8
-    UInt32 = 9
-
+    Single = 4, 'Unused in Alpaca 2022'
+    UInt64 = 5, 'Unused in Alpaca 2022'
+    Byte = 6, 'Unused in Alpaca 2022'
+    Int64 = 7, 'Unused in Alpaca 2022'
+    UInt16 = 8, 'Unused in Alpaca 2022'
 
 class ImageMetadata(object):
     """Metadata describing the returned ImageArray data
 
-        ** TODO ** see https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+        See https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
 
     """
     def __init__(
@@ -53,6 +53,27 @@ class ImageMetadata(object):
         num_y: int,
         num_z: int
     ):
+        """Initialize the Camera object
+        
+        Args:
+            metadata_version (int): Currently this is 1
+            image_element_type (ImageArrayElementTypes): 
+                The native data type of the original image data
+            transmission_element_type (ImageArrayElementTypes): 
+                The data type used when transmitting the image data
+            rank (int): The matrix rank of the iamge data (either 2 or 3)
+            num_x (int): Number of pixels in the X direction
+            num_y (int): Number of pixels in the Y direction
+            num_z (int): The index of the color plane
+        
+        Raises:      
+            DriverException: Thrown if the driver cannot successfully complete the request.
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See the description of the ImageArray property for info on image element ordering in the received data. 
+
+        """
         self.metavers = metadata_version
         self.imgtype = image_element_type
         self.xmtype = transmission_element_type
@@ -68,25 +89,11 @@ class ImageMetadata(object):
 
     @property
     def ImageElementType(self) -> ImageArrayElementTypes: 
-        """The ddta type of the pixels in originally acquired image
-
-        Returns:
-            Enum ImageArrayElementTypes
-                Unknown = 0
-                Int16 = 1
-                Int32 = 2
-                Double = 3
-                # Remainder unused in 2022 Alpaca
-                Single = 4
-                UInt64 = 5
-                Byte = 6
-                Int64 = 7
-                UInt16 = 8
-                UInt32 = 9
+        """The data type of the pixels in originally acquired image
+        
         Notes:
-            Within Python, the returned image pixels themselves will be either 
-            int or float. 
-
+            Within Python, the returned nested list(s) image pixels themselves 
+            will be either int or float. 
         """
         return self.imgtype
 
@@ -94,22 +101,9 @@ class ImageMetadata(object):
     def TransmissionElementType(self) -> ImageArrayElementTypes: 
         """The ddta type of the pixels in the transmitted image bytes stream
 
-        Returns:
-            Enum ImageArrayElementTypes
-                Unknown = 0
-                Int16 = 1
-                Int32 = 2
-                Double = 3
-                # Remainder unused in 2022 Alpaca
-                Single = 4
-                UInt64 = 5
-                Byte = 6
-                Int64 = 7
-                UInt16 = 8
-                UInt32 = 9
         Notes:
-            Within Python, the returned image pixels themselves will be either 
-            int or float.
+            Within Python, the returned image pixels themselves will be either int or float.
+
             To save transmission time camera may choose to use a smaller data 
             type than the original image if the pixel values would all be 
             representative in that data type without a loss of precision.
@@ -119,21 +113,23 @@ class ImageMetadata(object):
 
     @property
     def Rank(self):
+        """The matrix rank of the image data (either 2 or 3)"""
         return self.rank
 
     @property
     def Dimension1(self):
+        """The first (X) dimension of the image array"""
         return self.x_size
 
     @property
     def Dimension2(self):
+        """The second (Y) dimension of the image array"""
         return self.y_size
 
     @property
     def Dimension3(self):
+        """The third (Z) dimension of the image array (None or 3)"""
         return self.z_size
-
-
 
 class Camera(Device):
     """ASCOM Standard iCamera V3 Interface."""
@@ -143,9 +139,19 @@ class Camera(Device):
         address: str,
         device_number: int,
         protocol: str = "http",
-        img_desc: ImageMetadata = None
     ):
-        """Initialize Camera object."""
+        """Initialize the Camera object
+        
+        Args:
+            address (str): IP address and port of the device (x.x.x.x:pppp)
+            device_number (int): The index of the device (usually 0)
+            protocol (str, optional): Only if device needs https. Defaults to "http".
+        
+        Raises:
+            DriverException: Thrown if the driver cannot successfully complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         super().__init__(address, "camera", device_number, protocol)
         self.img_desc = None
 
@@ -161,15 +167,7 @@ class Camera(Device):
 
     @property
     def BinX(self) -> int:
-        """Set or return the binning factor for the X axis.
-
-        Args:
-            BinX (int): The X binning value.
-        
-        Returns:
-            Binning factor for the X axis.
-        
-        """
+        """**(Read/Write)** Set or return the binning factor for the X axis."""
         return self._get("binx")
     @BinX.setter
     def BinX(self, BinVal: int):
@@ -177,15 +175,7 @@ class Camera(Device):
 
     @property
     def BinY(self) -> int:
-        """Set or return the binning factor for the Y axis.
-
-        Args:
-            BinY (int): The Y binning value.
-        
-        Returns:
-            Binning factor for the Y axis.
-        
-        """
+        """**(Read/Write)** Set or return the binning factor for the Y axis."""
         return self._get("biny")
     @BinY.setter
     def BinY(self, BinVal: int):
@@ -193,26 +183,17 @@ class Camera(Device):
 
     @property
     def CameraState(self) -> CameraStates:
-        """Return the camera operational state (enum CameraStates).
-
-        CameraStates values:
-            0 = CameraIdle, 1 = CameraWaiting, 2 = CameraExposing,
-            3 = CameraReading, 4 = CameraDownload, 5 = CameraError.
-        
-        Returns:
-            Current camera operational state (enum CameraStates).
-        
-        """
+        """Return the camera operational state"""
         return CameraStates(self._get("camerastate"))
 
     @property
     def CameraXSize(self) -> int:
-        """Return the width (int) of the CCD camera chip."""
+        """Return the width of the camera sensor."""
         return self._get("cameraxsize")
 
     @property
     def CameraYSize(self) -> int:
-        """Return the height (int) of the CCD camera chip."""
+        """Return the height of the camera sensor."""
         return self._get("cameraysize")
 
     @property
@@ -257,18 +238,7 @@ class Camera(Device):
 
     @property
     def CoolerOn(self) -> bool:
-        """Turn the camera cooler on and off or return the current cooler on/off state.
-
-        Notes:
-            True = cooler on, False = cooler off.
-
-        Args:
-            CoolerOn (bool): Cooler state.
-        
-        Returns:
-            Current cooler on/off state.
-        
-        """
+        """**(Read/Write)** Turn the camera cooler on and off or return the current cooler on/off state."""
         return self._get("cooleron")
     @CoolerOn.setter
     def CoolerOn(self, CoolerState: bool):
@@ -708,16 +678,16 @@ class Camera(Device):
         url = f"{self.base_url}/{attribute}"
         hdrs = {'accept' : 'application/imagebytes'}
         pdata = {
-                "ClientTransactionID": f"{Device.client_trans_id}",
-                "ClientID": f"{Device.client_id}" 
+                "ClientTransactionID": f"{Device._client_trans_id}",
+                "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
         try:
-            Device.ctid_lock.acquire()
+            Device._ctid_lock.acquire()
             response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
-            Device.client_trans_id += 1
+            Device._client_trans_id += 1
         finally:
-            Device.ctid_lock.release()
+            Device._ctid_lock.release()
 
         if response.status_code not in range(200, 204):                 # HTTP level errors 
             raise AlpacaRequestException(response.status_code, 
