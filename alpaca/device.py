@@ -10,22 +10,7 @@ from alpaca.exceptions import *     # Sorry Python purists
 API_VERSION = 1
 
 class Device(object):
-    """Common interface members across all ASCOM Alpaca devices.
-
-    Attributes:
-        address (str): Domain name or IP address of Alpaca server.
-            Can also specify port number if needed.
-        device_type (str): One of the recognised ASCOM device types
-            e.g. telescope (must be lower case).
-        device_number (int): Zero based device number as set on the server (0 to
-            4294967295).
-        protocol (str): Protocol (http vs https) used to communicate with Alpaca server.
-        api_version (int): Alpaca API version.
-        base_url (str): Basic URL to easily append with commands.
-
-    Notes: Sets a random number for ClientID that lasts 
-
-    """
+    """Common interface members across all ASCOM Alpaca devices."""
 
     def __init__(
         self,
@@ -34,7 +19,22 @@ class Device(object):
         device_number: int,
         protocol: str
     ):
-        """Initialize Device object."""
+        """Initialize Device object.
+        
+        Attributes:
+            address: Domain name or IP address of Alpaca server.
+                Can also specify port number if needed.
+            device_type: One of the recognised ASCOM device types
+                e.g. telescope (must be lower case).
+            device_number: Zero based device number as set on the server (0 to
+                4294967295).
+            protocol: Protocol (http vs https) used to communicate with Alpaca server.
+            api_version: Alpaca API version.
+            base_url: Basic URL to easily append with commands.
+
+        Notes: Sets a random number for ClientID that lasts 
+
+        """
         self.address = address
         self.device_type = device_type
         self.device_number = device_number
@@ -60,6 +60,7 @@ class Device(object):
         Args:
             ActionString (str): A well known name that represents the action to be carried out.
             *Parameters: List of required parameters or empty if none are required.
+
         Returns:
             Result (str) of the action.
 
@@ -69,7 +70,9 @@ class Device(object):
     def CommandBlind(self, Command: str, Raw: bool) -> None:
         """Transmit an arbitrary string to the device and does not wait for a response.
 
-        Note: Deprecated
+        Notes:
+            Deprecated
+
         Args:
             Command (str): The literal command string to be transmitted.
             Raw (bool): If true, command is transmitted 'as-is'.
@@ -82,12 +85,15 @@ class Device(object):
     def CommandBool(self, Command: str, Raw: bool) -> bool:
         """Transmit an arbitrary string to the device and wait for a boolean response.
         
-        Note: Deprecated
+        Notes:
+            Deprecated
+
         Args:
             Command (str): The literal command string to be transmitted.
             Raw (bool): If true, command is transmitted 'as-is'.
                 If false, then protocol framing characters may be added prior to
                 transmission.
+
         Returns:
             The boolean response from the device
 
@@ -97,12 +103,15 @@ class Device(object):
     def CommandString(self, Command: str, Raw: bool) -> str:
         """Transmit an arbitrary string to the device and wait for a string response.
 
-        Note: Deprecated
+        Notes: 
+            Deprecated
+
         Args:
             Command (str): The literal command string to be transmitted.
             Raw (bool): If true, command is transmitted 'as-is'.
                 If false, then protocol framing characters may be added prior to
                 transmission.
+            
         Returns:
             The string response from the device
 
@@ -116,7 +125,6 @@ class Device(object):
         Args:
             Connected (bool): Set True to connect to device hardware.
                 Set False to disconnect from device hardware.
-                Set None to get connected state (default).
         
         """
         return self._get("connected")

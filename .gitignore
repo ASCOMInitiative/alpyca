@@ -5,6 +5,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+/.pypirc
 build/
 develop-eggs/
 dist/
@@ -84,6 +85,9 @@ venv.bak/
 # PyCharm project settings
 .idea
 
+# Visual Studio Code workspaces (rbd)
+.code-workspace
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -98,4 +102,4 @@ dmypy.json
 /TestResults
 /devtest.py
 /3-color-sample.fits
-/.pypirc
+AlpycaClient.code-workspace
