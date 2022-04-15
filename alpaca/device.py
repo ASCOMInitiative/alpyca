@@ -54,48 +54,74 @@ class Device(object):
     _ctid_lock = Lock()
     # ------------------------------------------------
 
-    def Action(self, ActionString: str, *Parameters) -> str:
-        """Access functionality beyond the built-in capabilities of the ASCOM device interfaces.
+    def Action(self, ActionName: str, *Parameters) -> str:
+        """Invoke the specified device-specific custom action
         
         Args:
-            ActionString (str): A well known name that represents the action to be carried out.
-            *Parameters: List of required parameters or empty if none are required.
+            ActionName: A name from :py:attr:`SupportedActions` that represents 
+                the action to be carried out.
+            *Parameters: List of required parameters or [] if none are required.
 
         Returns:
-            Result (str) of the action.
+            String result of the action.
+
+        Raises:
+            NotImplementedException: If no actions at all are supported
+            ActionNotImplementedException: If the driver does not support the requested
+                ActionName. The supported action names are listed in 
+                :py:attr:`SupportedActions`.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
 
         """
-        return self._put("action", Action=ActionString, Parameters=Parameters)["Value"]
+        return self._put("action", Action=ActionName, Parameters=Parameters)["Value"]
 
     def CommandBlind(self, Command: str, Raw: bool) -> None:
         """Transmit an arbitrary string to the device and does not wait for a response.
 
-        Notes:
-            Deprecated
-
         Args:
-            Command (str): The literal command string to be transmitted.
-            Raw (bool): If true, command is transmitted 'as-is'.
+            Command: The literal command string to be transmitted.
+            Raw: If true, command is transmitted 'as-is'.
                 If false, then protocol framing characters may be added prior to
                 transmission.
+
+        Raises:
+            NotImplementedException: If no actions at all are supported
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+                
+        Attention:
+            **Deprecated**, will most likely result in 
+            :py:class:`~exceptions.NotImplementedException`
+
 
         """
         self._put("commandblind", Command=Command, Raw=Raw)
 
     def CommandBool(self, Command: str, Raw: bool) -> bool:
         """Transmit an arbitrary string to the device and wait for a boolean response.
-        
-        Notes:
-            Deprecated
+
+        Returns:
+            The True/False response from the command
 
         Args:
-            Command (str): The literal command string to be transmitted.
-            Raw (bool): If true, command is transmitted 'as-is'.
+            Command: The literal command string to be transmitted.
+            Raw: If true, command is transmitted 'as-is'.
                 If false, then protocol framing characters may be added prior to
                 transmission.
 
-        Returns:
-            The boolean response from the device
+        Raises:
+            NotImplementedException: If no actions at all are supported
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+                
+        Attention:
+            **Deprecated**, will most likely result in 
+            :py:class:`~exceptions.NotImplementedException`
 
         """
         return self._put("commandbool", Command=Command, Raw=Raw)["Value"]
@@ -103,28 +129,51 @@ class Device(object):
     def CommandString(self, Command: str, Raw: bool) -> str:
         """Transmit an arbitrary string to the device and wait for a string response.
 
-        Notes: 
-            Deprecated
+        Returns:
+            The string response from the command
 
         Args:
-            Command (str): The literal command string to be transmitted.
-            Raw (bool): If true, command is transmitted 'as-is'.
+            Command: The literal command string to be transmitted.
+            Raw: If true, command is transmitted 'as-is'.
                 If false, then protocol framing characters may be added prior to
                 transmission.
-            
-        Returns:
-            The string response from the device
+
+        Raises:
+            NotImplementedException: If no actions at all are supported
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+                
+        Attention:
+            **Deprecated**, will most likely result in 
+            :py:class:`~exceptions.NotImplementedException`
 
         """
         return self._put("commandstring", Command=Command, Raw=Raw)["Value"]
 
     @property
     def Connected(self) -> bool:
-        """Retrieve or set the connected state of the device.
+        """(Read/Write) Retrieve or set the connected state of the device.
 
-        Args:
-            Connected (bool): Set True to connect to device hardware.
-                Set False to disconnect from device hardware.
+        Set True to connect to the device hardware. Set False to disconnect 
+        from the device hardware. You can also read the property to check 
+        whether it is connected. This reports the current hardware state.
+        See Notes below. 
+
+        Raises:      
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * The Connected property sets and reports the state of connection to 
+              the device hardware. For a hub this means that Connected will be 
+              True when the first driver connects and will only be set to False 
+              when all drivers have disconnected. A second driver may find that 
+              Connected is already True and setting Connected to False does not 
+              report Connected as False. This is not an error because the physical 
+              state is that the hardware connection is still True.
+            * Multiple calls setting Connected to true or false will not cause 
+              an error.
         
         """
         return self._get("connected")
@@ -134,32 +183,109 @@ class Device(object):
     
     @property
     def Description(self) -> str:
-        """Get description of the device."""
+        """Description of the **device** such as manufacturer and model number.
+
+        Raises:
+            NotConnectedException: If the device status is unavailable
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes: 
+            * This describes the *device*, not the driver. See the :py:attr:`DriverInfo`
+              property for information on the ASCOM driver.
+            * The description length will be a maximum of 64 characters so 
+              that it can be used in FITS image headers, which are limited 
+              to 80 characters including the header name.
+
+        """
         return self._get("description")
 
     @property
     def DriverInfo(self) -> List[str]:
-        """Get information of the device."""
+        """Descriptive and version information about the ASCOM **driver**
+
+        Returns:
+            Python list of strings (see Notes)
+        
+        Raises:
+            DriverException: If the driver cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes: 
+            * This describes the *driver* not the device. See the :py:attr:`Description`
+              property for information on the device itself
+            * The return is a Python list of strings, the total length of which may be
+              hundreds to thousands of characters long. It is intended to display 
+              detailed information on the ASCOM (COM or Alpaca) driver, including 
+              version and copyright data. . To get the driver version in a parse-able 
+              string, use the :py:attr:`DriverVersion` property. 
+       
+        """
         return [i.strip() for i in self._get("driverinfo").split(",")]
 
     @property
     def DriverVersion(self) -> float:
-        """Get string containing only the major and minor version of the driver."""
+        """String containing only the major and minor version of the *driver*.
+        
+        Raises:
+            DriverException: If the driver cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:        
+            * This must be in the form "n.n". It should not to be confused with the 
+              :py:attr:`InterfaceVersion` property, which is the version of this 
+              specification supported by the driver. 
+
+        """
         return float(self._get("driverversion"))
 
     @property
     def InterfaceVersion(self) -> int:
-        """ASCOM Device interface version number that this device supports."""
+        """ASCOM Device interface definition version that this device supports.
+        
+        Raises:
+            DriverException: If the driver cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:        
+            * This is a single integer indicating the version of this specific
+              ASCOM universal interface definition. For example, for ICameraV3,
+              this will be 3. It should not to be confused with the 
+              :py:attr:`DriverVersion` property, which is the major.minor version
+              of the driver for  this device. 
+        
+        """
         return int(self._get("interfaceversion"))
     
     @property
     def Name(self) -> str:
-        """Get name of the device."""
+        """The short name of the *driver*, for display  purposes.
+        
+        Raises:
+            DriverException: If the driver cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        """
         return self._get("name")
 
     @property
     def SupportedActions(self) -> List[str]:
-        """Get list of action names supported by this driver."""
+        """The list of custom action names supported by this driver
+        
+        Returns:
+            Python list of strings (see Notes)
+
+        Raises:
+            DriverException: If the driver cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This is an aid to client authors and testers who would otherwise have to 
+              repeatedly poll the driver to determine its capabilities. Returned :py:meth:`Action()`
+              names may be in mixed case to enhance presentation but the :py:meth:`Action(String, String)`
+              method is case insensitive.
+        
+        """
         return self._get("supportedactions")
 
 # ========================

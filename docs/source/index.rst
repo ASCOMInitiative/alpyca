@@ -5,6 +5,8 @@ To be written of course.
 .. toctree::
     :maxdepth: 4
 
+    introduction
+
     alpacaclasses
 
     alpacamodules

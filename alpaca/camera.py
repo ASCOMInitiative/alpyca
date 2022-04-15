@@ -236,6 +236,7 @@ class Camera(Device):
             NotConnectedException: If the camera status is unavailable
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
+
         """
         return CameraStates(self._get("camerastate"))
 
