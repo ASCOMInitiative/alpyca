@@ -5,7 +5,6 @@ Hello there.
 .. toctree::
    :maxdepth: 4
 
-   alpaca.device
    alpaca.camera
    alpaca.covercalibrator
    alpaca.dome

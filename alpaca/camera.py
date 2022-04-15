@@ -16,7 +16,7 @@ class CameraStates(DocIntEnum):
     cameraDownload  = 4, 'Downloading the image data'
     cameraError     = 5, 'An error condition exists'
 
-class SensorTypes(DocIntEnum):    # **TODO** This is singular in the ASCOM spec
+class SensorTypes(DocIntEnum):    # TODO This is singular in the ASCOM spec
     """Type of sensor in the Camera. Names should be self-explanatory."""
     Monochrome      = 0
     Color           = 1
@@ -40,7 +40,9 @@ class ImageArrayElementTypes(DocIntEnum):
 class ImageMetadata(object):
     """Metadata describing the returned ImageArray data
 
-        See https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+        Notes:
+            * Constructed internally by the library during image retrieval.
+            * See https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
 
     """
     def __init__(
@@ -53,27 +55,6 @@ class ImageMetadata(object):
         num_y: int,
         num_z: int
     ):
-        """Initialize the Camera object
-        
-        Args:
-            metadata_version (int): Currently this is 1
-            image_element_type (ImageArrayElementTypes): 
-                The native data type of the original image data
-            transmission_element_type (ImageArrayElementTypes): 
-                The data type used when transmitting the image data
-            rank (int): The matrix rank of the iamge data (either 2 or 3)
-            num_x (int): Number of pixels in the X direction
-            num_y (int): Number of pixels in the Y direction
-            num_z (int): The index of the color plane
-        
-        Raises:      
-            DriverException: If the device cannot *successfully* complete the request.
-                This exception may be encountered on any call to the device.
-        
-        Notes:
-            * See the description of the ImageArray property for info on image element ordering in the received data. 
-
-        """
         self.metavers = metadata_version
         self.imgtype = image_element_type
         self.xmtype = transmission_element_type
@@ -1362,41 +1343,103 @@ class Camera(Device):
         self._put("subexposureduration", SubexposureDuration=SubexposureDuration)
 
     def AbortExposure(self) -> None:
-        """Abort the current exposure, if any, and returns the camera to Idle state."""
+        """Abort the current exposure, if any, and returns the camera to Idle state.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected.
+            InvalidOperationException: If not currently possible (e.g. during image download)
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Unlike :py:meth:`StopExposure()` this method simply discards any
+              partially-acquired image data and returns the camera to idle.
+            * Will not raise an exception if the camera is already idle.
+     
+        """
         self._put("abortexposure")
 
     def PulseGuide(self, Direction: GuideDirections, Duration: int) -> None:
         """Pulse guide in the specified direction for the specified time (ms).
         
+        **TODO Is this truly blocking?**
+
         Args:
-            Direction (enum GuideDirections): Direction of movement 
-                (0 = North, 1 = South, 2 = East, 3 = West).
-            Duration (int): Duration of movement in milli-seconds.
-        **TODO** Check this once the Telescope PulseGuide is working
+            Direction: :py:class:`~alpaca.telescope.GuideDirections`
+            Interval: duration of the guide move, milliseconds
+
+        Raises:
+            NotImplementedException: If the camera does not support pulse guiding 
+                (:py:attr:`CanPulseGuide` property is False)
+            NotConnectedException: If the camera is not connected.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Some cameras have implemented this as a Synchronous (blocking) operation.
+              TODO This needs to be changed, with :py:attr:`IsPulseGuiding` 
+              being the completion property.
+            * :py:class:`~alpaca.telescope.GuideDirections` for North and South 
+              have varying interpretations
+              by German Equatorial mounts. Some GEM mounts interpret North to be 
+              the same rotation direction of the declination axis regardless of 
+              their pointing state ("side of the pier"). Others truly implement 
+              North and South by reversing the dec-axis rotation depending on 
+              their pointing state. **Apps must be prepared for either behavior**. 
+
         """
         self._put("pulseguide", Direction=Direction, Duration=Duration)
 
     def StartExposure(self, Duration: float, Light: bool) -> None:
-        """Start an exposure. Returns if exposure has successfully been started.
-        
-        Notes:
-            Asynchronous Use ImageReady to check when the exposure has been
-            successfully completed.
+        """Start an exposure. 
+
+        **Non-blocking**: Returns with :py:attr:`ImageReady` = False 
+        if exposure has *successfully* been started.
         
         Args:
-            Duration (float): Duration of exposure in seconds.
-            Light (bool): True if light frame, false if dark frame.
+            Duration: Duration of exposure in seconds.
+            Light: True for light frame, False for dark frame.
 
+        Raises:
+            InvalidValueException: If Duration is invalid, or if :py:attr:`BinX`,
+                :py:attr:`BinY`, :py:attr:`NumX`, :py:attr:`NumY`, :py:attr:`StartX`,
+                and :py:attr:`StartY` form an illegal combination.
+            InvalidOperationException: If :py:attr:`CanAsymmetricBin` is False, yet
+                :py:attr:`BinX` is not equal to :py:attr:`BinY`. TODO Is this right?
+                Isn't this another combination of illegal *values*?
+            NotConnectedException: If the camera is not connected.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device, *including
+                reading the ImageReady property*.
+
+        Notes:
+            * **Asynchronous** (non-blocking): Use :py:attr:`ImageReady` 
+              to determine if the exposure has been *successfully* 
+              completed.
+            * Refer to :py:attr:`ImageReady` for additional info.
+ 
         """
         self._put("startexposure", Duration=Duration, Light=Light)
 
     def StopExposure(self) -> None:
-        """Stop the current exposure, if any.
+        """Stop the current exposure, if any, and download the image data already acquired.
         
+        Raises:
+            NotImplementedException: If the camera cannot stop an in-progress exposure
+                and save the already-acquired image data (:py:attr:`CanStopExposure` is False)
+            NotConnectedException: If the camera is not connected.
+            InvalidOperationException: If not currently possible (e.g. during image download)
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
         Notes:
-            If an exposure is in progress, the readout process is initiated. Ignored if
-            readout is already in process.
-        
+            * Unlike :py:meth:`AbortExposure()` this method cuts an exposure short 
+              while preserving the image data acquired so far, making it available 
+              to the app.
+            * If an exposure is in progress, the readout process is initiated. 
+              Ignored if readout is already in process.
+            * Will not raise an exception if the camera is already idle.
+             
         """
         self._put("stopexposure")
 

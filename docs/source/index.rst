@@ -3,12 +3,15 @@ Welcome to the Alpyca Client Library
 To be written of course.
 
 .. toctree::
-   :maxdepth: 4
+    :maxdepth: 4
 
-   alpacaclasses
+    alpacaclasses
 
-   alpacamodules
+    alpacamodules
 
+    examples
+
+    miscellany
 
 Indices and tables
 ==================

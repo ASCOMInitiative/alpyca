@@ -73,7 +73,7 @@ class CoverCalibrator(Device):
         """Initiates cover closing if a cover is present 
         
         Notes:
-            Asynchronous: CoverState indictes the status of the operation once
+            Asynchronous: CoverState indicates the status of the operation once
             CloseCover() returns. CoverState = Closed indicates success. If an 
             error condition arises while moving between states, CoverState 
             must be set to Error rather than Unknown.
