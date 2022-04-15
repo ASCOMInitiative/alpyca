@@ -67,7 +67,7 @@ class ImageMetadata(object):
             num_z (int): The index of the color plane
         
         Raises:      
-            DriverException: Thrown if the driver cannot successfully complete the request.
+            DriverException: If the device cannot *successfully* complete the request.
                 This exception may be encountered on any call to the device.
         
         Notes:
@@ -148,7 +148,7 @@ class Camera(Device):
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
         Raises:
-            DriverException: Thrown if the driver cannot successfully complete the request. 
+            DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
         """
@@ -157,17 +157,68 @@ class Camera(Device):
 
     @property
     def BayerOffsetX(self) -> int:
-        """Return the X offset of the Bayer matrix, as defined in SensorType."""
+        """The X offset of the Bayer matrix, as defined in property :py:attr:`SensorType`
+        
+        Raises:
+        
+            NotImplementedException: Monochrome cameras throw this exception, 
+                colour cameras do not.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+            InvalidValueException: If not valid.
+
+        Notes:
+            * The value returned will be in the range 0 to M-1 where M is the width of 
+              the Bayer matrix. The offset is relative to the 0,0 pixel in the sensor 
+              array, and does not change to reflect subframe settings.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("bayeroffsetx")
 
     @property
     def BayerOffsetY(self) -> int:
-        """Return the Y offset of the Bayer matrix, as defined in SensorType."""
+        """The Y offset of the Bayer matrix, as defined in property :py:attr:`SensorType`
+        
+        Raises:
+        
+            NotImplementedException: Monochrome cameras throw this exception, 
+                colour cameras do not.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+            InvalidValueException: If not valid.
+
+        Notes:
+            * The value returned will be in the range 0 to M-1 where M is the width of 
+              the Bayer matrix. The offset is relative to the 0,0 pixel in the sensor 
+              array, and does not change to reflect subframe settings.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("bayeroffsety")
 
     @property
     def BinX(self) -> int:
-        """**(Read/Write)** Set or return the binning factor for the X axis."""
+        """**(Read/Write)** Set or return the binning factor for the X axis.
+
+        Raises:      
+            InvalidValueException: If the given binning value is invalid
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Will default to 1 when the camera connection is established. 
+            * Camera does not check for compatible subframe values when this property
+              is set; rather they are checked upon :py:meth:`StartExposure()`. 
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("binx")
     @BinX.setter
     def BinX(self, BinVal: int):
@@ -175,7 +226,22 @@ class Camera(Device):
 
     @property
     def BinY(self) -> int:
-        """**(Read/Write)** Set or return the binning factor for the Y axis."""
+        """**(Read/Write)** Set or return the binning factor for the Y axis.
+
+        Raises:      
+            InvalidValueException: If the given binning value is invalid
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Will default to 1 when the camera connection is established. 
+            * Camera does not check for compatible subframe values when this property
+              is set; rather they are checked upon :py:meth:`StartExposure()`. 
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("biny")
     @BinY.setter
     def BinY(self, BinVal: int):
@@ -183,62 +249,212 @@ class Camera(Device):
 
     @property
     def CameraState(self) -> CameraStates:
-        """Return the camera operational state"""
+        """The camera's operational state (:py:class:`CameraStates`)
+        
+        Raises:
+            NotConnectedException: If the camera status is unavailable
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        """
         return CameraStates(self._get("camerastate"))
 
     @property
     def CameraXSize(self) -> int:
-        """Return the width of the camera sensor."""
+        """The width of the camera sensor in unbinned pixels
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("cameraxsize")
 
     @property
     def CameraYSize(self) -> int:
-        """Return the height of the camera sensor."""
+        """The height of the camera sensor in unbinned pixels
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("cameraysize")
 
     @property
     def CanAbortExposure(self) -> bool:
-        """Indicate whether the camera can abort exposures."""
+        """Indicates whether the camera can abort exposures
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Some cameras support :py:meth:`AbortExposure()`, which allows the exposure to be 
+              terminated before the exposure timer completes, *with the image being discarded*.
+              Returns True if :py:meth:`AbortExposure()` is available, False if not. See also
+              :py:meth:`StopExposure()`
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("canabortexposure")
 
     @property
     def CanAsymmetricBin(self) -> bool:
-        """Indicate whether the camera supports asymmetric binning."""
+        """Indicates whether the camera supports asymmetric binning
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * If true, the camera can have different binning on the X and Y axes, as 
+              determined by BinX and BinY. If false, the binning must be equal on the X and Y axes.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """             
         return self._get("canasymmetricbin")
 
     @property
     def CanFastReadout(self) -> bool:
-        """Indicate whether the camera has a fast readout mode."""
+        """Indicates whether the camera supports a fast readout mode
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """             
         return self._get("canfastreadout")
 
     @property
     def CanGetCoolerPower(self) -> bool:
-        """Indicate whether the camera's cooler power setting can be read."""
+        """Indicates whether the camera's cooler power level is available via :py:attr:`CoolerPower`
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """             
         return self._get("cangetcoolerpower")
 
     @property
     def CanPulseGuide(self) -> bool:
-        """Indicate whether this camera supports pulse guiding."""
+        """Indicates whether the camera supports pulse guiding via :py:meth:`PulseGuide()`
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """             
         return self._get("canpulseguide")
 
     @property
     def CanSetCCDTemperature(self) -> bool:
-        """Indicate whether this camera supports setting the CCD temperature."""
+        """Indicates whether the camera cooler temperature can be controlled 
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * If True, the camera's cooler setpoint can be adjusted. If False, the 
+              camera either uses open-loop cooling or does not have the ability to 
+              adjust temperature from software, and setting the :py:attr:`SetCCDTemperature` 
+              property has no effect.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("cansetccdtemperature")
 
     @property
     def CanStopExposure(self) -> bool:
-        """Indicate whether this camera can stop an exposure that is in progress."""
+        """Indicates whether the camera can stop exposures
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Some cameras support :py:meth:`StopExposure()`, which allows the exposure to be 
+              terminated before the exposure timer completes, *but will still read out the image*. 
+              Returns True if :py:meth:`StopExposure()` is available, False if not. See also
+              :py:meth:`AbortExposure()`.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("canstopexposure")
 
     @property
     def CCDTemperature(self) -> float:
-        """Return the current CCD temperature in degrees Celsius."""
+        """The current CCD temperature in degrees Celsius.
+
+        Raises:
+            InvalidValueException: If data unavailable.
+            NotImplementedException: If not supported (no cooler)
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         return self._get("ccdtemperature")
 
     @property
     def CoolerOn(self) -> bool:
-        """**(Read/Write)** Turn the camera cooler on and off or return the current cooler on/off state."""
+        """**(Read/Write)** Turn the camera cooler on and off or return the current cooler on/off state.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            NotImplementedException: If not supported (no cooler)
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Warning:
+            Turning the cooler off when the cooler is operating at high delta-T 
+            (typically >20C below ambient) may result in thermal shock. Repeated thermal 
+            shock may lead to damage to the sensor or cooler stack. Please consult the 
+            documentation supplied with the camera for further information. 
+        
+        """
         return self._get("cooleron")
     @CoolerOn.setter
     def CoolerOn(self, CoolerState: bool):
@@ -246,38 +462,106 @@ class Camera(Device):
 
     @property
     def CoolerPower(self) -> float:
-        """Return the present cooler power level, in percent."""
+        """The current cooler power level in percent.
+
+        Raises:
+            NotImplementedException: If not supported (no cooler)
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         return self._get("coolerpower")
 
     @property
     def ElectronsPerADU(self) -> float:
-        """Return the gain of the camera (float) in photoelectrons per A/D unit."""
+        """The gain of the camera in photoelectrons per A/D unit.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * TODO Some cameras have multiple gain modes, resulting in this value changing.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("electronsperadu")
 
     @property
     def ExposureMax(self) -> float:
-        """Return the maximum exposure time (float) supported by StartExposure."""
+        """The maximum exposure time (sec) supported by :py:meth:`StartExposure()`.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+        """
         return self._get("exposuremax")
 
     @property
     def ExposureMin(self) -> float:
-        """Return the minimum exposure time (float) supported by StartExposure."""
+        """The minimum exposure time (sec) supported by :py:meth:`StartExposure()`.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+        """
         return self._get("exposuremin")
 
     @property
     def ExposureResolution(self) -> float:
-        """Return the smallest increment in exposure time (float) supported by StartExposure."""
+        """The smallest increment in exposure time (sec) supported by :py:meth:`StartExposure()`.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This can be used, for example, to specify the resolution of a user interface 
+              "spin control" used to dial in the exposure time. 
+            * The duration provided to :py:meth:`StartExposure()` does not have to be an 
+              exact multiple of this number; the driver will choose the closest available 
+              value. Also in some cases the resolution may not be constant over the full 
+              range of exposure times; in this case the smallest increment will be chosen 
+              by the driver. A value of 0.0 indicates that there is no minimum resolution 
+              except that imposed by the resolution of the float data type.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+        """
         return self._get("exposureresolution")
 
     @property
     def FastReadout(self) -> bool:
-        """Set or return whether Fast Readout Mode is enabled.
+        """(Read/Write) Gets or sets Fast Readout Mode.
 
-        Args:
-            FastReadout (bool): True to enable fast readout mode.
-        
-        Returns:
-            Whether Fast Readout Mode is enabled.
+        Raises:
+            NotImplementedException: Thrownif not supported
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This function may in some cases interact with :py:attr:`ReadoutModes`; for 
+              example, there may be modes where the Fast/Normal switch is meaningless. 
+              In this case, it may be preferable to use the :py:attr:`ReadoutModes` 
+              feature to control fast/normal switching.
 
         """
         return self._get("fastreadout")
@@ -287,27 +571,65 @@ class Camera(Device):
 
     @property
     def FullWellCapacity(self) -> float:
-        """Report the full well capacity of the camera.
+        """The full well capacity of the camera (see Notes).
 
-        Report the full well capacity of the camera in electrons, at the current
-        camera settings (binning, SetupDialog settings, etc.).
+        Raises:
+            NotConnectedException: If the camera is not connected.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
-        Returns:
-            Full well capacity of the camera.
+        Notes:
+            * Reports the full well capacity of the camera in electrons, at the current
+              camera settings (binning, SetupDialog settings, etc.).
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
 
         """
+
         return self._get("fullwellcapacity")
 
     @property
     def Gain(self) -> int:
-        """Set or return an index into the Gains array.
+        """(Read/Write) Gets or sets the current gain value or index (**see Notes**)
 
-        Args:
-            Gain (int): Index of the current camera gain in the Gains array.
+        Raises:
+            InvalidValueException: If the supplied valus is not valid 
+            NotImplementedException: If neither **gains index** mode nor **gains value**
+                mode are supported.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            The Gain property is used to adjust the gain setting of the camera and has 
+            two modes of operation:
+
+            * **Gains-Index:** The Gain property is the selected gain's index within 
+              the :py:attr:`Gains` array of textual gain descriptions.
+
+                * In this mode the Gains method returns a *0-based* array of strings, which 
+                  describe available gain settings e.g. "ISO 200", "ISO 1600" 
+                * :py:attr:`GainMin` and :py:attr:`GainMax` will throw a **NotImplementedException**.
+
+            * **Gains-Value:** The Gain property is a direct numeric representation 
+              of the camera's gain.
+
+                * In this mode the :py:attr:`GainMin` and :py:attr:`GainMax` properties must 
+                  return integers specifying the valid range for Gain.
+                * The :py:attr:`Gains` array property will throw a **NotImplementedException**.
+
+            A driver can support none, one or both gain modes depending on the camera's capabilities. 
+            However, only one mode can be active at any one moment because both modes share the 
+            Gain property to return the gain value. Your application can determine 
+            which mode is operational by reading the :py:attr:`GainMin`, :py:attr:`GainMax` 
+            property and this Gain property. If a property can be read then its associated mode 
+            is active, if it throws a **NotImplementedException** then the mode is not active.
         
-        Returns:
-            Index into the Gains array for the selected camera gain.
-        
+        Important:
+            The :py:attr:`ReadoutMode` may in some cases affect the gain of the camera; if so, 
+            the driver must ensure that the two properties do not conflict if both are used.
+                  
         """
         return self._get("gain")
     @Gain.setter
@@ -316,31 +638,115 @@ class Camera(Device):
 
     @property
     def GainMax(self) -> int:
-        """Maximum value of Gain."""
+        """Maximum gain value that this camera supports (see notes and :py:attr:`Gain`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Gain` property is not 
+                implemented or is operating in **gains-index** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Gain` is operating in **gain-value** mode:
+
+            * GainMax must return the camera's highest valid :py:attr:`Gain` setting
+            * The :py:attr:`Gains` property will throw **NotImplementedException**
+
+            GainMax and :py:attr:`GainMin` act together and that either both will 
+            return values, or both will throw **NotImplementedException**.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("gainmax")
 
     @property
     def GainMin(self) -> int:
-        """Minimum value of Gain."""
+        """Minimum gain value that this camera supports (see notes and :py:attr:`Gain`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Gain` property is not 
+                implemented or is operating in **gains-index** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Gain` is operating in **gain-value** mode:
+
+            * GainMin must return the camera's highest valid :py:attr:`Gain` setting
+            * The :py:attr:`Gains` property will throw **NotImplementedException**
+
+            GainMin and :py:attr:`GainMax` act together and that either both will 
+            return values, or both will throw **NotImplementedException**.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+         """     
         return self._get("gainmin")
 
     @property
-    def Gains(self) -> List[int]:
-        """Gains supported by the camera."""
+    def Gains(self) -> List[str]:
+        """List of Gain *names* supported by the camera (see notes and :py:attr:`Gain`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Gain` property is not 
+                implemented or is operating in **gains-value** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Gain` is operating in the **gains-index** mode:
+
+            * The Gains property returns a list of available gain setting *names*.
+            * The :py:attr:`GainMax` and :py:attr:`GainMin` properties will throw
+              **NotImplementedException**.
+
+            The returned gain names could, for example, be a list of ISO settings 
+            for a DSLR camera or a list of gain names for a CMOS camera. Typically 
+            the application software will display the returned gain names in a 
+            drop list, from which the astronomer can select the required value. 
+            The application can then configure the required gain by setting the 
+            camera's Gain property to the *array index* of the selected description.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("gains")
 
     @property
     def HasShutter(self) -> bool:
-        """Indicate whether the camera has a mechanical shutter."""
+        """Indicate whether the camera has a mechanical shutter.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            If HasShutter is False, the :py:meth:`StartExposure()` method will ignore the 
+            Light parameter. 
+
+        """
         return self._get("hasshutter")
 
     @property
     def HeatSinkTemperature(self) -> float:
-        """Return the current heat sink temperature.
+        """The current heat sink (aka "ambient") temperature (deg C).
 
-        Returns:
-            Current heat sink temperature (called "ambient temperature" by some
-            manufacturers) in degrees Celsius.
+        Raises:
+            NotConnectedException: If the camera is not connected
+            NotImplementedException: If :py:attr:`CanSetCCDTemperature` is False
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("heatsinktemperature")
@@ -349,33 +755,21 @@ class Camera(Device):
     def ImageArray(self) -> List[int]:      # TODO This could be Float
         """Return a multidimensional list containing the exposure pixel values.
 
-        Notes:
-            Automatically adapts to servers returning either JSON image data or the much
-            faster ImageBytes format. In either case the returned nested list array 
-            contains standard Python int or float pixel values. See
-            https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
-            See self.ImageArrayInfo for metadata covering the returned image data.
-
-        Returns:
-            list of lists (of lists) forming a two (or three) dimensional array of integers.
-
-        """
-        return self._get_imagedata("imagearray")
-
-    @property
-    def ImageArrayVariant(self) -> List[int]:
-        """Return a multidimensional list containing the exposure pixel values.
+        Raises:
+            InvalidOperationException: If no image data is available
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         Notes:
-            Automatically adapts to servers returning either JSON image data or the much
-            faster ImageBytes format. In either case the returned nested list array 
-            contains standard Python int or float pixel values. See
-            https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
-            See self.ImageArrayInfo for metadata covering the returned image data.
-            Synonym of ImageArray in Alpaca
-
-        Returns:
-            list of lists (of lists) forming a two (or three) dimensional array of integers.
+            * The returned array is in row-major format, and typically must be transposed
+              for use with *numpy* and *astropy* for creating FITS files. See the example
+              below. 
+            * Automatically adapts to devices returning either JSON image data or the much
+              faster ImageBytes format. In either case the returned nested list array 
+              contains standard Python int or float pixel values. See
+              https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+              See :py:attr:`ImageArrayInfo` for metadata covering the returned image data.
 
         """
         return self._get_imagedata("imagearray")
@@ -384,69 +778,176 @@ class Camera(Device):
     def ImageArrayInfo(self) -> ImageMetadata:
         """Get image metadata sucn as dimensions, data type, rank.
 
-        Notes:
-            If no image or if the image was not transmitted via ImageBytesis,
-            this returns None. 
-           
-        Returns:
-            ImageMetadata object containing ImageBytes info about the image
+        See Class :py:class:`ImageMetadata` for the properties available. 
 
+        Notes:
+            If no image has been retrieved via :py:attr:`ImageArray`, 
+            this returns None. 
+ 
         """
         return self.img_desc
 
     @property
     def ImageReady(self) -> bool:
-        """Indicates that an image is ready to be downloaded."""
+        """Indicates that an image is ready to be downloaded.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request
+                (see Attention below). This exception may be encountered on any 
+                call to the device.
+
+        Notes:
+            * If ImageReady returns a valid False or True value, then the process of
+              acquiring an image is *proceeding normally* or has been *successful*. 
+            * ImageReady will be False immediately upon return from :py:meth:`StartExposure()`. 
+              It will remain False until the exposure has been *successfully* completed and 
+              an image is ready for download.
+
+        Attention:
+            * If the camera encounters a problem which prevents or prevented it from 
+              *successfully* completing the exposure, the driver will raise an 
+              exception when you attempt to read ImageReady. 
+
+        """
         return self._get("imageready")
 
     @property
     def IsPulseGuiding(self) -> bool:
-        """Indicatee that the camera is pulse guideing."""
+        """Indicates that the camera is currently in a :py:meth:`PulseGuide()` operation.
+        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request
+                (see Attention below). This exception may be encountered on any 
+                call to the device.
+
+        Notes:
+            * If IsPulseGuiding returns a valid True or False value, then the process of
+              pulse-guiding is *proceeding normally* or has completed *successfully*,
+              respectively. 
+            * IsPulseGuiding will be True immediately upon return from :py:meth:`PulseGuide()`. 
+              It will remain True until the requested pulse-guide interval has elapsed, and
+              the pulse-guiding operation has been *successfully* completed.
+
+        Attention:
+            * If the camera encounters a problem which prevents it from *successfully*
+              completing the the pulse-guiding operation, the driver will raise an exception 
+              when you attempt to read IsPulseGuiding.
+
+        
+        
+        """
         return self._get("ispulseguiding")
 
     @property
     def LastExposureDuration(self) -> float:
-        """Report the actual exposure duration in seconds (i.e. shutter open time)."""
+        """Report the actual exposure duration in seconds (i.e. shutter open time).
+
+        Raises:
+            NotImplementedException: If the camera doesn't support this feature
+            InvalidOperationException: If no image has yet been *successfully* acquired.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request
+                (see Attention below). This exception may be encountered on any 
+                call to the device.
+
+        Notes:
+            * This may differ from the exposure time requested due to shutter latency, 
+              camera timing precision, etc. 
+        
+        """
         return self._get("lastexposureduration")
 
     @property
     def LastExposureStartTime(self) -> str:
         """Start time of the last exposure in FITS standard format.
         
-        Reports the actual exposure start in the FITS-standard / ISO-8601
-        CCYY-MM-DDThh:mm:ss[.sss...] format.
+        Raises:
+            NotImplementedException: If the camera doesn't support this feature
+            InvalidOperationException: If no image has yet been *successfully* acquired.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request
+                (see Attention below). This exception may be encountered on any 
+                call to the device.
 
-        Returns:
-            Start time of the last exposure in FITS / ISO-8601 standard format.
+        Notes:
+            Reports the actual exposure start in the FITS-standard / ISO-8601
+            CCYY-MM-DDThh:mm:ss[.sss...] format.
 
         """
         return self._get("lastexposurestarttime")
 
     @property
     def MaxADU(self) -> int:
-        """Camera's maximum ADU value."""
+        """The maximum ADU value of the camera.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("maxadu")
 
     @property
     def MaxBinX(self) -> int:
-        """Maximum binning for the camera X axis."""
+        """The maximum supported X binning value of the camera.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("maxbinx")
 
     @property
     def MaxBinY(self) -> int:
-        """Maximum binning for the camera Y axis."""
+        """The maximum supported Y binning value of the camera.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("maxbiny")
 
     @property
     def NumX(self) -> int:
-        """Set or return the current subframe width.
+        """(Read/Write) Set or return the current subframe width.
         
-        Args:
-            NumX (int): Subframe width, if binning is active, value is in binned
-                pixels.
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * If binning is active, value is in binned pixels. 
+            * Defaults to :py:attr:`CameraXSize` with :py:attr:`StartX` = 0
+              (full frame) on initial camera startup.
         
-        Returns:
-            Current subframe width.
+        Attention:
+            * No error check is performed for incompatibilty with :py:attr:`BinX`, 
+              and :py:attr:`StartX`, If these values are incompatible, you will
+              receive an **InvalidValueException** from a subsequent call to 
+              :py:meth:`StartExposure()`.
         
         """
         return self._get("numx")
@@ -456,14 +957,23 @@ class Camera(Device):
 
     @property
     def NumY(self) -> int:
-        """Set or return the current subframe height.
+        """(Read/Write) Set or return the current subframe height.
         
-        Args:
-            NumX (int): Subframe height, if binning is active, value is in binned
-                pixels.
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * If binning is active, value is in binned pixels. 
+            * Defaults to :py:attr:`CameraYSize` with :py:attr:`StartY` = 0
+              (full frame) on initial camera startup.
         
-        Returns:
-            Current subframe height.
+        Attention:
+            * No error check is performed for incompatibilty with :py:attr:`BinY`, 
+              and :py:attr:`StartY`, If these values are incompatible, you will
+              receive an **InvalidValueException** from a subsequent call to 
+              :py:meth:`StartExposure()`.
         
         """
         return self._get("numy")
@@ -473,15 +983,46 @@ class Camera(Device):
 
     @property
     def Offset(self) -> int:
-        """Set or return an index into the Offsets array.
+        """(Read/Write) Gets or sets the current offset value or index (**see Notes**)
 
-        Args:
-            Offset (int): Index of the current camera offset in the Offsets array.
+        Raises:
+            InvalidValueException: If the supplied value is not valid 
+            NotImplementedException: If neither **offsets index** mode nor **offsets value**
+                mode are supported.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            The Offset property is used to adjust the offset setting of the camera and has 
+            two modes of operation:
+
+            * **Offsets-Index:** The Offset property is the selected offset's index within 
+              the :py:attr:`Offsets` array of textual offset descriptions.
+
+                * In this mode the Offsets method returns a *0-based* array of strings, which 
+                  describe available offset settings.
+                * :py:attr:`OffsetMin` and :py:attr:`OffsetMax` will throw a **NotImplementedException**.
+
+            * **Offsets-Value:** The Offset property is a direct numeric representation 
+              of the camera's offset.
+
+                * In this mode the :py:attr:`OffsetMin` and :py:attr:`OffsetMax` properties must 
+                  return integers specifying the valid range for Offset.
+                * The :py:attr:`Offsets` array property will throw a **NotImplementedException**.
+
+            A driver can support none, one or both offset modes depending on the camera's capabilities. 
+            However, only one mode can be active at any one moment because both modes share the 
+            Offset property to return the offset value. Your application can determine 
+            which mode is operational by reading the :py:attr:`OffsetMin`, :py:attr:`OffsetMax` 
+            property and this Offset property. If a property can be read then its associated mode 
+            is active, if it throws a **NotImplementedException** then the mode is not active.
         
-        Returns:
-            Index into the Offsets array for the selected camera offset.
-        
-        """
+        Important:
+            The :py:attr:`ReadoutMode` may in some cases affect the offset of the camera; if so, 
+            the driver must ensure that the two properties do not conflict if both are used.
+
+        """          
         return self._get("offset")
     @Offset.setter
     def Offset(self, Offset: int):
@@ -489,43 +1030,181 @@ class Camera(Device):
 
     @property
     def OffsetMax(self) -> int:
-        """Maximum value of Offset."""
+        """Maximum offset value that this camera supports (see notes and :py:attr:`Offset`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Offset` property is not 
+                implemented or is operating in **offsets-index** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Offset` is operating in **offsets-value** mode:
+
+            * OffsetMax must return the camera's highest valid :py:attr:`Offset` setting
+            * The :py:attr:`Offsets` property will throw **NotImplementedException**
+
+            OffsetMax and :py:attr:`OffsetMin` act together and that either both will 
+            return values, or both will throw **NotImplementedException**.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("offsetmax")
 
     @property
     def OffsetMin(self) -> int:
-        """Minimum value of Offset."""
+        """Minimum offset value that this camera supports (see notes and :py:attr:`Offset`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Offset` property is not 
+                implemented or is operating in **offsets-index** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Offset` is operating in **offsets-value** mode:
+
+            * OffsetMin must return the camera's highest valid :py:attr:`Offset` setting
+            * The :py:attr:`Offsets` property will throw **NotImplementedException**
+
+            OffsetMin and :py:attr:`OffsetMax` act together and that either both will 
+            return values, or both will throw **NotImplementedException**.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+         """     
         return self._get("offsetmin")
 
     @property
     def Offsets(self) -> List[int]:
-        """Offsets supported by the camera."""
+        """List of Offset *names* supported by the camera (see notes and :py:attr:`Offset`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`Offset` property is not 
+                implemented or is operating in **offsets-value** mode.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            When :py:attr:`Offset` is operating in the **offsets-index** mode:
+
+            * The Offsets property returns a list of available offset setting *names*.
+            * The :py:attr:`OffsetMax` and :py:attr:`OffsetMin` properties will throw
+              **NotImplementedException**.
+
+            The returned offset names could, for example, be a list of ISO settings 
+            for a DSLR camera or a list of offset names for a CMOS camera. Typically 
+            the application software will display the returned offset names in a 
+            drop list, from which the astronomer can select the required value. 
+            The application can then configure the required offset by setting the 
+            camera's Offset property to the *array index* of the selected description.
+
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("offsets")
 
     @property
     def PercentCompleted(self) -> int:
-        """Indicate percentage completeness of the current operation.
+        """The percentage completeness of this operation
+        
+        Raises:
+            InvalidOperationException: When it is inappropriate to ask for a 
+                completion percentage.
+            NotImplementedException: If this optional property is not implemented.
+            NotConnectedException: If the camera is not connected.
+            DriverException: If the device cannot *successfully* complete the request
+                (see Attention below). This exception may be encountered on any 
+                call to the device.
 
-        Returns:
-            An integer between 0 and 100% indicating the completeness of 
-            this operation.
+        Notes:
+            * If valid, returns an integer between 0 and 100, where 0 indicates 0% progress 
+              (function just started) and 100 indicates 100% progress (i.e. completion). 
+            * At the discretion of the device, PercentCompleted may optionally be valid 
+              when :py:attr:`CameraState` is in any or all of the following states: 
+              
+                * cameraExposing
+                * cameraWaiting
+                * cameraReading
+                * cameraDownload
+            
+            In all other states an **InvalidOperationException** will be raised.
+
+        Attention:
+            * If the camera encounters a problem which prevents or prevented it from 
+              *successfully* completing the operation, the driver will raise an 
+              exception when you attempt to read PercentComplete. 
 
         """
         return self._get("percentcompleted")
 
     @property
     def PixelSizeX(self):
-        """Width of CCD chip pixels (microns)."""
+        """The width (microns) of the camera sensor elements.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("pixelsizex")
 
     @property
     def PixelSizeY(self):
-        """Height of CCD chip pixels (microns)."""
+        """The height (microns) of the camera sensor elements.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("pixelsizey")
 
     @property
     def ReadoutMode(self) -> int:
-        """Set or get the canera's readout mode as an index into the array ReadoutModes."""
+        """(Read/Write) Gets or sets the current camera readout mode (**see Notes**)
+
+        Raises:
+            InvalidValueException: If the supplied value is not valid (index out of range)
+            NotImplementedException: If :py:attr:`CanFastReadout` is True.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * ReadoutMode is an index into the array :py:attr:`ReadoutModes`, and 
+              selects the desired readout mode for the camera. Defaults to 0 if not set. 
+            * It is strongly recommended, but not required, that cameras make the 0-index 
+              mode suitable for standard imaging operations, since it is the default.
+
+        Important:
+            The :py:attr:`ReadoutMode` may in some cases affect the :py:attr:`Gain`
+            and/or :py:attr:`Offset` of the camera; if so, the camera must ensure 
+            that the two properties do not conflict if both are used.
+
+        """          
         return self._get("readoutmode")
     @ReadoutMode.setter
     def ReadoutMode(self, ReadoutMode: int):
@@ -533,45 +1212,79 @@ class Camera(Device):
 
     @property
     def ReadoutModes(self) -> List[str]:
-        """List of available readout mode names.
+        """List of ReadoutMode *names* supported by the camera (see notes and :py:attr:`ReadoutMode`)
+        
+        Raises:
+            NotImplementedException: If the :py:attr:`ReadoutMode` property is not 
+                implemented.
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
         Notes:
-            The names are indexed, and the index of the name is used to
-            set and get the current readout mode.
+            * Readout modes may be available from the camera, and if so then 
+              :py:attr:`CanFastReadout` will be False. The two camera mode selection
+              schemes are mutually exclusive.
+            * This property provides an array of strings, each of which describes an 
+              available readout mode of the camera. At least one string will be present 
+              in the list. Your application may use this list to present to the user a 
+              drop-list of modes. The choice of available modes made available is 
+              entirely at the discretion of the camera. Please note that if the camera 
+              has many different modes of operation, then the most commonly adjusted 
+              settings will probably be in ReadoutModes; additional settings may be 
+              provided using :py:meth:`SetupDialog()`. 
+            * To select a mode, set ReadoutMode to the index of the desired mode. 
+              The index is zero-based.
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
 
         """
         return self._get("readoutmodes")
 
     @property
     def SensorName(self) -> str:
-        """Name of the sensor used within the camera."""
+        """The name of the sensor used within the camera.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
+        """
         return self._get("sensorname")
 
     @property
     def SensorType(self) -> SensorTypes:
-        """Type of information returned by the the camera sensor (monochrome or colour).
-        
-        Returns: Enum SensorTypes: 
-            0 = Monochrome 
-            1 = Colour (not requiring Bayer decoding)
-            2 = RGGB   (Bayer encoding)
-            3 = CMYG   (Bayer encoding)
-            4 = CMYG2  (Bayer encoding)
-            5 = LRGB   TRUESENSE Bayer encoding
-       
+        """The type of sensor within the camera.
+
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is recommended that this property be retrieved only after a connection is 
+              established with the camera hardware, to ensure that the driver is
+              aware of the capabilities of the specific camera model.
+
         """
         return SensorTypes(self._get("sensortype"))
     
     @property
     def SetCCDTemperature(self) -> float:
-        """Set or return the camera's cooler setpoint (degrees Celsius).
+        """(Read/Write) Get or set the camera's cooler setpoint (degrees Celsius).
 
-        Args:
-            SetCCDTemperature (float): 	Temperature set point (degrees Celsius).
-        
-        Returns:
-            Camera's cooler setpoint (degrees Celsius).
-        
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
         """
         return self._get("setccdtemperature")
     @SetCCDTemperature.setter
@@ -580,14 +1293,23 @@ class Camera(Device):
 
     @property
     def StartX(self) -> int:
-        """Set or return the current subframe X axis start position.
-
-        Args:
-            StartX (int): The subframe X axis start position in binned pixels.
+        """(Read/Write) Set or return the current X-axis subframe start position.
         
-        Returns:
-            Sets the subframe start position for the X axis (0 based) and returns the
-            current value. If binning is active, value is in binned pixels.
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * If binning is active, value is in binned pixels. 
+            * Defaults to 0 with :py:attr:`NumX` = :py:attr:`CameraXSize`
+              (full frame) on initial camera startup.
+        
+        Attention:
+            * No error check is performed for incompatibilty with :py:attr:`BinX`, 
+              and :py:attr:`NumX`, If these values are incompatible, you will
+              receive an **InvalidValueException** from a subsequent call to 
+              :py:meth:`StartExposure()`.
         
         """
         return self._get("startx")
@@ -597,14 +1319,23 @@ class Camera(Device):
 
     @property
     def StartY(self) -> int:
-        """Set or return the current subframe Y axis start position.
-
-        Args:
-            StartY (int): The subframe Y axis start position in binned pixels.
+        """(Read/Write) Set or return the current Y-axis subframe start position.
         
-        Returns:
-            Sets the subframe start position for the Y axis (0 based) and returns the
-            current value. If binning is active, value is in binned pixels.
+        Raises:
+            NotConnectedException: If the camera is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * If binning is active, value is in binned pixels. 
+            * Defaults to 0 with :py:attr:`NumY` = :py:attr:`CameraYSize`
+              (full frame) on initial camera startup.
+        
+        Attention:
+            * No error check is performed for incompatibilty with :py:attr:`BinY`, 
+              and :py:attr:`NumY`, If these values are incompatible, you will
+              receive an **InvalidValueException** from a subsequent call to 
+              :py:meth:`StartExposure()`.
         
         """
         return self._get("starty")
@@ -614,10 +1345,15 @@ class Camera(Device):
 
     @property
     def SubExposureDuration(self) -> float:
-        """Camera's sub-exposure interval (float)
+        """(Read/Write) Set or return the camera's sub-exposure interval (sec)
 
-        The Camera's sub exposure duration (float) in seconds. Only available in Camera 
-        Interface Version 3 and later.
+        Raises:
+            NotImplementedException: The camera does not support 
+                on-board stacking with user-supplied sub-exposure interval.
+            NotConnectedException: If the camera is not connected.
+            InvalidValueException: The supplied duration is not valid.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("subexposureduration")
