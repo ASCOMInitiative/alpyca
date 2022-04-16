@@ -245,7 +245,7 @@ class Camera(Device):
         """The width of the camera sensor in unbinned pixels
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -262,7 +262,7 @@ class Camera(Device):
         """The height of the camera sensor in unbinned pixels
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -279,7 +279,7 @@ class Camera(Device):
         """Indicates whether the camera can abort exposures
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -300,7 +300,7 @@ class Camera(Device):
         """Indicates whether the camera supports asymmetric binning
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -319,7 +319,7 @@ class Camera(Device):
         """Indicates whether the camera supports a fast readout mode
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -336,7 +336,7 @@ class Camera(Device):
         """Indicates whether the camera's cooler power level is available via :py:attr:`CoolerPower`
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -353,7 +353,7 @@ class Camera(Device):
         """Indicates whether the camera supports pulse guiding via :py:meth:`PulseGuide()`
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -370,7 +370,7 @@ class Camera(Device):
         """Indicates whether the camera cooler temperature can be controlled 
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -391,7 +391,7 @@ class Camera(Device):
         """Indicates whether the camera can stop exposures
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -425,7 +425,7 @@ class Camera(Device):
         """**(Read/Write)** Turn the camera cooler on and off or return the current cooler on/off state.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             NotImplementedException: If not supported (no cooler)
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -448,7 +448,7 @@ class Camera(Device):
 
         Raises:
             NotImplementedException: If not supported (no cooler)
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -460,7 +460,7 @@ class Camera(Device):
         """The gain of the camera in photoelectrons per A/D unit.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -478,7 +478,7 @@ class Camera(Device):
         """The maximum exposure time (sec) supported by :py:meth:`StartExposure()`.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -494,7 +494,7 @@ class Camera(Device):
         """The minimum exposure time (sec) supported by :py:meth:`StartExposure()`.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -510,7 +510,7 @@ class Camera(Device):
         """The smallest increment in exposure time (sec) supported by :py:meth:`StartExposure()`.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -535,7 +535,7 @@ class Camera(Device):
 
         Raises:
             NotImplementedException: Thrownif not supported
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -556,7 +556,7 @@ class Camera(Device):
         """The full well capacity of the camera (see Notes).
 
         Raises:
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -579,7 +579,7 @@ class Camera(Device):
             InvalidValueException: If the supplied valus is not valid 
             NotImplementedException: If neither **gains index** mode nor **gains value**
                 mode are supported.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -625,7 +625,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Gain` property is not 
                 implemented or is operating in **gains-index** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -652,7 +652,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Gain` property is not 
                 implemented or is operating in **gains-index** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -679,7 +679,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Gain` property is not 
                 implemented or is operating in **gains-value** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -709,7 +709,7 @@ class Camera(Device):
         """Indicate whether the camera has a mechanical shutter.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -725,7 +725,7 @@ class Camera(Device):
         """The current heat sink (aka "ambient") temperature (deg C).
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             NotImplementedException: If :py:attr:`CanSetCCDTemperature` is False
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -739,7 +739,7 @@ class Camera(Device):
 
         Raises:
             InvalidOperationException: If no image data is available
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -774,14 +774,14 @@ class Camera(Device):
         """Indicates that an image is ready to be downloaded.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
 
         Notes:
-            * If ImageReady returns a valid False or True value, then the process of
-              acquiring an image is *proceeding normally* or has been *successful*. 
+            * If ImageReady returns a valid False or True value, then the *non-blocking*
+              process of acquiring an image is *proceeding normally* or has been *successful*. 
             * ImageReady will be False immediately upon return from :py:meth:`StartExposure()`. 
               It will remain False until the exposure has been *successfully* completed and 
               an image is ready for download.
@@ -799,7 +799,7 @@ class Camera(Device):
         """Indicates that the camera is currently in a :py:meth:`PulseGuide()` operation.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
@@ -829,7 +829,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the camera doesn't support this feature
             InvalidOperationException: If no image has yet been *successfully* acquired.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
@@ -848,7 +848,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the camera doesn't support this feature
             InvalidOperationException: If no image has yet been *successfully* acquired.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
@@ -865,7 +865,7 @@ class Camera(Device):
         """The maximum ADU value of the camera.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -882,7 +882,7 @@ class Camera(Device):
         """The maximum supported X binning value of the camera.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -899,7 +899,7 @@ class Camera(Device):
         """The maximum supported Y binning value of the camera.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -916,7 +916,7 @@ class Camera(Device):
         """(Read/Write) Set or return the current subframe width.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -942,7 +942,7 @@ class Camera(Device):
         """(Read/Write) Set or return the current subframe height.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -971,7 +971,7 @@ class Camera(Device):
             InvalidValueException: If the supplied value is not valid 
             NotImplementedException: If neither **offsets index** mode nor **offsets value**
                 mode are supported.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1017,7 +1017,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Offset` property is not 
                 implemented or is operating in **offsets-index** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -1044,7 +1044,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Offset` property is not 
                 implemented or is operating in **offsets-index** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -1071,7 +1071,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`Offset` property is not 
                 implemented or is operating in **offsets-value** mode.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -1104,7 +1104,7 @@ class Camera(Device):
             InvalidOperationException: When it is inappropriate to ask for a 
                 completion percentage.
             NotImplementedException: If this optional property is not implemented.
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             DriverException: If the device cannot *successfully* complete the request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
@@ -1135,7 +1135,7 @@ class Camera(Device):
         """The width (microns) of the camera sensor elements.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1152,7 +1152,7 @@ class Camera(Device):
         """The height (microns) of the camera sensor elements.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1171,7 +1171,7 @@ class Camera(Device):
         Raises:
             InvalidValueException: If the supplied value is not valid (index out of range)
             NotImplementedException: If :py:attr:`CanFastReadout` is True.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1199,7 +1199,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the :py:attr:`ReadoutMode` property is not 
                 implemented.
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -1229,7 +1229,7 @@ class Camera(Device):
         """The name of the sensor used within the camera.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1246,7 +1246,7 @@ class Camera(Device):
         """The type of sensor within the camera.
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1263,7 +1263,7 @@ class Camera(Device):
         """(Read/Write) Get or set the camera's cooler setpoint (degrees Celsius).
 
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1278,7 +1278,7 @@ class Camera(Device):
         """(Read/Write) Set or return the current X-axis subframe start position.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1304,7 +1304,7 @@ class Camera(Device):
         """(Read/Write) Set or return the current Y-axis subframe start position.
         
         Raises:
-            NotConnectedException: If the camera is not connected
+            NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
@@ -1332,7 +1332,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: The camera does not support 
                 on-board stacking with user-supplied sub-exposure interval.
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied duration is not valid.
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -1347,7 +1347,7 @@ class Camera(Device):
         """Abort the current exposure, if any, and returns the camera to Idle state.
         
         Raises:
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             InvalidOperationException: If not currently possible (e.g. during image download)
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -1372,7 +1372,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the camera does not support pulse guiding 
                 (:py:attr:`CanPulseGuide` property is False)
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
         
@@ -1408,7 +1408,7 @@ class Camera(Device):
             InvalidOperationException: If :py:attr:`CanAsymmetricBin` is False, yet
                 :py:attr:`BinX` is not equal to :py:attr:`BinY`. TODO Is this right?
                 Isn't this another combination of illegal *values*?
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device, *including
                 reading the ImageReady property*.
@@ -1428,7 +1428,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If the camera cannot stop an in-progress exposure
                 and save the already-acquired image data (:py:attr:`CanStopExposure` is False)
-            NotConnectedException: If the camera is not connected.
+            NotConnectedException: If the device is not connected.
             InvalidOperationException: If not currently possible (e.g. during image download)
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.

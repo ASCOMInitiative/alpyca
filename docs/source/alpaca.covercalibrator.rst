@@ -1,11 +1,9 @@
 CoverCalibrator Class
 =====================
-Description of this class, etc.
-
 .. module:: alpaca.covercalibrator
 .. autoclass:: CoverCalibrator
     :members:
-    :inherited-members: Device
+    :inherited-members:
 
 CoverCalibrator-Related Constants
 ---------------------------------

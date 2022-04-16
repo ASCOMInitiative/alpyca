@@ -95,7 +95,7 @@ class Device(object):
                 
         Attention:
             **Deprecated**, will most likely result in 
-            :py:class:`~exceptions.NotImplementedException`
+            :py:exc:`~alpaca.exceptions.NotImplementedException`
 
 
         """
@@ -121,7 +121,7 @@ class Device(object):
                 
         Attention:
             **Deprecated**, will most likely result in 
-            :py:class:`~exceptions.NotImplementedException`
+            :py:exc:`~alpaca.exceptions.NotImplementedException`
 
         """
         return self._put("commandbool", Command=Command, Raw=Raw)["Value"]
@@ -146,7 +146,7 @@ class Device(object):
                 
         Attention:
             **Deprecated**, will most likely result in 
-            :py:class:`~exceptions.NotImplementedException`
+            :py:exc:`~alpaca.exceptions.NotImplementedException`
 
         """
         return self._put("commandstring", Command=Command, Raw=Raw)["Value"]
