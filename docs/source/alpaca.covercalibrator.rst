@@ -7,8 +7,6 @@ CoverCalibrator Class
 
 CoverCalibrator-Related Constants
 ---------------------------------
-Another need for blank line!
-
 .. autoenum:: CoverStatus
     :members:
 .. autoenum:: CalibratorStatus

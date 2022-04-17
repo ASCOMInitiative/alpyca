@@ -3,7 +3,8 @@ from threading import Lock
 from datetime import datetime
 from typing import List, Any
 import dateutil.parser
-import requests
+#import requests
+import httpx
 import random
 from alpaca.exceptions import *     # Sorry Python purists
 
@@ -36,7 +37,7 @@ class Device(object):
 
         """
         self.address = address
-        self.device_type = device_type
+        self.device_type = device_type.lower()
         self.device_number = device_number
         self.api_version = API_VERSION
         self.base_url = "%s://%s/api/v%d/%s/%d" % (
@@ -292,11 +293,12 @@ class Device(object):
 # HTTP/JSON Communications
 # ========================
 
-    def _get(self, attribute: str, **data) -> str:
+    def _get(self, attribute: str, tmo=5, **data) -> str:
         """Send an HTTP GET request to an Alpaca server and check response for errors.
 
         Args:
             attribute (str): Attribute to get from server.
+            tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
         
         """
@@ -308,18 +310,19 @@ class Device(object):
         pdata.update(data)
         try:
             Device._ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata)
+            response = httpx.get("%s/%s" % (self.base_url, attribute), params = pdata, timeout=tmo)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
         self.__check_error(response)
         return response.json()["Value"]
 
-    def _put(self, attribute: str, **data) -> str:
+    def _put(self, attribute: str, tmo=5, **data) -> str:
         """Send an HTTP PUT request to an Alpaca server and check response for errors.
 
         Args:
             attribute (str): Attribute to put to server.
+            tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
         
         """
@@ -331,14 +334,14 @@ class Device(object):
         pdata.update(data)
         try:
             Device._ctid_lock.acquire()
-            response = requests.put("%s/%s" % (self.base_url, attribute), data=pdata)
+            response = httpx.put("%s/%s" % (self.base_url, attribute), data=pdata, timeout=tmo)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
         self.__check_error(response)
         return response.json()  # TODO Is this right? json()?
 
-    def __check_error(self, response: requests.Response) -> None:
+    def __check_error(self, response: httpx.Response) -> None:
         """Alpaca exception handler (ASCOM exception types)
 
         Args:
@@ -347,7 +350,8 @@ class Device(object):
         Notes:
             Depending on the error number, the appropriate ASCOM exception type
             will be raised. See the ASCOM Alpaca API Reference for the reserved
-            error codes and their corresponding exceptions.
+            error codes and their corresponding exceptions. NOTE that DriverException
+            and AlpacaRequestException take error code and message.
 
         """
         if response.status_code in range(200, 204):
@@ -356,21 +360,21 @@ class Device(object):
             m = j["ErrorMessage"]
             if n != 0:
                 if n == 0x0400:
-                    raise NotImplementedException(n, m)
+                    raise NotImplementedException(m)
                 elif n == 0x0401:
-                    raise InvalidValueException(n, m)
+                    raise InvalidValueException(m)
                 elif n == 0x0402:
-                    raise ValueNotSetException(n, m)
+                    raise ValueNotSetException(m)
                 elif n == 0x0407:
-                    raise NotConnectedException(n, m)
+                    raise NotConnectedException(m)
                 elif n == 0x0408:
-                    raise ParkedException(n, m)
+                    raise ParkedException(m)
                 elif n == 0x0409:
-                    raise SlavedException(n, m)
+                    raise SlavedException(m)
                 elif n == 0x040B:
-                    raise InvalidOperationException(n, m)
+                    raise InvalidOperationException(m)
                 elif n == 0x040c:
-                    raise ActionNotImplementedException(n, m)
+                    raise ActionNotImplementedException(m)
                 elif n >= 0x500 and n <= 0xFFF:
                     raise DriverException(n, m)
                 else: # unknown 0x400-0x4FF

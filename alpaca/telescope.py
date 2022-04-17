@@ -661,7 +661,7 @@ class Telescope(Device):
     def FindHome(self) -> None:
         """Move the mount to the "home" position."""
         # **TODO** This is synchronous now, etc.
-        self._put("findhome")
+        self._put("findhome", 30)   # Extended timeout for bleeping sync method
 
     def MoveAxis(self, Axis: TelescopeAxes, Rate: float) -> None:
         """Move a telescope axis at the given rate.
@@ -697,7 +697,7 @@ class Telescope(Device):
 
     def SlewToAltAz(self, Azimuth: float, Altitude: float) -> None:
         """DEPRECATED - Do not use this via Alpaca"""
-        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
+        raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToAltAzAsync(self, Azimuth: float, Altitude: float) -> None:
         """Slew asynchronously to the given local horizontal coordinates.
@@ -712,7 +712,7 @@ class Telescope(Device):
 
     def SlewToCoordinates(self, RightAscension: float, Declination: float) -> None:
         """DEPRECATED - Do not use this via Alpaca"""
-        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
+        raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToCoordinatesAsync(self, RightAscension: float, Declination: float):
         """Slew asynchronously to the given equatorial coordinates.
@@ -726,7 +726,7 @@ class Telescope(Device):
 
     def SlewToTarget(self) -> None:
         """DEPRECATED - Do not use this via Alpaca"""
-        raise NotImplementedException(0x400, "Synchronous methods are deprecated, not available via Alpaca.")
+        raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToTargetAsync(self) -> None:
         """Asynchronously slew to the TargetRightAscension and TargetDeclination coordinates."""

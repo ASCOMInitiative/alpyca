@@ -1,7 +1,11 @@
-alpaca.dome module
-==================
+Dome Class
+==========
+.. module:: alpaca.dome
+.. autoclass:: Dome
+    :members:
+    :inherited-members:
 
-.. automodule:: alpaca.dome
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Dome-Related Constants
+----------------------
+.. autoenum:: ShutterState
+    :members:

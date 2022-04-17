@@ -3,8 +3,9 @@ from alpaca.telescope import GuideDirections
 from alpaca.exceptions import *
 from alpaca.docenum import DocIntEnum
 from typing import List, Any
-import requests
-from requests import Response
+#import requests
+#from requests import Response
+import httpx
 import array
 
 class CameraStates(DocIntEnum):
@@ -276,7 +277,7 @@ class Camera(Device):
 
     @property
     def CanAbortExposure(self) -> bool:
-        """Indicates whether the camera can abort exposures
+        """The camera can abort exposures
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -297,7 +298,7 @@ class Camera(Device):
 
     @property
     def CanAsymmetricBin(self) -> bool:
-        """Indicates whether the camera supports asymmetric binning
+        """The camera supports asymmetric binning
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -316,7 +317,7 @@ class Camera(Device):
 
     @property
     def CanFastReadout(self) -> bool:
-        """Indicates whether the camera supports a fast readout mode
+        """The camera supports a fast readout mode
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -333,7 +334,7 @@ class Camera(Device):
 
     @property
     def CanGetCoolerPower(self) -> bool:
-        """Indicates whether the camera's cooler power level is available via :py:attr:`CoolerPower`
+        """The camera's cooler power level is available via :py:attr:`CoolerPower`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -350,7 +351,7 @@ class Camera(Device):
 
     @property
     def CanPulseGuide(self) -> bool:
-        """Indicates whether the camera supports pulse guiding via :py:meth:`PulseGuide()`
+        """The camera supports pulse guiding via :py:meth:`PulseGuide()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -367,7 +368,7 @@ class Camera(Device):
 
     @property
     def CanSetCCDTemperature(self) -> bool:
-        """Indicates whether the camera cooler temperature can be controlled 
+        """The camera cooler temperature can be controlled 
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -388,7 +389,7 @@ class Camera(Device):
 
     @property
     def CanStopExposure(self) -> bool:
-        """Indicates whether the camera can stop exposures
+        """The camera can stop exposures
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -1464,7 +1465,7 @@ class Camera(Device):
         pdata.update(data)
         try:
             Device._ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
+            response = httpx.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
@@ -1576,21 +1577,21 @@ def raise_alpaca_if(n, m):
 
     """
     if n == 0x0400:
-        raise NotImplementedException(n, m)
+        raise NotImplementedException(m)
     elif n == 0x0401:
-        raise InvalidValueException(n, m)
+        raise InvalidValueException(m)
     elif n == 0x0402:
-        raise ValueNotSetException(n, m)
+        raise ValueNotSetException(m)
     elif n == 0x0407:
-        raise NotConnectedException(n, m)
+        raise NotConnectedException(m)
     elif n == 0x0408:
-        raise ParkedException(n, m)
+        raise ParkedException(m)
     elif n == 0x0409:
-        raise SlavedException(n, m)
+        raise SlavedException(m)
     elif n == 0x040B:
-        raise InvalidOperationException(n, m)
+        raise InvalidOperationException(m)
     elif n == 0x040c:
-        raise ActionNotImplementedException(n, m)
+        raise ActionNotImplementedException(m)
     elif n >= 0x500 and n <= 0xFFF:
         raise DriverException(n, m)
     else:

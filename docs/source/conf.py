@@ -79,6 +79,22 @@ exclude_patterns = []
 #
 html_theme = 'sphinx_rtd_theme'  # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 
+# -- Options for PDF Output using rinohtype ----------------------------------
+
+# The rinoh app that was installed died on my Windows system. I found this on 
+# GitHub and applied the fix: * Fixed rinoh # (rbd 16-Apr-2022) 
+# Apply patch from https://github.com/python/cpython/issues/88625#issuecomment-1093919783
+# The patched resource.py is in site-packages as usual. This resulted in a working rinoh!
+# Here are the settings per the rinohtype docs 
+#   https://www.mos6581.org/rinohtype/master/index.html#
+# The docs for the available rinoh_documents options are at
+#   https://www.mos6581.org/rinohtype/master/sphinx.html
+# Invokes as > sphinx-build -b rinoh source build/PDF  (I have a makepdf.bat)
+
+rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
+                        target='alpyca-client',     # output file (alpyca-client.pdf)
+                        title='Alpyca Client Library')]  
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

@@ -4,6 +4,7 @@ attrs==21.4.0
 certifi==2021.10.8
 charset-normalizer==2.0.12
 colorama==0.4.4
+httpx==0.22.0
 idna==3.3
 importlib-metadata==4.11.3
 iniconfig==1.1.1
