@@ -35,10 +35,6 @@ class CoverCalibrator(Device):
             device_number (int): The index of the device (usually 0)
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
-        Raises:
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
-
         """
         super().__init__(address, "covercalibrator", device_number, protocol)
 

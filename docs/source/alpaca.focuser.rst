@@ -1,7 +1,6 @@
-alpaca.focuser module
-=====================
-
-.. automodule:: alpaca.focuser
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Focuser Class
+=============
+.. module:: alpaca.focuser
+.. autoclass:: Focuser
+    :members:
+    :inherited-members:

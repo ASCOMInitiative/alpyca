@@ -98,7 +98,7 @@ class UnknownAscomException(Exception):
     
     Raised by the  library if the driver returns an error code that is 
     not part of the Alpaca 2022 specification, that is, a code from 0x400
-    through 0x4FF that is not listed here for one of the other definede 
+    through 0x4FF that is not listed here for one of the other defined 
     exceptions. The message will contain the number followed by the 
     message from the driver. 
 

@@ -11,7 +11,14 @@ from alpaca.exceptions import *     # Sorry Python purists
 API_VERSION = 1
 
 class Device(object):
-    """Common interface members across all ASCOM Alpaca devices."""
+    """Common interface members across all ASCOM Alpaca devices.
+    
+    Notes:
+        * This uses `HTTPX a next generation HTTP client for Python <https://www.python-httpx.org/>`_ 
+          for HTTP I/O. Applications may take advantage of its features such as async i/o and 
+          HTTP/2.0 (not included, 'h2' must be installed to enable). 
+        * Low-level async/await i/o is not used within Alpaca Client.
+    """
 
     def __init__(
         self,
@@ -293,7 +300,7 @@ class Device(object):
 # HTTP/JSON Communications
 # ========================
 
-    def _get(self, attribute: str, tmo=5, **data) -> str:
+    def _get(self, attribute: str, tmo=5.0, **data) -> str:
         """Send an HTTP GET request to an Alpaca server and check response for errors.
 
         Args:
@@ -301,13 +308,18 @@ class Device(object):
             tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
         
-        """
+         References:
+            HTTPX https://www.python-httpx.org/
+            
+       """
         url = f"{self.base_url}/{attribute}"
         pdata = {
                 "ClientTransactionID": f"{Device._client_trans_id}",
                 "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
+        # TODO - Catch and handle connect failures nicely
+        # TODO - Use httpx.Client() context handler and specify separate timeouts
         try:
             Device._ctid_lock.acquire()
             response = httpx.get("%s/%s" % (self.base_url, attribute), params = pdata, timeout=tmo)
@@ -317,7 +329,7 @@ class Device(object):
         self.__check_error(response)
         return response.json()["Value"]
 
-    def _put(self, attribute: str, tmo=5, **data) -> str:
+    def _put(self, attribute: str, tmo=5.0, **data) -> str:
         """Send an HTTP PUT request to an Alpaca server and check response for errors.
 
         Args:
@@ -325,6 +337,9 @@ class Device(object):
             tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
         
+        References:
+            HTTPX https://www.python-httpx.org/
+
         """
         url = f"{self.base_url}/{attribute}"
         pdata = {
@@ -332,6 +347,8 @@ class Device(object):
                 "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
+        # TODO - Catch and handle connect failures nicely
+        # TODO - Use httpx.Client() context handler and specify separate timeouts
         try:
             Device._ctid_lock.acquire()
             response = httpx.put("%s/%s" % (self.base_url, attribute), data=pdata, timeout=tmo)

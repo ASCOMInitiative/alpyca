@@ -1,7 +1,6 @@
-alpaca.observingconditions module
-=================================
-
-.. automodule:: alpaca.observingconditions
-   :members:
-   :undoc-members:
-   :show-inheritance:
+ObservingConditions Class
+=========================
+.. module:: alpaca.observingconditions
+.. autoclass:: ObservingConditions
+    :members:
+    :inherited-members:

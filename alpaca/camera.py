@@ -129,10 +129,6 @@ class Camera(Device):
             device_number (int): The index of the device (usually 0)
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
-        Raises:
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
-
         """
         super().__init__(address, "camera", device_number, protocol)
         self.img_desc = None

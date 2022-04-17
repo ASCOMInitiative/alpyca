@@ -56,6 +56,11 @@ class Dome(Device):
               including positioning clamshell leaves, split shutters, etc. Your app
               need not know how this is happening, just that the alt/az area of the sky
               will be visible.
+            * Do not use Altitude as a way to determine if a (non-blocking) 
+              :py:meth:`SlewToAltitude()` has completed. The Altitude may transit through 
+              the requested position before finally settling. Use the 
+              :py:attr:`Slewing` property.
+
         
         Attention:
             An ASCOM Dome device does not include transformations for mount/optics to
@@ -132,6 +137,10 @@ class Dome(Device):
               including positioning clamshell leaves, split shutters, etc. Your app
               need not know how this is happening, just that the alt/az area of the sky
               will be visible.
+            * Do not use Azimuth as a way to determine if a (non-blocking) 
+              :py:meth:`SlewToAzimuth()` has completed. The Azimuth may transit through 
+              the requested position before finally settling. Use the 
+              :py:attr:`Slewing` property.
         
         Attention:
             An ASCOM Dome device does not include transformations for mount/optics to
@@ -320,7 +329,7 @@ class Dome(Device):
               a (non-blocking) :py:meth:`SlewToAzimuth()` and/or :py:meth:`SlewToAltitude()`
               request. Slewing will be True immediately upon returning from either of these
               calls, and will remain True until *successful* completion, at which time 
-              Slewing will become False, indicating *successful*  completion.
+              Slewing will become False.
 
         """
         return self._get("slewing")
@@ -335,9 +344,8 @@ class Dome(Device):
                 on any call to the device. TODO REVIEW.
         
         Notes:
-            * If this call succeeds, :py:attr:`Slewing` will become False, and slaving 
+            * When this call succeeds, :py:attr:`Slewing` will become False, and slaving 
               will have stopped as indicate by :py:attr:`Slaved` becoming False.
-              Slewing will become False, indicating *successful*  completion.
 
         """
         self._put("abortslew")

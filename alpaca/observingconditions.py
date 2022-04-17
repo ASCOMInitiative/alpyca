@@ -1,6 +1,13 @@
 from alpaca.device import Device
 
 class ObservingConditions(Device):
+    """ASCOM Standard IObservingConditions Interface
+    
+    Provides measurements of meterological conditions as apply
+    to astronomy. Determination of safe/unsafe is made by a separate
+    :py:class:`~alpaca.safetymonitor.SafetyMonitor` device. 
+    
+    """
 
     def __init__(
         self,
@@ -8,32 +15,88 @@ class ObservingConditions(Device):
         device_number: int,
         protocol: str = "http"
     ):
-        """Initialize FilterWheel object."""
+        """Initialize ObservingConditions object.
+              
+        Args:
+            address (str): IP address and port of the device (x.x.x.x:pppp)
+            device_number (int): The index of the device (usually 0)
+            protocol (str, optional): Only if device needs https. Defaults to "http".
+
+        """
         super().__init__(address, "observingconditions", device_number, protocol)
 
     @property
     def AveragePeriod(self) -> float:
-        """Gets And sets the time period over which observations will be averaged"""
+        """(read/write) Gets And sets the time period (hours) over which observations will be averaged
+        
+        Raises:
+            InvalidValueException: If the value set is out of bounds for this device. 
+                All devices must accept 0.0 to specify that an instantaneous value 
+                is to be made available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * AveragePeriod returns the time period (hours) over which sensor readings will be 
+              averaged. If the device is delivering instantaneous sensor readings this property 
+              will return a value of 0.0.
+            * Though discouraged in the specification, possible you will receive an exception 
+              if you read a sensor property when insufficient time has passed to get a true 
+              average reading. 
+        
+        """
         self._get("averagePeriod")
 
     @property
     def CloudCover(self) -> float:
-        """Amount of sky obscured by cloud (0.0-1.0)"""
+        """Amount of sky obscured by cloud (0.0-1.0)
+        
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("cloudcover")
 
     @property
     def DewPoint(self) -> float:
-        """Atmospheric dew point temperature (deg C) at the observatory"""
+        """Atmospheric dew point temperature (deg C) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("dewpoint")
 
     @property
     def Humidity(self) -> float:
-        """Atmospheric relative humidity (0-100%) at the observatory"""
+        """Atmospheric relative humidity (0-100%) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        
+        """
         self._get("humidity")
 
     @property
     def Pressure(self) -> float:
         """Atmospheric pressure (hPa) at the observatory altitude
+        
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         Notes:
             Not "corrected to sea level" as often encountered in weather reports.
@@ -44,64 +107,175 @@ class ObservingConditions(Device):
 
     @property
     def RainRate(self) -> float:
-        """Rain rate (mm/hr) at the observatory"""
+        """Rain rate (mm/hr) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("rainrate")
 
     @property
     def SkyBrightness(self) -> float:
-        """Sky brightness (Lux) at the observatory"""
+        """Sky brightness (Lux) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("skybrightness")
 
     @property
     def SkyQuality(self) -> float:
-        """Sky quality (mag per sq-arcsec) at the observatory"""
+        """Sky quality (mag per sq-arcsec) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("skyquality")
 
     @property
     def SkyTemperature(self) -> float:
-        """Sky temperature (deg C) at the observatory"""
+        """Sky temperature (deg C) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("skytemperature")
 
     @property
     def StarFWHM(self) -> float:
-        """Seeing (FWHM in arc-sec) at the observatory"""
+        """Seeing (FWHM in arc-sec) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("starfwhm")
 
     @property
     def Temperature(self) -> float:
-        """Atmospheric temperature (deg C) at the observatory"""
+        """Atmospheric temperature (deg C) at the observatory
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("temperature")
 
     @property
     def WindDirection(self) -> float:
         """Direction (deg) from which the wind is blowing at the observatory
-        
-        Meterological standards:
-            Wind direction is that from which the wind is blowing, measured in degrees
-            clockwise from true North=0.0, East=90.0, South=180.0, West=270.0 If the 
-            wind velocity is 0 then direction is reported as 0.
+                
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * **Meterological standards** Wind direction is that from which the wind 
+              is blowing, measured in degrees clockwise from *true* North=0.0, 
+              East=90.0, South=180.0, West=270.0 If the wind velocity is 0 then 
+              direction is reported as 0.
             
-            """
+        """
         self._get("winddirection")
 
     @property
     def WindGust(self) -> float:
-        """Peak 3 second wind gust (m/s) at the observatory over the last 2 minutes"""
+        """Peak 3 second wind gust (m/s) at the observatory over the last 2 minutes
+
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("windgust")
 
     @property
     def WindSpeed(self) -> float:
-        """Wind speed (m/s) at the observatory"""
+        """Wind speed (m/s) at the observatory
+        
+        Raises:
+            NotImplementedException: This property is not available.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("windgust")
 
     def Refresh(self) -> None:
-        """Forces the device to immediately query its attached hardware to refresh sensor values"""
+        """Forces the device to immediately query its attached hardware to refresh sensor values
+        
+        Raises:
+            NotImplementedException: This method is not supported.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._put("refresh")
 
+    @property
     def SensorDescription(self, PropertyName: str) -> str:
-        """Description of the sensor providing the requested property"""
+        """Description of the sensor providing the requested property
+        
+        Args:
+            PropertyName: A string containing the name of the ObservingConditions
+                meterological property for which the sensor description is desired.
+                For example "WindSpeed" (for :py:attr:`WindSpeed`) would retrieve 
+                a description of the sensor used to measure the wind speed.
+        
+        Raises:
+            NotImplementedException: This method is not supported.
+            NotConnectedException: If the device is not connected.
+            InvalidValueException: The supplied PropertyName is not valid.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("sensordescription", PropertyName=PropertyName)
 
+    @property
     def TimeSinceLastpdate(self, PropertyName: str) -> str:
-        """Elapsed time (sec) since last update of the sensor providing the requested property"""
+        """Elapsed time (sec) since last update of the sensor providing the requested property
+        
+        Args:
+            PropertyName: A string containing the name of the ObservingConditions
+                meterological property for which the time since last update is 
+                desired. For example "WindSpeed" (for :py:attr:`WindSpeed`) would 
+                retrieve the time since the wind speed was last updated by its sensor.
+        
+        Raises:
+            NotImplementedException: This method is not supported.
+            NotConnectedException: If the device is not connected.
+            InvalidValueException: The supplied PropertyName is not valid.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._get("timesincelastupdate", PropertyName=PropertyName)
