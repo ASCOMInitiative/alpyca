@@ -20,6 +20,29 @@ places where an async operation can fail:
    a :py:class:`~alpaca.exceptions.DriverException`), it means the device *failed to finish the 
    operation successfully*. In this case, the device is compromsed and requires special attention.
 
+**Use Caution:**
+
+Have a look at this article |excpdang|. While the article uses the C# language and acync/await
+to illustrate the so-called "dangers" (failing to await), the exact same principles apply here.
+In the example above, you really must use IsMoving to determine completion. It is the 'await'
+in this cross-language/cross-platform environment. Iff you ignore IsMoving and instead 
+“double-check” the results by comparing your request with the results, you run several risks
+
+1. A lost exception (an integrity bust),
+2. a false completion indication if the device passes through the requested 
+   position on its way to settling to its final place, and 
+3. needing to decide what “close enough” means. 
+
+Plus it needlessly complicates your code. We have to design for, and require, 
+trustworthy devices/drivers.
+
+.. |excpdang| raw:: html
+
+    <a href="https://medium.com/@alexandre.malavasi/why-exceptions-in-async-methods-are-dangerous-in-c-fda7d382b0ff" 
+    target="_blank">
+    Why exceptions in async methods are “dangerous” in C#</a> (external)
+
+
 
 .. _dome-faq:
 
