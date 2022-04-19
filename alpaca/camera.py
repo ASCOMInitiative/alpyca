@@ -772,7 +772,8 @@ class Camera(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request
+            DriverException: If the device cannot *successfully* complete the previous
+                :py:meth:`Expose()` request
                 (see Attention below). This exception may be encountered on any 
                 call to the device.
 

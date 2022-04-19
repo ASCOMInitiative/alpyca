@@ -211,6 +211,7 @@ class Focuser(Device):
                 value of the :py:attr:`Absolute` property. 
             
         Raises:
+            TODO [REVIEW] No InvalidValueException if  the limits are exceeded?
             InvalidOperationException: **IFocuserV2 and earlier only** Raised if 
                 :py:attr:`TempComp` is true and a Move() is attempted. This 
                 restriction was removed in IFocuserV3, but you must be prepared 
