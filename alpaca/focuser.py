@@ -204,6 +204,9 @@ class Focuser(Device):
     def Move(self, Position: int) -> None:
         """Starts moving the focuser to a new position
         
+        **Non-blocking**: Returns immediately after *successfully* starting the 
+        focus change with :py:attr:`IsMoving` = True. See Notes, and :ref:`async_faq`
+
         **See Notes for details on absolute versus relative focusers**
 
         Arguments:
@@ -225,7 +228,7 @@ class Focuser(Device):
             * **Asynchronous** (non-blocking): The method returns as soon as the focus 
               change operation has been *successfully* started, with the :py:attr:`IsMoving`
               property True. After the requested position is *successfully* reached and 
-              motion stops, the :py:attr:`IsMoving` property becomes False.
+              motion stops, the :py:attr:`IsMoving` property becomes False. See :ref:`async_faq`
             * If the :py:attr:`Absolute` property is True, then this is an absolute 
               positioning focuser. The :py:meth:`Move()` method tells the focuser to move 
               to an exact step position, and the Position parameter of the :py:meth:`Move()` 

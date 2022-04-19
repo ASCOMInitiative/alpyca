@@ -157,8 +157,12 @@ class Rotator(Device):
     def Move(self, Position: float) -> None:
         """Starts rotation relative to the current position (degrees)
 
-        **Non-blocking** - See Notes. Also See Notes for details on absolute 
-        versus relative movement.
+        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if 
+        the operation has *successfully* been started, or if it returns with 
+        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        also a success. See Notes, and :ref:`async_faq`
+        
+        **Also See Notes for details on absolute versus relative movement**.
 
         Arguments:
             Position: The angular amount (degrees) to move relative to the
@@ -180,7 +184,7 @@ class Rotator(Device):
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :py:attr:`IsMoving' property True. 
               After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False.
+              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
         
         """
         self._put("move", Position=Position)
@@ -188,8 +192,11 @@ class Rotator(Device):
     def MoveAbsolute(self, Position: float) -> None:
         """Starts rotation to the new position (degrees)
 
-        **Non-blocking** - See Notes.
-
+        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if 
+        the operation has *successfully* been started, or if it returns with 
+        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        also a success. See Notes, and :ref:`async_faq`
+        
         Arguments:
             Position: The requested angle, degrees.
             
@@ -209,13 +216,18 @@ class Rotator(Device):
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :py:attr:`IsMoving' property True. 
               After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False.
+              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
         
         """
         self._put("moveabsolute", Position=Position)
 
     def MoveMechanical(self, Position: float) -> None:
         """Starts rotation to the given mechanical position (degrees)
+
+        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if 
+        the operation has *successfully* been started, or if it returns with 
+        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        also a success. See Notes, and :ref:`async_faq`
 
         Arguments:
             Position: The requested angle, degrees.
@@ -238,7 +250,7 @@ class Rotator(Device):
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :py:attr:`IsMoving' property True. 
               After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False.
+              the :py:attr:`IsMoving` property becomes False. See :ref:`async_faq`
         
         """
         self._put("movemechanical", Position=Position)

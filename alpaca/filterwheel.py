@@ -60,7 +60,8 @@ class FilterWheel(Device):
         """(Read/Write) Start a change to, or return the filter wheel position (zero-based)
 
         **Non-blocking**: Returns immediately upon writing to change the filter 
-        with Position = -1 if the operation has been *successfully* started.
+        with Position = -1 if the operation has been *successfully* started. See Notes,
+        and :ref:`async_faq`
 
         Raises:
             InvalidValueException: If an invalid filter number is written to Position.
@@ -73,7 +74,7 @@ class FilterWheel(Device):
             filter change operation has been *successfully* started. Position
             will return -1 while the change is in progress. After the requested position 
             has been *successfully* reached and motion stops, Position will
-            return the requested new filter number. 
+            return the requested new filter number.  See :ref:`async_faq`
 
         """
         return self._get("position")

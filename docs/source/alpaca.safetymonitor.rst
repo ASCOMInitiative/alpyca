@@ -1,7 +1,6 @@
-alpaca.safetymonitor module
-===========================
-
-.. automodule:: alpaca.safetymonitor
-   :members:
-   :undoc-members:
-   :show-inheritance:
+SafetyMonitor Class
+===================
+.. module:: alpaca.safetymonitor
+.. autoclass:: SafetyMonitor
+    :members:
+    :inherited-members:

@@ -1,6 +1,7 @@
 ASCOM Alpaca Device Classes
 ===========================
-Hello there. 
+Each of these Classes implements the properties, methods, exceptions, and enumerated
+constants of the corresponding ASCOM device interface.
 
 .. toctree::
    :maxdepth: 4

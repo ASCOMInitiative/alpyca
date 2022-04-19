@@ -9,136 +9,177 @@ class Switch(Device):
         device_number: int,
         protocol: str = "http"
     ):
-        """Initialize Switch object."""
+        """Initialize the Switch object.
+              
+        Args:
+            address (str): IP address and port of the device (x.x.x.x:pppp)
+            device_number (int): The index of the device (usually 0)
+            protocol (str, optional): Only if device needs https. Defaults to "http".
+
+        """
         super().__init__(address, "switch", device_number, protocol)
 
     @property
     def MaxSwitch(self) -> int:
         """Count of switch devices managed by this driver.
 
-        Returns:
-            Number of switch devices managed by this driver. Devices are numbered from 0
-            to MaxSwitch - 1.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Number of switch devices managed by this driver. Devices are numbered from 0
+              to MaxSwitch - 1.
         
         """
         return self._get("maxswitch")
 
     def CanWrite(self, Id: int) -> bool:
-        """Indicate whether the specified switch device can be written to.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+        """The specified switch device can be written to.
 
         Args:
-            Id (int): The device number.
+            Id: the specified switch number (see Notes)
 
-        Returns:
-            Whether the specified switch device can be written to, default true. This is
-            false if the device cannot be written to, for example a limit switch or a
-            sensor.
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Examples of witches that cannot be written to include a
+              limit switch or a sensor.
         
         """
         return self._get("canwrite", ID=Id)
 
     def GetSwitch(self, Id: int) -> bool:
-        """Return the state of switch device id as a boolean.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+        """The state of the specified switch device.
 
         Args:
-            Id (protocol): The device number.
-        
-        Returns:
-            On/Off State (bool) of specified switch device.
-        
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * On is True, Off is False.
+
         """
         return self._get("getswitch", ID=Id)
 
     def GetSwitchDescription(self, Id: int) -> str:
-        """Get the description of the specified switch device.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+        """The textual description of the specified switch device.
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Description of specified switch device.
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
         return self._get("getswitchdescription", ID=Id)
 
     def GetSwitchName(self, Id: int) -> str:
-        """Get the name of the specified switch device.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+        """The textual name of the specified switch device.
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Name of the specified switch device.
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
         return self._get("getswitchname", ID=Id)
     
-    def GetSwitchValue(self, Id: int) -> str:
-        """Get the value of the specified switch device as a double.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+    def GetSwitchValue(self, Id: int) -> float:
+        """The value of the specified switch device as a float.
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Value of the specified switch device.
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
         return self._get("getswitchvalue", ID=Id)
 
-    def MaxSwitchValue(self, Id: int) -> str:
-        """Get the maximum value of the specified switch device as a double.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+    def MaxSwitchValue(self, Id: int) -> float:
+        """The maximum value of the specified switch device as a double.
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Maximum value of the specified switch device as a double.
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
         return self._get("maxswitchvalue", ID=Id)
 
-    def MinSwitchValue(self, Id: int) -> str:
-        """Get the minimum value of the specified switch device as a double.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+    def MinSwitchValue(self, Id: int) -> float:
+        """The minimum value of the specified switch device as a double.
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Minimum value of the specified switch device as a double.
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
         return self._get("minswitchvalue", ID=Id)
 
     def SetSwitch(self, Id: int, State: bool) -> None:
-        """Set a switch controller device to the specified state, True or False.
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+        """Set a switch device to the specified state
 
         Args:
-            Id (int): The device number.
-            State (bool): The required control state (True or False).
+            Id: the specified switch number (see Notes)
+            State: The required control state
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * On is True, Off is False.
 
         """
         self._put("setswitch", ID=Id, State=State)
@@ -146,12 +187,19 @@ class Switch(Device):
     def SetSwitchName(self, Id: int, Name: str) -> None:
         """Set a switch device name to the specified value.
 
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
-
         Args:
-            Id (int): The device number.
-            Name (str): The name of the device.
+            Id: the specified switch number (see Notes)
+            Name: The desired (new) name for the switch
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * On is True, Off is False.
 
         """
         self._put("setswitchname", ID=Id, Name=Name)
@@ -159,30 +207,41 @@ class Switch(Device):
     def SetSwitchValue(self, Id: int, Value: float) -> None:
         """Set a switch device value to the specified value.
 
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
-
         Args:
-            Id (int): The device number.
-            Value (float): Value to be set, between MinSwitchValue and MaxSwitchValue.
+            Id: the specified switch number (see Notes)
+            Value: Value to be set, between :py:attr:`MinSwitchValue` and 
+                :py:attr:`MinSwitchValue`.
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`), or
+                the Value is out of range, not between :py:attr:`MinSwitchValue` and 
+                :py:attr:`MinSwitchValue`.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * On is True, Off is False.
 
         """
         self._put("setswitchvalue", ID=Id, Value=Value)
 
-    def SwitchStep(self, Id: int) -> str:
-        """Return the step size that this device supports.
-
-        Return the step size that this device supports (the difference between
-        successive values of the device).
-
-        Notes:
-            Devices are numbered from 0 to MaxSwitch - 1.
+    def SwitchStep(self, Id: int) -> float:
+        """The step size of the specified switch device (see Notes).
 
         Args:
-            Id (int): The device number.
-        
-        Returns:
-            Maximum value of the specified switch device as a double.
-        
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Step size is the difference between successive values of the device.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+
         """
         return self._get("switchstep", ID=Id)

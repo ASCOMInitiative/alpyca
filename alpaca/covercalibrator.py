@@ -141,6 +141,8 @@ class CoverCalibrator(Device):
     def CalibratorOff(self) -> None:
         """Turns the calibrator off if the device has calibration capability 
         
+        **Non-blocking**: See Notes, and :ref:`async_faq`
+
         Raises:
             NotImplementedException: When :py:attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
@@ -152,7 +154,7 @@ class CoverCalibrator(Device):
             * **Asynchronous** (non-blocking): If the calibrator requires time to safely stabilise 
               after use, :py:class:`CalibratorState` will return :py:class:`~CalibratorStatus.NotReady`. 
               When the calibrator is safely off, :py:class:`CalibratorState` will return 
-              :py:class:`~CalibratorStatus.Off`.
+              :py:class:`~CalibratorStatus.Off`.  See :ref:`async_faq`
             * During the shutdown process, reading :py:class:`CalibratorStatus` may result in a 
               :py:exc:`~alpaca.exceptions.DriverException`.
 
@@ -161,7 +163,9 @@ class CoverCalibrator(Device):
 
     def CalibratorOn(self, BrightnessVal: int) -> None:
         """Turns the calibrator on if the device has calibration capability
-        
+
+        **Non-blocking**: See Notes, and :ref:`async_faq`
+
         Parameters:
             Brightness: The calibrator illumination brightness to be set
 
@@ -177,7 +181,7 @@ class CoverCalibrator(Device):
               stabilise, :py:class:`CalibratorState` will return
               :py:class:`~CalibratorStatus.NotReady`. 
               When the calibrator is ready for use, :py:class:`CalibratorState` will return 
-              :py:class:`~CalibratorStatus.Ready`.
+              :py:class:`~CalibratorStatus.Ready`.  See :ref:`async_faq`
             * If an error condition arises while turning on the calibrator, 
               :py:class:`CalibratorState` will be set to :py:class:`~CalibratorStatus.Error`
               rather than :py:class:`~CalibratorStatus.Unknown`.
@@ -188,14 +192,16 @@ class CoverCalibrator(Device):
             For devices with both cover and calibrator capabilities, this method may 
             change the :py:class:`CoverState`, if required. This operation is also 
             **asynchronous** (non-blocking) so you may need to wait for :py:class:`CoverState`
-            to reach :py:class:`~CoverStatus.Open` 
+            to reach :py:class:`~CoverStatus.Open`. See :ref:`async_faq`
 
         """
         self._put("calibratoron", Brightness=BrightnessVal)
 
     def CloseCover(self) -> None:
         """Initiates cover closing if a cover is present 
-        
+
+        **Non-blocking**: See Notes, and :ref:`async_faq`
+
         Raises:
             NotImplementedException: When :py:attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
@@ -208,7 +214,7 @@ class CoverCalibrator(Device):
               status of the operation once CloseCover() returns. It will be 
               :py:class:`~CoverStatus.Moving` immediately after the return of 
               CloseCover(), and will remain as long as the operation is progressing 
-              successfully.
+              successfully. See :ref:`async_faq`
             * :py:class:`~CoverStatus.Closed` indicates *successful* completion. 
             * If an error condition arises while moving between states, 
               :py:attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
@@ -242,6 +248,8 @@ class CoverCalibrator(Device):
     def OpenCover(self) -> None:
         """Initiates cover opening if a cover is present 
         
+        **Non-blocking**: See Notes, and :ref:`async_faq`
+
         Raises:
             NotImplementedException: When :py:attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
@@ -254,7 +262,7 @@ class CoverCalibrator(Device):
               status of the operation once OpenCover() returns. It will be 
               :py:class:`~CoverStatus.Moving` immediately after the return of 
               OpenCover(), and will remain as long as the operation is progressing 
-              successfully.
+              successfully.  See :ref:`async_faq`
             * :py:class:`~CoverStatus.Open` indicates *successful* completion. 
             * If an error condition arises while moving between states, 
               :py:attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`

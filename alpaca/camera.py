@@ -1393,7 +1393,7 @@ class Camera(Device):
         """Start an exposure. 
 
         **Non-blocking**: Returns with :py:attr:`ImageReady` = False 
-        if exposure has *successfully* been started.
+        if exposure has *successfully* been started. See :ref:`async_faq`
         
         Args:
             Duration: Duration of exposure in seconds.
@@ -1414,7 +1414,7 @@ class Camera(Device):
         Notes:
             * **Asynchronous** (non-blocking): Use :py:attr:`ImageReady` 
               to determine if the exposure has been *successfully* 
-              completed.
+              completed. See :ref:`async_faq`
             * Refer to :py:attr:`ImageReady` for additional info.
  
         """

@@ -15,7 +15,7 @@ class ObservingConditions(Device):
         device_number: int,
         protocol: str = "http"
     ):
-        """Initialize ObservingConditions object.
+        """Initialize the ObservingConditions object.
               
         Args:
             address (str): IP address and port of the device (x.x.x.x:pppp)
@@ -46,7 +46,7 @@ class ObservingConditions(Device):
               average reading. 
         
         """
-        self._get("averagePeriod")
+        return self._get("averagePeriod")
 
     @property
     def CloudCover(self) -> float:
@@ -59,7 +59,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("cloudcover")
+        return self._get("cloudcover")
 
     @property
     def DewPoint(self) -> float:
@@ -72,7 +72,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("dewpoint")
+        return self._get("dewpoint")
 
     @property
     def Humidity(self) -> float:
@@ -86,7 +86,7 @@ class ObservingConditions(Device):
 
         
         """
-        self._get("humidity")
+        return self._get("humidity")
 
     @property
     def Pressure(self) -> float:
@@ -103,7 +103,7 @@ class ObservingConditions(Device):
             The ConvertPressure() method may be used to get "sea level" pressure
         
         """
-        self._get("pressure")
+        return self._get("pressure")
 
     @property
     def RainRate(self) -> float:
@@ -116,7 +116,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("rainrate")
+        return self._get("rainrate")
 
     @property
     def SkyBrightness(self) -> float:
@@ -142,7 +142,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("skyquality")
+        return self._get("skyquality")
 
     @property
     def SkyTemperature(self) -> float:
@@ -155,7 +155,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("skytemperature")
+        return self._get("skytemperature")
 
     @property
     def StarFWHM(self) -> float:
@@ -168,7 +168,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("starfwhm")
+        return self._get("starfwhm")
 
     @property
     def Temperature(self) -> float:
@@ -181,7 +181,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("temperature")
+        return self._get("temperature")
 
     @property
     def WindDirection(self) -> float:
@@ -200,7 +200,7 @@ class ObservingConditions(Device):
               direction is reported as 0.
             
         """
-        self._get("winddirection")
+        return self._get("winddirection")
 
     @property
     def WindGust(self) -> float:
@@ -213,7 +213,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("windgust")
+        return self._get("windgust")
 
     @property
     def WindSpeed(self) -> float:
@@ -226,7 +226,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("windgust")
+        return self._get("windgust")
 
     def Refresh(self) -> None:
         """Forces the device to immediately query its attached hardware to refresh sensor values
@@ -258,7 +258,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("sensordescription", PropertyName=PropertyName)
+        return self._get("sensordescription", PropertyName=PropertyName)
 
     @property
     def TimeSinceLastpdate(self, PropertyName: str) -> str:
@@ -278,4 +278,4 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("timesincelastupdate", PropertyName=PropertyName)
+        return self._get("timesincelastupdate", PropertyName=PropertyName)

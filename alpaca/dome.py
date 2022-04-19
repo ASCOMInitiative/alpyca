@@ -359,11 +359,9 @@ class Dome(Device):
     def CloseShutter(self) -> None:
         """Start to close the shutter or otherwise shield the telescope from the sky
 
-        **Non-blocking**: Returns immediately 
-        with :py:attr:`ShutterStatus` = :py:attr:`~ShutterState.shutterClosing`
-        if the closure has *successfully* been started, or 
-        :py:attr:`~ShutterState.shutterClosed` if it is already closed, which is
-        also a success.
+        **Non-blocking**: Returns immediately with :py:attr:`ShutterStatus` = 
+        :py:attr:`~ShutterState.shutterClosing` after *successfully* starting the operation.
+        See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not have a controllable
@@ -376,7 +374,9 @@ class Dome(Device):
             * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct 
               property to use for monitoring an in-progress shutter movement. A transition to 
               :py:class:`~ShutterState.shutterClosed` indicates a *successfully
-              completed* closure. 
+              completed* closure. If it returns with :py:attr:`ShutterStatus` 
+              :py:class:`~ShutterState.shutterClosed`, it means the shutter was already 
+              closed, another success. If  See :ref:`async_faq`
             * If another app calls CloseShutter() while the shutter is already closing, 
               the request will be accepted and you will see :py:attr:`ShutterStatus` = 
               :py:attr:`~ShutterState.shutterClosing` as you would expect.
@@ -394,10 +394,7 @@ class Dome(Device):
     def FindHome(self):
         """Start a search for the dome's home position and synchronize Azimuth.
 
-        **Non-blocking**: Returns immediately 
-        with :py:attr:`Slewing` = True if the operation has *successfully* been started,
-        or if it returns with :py:attr:`Slewing` = False, it will already be at home,
-        and :py:attr:`AtHome` will be True.
+        **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not support homing.
@@ -410,7 +407,7 @@ class Dome(Device):
             * **Asynchronous** (non-blocking): Use the :py:attr:`AtHome` property
               to monitor the operation. When the the home position is has been 
               *successfully* reached, :py:attr:`Azimuth` is synchronized to the appropriate value,
-              :py:attr:`AtHome` becomes True and :py:attr:`Slewing` becomes False.
+              :py:attr:`AtHome` becomes True and :py:attr:`Slewing` becomes False. See :ref:`async_faq`
             * An app should check :py:attr:`AtHome` before calling FindHome(). 
         
         """
@@ -420,11 +417,9 @@ class Dome(Device):
     def OpenShutter(self) -> None:
         """Start to open shutter or otherwise expose telescope to the sky.
         
-        **Non-blocking**: Returns immediately 
-        with :py:attr:`ShutterStatus` = :py:class:`~ShutterState.shutterOpening`
-        if the opening has *successfully* been started, or 
-        :py:attr:`~ShutterState.shutterOpen` if it is already open, which is
-        also a success.
+        **Non-blocking**: Returns immediately with :py:attr:`ShutterStatus` = 
+        :py:class:`~ShutterState.shutterOpening` if the opening has *successfully* 
+        been started. See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not have a controllable
@@ -437,7 +432,11 @@ class Dome(Device):
             * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct 
               property to use for monitoring an in-progress shutter movement. A 
               transition to :py:class:`~ShutterState.shutterOpen` indicates a 
-              *successfully completed* opening.
+              *successfully completed* opening. If OpenShutter returns with 
+              :py:attr:`ShutterStatus` = :py:attr:`~ShutterState.shutterOpen`
+              then the shutter was already open, which is also a success. 
+              See :ref:`async_faq`
+
             * If another app calls OpenShutter() while the shutter is already opening, 
               the request will be accepted and you will see :py:attr:`ShutterStatus` = 
               :py:attr:`~ShutterState.shutterOpening` as you would expect.
@@ -457,7 +456,8 @@ class Dome(Device):
         **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
         if the park operation has *successfully* been started, or 
         :py:attr:`Slewing` = False which means the dome is already parked 
-        (and of course :py:attr:`AtPark` will already be True).
+        (and of course :py:attr:`AtPark` will already be True). See Notes, 
+        and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not support parking. 
@@ -473,7 +473,7 @@ class Dome(Device):
               to monitor the operation. When the the park position has been 
               *successfully* reached, :py:attr:`Azimuth` is synchronized to the 
               park position, :py:attr:`AtHome` becomes True, and 
-              :py:attr:`Slewing` becomes False.
+              :py:attr:`Slewing` becomes False.  See :ref:`async_faq`
             * An app should check :py:attr:`AtPark` before calling Park().
         
         """
@@ -498,9 +498,8 @@ class Dome(Device):
         """Start slewing the opening to the given altitude (degrees).
         
         **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
-        if the slewing operation has *successfully* been started, or 
-        :py:attr:`Slewing` = False id the opening is already at the requested
-        azimuth, which is also a success.
+        if the slewing operation has *successfully* been started. 
+        See Notes, and :ref:`async_faq`
 
         Args:
             Altitude: The requested altitude of the opening
@@ -516,7 +515,10 @@ class Dome(Device):
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
               to monitor the operation. When the the requested Altitude has been 
-              *successfully* reached, :py:attr:`Slewing` becomes False.
+              *successfully* reached, :py:attr:`Slewing` becomes False. 
+              If SlewToAltitude() returns with :py:attr:`Slewing` = False then 
+              the opening was already at the requested altitude, which is also a 
+              success See :ref:`async_faq`
             * The specified altitude (*referenced to the dome center/equator*) is 
               of the position of the opening.
 
@@ -534,9 +536,8 @@ class Dome(Device):
         """Start slewing the opening to the given azimuth (degrees).
         
         **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
-        if the slewing operation has *successfully* been started, or 
-        :py:attr:`Slewing` = False if the opening is already at the requested
-        azimuth, which is also a success. 
+        if the slewing operation has *successfully* been started.
+        See Notes, and :ref:`async_faq`
 
         Args:
             Azimuth: The requested azimuth of the opening. See Notes.
@@ -552,7 +553,10 @@ class Dome(Device):
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
               to monitor the operation. When the the requested Azimuth has been 
-              *successfully* reached, :py:attr:`Slewing` becomes False.
+              *successfully* reached, :py:attr:`Slewing` becomes False. 
+              If SlewToAzimuth() returns with :py:attr:`Slewing` = False then 
+              the opening was already at the requested azimuth, which is also a 
+              success See :ref:`async_faq`
             * Azimuth has the usual sense of True North zero and increasing clockwise
               i.e. 90 East, 180 South, 270 West.
             * The specified azimuth (*referenced to the dome center/equator*) is of the 
