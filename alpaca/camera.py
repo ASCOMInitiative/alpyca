@@ -531,7 +531,7 @@ class Camera(Device):
         """(Read/Write) Gets or sets Fast Readout Mode.
 
         Raises:
-            NotImplementedException: Thrownif not supported
+            NotImplementedException: If FastReadout is not supported
             NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -808,7 +808,9 @@ class Camera(Device):
               respectively. 
             * IsPulseGuiding will be True immediately upon return from :py:meth:`PulseGuide()`. 
               It will remain True until the requested pulse-guide interval has elapsed, and
-              the pulse-guiding operation has been *successfully* completed.
+              the pulse-guiding operation has been *successfully* completed. If 
+              :py:meth:`PulseGuide()` returns with IsPulseGuiding = False, then you can
+              assume that the operation *succeeded* with a very short pulse-guide interval.
 
         Attention:
             * If the camera encounters a problem which prevents it from *successfully*
@@ -841,7 +843,7 @@ class Camera(Device):
 
     @property
     def LastExposureStartTime(self) -> str:
-        """Start time of the last exposure in FITS standard format.
+        """Start time of the last exposure in FITS standard format, UTC.
         
         Raises:
             NotImplementedException: If the camera doesn't support this feature
@@ -852,8 +854,8 @@ class Camera(Device):
                 call to the device.
 
         Notes:
-            Reports the actual exposure start in the FITS-standard / ISO-8601
-            CCYY-MM-DDThh:mm:ss[.sss...] format.
+            Reports the actual exposure UTC start date/time in the 
+            FITS-standard / ISO-8601 CCYY-MM-DDThh:mm:ss[.sss...] format. 
 
         """
         return self._get("lastexposurestarttime")
@@ -1063,7 +1065,7 @@ class Camera(Device):
         return self._get("offsetmin")
 
     @property
-    def Offsets(self) -> List[int]:
+    def Offsets(self) -> List[str]:
         """List of Offset *names* supported by the camera (see notes and :py:attr:`Offset`)
         
         Raises:
@@ -1129,7 +1131,7 @@ class Camera(Device):
         return self._get("percentcompleted")
 
     @property
-    def PixelSizeX(self):
+    def PixelSizeX(self) -> float:
         """The width (microns) of the camera sensor elements.
 
         Raises:
@@ -1146,7 +1148,7 @@ class Camera(Device):
         return self._get("pixelsizex")
 
     @property
-    def PixelSizeY(self):
+    def PixelSizeY(self) -> float:
         """The height (microns) of the camera sensor elements.
 
         Raises:
@@ -1232,6 +1234,24 @@ class Camera(Device):
                 This exception may be encountered on any call to the device.
 
         Notes:
+            * Returns the name (data sheet part number) of the sensor, e.g. ICX285AL. 
+              The format is to be exactly as shown on manufacturer data sheet, 
+              subject to the following rules: 
+
+                * All letters will be upper-case.
+                * Spaces will not be included.
+                * Any extra suffixes that define region codes, package types, temperature range, 
+                  coatings, grading, colour/monochrome, etc. will not be included.
+                * For colour sensors, if a suffix differentiates different Bayer matrix encodings, 
+                  it will be included.
+                * The property will return an empty string if the sensor name is not known
+            * Examples:
+                * ICX285AL-F shall be reported as ICX285
+                * KAF-8300-AXC-CD-AA shall be reported as KAF-8300
+            * The most common usage of this property is to select approximate colour balance 
+              parameters to be applied to the Bayer matrix of one-shot colour sensors. 
+              Application authors should assume that an appropriate IR cut-off filter is 
+              in place for colour sensors.
             * It is recommended that this property be retrieved only after a connection is 
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1261,6 +1281,8 @@ class Camera(Device):
         """(Read/Write) Get or set the camera's cooler setpoint (degrees Celsius).
 
         Raises:
+            InvalidValueException: If set to a value outside the camera's valid
+                temperature setpoint range.
             NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -1361,7 +1383,7 @@ class Camera(Device):
     def PulseGuide(self, Direction: GuideDirections, Duration: int) -> None:
         """Pulse guide in the specified direction for the specified time (ms).
         
-        **TODO Is this truly blocking?**
+        **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Args:
             Direction: :py:class:`~alpaca.telescope.GuideDirections`
@@ -1375,9 +1397,12 @@ class Camera(Device):
                 This exception may be encountered on any call to the device.
         
         Notes:
+            * **Asynchronous**: The method returns as soon pulse-guiding operation
+              has been *successfully* started with :py:attr:`IsPulseGuiding' property True. 
+              However, you may find that :py:attr:`IsPulseGuiding' is False when you get 
+              around to checking it if the 'pulse' is short. This is still a success if you
+              get False back and not an exception. See :ref:`async_faq`
             * Some cameras have implemented this as a Synchronous (blocking) operation.
-              TODO This needs to be changed, with :py:attr:`IsPulseGuiding` 
-              being the completion property.
             * :py:class:`~alpaca.telescope.GuideDirections` for North and South 
               have varying interpretations
               by German Equatorial mounts. Some GEM mounts interpret North to be 

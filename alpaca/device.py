@@ -1,4 +1,5 @@
 from enum import Enum
+import string
 from threading import Lock
 from datetime import datetime
 from typing import List, Any
@@ -232,7 +233,7 @@ class Device(object):
         return [i.strip() for i in self._get("driverinfo").split(",")]
 
     @property
-    def DriverVersion(self) -> float:
+    def DriverVersion(self) -> str:
         """String containing only the major and minor version of the *driver*.
         
         Raises:
@@ -242,7 +243,9 @@ class Device(object):
         Notes:        
             * This must be in the form "n.n". It should not to be confused with the 
               :py:attr:`InterfaceVersion` property, which is the version of this 
-              specification supported by the driver. 
+              specification supported by the driver. **Note:** on systems with a comma
+              as the decimal point you may need to make accommodations to parse the
+              value. 
 
         """
         return float(self._get("driverversion"))
@@ -288,10 +291,11 @@ class Device(object):
                 This exception may be encountered on any call to the device.
 
         Notes:
-            * This is an aid to client authors and testers who would otherwise have to 
-              repeatedly poll the driver to determine its capabilities. Returned :py:meth:`Action()`
-              names may be in mixed case to enhance presentation but the :py:meth:`Action(String, String)`
-              method is case insensitive.
+            * This list contains the names of device-specific special functions 
+              that are outside the the universal capabilites of the interface. These
+              are meant to allow device/driver creators to include special capabilities
+              for their users, or to implement potential new capabilities in an 
+              experimental way.
         
         """
         return self._get("supportedactions")
