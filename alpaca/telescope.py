@@ -1,46 +1,52 @@
-from enum import IntEnum
 from datetime import datetime
 from typing import List, Any
 import dateutil.parser
+from alpaca.docenum import DocIntEnum
 from alpaca.device import Device
 from alpaca.exceptions import *
 
-class AlignmentModes(IntEnum):
-    algAltAz        = 0
-    algPolar        = 1
-    algGermanPolar  = 2
+class AlignmentModes(DocIntEnum):
+    """The geometry of the mount"""
+    algAltAz        = 0, 'Altitude-Azimuth alignment'
+    algPolar        = 1, 'Polar (equatorial) mount other than German equatorial.'
+    algGermanPolar  = 2, 'German equatorial mount.'
 
-class DriveRates(IntEnum):
-    driveSidereal   = 0
-    drivelunar      = 1
-    driveSolar      = 2
-    driveKing       = 3
+class DriveRates(DocIntEnum):
+    """Well-known telescope tracking rates"""
+    driveSidereal   = 0, 'Sidereal tracking rate (15.041 arcseconds per second).'
+    drivelunar      = 1, 'Lunar tracking rate (14.685 arcseconds per second).'
+    driveSolar      = 2, 'Solar tracking rate (15.0 arcseconds per second).'
+    driveKing       = 3, 'King tracking rate (15.0369 arcseconds per second).'
 
-class EquatorialCoordinateType(IntEnum):
-    equOther        = 0
-    equTopocentric  = 1
-    equJ2000        = 2
-    equJ2050        = 3
-    equLocalTopocentric = 1     # OBSOLETE, use Topocentric
+class EquatorialCoordinateType(DocIntEnum):
+    """Equatorial coordinate systems used by telescopes."""
+    equOther        = 0, 'Custom or unknown equinox and/or reference frame.'
+    equTopocentric  = 1, 'Topocentric coordinates. Coordinates of the object at the current date having allowed for annual aberration, precession and nutation. This is the most common coordinate type for amateur telescopes.'
+    equJ2000        = 2, 'J2000 equator/equinox. Coordinates of the object at mid-day on 1st January 2000, ICRS reference frame.'
+    equJ2050        = 3, 'J2050 equator/equinox, ICRS reference frame.'
+    equB1950        = 4, 'B1950 equinox, FK4 reference frame.'
+##    equLocalTopocentric = 1     # OBSOLETE, use Topocentric
 
-class GuideDirections(IntEnum):    # Shared by Camera
-    guideNorth      = 0
-    guideSouth      = 1
-    guideEast       = 2
-    guideWest       = 3
+class GuideDirections(DocIntEnum):    # Shared by Camera
+    """The direction in which the guide-rate motion is to be made."""
+    guideNorth      = 0, 'North (+ declination/altitude).'
+    guideSouth      = 1, 'South (- declination/altitude).'
+    guideEast       = 2, 'East (+ right ascension/azimuth).'
+    guideWest       = 3, 'West (- right ascension/azimuth).'
 
-class PierSide(IntEnum):
-    pierEast        = 0
-    pierWest        = 1
-    pierUnknown     = -1
+class PierSide(DocIntEnum):
+    """The pointing state of the mount"""
+    pierEast        = 0, 'Normal pointing state - Mount on the East side of pier (looking West)'
+    pierWest        = 1, 'Unknown or indeterminate.' 
+    pierUnknown     = -1, 'Through the pole pointing state - Mount on the West side of pier (looking East)'
 
-class TelescopeAxes(IntEnum):
-    axisPrimary     = 0
-    axisSecondary   = 1
-    axisTertiary    = 2
+class TelescopeAxes(DocIntEnum):
+    axisPrimary     = 0, 'Primary axis (e.g., Right Ascension or Azimuth).'
+    axisSecondary   = 1, 'Secondary axis (e.g., Declination or Altitude).'
+    axisTertiary    = 2, 'Tertiary axis (e.g. imager rotator/de-rotator).'
 
 class Rate(object):
-    """Describes a range of rates supported by the MoveAxis()"""
+    """Describes a range of rates supported by the :py:meth:`MoveAxis()` method"""
     def __init__(
         self,
         maxv: float,
@@ -68,238 +74,442 @@ class Telescope(Device):
         device_number: int,
         protocol: str = "http"
     ):
-        """Initialize Telescope object."""
+        """Initialize the Telescope object.
+              
+        Args:
+            address (str): IP address and port of the device (x.x.x.x:pppp)
+            device_number (int): The index of the device (usually 0)
+            protocol (str, optional): Only if device needs https. Defaults to "http".
+        
+        Raises:
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         super().__init__(address, "telescope", device_number, protocol)
 
     @property
     def AlignmentMode(self) -> AlignmentModes:
-        """Return the current mount alignment mode.
+        """The current mount alignment mode.
 
-        Returns:
-            Alignment mode of the mount (Alt/Az, Polar, German Polar).
-        
+        Raises:
+            NotImplementedException: TODO [REALLY? Should this be required?]
+                If the mount cannot report its alignment mode.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
         """
         return AlignmentModes(self._get("alignmentmode"))
 
     @property
     def Altitude(self) -> float:
-        """Return the mount's Altitude above the horizon.
+        """The mount's current Altitude (degrees) above the horizon.
 
-        Returns:
-            Altitude of the telescope's current position (degrees, positive up).
+        Raises:
+            NotImplementedException: Alt-Az not implemented by the device
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("altitude")
 
     @property
     def ApertureArea(self) -> float:
-        """Return the telescope's aperture.
+        """The telescope's aperture area (square meters).
 
-        Returns:
-            Area of the telescope's aperture (square meters).
+        Raises:
+            NotImplementedException:Not implemented by the device
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes: 
+            * The area takes into account any obstructions; it is the actual
+              light-gathering area.
 
         """
         return self._get("aperturearea")
 
     @property
     def ApertureDiameter(self) -> float:
-        """Return the telescope's effective aperture.
+        """Return the telescope's effective aperture (meters).
 
-        Returns:
-            Telescope's effective aperture diameter (meters).
+        Raises:
+            NotImplementedException: Alt-Az not implemented by the device
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("aperturediameter")
 
     @property
     def AtHome(self) -> bool:
-        """Indicate whether the mount is at the home position.
+        """The mount is at the home position.
 
-        Returns:
-            True if the mount is stopped in the Home position. Must be False if the
-            telescope does not support homing.
-        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * True if the telescope is stopped in the Home position. Can be True
+              only following a FindHome() operation.
+            * Will become False immediately upon any slewing operation
+            * Will always be False if the telescope does not support homing. Use
+              :py:attr:`CanFindHome` to determine if the mount supports homing.
+            * TODO [REVIEW] This should be the completion property for async
+              FindHomeAsync().
+
         """
         return self._get("athome")
 
     @property
     def AtPark(self) -> bool:
-        """Indicate whether the telescope is at the park position.
+        """The telescope is at the park position.
 
-        Returns:
-            True if the telescope has been put into the parked state by the seee park()
-            method. Set False by calling the unpark() method.
-        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * True if the telescope is stopped in the Park position. Can be True
+              only following successful completion of a :py:meth:`Park()` operation.
+            * When parked, the telescope will be stationary or restricted to a small 
+              safe range of movement. :py:attr:`Tracking` will be False.
+            * You must take the telescope out of park by calling :py:meth:`Unpark()`;
+              attempts to slew enabling tracking while parked will raise an exception.
+            * Will always be False if the telescope does not support parking. Use
+              :py:attr:`CanPark` to determine if the mount supports parking.
+            * TODO [REVIEW] This should be the completion property for async
+              ParkAsync(). I  think we have established that Park is already
+              asynch? If so I will document that.
+
         """
         return self._get("atpark")
 
     @property
     def Azimuth(self) -> float:
-        """Return the telescope's aperture.
-        
-        Return:
-            Azimuth of the telescope's current position (degrees, North-referenced,
-            positive East/clockwise).
+        """The azimuth (degrees) at which the telescope is currently pointing.
 
+        Raises:
+            NotImplementedException: Alt-Az not implemented by the device
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Azimuth is per the usual alt/az coordinate convention: degrees
+              North-referenced, positive East/clockwise.
+              
         """
         return self._get("azimuth")
 
     @property
     def CanFindHome(self) -> bool:
-        """Indicate whether the mount can find the home position.
+        """The mount can find its home position.
         
-        Returns:
-            True if this telescope is capable of programmed finding its home position.
-        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+ 
+        Notes:
+            * See :py:meth:`FindHome()`
+               
         """
         return self._get("canfindhome")
 
     @property
     def CanPark(self) -> bool:
-        """Indicate whether the telescope can be parked.
+        """The mount can be parked.
 
-        Returns:
-            True if this telescope is capable of programmed parking.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * See :py:meth:`Park()`
         
         """
         return self._get("canpark")
 
     @property
     def CanPulseGuide(self) -> bool:
-        """Indicate whether the telescope can be pulse guided.
+        """The mount can be pulse guided.
 
-        Returns:
-            True if this telescope is capable of software-pulsed guiding (via the
-            pulseguide(int, int) method).
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
+        Notes:
+            * See :py:attr:`PulseGuide`
+
         """
         return self._get("canpulseguide")
 
     @property
     def CanSetDeclinationRate(self) -> bool:
-        """Indicate whether the DeclinationRate property can be changed.
+        """The Declination tracking rate may be offset.
 
-        Returns:
-            True if the DeclinationRate property can be changed to provide offset
-            tracking in the declination axis.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:attr:`DeclinationRate`
 
         """
         return self._get("cansetdeclinationrate")
 
     @property
     def CanSetGuideRates(self) -> bool:
-        """Indicate whether the DeclinationRate property can be changed.
+        """The guiding rates for :py:meth:'PulseGuide()` can be adjusted
 
-        Returns:
-            True if the guide rate properties used for pulseguide(int, int) can ba
-            adjusted.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:attr:`PulseGuide()`.
 
         """
         return self._get("cansetguiderates")
 
     @property
     def CanSetPark(self) -> bool:
-        """Indicate whether the telescope park position can be set.
+        """The mount's park position can be set.
 
-        Returns:
-            True if this telescope is capable of programmed setting of its park position
-            (setpark() method).
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:attr:`SetPark()`
 
         """
         return self._get("cansetpark")
 
     @property
     def CanSetPierSide(self) -> bool:
-        """Indicate whether the telescope SideOfPier can be set.
+        """The mount can be force-flipped via setting :py:attr:`SideOfPier`.
 
-        Returns:
-            True if the SideOfPier property can be set, meaning that the mount can be
-            forced to flip.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
+        Notes:
+            * See :py:attr:`SideOfPier`.
+            * Will always be False for non-German mounts
+
         """
         return self._get("cansetpierside")
 
     @property
     def CanSetRightAscensionRate(self) -> bool:
-        """Indicate whether the RightAscensionRate property can be changed.
+        """The Right Ascension tracking rate may be offset
 
-        Returns:
-            True if the RightAscensionRate property can be changed to provide offset
-            tracking in the right ascension axis.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
+        Notes:
+            * See :py:attr:`RightAscensionRate`.
+
         """
         return self._get("cansetrightascensionrate")
 
     @property
     def CanSetTracking(self) -> bool:
-        """Indicate whether the Tracking property can be changed.
+        """The mount's sidereal tracking may be turned on and off
 
-        Returns:
-            True if the Tracking property can be changed, turning telescope sidereal
-            tracking on and off.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
+        Notes:
+            * See :py:attr:`Tracking`.
+
         """
         return self._get("cansettracking")
 
     @property
     def CanSlew(self) -> bool:
-        """Indicate whether the telescope can slew to equatorial coordinates."""
+        """The mount can slew to equatorial coordinates.
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`SlewToCoordinates()`, :py:meth:`SlewToCoordinatesAsync()`
+              :py:meth:`SlewToTarget()`, and :py:meth:`SlewToTargetAsync()`.
+
+        Attention:
+            Do not use synchronous methods unless the mount cannot do asynchronous
+            slewing (:py:attr:`CanSlewAsync` = False). Synchronous methods will be
+            deprecated in the next version of ITelescope.
+       
+        """
         return self._get("canslew")
 
     @property
     def CanSlewAsync(self) -> bool:
-        """Indicate whether the telescope can slew asynchronously."""
+        """The mount can slew to equatorial coordinates synchronously.
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * :py:attr:`CanSlew` will be True if CanSlewAsync is True.
+            * See :py:meth:`SlewToCoordinatesAsync()`
+              and :py:meth:`SlewToTargetAsync()`.
+
+        Attention:
+            Always use asynchronous slewing if at all possible (CanSlewAsync = True).
+            Synchronous methods will be deprecated in the next version of ITelescope.
+
+        """
         return self._get("canslewasync")
 
     @property
     def CanSlewAltAz(self) -> bool:
-        """Indicate whether the telescope can slew to AltAz coordinates."""
+        """The mount can slew to alt/az coordinates.
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`SlewToAltAz()` and :py:meth:`SlewToAltAzAsync()`.
+
+        Attention:
+            Do not use synchronous methods unless the mount cannot do asynchronous
+            slewing (:py:attr:`CanSlewAltAzAsync` = False). Synchronous methods will be
+            deprecated in the next version of ITelescope.
+       
+        """
         return self._get("canslewaltaz")
 
     @property
     def CanSlewAltAzAsync(self) -> bool:
-        """Indicate whether the telescope can slew asynchronusly to AltAz coordinates."""
+        """The mount can slew to alt/az coordinates asynchronously.
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * :py:attr:`CanSlewAltAz` will be True if CanSlewAltAzAsync is True.
+            * See :py:meth:`SlewToAltAzAsync()`.
+
+        Attention:
+            Always use asynchronous slewing if at all possible (CanSlewAltAzAsync = True).
+            Synchronous methods will be deprecated in the next version of ITelescope.
+
+        """
         return self._get("canslewaltazasync")
 
     @property
     def CanSync(self) -> bool:
-        """Indicate whether the telescope can sync to equatorial coordinates."""
+        """The mount can be synchronized to equatorial coordinates.
+        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`SyncToCoordinates()`.
+
+        """
         return self._get("cansync")
 
     @property
     def CanSyncAltAz(self) -> bool:
-        """Indicate whether the telescope can sync to local horizontal coordinates."""
+        """The mount can be synchronized to alt/az coordinates.
+        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`SyncToAltAz()`.
+
+        """
         return self._get("cansyncaltaz")
 
     @property
     def CanUnpark(self) -> bool:
-        """Indicates whether the telescope can be unparked via UnPark()."""
+        """The mount can be unparked
+        
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`Unpark()` and :py:meth:`Park()`.
+
+        """
         return self._get("canunpark")
 
     @property
     def Declination(self) -> float:
-        """Return the telescope's declination (degrees, float).
+        """The mount's current Declination (degrees, see Notes)
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         Notes:
-            Reading the property will raise an error if the value is unavailable.
+            * Declination will be in the equinox given by the current value of 
+              :py:attr:`EquatorialSystem`.
 
-        Returns:
-            The declination (degrees) of the telescope's current equatorial coordinates,
-            in the coordinate system given by the EquatorialSystem property.
-        
         """
         return self._get("declination")
 
     @property
     def DeclinationRate(self) -> float:
-        """Set or return the telescope's declination tracking rate.
+        """(Read/Write) The mount's declination tracking rate (see Notes).
 
-        Args:
-            DeclinationRate (float, arcseconds per second).
-        
-        Returns:
-            The declination tracking rate (arcseconds per second).
-        
+        Raises:
+            NotImplementedException: If :py:attr:`CanSetDeclinationRate` is False,
+            yet an attempt is made to write to this property.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * DeclinationRate is an offset from 0 (no change in declination), given in arc seconds
+              per SI (atomic) second. (Please note that the units of :py:attr:`RightAscensionRate` 
+              are in (sidereal) seconds of RA per *sidereal* second).
+            * The supported range for this property is mount-specific. 
+            * Offset tracking is most commonly used to track a solar system object such as a 
+              minor planet or comet.
+            * Offset tracking may also be used (less commonly) as a method for reducing 
+              dynamic mount errors.
+            * If offset tracking is in effect (non-zero), and a slew is initiated, the
+              mount will continue to update the slew destination coordinates at the 
+              given offset rate.
         """
         return self._get("declinationrate")
     @DeclinationRate.setter
@@ -308,15 +518,26 @@ class Telescope(Device):
 
     @property
     def DoesRefraction(self) -> bool:
-        """Indicate or determine if atmospheric refraction is applied to coordinates.
+        """(Read/Write) The mount applies atmospheric refraction to corrections
 
-        Args:
-            DoesRefraction (bool): Set True to make the telescope or driver apply
-                atmospheric refraction to coordinates.
-        
-        Returns:   
-            True if the telescope or driver applies atmospheric refraction to
-            coordinates.
+        Raises:
+            NotImplementedException: If either reading or writing of this 
+                property is not implemented
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * If the driver does not know whether the attached telescope does its 
+              own refraction, and if the driver does not itself calculate refraction, 
+              this property (if implemented) will raise an error when read.
+              TODO [What error? Clarify this]
+            * If the mount indicates that it can apply refraction, yet you wish to 
+              calculate your own (more accurate) correction, try setting this to 
+              False then, if successful, supply your own refracted coordinates.
+            * If you set this to True, and the mount (already) does refraction, or
+              if you set this to Fales, and the mount (already) does not do 
+              refraction, no exception will be raised. 
 
         """
         return self._get("doesrefraction")
@@ -326,11 +547,17 @@ class Telescope(Device):
 
     @property
     def EquatorialSystem(self) -> EquatorialCoordinateType:
-        """Return the current equatorial coordinate system used by this telescope.
+        """The current equatorial coordinate system used by the mount
 
-        Returns:
-            Current equatorial coordinate system used by this telescope
-            (Enum EquatorialCoordinateType)
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * See :py:class:`EquatorialCoordinateType`. 
+            * Most mounts use topocentric coordinates. Some high-end research 
+              mounts use J2000 coordinates. 
 
         """
         return EquatorialCoordinateType(self._get("equatorialsystem"))
@@ -339,19 +566,33 @@ class Telescope(Device):
     def FocalLength(self) -> float:
         """Return the telescope's focal length in meters.
 
-        Returns:
-            The telescope's focal length in meters.
+        Raises:
+            NotImplementedException: Focal length is not available from the mount
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("focallength")
 
     @property
     def GuideRateDeclination(self) -> float:
-        """Set or return the current Declination rate offset for telescope guiding.
+        """(Read/Write) The current Declination rate offset (deg/sec) for guiding.
 
-        Args:
-            GuideRateDeclination (float): Declination movement rate offset
-                (degrees/sec).
+        Raises:
+            InvalidValueException: If an invalid guide rate is set
+            NotImplementedException: Rate cannot be set, :py:attr:`CanSetGuideRates` = False
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * This is the rate for both hardware/relay guiding and for 
+              :py:meth:`PulseGuide()`.
+            * The mount may not support separate right ascension and declination
+              guide rates. If so, setting either rate will set the other to the
+              same value.
+            * This value will be set to a default upon startup. 
 
         """
         return self._get("guideratedeclination")
@@ -361,11 +602,22 @@ class Telescope(Device):
 
     @property
     def GuideRateRightAscension(self) -> float:
-        """Set or return the current Right Ascension rate offset for telescope guiding.
+        """(Read/Write) The current Right Ascension rate offset (deg/sec) for guiding.
 
-        Args:
-            GuideRateRightAscension (float): Right Ascension movement rate offset
-                (degrees/sec).
+        Raises:
+            InvalidValueException: If an invalid guide rate is set
+            NotImplementedException: Rate cannot be set, :py:attr:`CanSetGuideRates` = False
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * This is the rate for both hardware/relay guiding and for 
+              :py:meth:`PulseGuide()`.
+            * The mount may not support separate right ascension and declination
+              guide rates. If so, setting either rate will set the other to the
+              same value.
+            * This value will be set to a default upon startup. 
 
         """
         return self._get("guideraterightascension")
@@ -375,34 +627,63 @@ class Telescope(Device):
 
     @property
     def IsPulseGuiding(self) -> bool:
-        """Indicate whether the telescope is currently executing a PulseGuide command.
+        """The mount is currently executing a :py:meth:`PulseGuide()` command.
 
-        Returns:
-            True if a pulseguide(int, int) command is in progress, False otherwise.
+        Use this property to determine when a (non-blocking) pulse guide command
+        has completed. See Notes and :ref:`async_faq`
+
+        Raises:
+            NotImplementedException: Pulse guiding is not supported 
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+          * A pulse guide command may be so short that you won't see this equal to True. 
+            If you can read False after calling :py:meth:`PulseGuide()`, then you know it 
+            completed *successfully*. See :ref:`async_faq`
         
         """
         return self._get("ispulseguiding")
 
     @property
     def RightAscension(self) -> float:
-        """Return the telescope's right ascension coordinate.
+        """The mount's current right ascension (hours) in the current :py:attr:`EquatorialSystem`.
 
-        Returns:
-            The right ascension (hours) of the telescope's current equatorial
-            coordinates, in the coordinate system given by the EquatorialSystem
-            property.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         return self._get("rightascension")
 
     @property
     def RightAscensionRate(self) -> float:
-        """Set or return the telescope's right ascension tracking rate.
+        """(Read/Write) The mount's right ascension tracking rate (see Notes).
 
-        Args:
-            RightAscensionRate (float): Right ascension tracking rate (arcseconds per
-                second).
+        Raises:
+            NotImplementedException: If :py:attr:`CanSetRightAscensionRate` is False,
+            yet an attempt is made to write to this property.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
+        Notes:
+            * RightAscensionRate is an offset from the currently selected :py:attr:TrackingRate`
+              given in (sidereal) seconds of RA per *sidereal* second.
+            * To convert a given rate in units of sidereal seconds per UTC (clock) second, 
+              multiply the value by 0.9972695677 (the number of UTC seconds in a sidereal 
+              second) then set the RightAscensionRate property.
+            * The supported range for this property is mount-specific. 
+            * Offset tracking is most commonly used to track a solar system object such 
+              as a minor planet or comet.
+            * Offset tracking may also be used (less commonly) as a method for reducing 
+              dynamic mount errors.
+            * If offset tracking is in effect (non-zero), and a slew is initiated, the
+              mount will continue to update the slew destination coordinates at the 
+              given offset rate.
+            * Use the :py:attr:`Tracking` property to stop and start tracking. 
         """
         return self._get("rightascensionrate")
     @RightAscensionRate.setter
@@ -411,13 +692,19 @@ class Telescope(Device):
 
     @property
     def SideOfPier(self)  -> PierSide:
-        """Set or return the mount's pointing state.
+        """(Read/Write) Set or return the mount's pointing state. See :ref:`ptgstate-faq`
 
-        Args:
-            SideOfPier (enum PierSide): New pointing state
-        
-        Returns:
-            Side of pier if not set.
+        Raises:
+            NotImplementedException: If the mount does not report its pointing state,
+                or if it doesn't support force-flipping by writing to SideOfPier
+                (:py:attr:`CanSetPierSide` = False).
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * May optionally be written-to to force a flip on a German mount
+            * See :ref:`ptgstate-faq`
         
         """
         return PierSide(self._get("sideofpier"))
@@ -427,25 +714,47 @@ class Telescope(Device):
 
     @property
     def SiderealTime(self) -> float:
-        """Return the local apparent sidereal time.
+        """Local apparent sidereal time (See Notes)
 
-        Returns:
-            The local apparent sidereal time from the telescope's internal clock 
-            (hours, float).
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * It is required for a driver to calculate this from the system clock if 
+              the mount has no accessible source of sidereal time.
+            * Local Apparent Sidereal Time is the sidereal time used for pointing 
+              telescopes, and thus must be calculated from the Greenwich Mean 
+              Sidereal time, longitude, nutation in longitude and true ecliptic 
+              obliquity. 
+            * Local Apparent Sidereal Time is the topocentric Right Ascension 
+              of the meridian at the current instant. TODO [REVIEW is this right?]
 
         """
         return self._get("siderealtime")
 
     @property
     def SiteElevation(self) -> float:
-        """Set or return the observing site's elevation above mean sea level.
+        """(Read/Write) The observing site's elevation (meters) above mean sea level.
 
-        Args:
-            SiteElevation (float): Elevation above mean sea level (metres).
-        
-        Returns:
-            Elevation above mean sea level (metres) of the site at which the telescope
-            is located if not set.
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given value is outside the range -300 through
+                10000 meters.
+            InvalidOperationException: If the application must set the SiteElevation
+                before reading it, but has not. See Notes.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Some mounts supply this via input to their control systems, in 
+              other scenarios the application will set this on initialization.
+            * If a change is made via SiteElevation, most mounts will save the value
+              persistently across power off/on.
+            * If the value hasn't been set by any means, an InvalidOperationException
+              will be raised.
 
         """
         return self._get("siteelevation")
@@ -455,14 +764,26 @@ class Telescope(Device):
 
     @property
     def SiteLatitude(self) -> float:
-        """Set or return the observing site's latitude.
+        """(Read/Write) The latitude (degrees) of the observing site. See Notes.
 
-        Args:
-            SiteLatitude (float): Site latitude (degrees).
-        
-        Returns:
-            Geodetic(map) latitude (degrees, positive North, WGS84) of the site at which
-            the telescope is located if not set.
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given value is outside the range -90 through
+                90 degrees.
+            InvalidOperationException: If the application must set the SiteLatitude
+                before reading it, but has not. See Notes.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This is geodetic (map) latitude, degrees, WGS84, positive North.
+            * Some mounts supply this via input to their control systems, in 
+              other scenarios the application will set this on initialization.
+            * If a change is made via SiteLatitude, most mounts will save the value
+              persistently across power off/on.
+            * If the value hasn't been set by any means, an InvalidOperationException
+              will be raised.
         
         """
         return self._get("sitelatitude")
@@ -472,14 +793,29 @@ class Telescope(Device):
 
     @property
     def SiteLongitude(self) -> float:
-        """Set or return the observing site's longitude.
+        """(Read/Write) The longitude (degrees) of the observing site. See Notes.
 
-        Args:
-            SiteLongitude (float): Site longitude (degrees, positive East, WGS84)
-        
-        Returns:
-            Longitude (degrees, positive East, WGS84) of the site at which the telescope
-            is located.
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given value is outside the range -180 through
+                180 degrees.
+            InvalidOperationException: If the application must set the SiteLatitude
+                before reading it, but has not. See Notes.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This is geodetic (map) longitude, degrees, WGS84, **positive East**.
+            * Some mounts supply this via input to their control systems, in 
+              other scenarios the application will set this on initialization.
+            * If a change is made via SiteLongitude, most mounts will save the value
+              persistently across power off/on.
+            * If the value hasn't been set by any means, an InvalidOperationException
+              will be raised.
+
+        Attention:
+            West longitude is negative.
         
         """
         return self._get("sitelongitude")
@@ -489,11 +825,19 @@ class Telescope(Device):
 
     @property
     def Slewing(self) -> bool:
-        """Indicate whether the telescope is currently slewing.
+        """The mount is in motion resulting from a slew or a MoveAxis. See :ref:`async_faq`
 
-        Returns:
-            True if telescope is currently moving in response to one of the Slew methods
-            or the moveaxis(int, float) method, False at all other times.
+        Notes:
+            * This is the correct property to use to determine *successful* completion of 
+              a (non-blocking) :py:meth:`SlewToCoordinatesAsync()`, :py:meth:`SlewToTargetAsync()`,
+              :py:meth:`SlewToCoordinatesAsync()`, or by writing to :py:attr:`SideOfPier`
+              to force a flip. 
+            * See :ref:`async_faq`
+            * Slewing will be True immediately upon 
+              returning from any of these calls, and will remain True until *successful* 
+              completion, at which time Slewing will become False.
+            * Slewing will not be True during pulse-guiding or application of tracking 
+              offsets.
 
         """
         return self._get("slewing")

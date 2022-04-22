@@ -1,14 +1,14 @@
-from enum import IntEnum
+from alpaca.docenum import DocIntEnum
 from alpaca.device import Device
 from typing import List, Any
 
-class ShutterState(IntEnum):
+class ShutterState(DocIntEnum):
     """Indicates the current state of the shutter or roof"""
-    shutterOpen = 0
-    shutterClosed = 1
-    shutterOpening = 2
-    shutterClosing = 3
-    shutterError = 4
+    shutterOpen = 0, 'The shutter or roof is open'
+    shutterClosed = 1, 'The shutter or roof is closed'
+    shutterOpening = 2, 'The shutter or roof is opening'
+    shutterClosing = 3, 'The shutter or roof is closing'
+    shutterError = 4, 'The shutter or roof has encountered a problem'
 
 class Dome(Device):
     """**ASCOM Standard IDomeV2 Interface**"""
