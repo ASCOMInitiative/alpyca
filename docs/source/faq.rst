@@ -25,7 +25,7 @@ places where an async operation can fail:
 Have a look at this article |excpdang|. While the article uses the C# language and acync/await
 to illustrate the so-called "dangers" (failing to await), the exact same principles apply here.
 In the example above, you really must use IsMoving to determine completion. It is the 'await'
-in this cross-language/cross-platform environment. Iff you ignore IsMoving and instead 
+in this cross-language/cross-platform environment. If you ignore IsMoving and instead 
 “double-check” the results by comparing your request with the results, you run several risks
 
 1. A lost exception (an integrity bust),
@@ -79,8 +79,8 @@ The :doc:`Dome Interface <alpaca.dome>` seems complex and confusing. Help me do 
 
 .. _ptgstate-faq:
 
-What is the meaning of "pointing state" in the docs for Telescope.SideOfPier?
------------------------------------------------------------------------------
+What is the meaning of "pointing state" in the docs for SideOfPier?
+-------------------------------------------------------------------
 
 In the docs for :py:attr:`Telescope.SideOfPier <alpaca.telescope.Telescope.SideOfPier>` and
 :py:meth:`Telescope.DestinationSideOfPier() <alpaca.telescope.Telescope.DestinationSideOfPier>`,
@@ -179,6 +179,89 @@ diagrams illustrating how it relates to physical side of pier for German equator
 telescopes. It also includes details of the tests performed by Conform to determine 
 whether the driver correctly reports the pointing state as defined above.
 
+.. _dsop-faq:
+
+What is DestinationSideOfPier and why would I want to use it?
+-----------------------------------------------------------------------
+
+The :py:attr:`DestinationSideOfPier <alpaca.telescope.Telescope.DestinationSideOfPier>`
+property is provided for applications to manage pier flipping during automated image sequences.
+Basically you provide it with an RA and Dec, and it comes back telling you the pointing state 
+:py:attr:`SideOfPier <alpaca.telescope.Telescope.SideOfPier>` that would result 
+from a slew-to *at the 
+present time*. Looking at the current SideOfPier and DestinationSideOfPier tells you if the mount 
+would flip on a slew to those coordinates. This info is based on the given RA/Dec at the given 
+time, so is not a static function.  
+
+The mount knows where all of its settings are, how they  are applied, and what their effects are. 
+All it needs to do is tell the app the outcome of a slew to a point. Obviously if trash RA/Dec 
+are given the mount would raise an exception for invalid coordinates.
+
+As your image sequence progresses, at the beginning of each image you add the exposure interval 
+to the RA (RA is a time coordinate, right?) and if you're really picky adjust by the 0.27% 
+difference from sidereal to solar time, then call DestinationSideOfPier(RA + image, Dec). 
+If it tells you the flip point will be reached before the end of the exposure, then you have 
+some choices to make:
+
+1. Will the mount track past the flip point far enough to allow the image to proceed "from here" 
+   and complete, so you could do the flip at the end while the image downloads?
+2. If the mount is hard limited at the flip point then you would have to wait until the target 
+   drifts past the flip point, flip, then proceed. Not many mounts are hard limited against tracking 
+   past their flip points.
+
+The tricky parts are
+
+1. For #1 above, knowing whether, and how far, the mount can track past its flip point. My own 
+   experience is that most German mounts can track at least one "typical" exposure interval past 
+   their flip points. In the old days this would be 1800 seconds for  grungy CCDs with bad read 
+   noise and narrowband filter, but nowadays, especially with CMOS, even narrowband exposures 
+   are significantly shorter. Even at the celestial equator, 1800 seconds is only 7.5 degrees, 
+   and less as declination increases (by cos(dec)). Tracking 7.5 degrees or less past a flip 
+   point seems within the capability of most GEMs. Also, if you can image past the flip 
+   point, you can download the image in parallel with flipping the mount, so the penalty 
+   for flipping is the flip time minus the image download time.
+2. For #2 above, how long to wait before flipping? To handle this, stop tracking for safety, 
+   then periodically call DestinationSideOfPier(RA, Dec) for your target's coordinates 
+   while the target itself drifts towards, then past, the flip point (which  you don't 
+   know but who cares?).  Wait until it tells you that the mount will flip. 
+   Turn on tracking, slew to your target, the mount will flip, and off you go toward 
+   the west with your image sequence.
+
+.. _moveaxis-faq:
+
+What does MoveAxis() do and how do I use it?
+--------------------------------------------
+
+This method supports control of the mount about its mechanical axes. Upon successful return, 
+the telescope will start moving at the specified rate about the specified axis and continue 
+*indefinitely*. This method must be called for each axis separately. The axis motions may run 
+concurrently, each at their own rate. Set the rate for an axis to zero to restore the motion 
+about that axis to the rate set by the :py:attr:`TrackingRate` property. 
+Tracking motion (if enabled) is suspended during this mode of operation.
+
+**Notes:**
+
+* The movement rate must be within the value(s) obtained from a 
+  :py:class:`~alpaca.telescope.Rate` object in the
+  :py:meth:`~alpaca.telescope.Telescope.AxisRates()` list for the desired axis. 
+* The rate is a signed value with negative rates moving in the oposite direction to 
+  positive rates.
+* The values specified in 
+  :py:meth:`~alpaca.telescope.Telescope.AxisRates()` are absolute, unsigned values and apply 
+  to both directions, determined by the sign used in this command.
+* The value of :py:attr:`~alpaca.telescope.Telescope.Slewing` will be True if the 
+  mount is moving about any of its 
+  axes as a result of this method being called. This can be used to simulate a handbox 
+  by initiating motion with the MouseDown event and stopping the motion with the 
+  MouseUp event.
+* When the motion is stopped by setting the rate to zero the mount will be set to the 
+  previous 
+  :py:attr:`~alpaca.telescope.Telescope.TrackingRate` or to no movement, 
+  depending on the state of the 
+  :py:attr:`~alpaca.telescope.Telescope.Tracking` property.
+* It may be possible to implement satellite tracking by using the 
+  :py:meth:`~alpaca.telescope.Telescope.MoveAxis()` method to 
+  move the scope in the required manner to track a satellite.
 
 
 

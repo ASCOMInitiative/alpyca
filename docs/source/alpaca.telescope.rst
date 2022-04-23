@@ -7,6 +7,9 @@ Telescope Class
 
 Rate Class
 ----------
+TODO Yes this could be a simple Python tuple. Is it worth
+being a class?
+
 .. autoclass:: Rate
     :members:
 

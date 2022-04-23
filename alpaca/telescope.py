@@ -46,7 +46,14 @@ class TelescopeAxes(DocIntEnum):
     axisTertiary    = 2, 'Tertiary axis (e.g. imager rotator/de-rotator).'
 
 class Rate(object):
-    """Describes a range of rates supported by the :py:meth:`MoveAxis()` method"""
+    """Describes a range of rates supported by the :py:meth:`MoveAxis()` method
+    
+    TODO Should this be a simple Python tuple? Should :py:meth:`AxisRates()` return
+    a list of simple 2-part tuples?
+    
+    """
+
+
     def __init__(
         self,
         maxv: float,
@@ -825,7 +832,14 @@ class Telescope(Device):
 
     @property
     def Slewing(self) -> bool:
-        """The mount is in motion resulting from a slew or a MoveAxis. See :ref:`async_faq`
+        """The mount is in motion resulting from a slew or a move-axis. See :ref:`async_faq`
+
+        Raises:
+            NotImplementedException: If the property is not implemented (none of the CanSlew
+                properties are True, this is a manual mount)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         Notes:
             * This is the correct property to use to determine *successful* completion of 
@@ -836,6 +850,9 @@ class Telescope(Device):
             * Slewing will be True immediately upon 
               returning from any of these calls, and will remain True until *successful* 
               completion, at which time Slewing will become False.
+            * You might see Slewing = False on returning from a slew or move-axis
+              if the operation takes a very short time. If you see False (and not an exception)
+              in this state, you can be certain that the operation completed *successfully*.
             * Slewing will not be True during pulse-guiding or application of tracking 
               offsets.
 
@@ -844,13 +861,20 @@ class Telescope(Device):
 
     @property
     def SlewSettleTime(self) -> int:
-        """Set or return the post-slew settling time.
+        """(Read/Write) The post-slew settling time (seconds).
 
-        Args:
-            SlewSettleTime (int): Settling time (integer sec.).
+        Artificially lengthen all slewing operations. Useful for mounts or 
+        buildings that require additional mechanical settling time after a
+        slew to stabilize.
 
-        Returns:
-            Returns the post-slew settling time (sec.) if not set.
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given settling time is invalid (negative or 
+                ridiculously high)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
 
         """
         return self._get("slewsettletime")
@@ -860,15 +884,23 @@ class Telescope(Device):
 
     @property
     def TargetDeclination(self) -> float:
-        """Set or return the target declination of a slew or sync.
+        """(Read/Write) Set or return the target declination. See Notes.
 
-        Args:
-            TargetDeclination (float): Target declination(degrees)
-        
-        Returns:
-            Declination (degrees, positive North) for the target of an equatorial slew
-            or sync operation.
-        
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given value is outside the range -90 through
+                90 degrees.
+            InvalidOperationException: If the application must set the TargetDeclination
+                before reading it, but has not. See Notes.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This is a pre-set target coordinate for :py:meth:`SlewToTargetAsync()`
+              and :py:meth:`SyncToTarget()`
+            * Target coordinates are for the current :py:attr:`EquatorialSystem`.
+       
         """
         return self._get("targetdeclination")
     @TargetDeclination.setter
@@ -877,15 +909,23 @@ class Telescope(Device):
 
     @property
     def TargetRightAscension(self) -> float:
-        """Set or return the current target right ascension.
+        """(Read/Write) Set or return the target declination. See Notes.
 
-        Args:
-            TargetRightAscension (float): Target right ascension (hours).
+        Raises:
+            NotImplementedException: If the property is not implemented
+            InvalidValueException: If the given value is outside the range -180 through
+                180 degrees.
+            InvalidOperationException: If the application must set the TargetRightAscension
+                before reading it, but has not. See Notes.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * This is a pre-set target coordinate for :py:meth:`SlewToTargetAsync()`
+              and :py:meth:`SyncToTarget()`
+            * Target coordinates are for the current :py:attr:`EquatorialSystem`.
         
-        Returns:
-            Right ascension (hours) for the target of an equatorial slew or sync
-            operation.
-
         """
         return self._get("targetrightascension")
     @TargetRightAscension.setter
@@ -894,14 +934,20 @@ class Telescope(Device):
 
     @property
     def Tracking(self) -> bool:
-        """Enable, disable, or indicate whether the telescope is tracking.
+        """(Read/Write) The on/off state of the mount's sidereal tracking drive. See Notes.
 
-        Args:
-            Tracking (bool): Tracking enabled / disabled.
+        Raises:
+            NotImplementedException: If writing to the property is not implemented. 
+                :py:attr:`CanSetTracking` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
-        Returns:
-            State of the telescope's sidereal tracking drive.
-        
+        Notes:
+            * When on, the mount will use the last selected :py:attr:`TrackingRate`.
+            * Even if the mount doesn't support changing this, it will report the
+              current state. 
+
         """
         return self._get("tracking")
     @Tracking.setter
@@ -910,15 +956,21 @@ class Telescope(Device):
 
     @property
     def TrackingRate(self) -> DriveRates:
-        """Set or return the current tracking rate (enum DriveRates).
+        """(Read/Write) The current (sidereal) tracking rate of the mount. See Notes.
 
-        Args:
-            Enum DriveRates: 
-                0 = driveSidereal, 1 = driveLunar, 2 = driveSolar, 3 = driveKing.
+        Raises:
+            InvalidValueException: If value being written is not one of the 
+                :py:class:`DriveRates`, or if the requested rate is not 
+                supported by the mount (not all are). 
+            NotImplementedException: If the mount doesn't support writing this 
+                property to change the tracking rate.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
-        Returns:
-            Current tracking rate of the telescope's sidereal drive if not set.
-        **TODO** Verify enum usage both ways
+        Notes:
+            * Even if the mount doesn't support changing this, it will report the
+              current state. 
 
         """
         return DriveRates(self._get("trackingrate"))
@@ -928,30 +980,56 @@ class Telescope(Device):
 
     @property
     def TrackingRates(self) -> List[DriveRates]:
-        """Return a list of supported enum DriveRates values.
+        """Return a list of supported :py:class:`DriveRates` values
 
-        Returns:
-            List of supported enum DriveRates values that describe the permissible values of
-            the TrackingRate property for this telescope type.
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
+        Notes:
+            * At a minimum, this list will contain an item for 
+              :py:class:`~DriveRates.driveSidereal`
         """
         return self._get("trackingrates")
 
     @property
     def UTCDate(self) -> datetime:
-        """Set or return the UTC date/time of the telescope's internal clock.
+        """(Read/Write) The UTC date/time of the mount's internal clock. See Notes.
 
-        Args:
-            UTCDate: UTC date/time as an str or datetime.
+        You may write either a Python datetime (tz=UTC) or an ISO 8601 string
+        for example:: 
         
-        Returns:
-            datetime of the UTC date/time if not set.
-        **TODO** Check setting with both formats
+            2022-04-22T20:21:01.123+00:00
+
+        Raises:
+            InvalidValueException: if an illegal ISO 8601 string or a bad Python 
+                datetime value is written to change the time. See Notes.
+            NotImplementedException: If the mount doesn't support writing this 
+                property to change the UTC time
+            InvalidOperationException: TODO [Review] When UTCDate is read and the 
+                mount cannot provide this property itslef and a value has 
+                not yet be established by writing to the property.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * Changing time by writing to this property can be done with either a
+              Python datetime value or an ISO 8601 string, for example
+              '2022-04-22T20:21:01.123+00:00'.
+            * Even if the mount doesn't support changing this, it will report the
+              current UTC date/time. The value may be derived from the system clock
+              by the driver if the mount doesn't provide it. 
+            * If the UTC date/time is being derived from the system clock, you will 
+              not be able to write this  (you'll get 
+              :py:class:`~exceptions.NotImplementedException`).
+
 
         """
         return dateutil.parser.parse(self._get("utcdate"))
     @UTCDate.setter
-    def UTCDate(self, UTCDate: datetime):
+    def UTCDate(self, UTCDate) -> datetime:         # Variable format
         if type(UTCDate) is str:
             data = UTCDate
         elif type(UTCDate) is datetime:
@@ -961,12 +1039,25 @@ class Telescope(Device):
         self._put("utcdate", UTCDate=data)
 
     def AxisRates(self, Axis: TelescopeAxes) -> List[Rate]:
-        """Return rates at which the telescope may be moved about the specified axis.
+        """Angular rates at which the mount may be moved with :py:meth:`MoveAxis()`. See Notes.
 
         Returns:
-            The rates at which the telescope may be moved about the specified axis 
-            (enum TelescopeAxes) by the MoveAxis(int, float) method.
+            A list of :py:class:`Rate` objects, each of which specifies a minimum
+            and a maximum angular rate at which the given axis of the mount may be 
+            moved. 
         
+        Raises:
+            InvalidValueException: An invalid axis value is specified.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * See :py:meth:`MoveAxis()` for details.
+            * An empty list will be returned if :py:meth:`MoveAxis()` is not supported.
+            * Returned rates will always be positive, it is up to you to choose the 
+              positive or negative rate for your call to :py:meth:`MoveAxis()`.
+
         """
         l = []
         jList = self._get("axisrates", Axis=Axis.value)
@@ -975,68 +1066,179 @@ class Telescope(Device):
         return l
 
     def CanMoveAxis(self, Axis: TelescopeAxes) -> bool:
-        """Indicate whether the telescope can move about the requested axis.
+        """The mount can be moved about the given axis
 
-        Returns:
-            True if this telescope can move about the requested axis.
-
+        Raises:
+            InvalidValueException: An invalid axis value is specified.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
         """
         return self._get("canmoveaxis", Axis=Axis.value)
 
     def DestinationSideOfPier(self, RightAscension: float, Declination: float) -> PierSide:
-        """Predict the pointing state (PierSide) after a German equatorial mount slews to given coordinates.
+        """Predicts the pointing state (PierSide) after a GEM slews to given coordinates at this instant. 
 
-        Args:
-            RightAscension (float): Right Ascension coordinate (0.0 to 23.99999999
-                hours).
-            Declination (float): Declination coordinate (-90.0 to +90.0 degrees).
+        Provided so apps can manage GEM flipping during an image sequence. See 
+        :py:attr:`SideOfPier`, :ref:`dsop-faq`, and :ref:`ptgstate-faq`
 
-        Returns:
-            Pointing state (enum PierSide)that a German equatorial mount will be in 
-            if it slews to the given coordinates. 
-
+        Raises:
+            InvalidValueException: An invalid axis value is specified.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
         """
         return self._get("destinationsideofpier", RightAscension=RightAscension, Declination=Declination)
 
     def AbortSlew(self) -> None:
-        """Immediatley stops a slew in progress."""
+        """Immediatley stops an asynchronous slew in progress.
+
+        Raises:
+            NotImplementedException: If this feature is not implemented. TODO with the 
+                deprecation of sync methods, this should be required.
+            InvalidOperationException: TODO [Review New] If the mount is parked (:py:attr:`AtPark` = True)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes: 
+            * Effective only after an asynchronous slew/move call to 
+              :py:meth:`SlewToTargetAsync()`, :py:meth:`SlewToCoordinatesAsync()`, 
+              :py:meth:`SlewToAltAzAsync()`, or :py:meth:`MoveAxis()`. 
+            * Does nothing if no slew/motion is in progress.
+            * Tracking is returned to its pre-slew state. 
+
+        
+        """
         self._put("abortslew")
 
     def FindHome(self) -> None:
-        """Move the mount to the "home" position."""
-        # **TODO** This is synchronous now, etc.
-        self._put("findhome", 30)   # Extended timeout for bleeping sync method
+        """Move the mount to the "home" position.
+
+        **BLOCKING** This will not return until completed. TODO This should be 
+        deprecated and we need a FindHomeAsync(). The docs and the simulator both
+        implement sync behavior. 
+        
+        Raises:
+            NotImplementedException: If this feature is not implemented (:py:attr:`CanFindHome` = False)
+            InvalidOperationException: If the mount is parked (:py:attr:`AtPark` = True)
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+       
+        Notes:
+            * Returns only after the home position has been found. At this point the AtHome 
+              property will be True. TODO [needs change!]
+
+        """
+        self._put("findhome", 60)   # Extended timeout for bleeping sync method
 
     def MoveAxis(self, Axis: TelescopeAxes, Rate: float) -> None:
-        """Move a telescope axis at the given rate.
+        """Move the mount about the given axis at the given angular rate. 
+        
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True
+        after *successfully* starting the axis rotation operation. See Notes, 
+        and :ref:`async_faq`
 
+    
         Args:
-            Axis (int): The axis about which rate information is desired
-            (enum TelescopeAxes): 0 = axisPrimary, 1 = axisSecondary, 
-            2 = axisTertiary.
-            Rate (float): The rate of motion (deg/sec) about the specified axis
+            Axis: :py:class:`TelecopeAxes`, the axis about which rotation is desired
+            Rate: The rate or rotation desired (deg/sec)
 
+
+        Raises:
+            NotImplementedException: If this feature is not implemented (:py:attr:`CanMoveAxis` = False)
+            InvalidOperationException: If the mount is parked (:py:attr:`AtPark` = True)
+            InvalidValueException: If the axis or rate value is not valid.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+              to determine if the mount is moving, however you must explicitly 
+              call MoveAxis() with a zero rate to stop motion about the given axis.
+            * This is a complex feature, see :ref:`moveaxis-faq`
         """
         self._put("moveaxis", Axis=Axis.value, Rate=Rate)
 
     def Park(self) -> None:
-        """Park the mount."""
-        # **TODO** This is synchronous, etc.
+        """Start slewing the mount to its park position.
+
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
+        if the park operation has *successfully* been started, or 
+        :py:attr:`Slewing` = False which means the mount is already parked 
+        (and of course :py:attr:`AtPark` will already be True). See Notes, 
+        and :ref:`async_faq`  TODO [Review] I believe most mounts already 
+        implement this async. Should we just go with it?
+
+        Raises:
+            NotImplementedException: If the mount does not support parking. 
+                In this case :py:attr:`CanPark` will be False.
+            NotConnectedException: If the device is not connected
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            DriverException:If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * **Asynchronous** (non-blocking): Use the :py:attr:`AtPark` property
+              to monitor the operation. When the the park position has been 
+              *successfully* reached, :py:attr:`AtPark` becomes True, and 
+              :py:attr:`Slewing` becomes False.  See :ref:`async_faq`
+            * An app should check :py:attr:`AtPark` before calling Park().
+
+        """
         self._put("park")
 
     def PulseGuide(self, Direction: GuideDirections, Duration: int) -> None:
-        """Move the scope in the given direction for the given time.
+        """Pulse guide in the specified direction for the specified time (ms).
+        
+        **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Args:
-            Direction (enum GuideDirections): Direction in which the guide-rate 
-            motion is to be made.
-            Duration (int): Duration of the guide-rate motion (milliseconds).
+            Direction: :py:class:`~alpaca.telescope.GuideDirections`
+            Interval: duration of the guide move, milliseconds
+
+        Raises:
+            InvalidValueException: If either the direction or the duration are invalid
+            NotImplementedException: If the mount does not support pulse guiding 
+                (:py:attr:`CanPulseGuide` property is False)
+            NotConnectedException: If the device is not connected.
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
         
+        Notes:
+            * **Asynchronous**: The method returns as soon the pulse-guiding operation
+              has been *successfully* started, with :py:attr:`IsPulseGuiding` property True. 
+              However, you may find that :py:attr:`IsPulseGuiding' is False when you get 
+              around to checking it if the 'pulse' is short. This is still a success if you
+              get False back and not an exception. See :ref:`async_faq`
+            * Some mounts have implemented this as a Synchronous (blocking) operation. This
+              is deprecated and will be prohbited in the future.
+            * :py:class:`~alpaca.telescope.GuideDirections` for North and South 
+              have varying interpretations
+              by German Equatorial mounts. Some GEM mounts interpret North to be 
+              the same rotation direction of the declination axis regardless of 
+              their pointing state ("side of the pier"). Others truly implement 
+              North and South by reversing the dec-axis rotation depending on 
+              their pointing state. **Apps must be prepared for either behavior**. 
         """
         self._put("pulseguide", Direction=Direction.value, Duration=Duration)
 
     def SetPark(self) -> None:
-        """Set the telescope's park position to its current position."""
+        """Set the telescope's park position to its current position.
+        
+        Raises:
+            NotImplementedException: If the mount does not support the setting
+                of the park position. In this case :py:attr:`CanSetPark` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        """
         self._put("setpark")
 
     def SlewToAltAz(self, Azimuth: float, Altitude: float) -> None:
@@ -1044,12 +1246,33 @@ class Telescope(Device):
         raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToAltAzAsync(self, Azimuth: float, Altitude: float) -> None:
-        """Slew asynchronously to the given local horizontal coordinates.
+        """Start a slew to the given local horizontal coordinates. See Notes.
+
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
+        if the slewing operation has *successfully* been started. 
+        See Notes, and :ref:`async_faq`
 
         Args:
-            Azimuth (float): Azimuth coordinate (degrees, North-referenced, positive
+            Azimuth: Azimuth coordinate (degrees, North-referenced, positive
                 East/clockwise).
-            Altitude (float): Altitude coordinate (degrees, positive up).
+            Altitude: Altitude coordinate (degrees, positive up).
+
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            InvalidValueException: If either of the coordinates are invalid 
+            NotImplementedException: If the mount does not support alt/az slewing. 
+                In this case :py:attr:`CanSlewAltAz` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+              to monitor the operation. When the the requested coordinates have been 
+              *successfully* reached, :py:attr:`Slewing` becomes False. 
+              If SlewToAltAzAsync() returns with :py:attr:`Slewing` = False then 
+              the mount was already at the  requested coordinates, which is also a 
+              success See :ref:`async_faq`
 
         """
         self._put("slewtoaltazasync", Azimuth=Azimuth, Altitude=Altitude)
@@ -1059,12 +1282,36 @@ class Telescope(Device):
         raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToCoordinatesAsync(self, RightAscension: float, Declination: float):
-        """Slew asynchronously to the given equatorial coordinates.
+        """Start a slew to the given equatorial coordinates. See Notes.
+
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
+        if the slewing operation has *successfully* been started. 
+        See Notes, and :ref:`async_faq`
 
         Args:
-            RightAscension (float): Right Ascension coordinate (hours).
-            Declination (float): Declination coordinate (degrees).
+            RightAscension: Right Ascension coordinate (hours).
+            Declination: Declination coordinate (degrees).
         
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            NotImplementedException: If the mount does not support async slewing
+                to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
+            InvalidValueException: If either of the coordinates are invalid 
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+              to monitor the operation. When the the requested coordinates have been 
+              *successfully* reached, :py:attr:`Slewing` becomes False. 
+              If SlewToCoordinatesAsync() returns with :py:attr:`Slewing` = False then 
+              the mount was already at the requested coordinates, which is also a 
+              success See :ref:`async_faq`
+            * The given coordinates must match the mount's :py:attr:`EquatorialSystem`.
+            * The given coordinates are copied to the :py:attr:`TargetRightAscension` and
+              :py:attr:`TargetDeclination` properties. 
+
         """
         self._put("slewtocoordinatesasync", RightAscension=RightAscension, Declination=Declination)
 
@@ -1073,26 +1320,67 @@ class Telescope(Device):
         raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToTargetAsync(self) -> None:
-        """Asynchronously slew to the TargetRightAscension and TargetDeclination coordinates."""
+        """Start a slew to the coordinates in :py:attr:`TargetRightAscension' and 
+        :py:attr:`TargetDeclination`.. See Notes.
+
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
+        if the slewing operation has *successfully* been started. 
+        See Notes, and :ref:`async_faq`
+
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            NotImplementedException: If the mount does not support async slewing
+                to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
+        Notes:
+            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+              to monitor the operation. When the the target coordinates have been 
+              *successfully* reached, :py:attr:`Slewing` becomes False. 
+              If SlewToCoordinatesAsync() returns with :py:attr:`Slewing` = False then 
+              the mount was already at the target coordinates, which is also a 
+              success See :ref:`async_faq`
+
+        """
         self._put("slewtotargetasync")
 
     def SyncToAltAz(self, Azimuth: float, Altitude: float) -> None:
-        """Sync to the given local horizontal coordinates.
+        """Match the mount's alt/az coordinates with the given alt/az coordinates
 
         Args:
-            Azimuth (float): Azimuth coordinate (degrees, North-referenced, positive
+            Azimuth: Corrected Azimuth coordinate (degrees, North-referenced, positive
                 East/clockwise).
-            Altitude (float): Altitude coordinate (degrees, positive up).
+            Altitude: Corrected Altitude coordinate (degrees, positive up).
 
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            InvalidValueException: If either of the coordinates are invalid 
+            NotImplementedException: If the mount does not support alt/az
+                sync. In this case :py:attr:`CanSyncAltAz` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+        
         """
         self._put("synctoaltaz", Azimuth=Azimuth, Altitude=Altitude)
 
     def SyncToCoordinates(self, RightAscension: float, Declination: float) -> None:
-        """Sync to the given equatorial coordinates.
+        """Match the mount's equatorial coordinates with the given equatorial coordinates
 
         Args:
-            RightAscension (float): Right Ascension coordinate (hours).
-            Declination (float): Declination coordinate (degrees).
+            RightAscension: Corrected Right Ascension coordinate (hours).
+            Declination: Corrected Declination coordinate (degrees).
+
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            NotImplementedException: If the mount does not support equatorial
+                coordinate synchronization. In this case 
+                :py:attr:`CanSync` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
 
         """
         self._put(
@@ -1100,9 +1388,34 @@ class Telescope(Device):
         )
 
     def SyncToTarget(self) -> None:
-        """Sync to the TargetRightAscension and TargetDeclination coordinates."""
+        """Match the mount's equatorial coordinates with :py:attr:TaretRightAscension and
+        :py:attr:`TargetDeclination`. 
+
+        Raises:
+            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            NotImplementedException: If the mount does not support equatorial
+                coordinate synchronization. In this case 
+                :py:attr:`CanSync` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        """
         self._put("synctotarget")
 
     def Unpark(self) -> None:
-        """Unpark the mount."""
+        """Takes the mount out of parked state
+        
+        Raises:
+            NotImplementedException: If this method is not implemented. In this case 
+                :py:attr:`CanUnpark` will be False.
+            NotConnectedException: If the device is not connected
+            DriverException: If the device cannot *successfully* complete the request. 
+                This exception may be encountered on any call to the device.
+
+        Notes:
+            * Unparking a mount that is not parked is harmless and will always be
+              successful.
+              
+        """
         self._put("unpark")

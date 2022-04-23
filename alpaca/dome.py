@@ -472,7 +472,7 @@ class Dome(Device):
             * **Asynchronous** (non-blocking): Use the :py:attr:`AtPark` property
               to monitor the operation. When the the park position has been 
               *successfully* reached, :py:attr:`Azimuth` is synchronized to the 
-              park position, :py:attr:`AtHome` becomes True, and 
+              park position, :py:attr:`AtPark` becomes True, and 
               :py:attr:`Slewing` becomes False.  See :ref:`async_faq`
             * An app should check :py:attr:`AtPark` before calling Park().
         
@@ -486,7 +486,6 @@ class Dome(Device):
             NotImplementedException: If the dome does not support the setting
                 of the park position. In this case :py:attr:`CanSetPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
