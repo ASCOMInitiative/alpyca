@@ -190,6 +190,8 @@ class Camera(Device):
         
         Notes:
             * Will default to 1 when the camera connection is established. 
+            * If :py:attr:`CanAssymetricBin` is False, then the binning values must be
+              the same. Setting this property will result in BinY being the same value.
             * Camera does not check for compatible subframe values when this property
               is set; rather they are checked upon :py:meth:`StartExposure()`. 
             * It is recommended that this property be retrieved only after a connection is 
@@ -213,6 +215,8 @@ class Camera(Device):
         
         Notes:
             * Will default to 1 when the camera connection is established. 
+            * If :py:attr:`CanAssymetricBin` is False, then the binning values must be
+              the same. Setting this property will result in BinY being the same value.
             * Camera does not check for compatible subframe values when this property
               is set; rather they are checked upon :py:meth:`StartExposure()`. 
             * It is recommended that this property be retrieved only after a connection is 

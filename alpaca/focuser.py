@@ -91,7 +91,7 @@ class Focuser(Device):
         Notes:
             * The focuser can step between 0 and MaxStep. If an attempt is made to 
               move the focuser beyond these limits, it will automatically stop at 
-              the limit. TODO [REVIEW - Really? No exception?]
+              the limit.
  
         """
         return self._get("maxstep")
@@ -214,7 +214,8 @@ class Focuser(Device):
                 value of the :py:attr:`Absolute` property. 
             
         Raises:
-            TODO [REVIEW] No InvalidValueException if  the limits are exceeded?
+            InvalidValueException: TODO [REVIEW] If Position would result in a movement beyond 
+                :py:attr:`MaxStep`.
             InvalidOperationException: **IFocuserV2 and earlier only** Raised if 
                 :py:attr:`TempComp` is true and a Move() is attempted. This 
                 restriction was removed in IFocuserV3, but you must be prepared 

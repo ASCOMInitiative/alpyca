@@ -46,13 +46,7 @@ class TelescopeAxes(DocIntEnum):
     axisTertiary    = 2, 'Tertiary axis (e.g. imager rotator/de-rotator).'
 
 class Rate(object):
-    """Describes a range of rates supported by the :py:meth:`MoveAxis()` method
-    
-    TODO Should this be a simple Python tuple? Should :py:meth:`AxisRates()` return
-    a list of simple 2-part tuples?
-    
-    """
-
+    """Describes a range of rates supported by the :py:meth:`MoveAxis()` method"""
 
     def __init__(
         self,
@@ -100,8 +94,7 @@ class Telescope(Device):
         """The current mount alignment mode.
 
         Raises:
-            NotImplementedException: TODO [REALLY? Should this be required?]
-                If the mount cannot report its alignment mode.
+            NotImplementedException: If the mount cannot report its alignment mode.
             NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
@@ -537,8 +530,8 @@ class Telescope(Device):
         Notes:
             * If the driver does not know whether the attached telescope does its 
               own refraction, and if the driver does not itself calculate refraction, 
-              this property (if implemented) will raise an error when read.
-              TODO [What error? Clarify this]
+              this property (if implemented) will raise 
+              :py:class:`~alpaca.exceptions.DriverException` when read.
             * If the mount indicates that it can apply refraction, yet you wish to 
               calculate your own (more accurate) correction, try setting this to 
               False then, if successful, supply your own refracted coordinates.
@@ -699,17 +692,29 @@ class Telescope(Device):
 
     @property
     def SideOfPier(self)  -> PierSide:
-        """(Read/Write) Set or return the mount's pointing state. See :ref:`ptgstate-faq`
+        """(Read/Write) Start a change of, or return, the mount's pointing state. See :ref:`ptgstate-faq`
+
+        **Non-blocking**: Writing to *change* pointing state returns immediately 
+        with :py:attr:`Slewing` = True if the state change (e.g. GEM flip) operation 
+        has *successfully* been started. See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the mount does not report its pointing state,
-                or if it doesn't support force-flipping by writing to SideOfPier
+                at all, or if it doesn't support changing pointing state 
+                (e.g.force-flipping) by writing to SideOfPier 
                 (:py:attr:`CanSetPierSide` = False).
             NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
         Notes:
+            * **Asynchronous** (non-blocking) if writing SideOfPier to force a 
+              pointing state change (e.g. GEM flip): Use the :py:attr:`Slewing` property
+              to monitor the operation. When the pointing state change has been 
+              *successfully* completed, :py:attr:`Slewing` becomes False. 
+              If writing SideOfPier returns with :py:attr:`Slewing` = False then 
+              the mount was already in the requested pointing state, which is also a 
+              success.  See :ref:`async_faq`
             * May optionally be written-to to force a flip on a German mount
             * See :ref:`ptgstate-faq`
         
@@ -735,8 +740,6 @@ class Telescope(Device):
               telescopes, and thus must be calculated from the Greenwich Mean 
               Sidereal time, longitude, nutation in longitude and true ecliptic 
               obliquity. 
-            * Local Apparent Sidereal Time is the topocentric Right Ascension 
-              of the meridian at the current instant. TODO [REVIEW is this right?]
 
         """
         return self._get("siderealtime")
@@ -1007,7 +1010,7 @@ class Telescope(Device):
                 datetime value is written to change the time. See Notes.
             NotImplementedException: If the mount doesn't support writing this 
                 property to change the UTC time
-            InvalidOperationException: TODO [Review] When UTCDate is read and the 
+            InvalidOperationException: When UTCDate is read and the 
                 mount cannot provide this property itslef and a value has 
                 not yet be established by writing to the property.
             NotConnectedException: If the device is not connected
@@ -1320,7 +1323,7 @@ class Telescope(Device):
         raise NotImplementedException("Synchronous methods are deprecated, not available via Alpaca.")
 
     def SlewToTargetAsync(self) -> None:
-        """Start a slew to the coordinates in :py:attr:`TargetRightAscension' and 
+        """Start a slew to the coordinates in :py:attr:`TargetRightAscension` and 
         :py:attr:`TargetDeclination`.. See Notes.
 
         **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
@@ -1388,7 +1391,7 @@ class Telescope(Device):
         )
 
     def SyncToTarget(self) -> None:
-        """Match the mount's equatorial coordinates with :py:attr:TaretRightAscension and
+        """Match the mount's equatorial coordinates with :py:attr:TargetRightAscension and
         :py:attr:`TargetDeclination`. 
 
         Raises:

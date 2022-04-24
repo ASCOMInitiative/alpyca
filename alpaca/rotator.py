@@ -169,22 +169,21 @@ class Rotator(Device):
                 current position.
             
         Raises:
-            InvalidValueException: TODO [REVIEW] The given position change results in a position
-                outside 0 <= position < 360. [or does it just apply modulo 360 for negative
-                or positive offsets? Then what is an "invalid" value?]
+            InvalidValueException: The given position change results in a position
+                outside 0 <= position < 360.
             NotConnectedException: If the device is not connected
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
         Notes:
+            * **Asynchronous**: The method returns as soon as the rotation operation has
+              been successfully started, with the :py:attr:`IsMoving` property True. 
+              After the requested angle is successfully reached and motion stops, 
+              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
             * Calling Move causes the TargetPosition property to change to the sum of the 
               current angular position and the value of the Position parameter (modulo 
               360 degrees), then starts rotation to TargetPosition. Position includes the
               effect of any previous Sync() operation.
-            * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving' property True. 
-              After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
         
         """
         self._put("move", Position=Position)
@@ -209,14 +208,14 @@ class Rotator(Device):
                 This exception may be encountered on any call to the device.
 
         Notes:
+            * **Asynchronous**: The method returns as soon as the rotation operation has
+              been successfully started, with the :py:attr:`IsMoving` property True. 
+              After the requested angle is successfully reached and motion stops, 
+              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
             * Calling Move causes the TargetPosition property to change to  the
               value of the Position parameter (modulo 
               360 degrees [TODO REVIEW]), then starts rotation to TargetPosition. 
               Position includes the effect of any previous Sync() operation.
-            * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving' property True. 
-              After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
         
         """
         self._put("moveabsolute", Position=Position)
@@ -241,16 +240,16 @@ class Rotator(Device):
                 This exception may be encountered on any call to the device.
 
         Notes:
+            * **Asynchronous**: The method returns as soon as the rotation operation has
+              been successfully started, with the :py:attr:`IsMoving` property True. 
+              After the requested angle is successfully reached and motion stops, 
+              the :py:attr:`IsMoving` property becomes False. See :ref:`async_faq`
             * Calling MoveMechanical causes the TargetPosition property to change to 
               the value of the Position parameter then starts rotation to TargetPosition. 
               This moves without regard to the SyncOffset, that is, to the 
               mechanical rotator angle.
             * This method is to address requirements that need a physical rotation 
               angle such as taking sky flats.
-            * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving' property True. 
-              After the requested angle is successfully reached and motion stops, 
-              the :py:attr:`IsMoving` property becomes False. See :ref:`async_faq`
         
         """
         self._put("movemechanical", Position=Position)

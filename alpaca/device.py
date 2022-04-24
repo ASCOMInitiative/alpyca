@@ -83,6 +83,9 @@ class Device(object):
             DriverException: If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 
+        Notes:
+            * This method, combined with :py:attr:`SupportedActions`, is the supported 
+              mechanic for adding non-standard functionality. 
 
         """
         return self._put("action", Action=ActionName, Parameters=Parameters)["Value"]
@@ -291,11 +294,18 @@ class Device(object):
                 This exception may be encountered on any call to the device.
 
         Notes:
-            * This list contains the names of device-specific special functions 
-              that are outside the the universal capabilites of the interface. These
-              are meant to allow device/driver creators to include special capabilities
-              for their users, or to implement potential new capabilities in an 
-              experimental way.
+            * This method, combined with :py:meth:`Action())`, is the supported 
+              mechanic for adding non-standard functionality. 
+            * SupportedActions is a "discovery" mechanism that enables clients to know 
+              which Actions a device supports without having to exercise the Actions 
+              themselves. This mechanism is necessary because there could be
+              people / equipment safety issues if actions are called unexpectedly 
+              or out of a defined process sequence. It follows from this that 
+              SupportedActions must return names that match the spelling of 
+              :py:meth:`Action()` 
+              names exactly, without additional descriptive text. However, returned 
+              names may use any casing because the ActionName parameter of 
+              :py:meth:`Action()` is case insensitive.
         
         """
         return self._get("supportedactions")

@@ -463,8 +463,8 @@ class Dome(Device):
             NotImplementedException: If the dome does not support parking. 
                 In this case :py:attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            ParkedException: TODO [REVIEW-not in C# docs] If :py:attr:`AtPark` is True
+            SlavedException: TODO [REVIEW-Not in C# docs] If :py:attr:`Slaved` is True
             DriverException:If the device cannot *successfully* complete the request. 
                 This exception may be encountered on any call to the device.
 

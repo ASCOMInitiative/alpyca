@@ -9,7 +9,6 @@ constants of the corresponding ASCOM device interface.
    alpaca.camera
    alpaca.covercalibrator
    alpaca.dome
-   alpaca.exceptions
    alpaca.filterwheel
    alpaca.focuser
    alpaca.observingconditions
@@ -18,3 +17,11 @@ constants of the corresponding ASCOM device interface.
    alpaca.switch
    alpaca.telescope
 
+ASCOM Alpaca Exception Classes
+==============================
+Standard exceptions that are used throughout
+
+.. toctree::
+   :maxdepth: 4
+
+   alpaca.exceptions

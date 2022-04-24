@@ -3,6 +3,19 @@ Introduction and Quick Start
 This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
 For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
 
+.. _intro-stat:
+
+Status of This Document
+-----------------------
+The descriptions of the ASCOM Standard interfaces implemented in Alpyca Client are 
+our best efforts as of May 2022. At that time, the ASCOM Core Team announced that 
+they are formalizing the operation of the non-blocking (asynchronous) methods 
+in the standards documentation. This library manual includes additional information 
+and clarification of the asynchronous methods which follows the formal specification 
+changes as of that time. If there are any significant changes, we will release an 
+updated (compatible) library as soon as  possible. We wanted to get you started 
+in the right direction!
+
 Member Capitalization
 ---------------------
 This help file provides detailed descripions of the ASCOM Interfaces for all supported device types.
@@ -32,8 +45,6 @@ Output::
 
     10000000000000000000000000000000000000000001
  
-
-
 Common Misconceptions and Confusions
 ------------------------------------
 Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to

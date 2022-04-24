@@ -128,9 +128,9 @@ class CoverCalibrator(Device):
         Notes:
             * This is a mandatory property if a calibrator device is present
               (:py:attr:`CalibratorState` is other than 
-              :py:class:`~CalibratorStatus.NotPresent`), and must always 
-              return a value within the integer range 1 to 2,147,483,647. TODO I added 
-              wording here. Also need we explicitly mention 2,147,483,647???
+              :py:class:`~CalibratorStatus.NotPresent`)
+            * The value will always be a positive integer, indicating the available
+              precision. 
             * Examples: A value of 1 indicates that the calibrator can only be 
               "off" or "on". A value of 10 indicates that the calibrator has 
               10 discrete illumination levels in addition to "off".
