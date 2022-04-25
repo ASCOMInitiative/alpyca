@@ -129,7 +129,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        self._get("skybrightness")
+        return self._get("skybrightness")
 
     @property
     def SkyQuality(self) -> float:
@@ -226,7 +226,7 @@ class ObservingConditions(Device):
                 This exception may be encountered on any call to the device.
 
         """
-        return self._get("windgust")
+        return self._get("windspeed")
 
     def Refresh(self) -> None:
         """Forces the device to immediately query its attached hardware to refresh sensor values
@@ -260,8 +260,7 @@ class ObservingConditions(Device):
         """
         return self._get("sensordescription", PropertyName=PropertyName)
 
-    @property
-    def TimeSinceLastpdate(self, PropertyName: str) -> str:
+    def TimeSinceLastUpdate(self, PropertyName: str) -> str:
         """Elapsed time (sec) since last update of the sensor providing the requested property
         
         Args:
