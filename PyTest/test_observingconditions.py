@@ -14,7 +14,7 @@ def test_observingconditions(device, settings, disconn):
     s = settings
     print("Test ObservingConditions interface. OmniSim must be set to override")
     print("all settings with any non-zero values. ")
-    assert d.AveragePeriod == s['Average Period']       # Default after reset
+    assert d.AveragePeriod <= s['Average Period']       # Default after reset
     assert s['CloudCoverOverride'] == True, "CloudCover value must be overridden"
     assert d.CloudCover == s['CloudCoverOverride Value'], 'CloudCover value mismatch'
 #   No settings for DewPoint
