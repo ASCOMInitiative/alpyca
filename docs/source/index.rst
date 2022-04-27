@@ -11,8 +11,6 @@ To be written of course.
 
     alpacamodules
 
-    examples
-
     miscellany
 
 Indices and tables
