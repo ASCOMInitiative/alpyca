@@ -1,11 +1,11 @@
 from typing import List, Any
 #import requests
-import httpx
+import requests
 from alpaca.exceptions import AlpacaRequestException
 
 API_VERSION = 1
 
-def __check_error(response: httpx.Response) -> None:
+def __check_error(response: requests.Response) -> None:
     """Check response from Alpaca server for Errors.
 
     Args:
@@ -30,7 +30,7 @@ def apiversions(addr: str) -> List[int]:
         * Currently (April 2022) this will be [1]
 
     """
-    response = httpx.get(f"http://{addr}/management/apiversions")
+    response = requests.get(f"http://{addr}/management/apiversions")
     __check_error(response)
     j = response.json()["Value"]
     return j
@@ -49,7 +49,7 @@ def description(addr: str) -> str:
           which may serve multiple Alpaca devices. 
 
     """
-    response = httpx.get(f"http://{addr}/management/v{API_VERSION}/description")
+    response = requests.get(f"http://{addr}/management/v{API_VERSION}/description")
     __check_error(response)
     j = response.json()["Value"]
     return j
@@ -76,7 +76,7 @@ def configureddevices(addr: str) -> List[dict]:
         AlpacaRequestException: Method or parameter error, internal Alpaca server error
 
     """
-    response = httpx.get(f"http://{addr}/management/v{API_VERSION}/configureddevices")
+    response = requests.get(f"http://{addr}/management/v{API_VERSION}/configureddevices")
     __check_error(response)
     j = response.json()["Value"]
     return j

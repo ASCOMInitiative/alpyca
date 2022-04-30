@@ -5,7 +5,7 @@ from alpaca.docenum import DocIntEnum
 from typing import List, Any
 #import requests
 #from requests import Response
-import httpx
+import requests
 import array
 
 class CameraStates(DocIntEnum):
@@ -1491,7 +1491,7 @@ class Camera(Device):
         pdata.update(data)
         try:
             Device._ctid_lock.acquire()
-            response = httpx.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
+            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()

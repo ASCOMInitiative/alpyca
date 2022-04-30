@@ -1,25 +1,13 @@
-from enum import Enum
-import string
 from threading import Lock
-from datetime import datetime
 from typing import List, Any
-import dateutil.parser
-#import requests
-import httpx
+import requests
 import random
 from alpaca.exceptions import *     # Sorry Python purists
 
 API_VERSION = 1
 
 class Device(object):
-    """Common interface members across all ASCOM Alpaca devices.
-    
-    Notes:
-        * This uses `HTTPX a next generation HTTP client for Python <https://www.python-httpx.org/>`_ 
-          for HTTP I/O. Applications may take advantage of its features such as async i/o and 
-          HTTP/2.0 (not included, 'h2' must be installed to enable). 
-        * Low-level async/await i/o is not used within Alpaca Client.
-    """
+    """Common interface members across all ASCOM Alpaca devices."""
 
     def __init__(
         self,
@@ -321,10 +309,7 @@ class Device(object):
             attribute (str): Attribute to get from server.
             tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
-        
-         References:
-            HTTPX https://www.python-httpx.org/
-            
+                  
        """
         url = f"{self.base_url}/{attribute}"
         pdata = {
@@ -333,10 +318,10 @@ class Device(object):
                 }
         pdata.update(data)
         # TODO - Catch and handle connect failures nicely
-        # TODO - Use httpx.Client() context handler and specify separate timeouts
+        # TODO - Use requests.Client() context handler and specify separate timeouts
         try:
             Device._ctid_lock.acquire()
-            response = httpx.get("%s/%s" % (self.base_url, attribute), params = pdata, timeout=tmo)
+            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, timeout=tmo)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
@@ -351,9 +336,6 @@ class Device(object):
             tmo (optional) Timeout for HTTP (default = 5 sec)
             **data: Data to send with request.
         
-        References:
-            HTTPX https://www.python-httpx.org/
-
         """
         url = f"{self.base_url}/{attribute}"
         pdata = {
@@ -362,17 +344,16 @@ class Device(object):
                 }
         pdata.update(data)
         # TODO - Catch and handle connect failures nicely
-        # TODO - Use httpx.Client() context handler and specify separate timeouts
         try:
             Device._ctid_lock.acquire()
-            response = httpx.put("%s/%s" % (self.base_url, attribute), data=pdata, timeout=tmo)
+            response = requests.put("%s/%s" % (self.base_url, attribute), data=pdata, timeout=tmo)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
         self.__check_error(response)
         return response.json()  # TODO Is this right? json()?
 
-    def __check_error(self, response: httpx.Response) -> None:
+    def __check_error(self, response: requests.Response) -> None:
         """Alpaca exception handler (ASCOM exception types)
 
         Args:
@@ -409,7 +390,8 @@ class Device(object):
                 elif n >= 0x500 and n <= 0xFFF:
                     raise DriverException(n, m)
                 else: # unknown 0x400-0x4FF
-                    raise UnknownAscomException(n, m)
+                    # raise UndefinedAscomException(n, m)
+                    raise DriverException(n, m) # Outside 0x500-0x5FF but agreed on this
         else:
             raise AlpacaRequestException(response.status_code, f"{response.text} (URL {response.url})")
 

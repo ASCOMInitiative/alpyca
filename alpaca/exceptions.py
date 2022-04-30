@@ -93,22 +93,23 @@ class SlavedException(Exception):
         self.number = 0x409
         super().__init__(message)
 
-class UnknownAscomException(Exception):
-    """ Unknown Error Code in Alpaca response
+# Replaced with DriverException per agreement 30-Apr-2022
+# class UnknownAscomException(Exception):
+#     """ Unknown Error Code in Alpaca response
     
-    Raised by the  library if the driver returns an error code that is 
-    not part of the Alpaca 2022 specification, that is, a code from 0x400
-    through 0x4FF that is not listed here for one of the other defined 
-    exceptions. The message will contain the number followed by the 
-    message from the driver. 
+#     Raised by the  library if the driver returns an error code that is 
+#     not part of the Alpaca 2022 specification, that is, a code from 0x400
+#     through 0x4FF that is not listed here for one of the other defined 
+#     exceptions. The message will contain the number followed by the 
+#     message from the driver. 
 
-    """
-    def __init__(
-        self,
-        number: int,
-        message: str
-    ):
-        super().__init__(f'Unknown code {number}: {message}')
+#     """
+#     def __init__(
+#         self,
+#         number: int,
+#         message: str
+#     ):
+#         super().__init__(f'Unknown code {number}: {message}')
 
 class ValueNotSetException(Exception):
     """Numeric value: 0x402 (1026)"""
