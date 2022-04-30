@@ -1,6 +1,7 @@
 import json
 import socket
 import netifaces
+import platform
 from typing import List
 import re
 
@@ -99,6 +100,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
           for Discovery details. 
 
     """
+    my_plat = platform.system()
     addrs = []
     for i in range(numquery):
         for interface in netifaces.interfaces():
@@ -118,7 +120,13 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                         scope = addr.split('%')[1]
                         try:
                             sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
-                            sock.bind((addr, 0))    # Force send from this IP
+                            if my_plat == 'Linux':
+                                sock.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE, 
+                                                (interface + '\0').encode())
+                            elif my_plat == "Windows":
+                                sock.bind((addr, 0))                    # Force send from this IP
+                            else:
+                                raise NotImplementedError('MacOS IPv6 discovery not yet supported')
                             sock.settimeout(timeout)
                             dest = 'ff12::a1:9aca'
                             sock.sendto(AlpacaDiscovery.encode(), (dest, port))
