@@ -312,16 +312,21 @@ class Device(object):
                   
        """
         url = f"{self.base_url}/{attribute}"
+        # Make Host: header safe for IPv6
+        if(self.address.startswith('[') and not self.address.startswith('[::1]')):
+            hdrs = {'Host': f'{self.address.split("%")[0]}]'}
+        else:
+            hdrs = {}
         pdata = {
                 "ClientTransactionID": f"{Device._client_trans_id}",
                 "ClientID": f"{Device._client_id}" 
                 }
         pdata.update(data)
         # TODO - Catch and handle connect failures nicely
-        # TODO - Use requests.Client() context handler and specify separate timeouts
         try:
             Device._ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, timeout=tmo)
+            response = requests.get("%s/%s" % (self.base_url, attribute), 
+                            params=pdata, timeout=tmo, headers=hdrs)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()
@@ -338,6 +343,11 @@ class Device(object):
         
         """
         url = f"{self.base_url}/{attribute}"
+        # Make Host: header safe for IPv6
+        if(self.address.startswith('[') and not self.address.startswith('[::1]')):
+            hdrs = {'Host': f'{self.address.split("%")[0]}]'}
+        else:
+            hdrs = {}
         pdata = {
                 "ClientTransactionID": f"{Device._client_trans_id}",
                 "ClientID": f"{Device._client_id}" 
@@ -346,7 +356,8 @@ class Device(object):
         # TODO - Catch and handle connect failures nicely
         try:
             Device._ctid_lock.acquire()
-            response = requests.put("%s/%s" % (self.base_url, attribute), data=pdata, timeout=tmo)
+            response = requests.put("%s/%s" % (self.base_url, attribute), 
+                            data=pdata, timeout=tmo, headers=hdrs)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()

@@ -1484,6 +1484,9 @@ class Camera(Device):
         """
         url = f"{self.base_url}/{attribute}"
         hdrs = {'accept' : 'application/imagebytes'}
+        # Make Host: header safe for IPv6
+        if(self.address.startswith('[') and not self.address.startswith('[::1]')):
+            hdrs['Host'] = f'{self.address.split("%")[0]}]'
         pdata = {
                 "ClientTransactionID": f"{Device._client_trans_id}",
                 "ClientID": f"{Device._client_id}" 
@@ -1491,7 +1494,7 @@ class Camera(Device):
         pdata.update(data)
         try:
             Device._ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), params = pdata, headers = hdrs)
+            response = requests.get("%s/%s" % (self.base_url, attribute), params=pdata, headers=hdrs)
             Device._client_trans_id += 1
         finally:
             Device._ctid_lock.release()

@@ -11,7 +11,8 @@ def device(request):
     n = getattr(request.module, "dev_name")
     print(f'Setup: for {n}')
     c = getattr(sys.modules[f"alpaca.{n.lower()}"], n)  # Creates a device class by string name :-)
-    d =  c('localhost:32323', 0)                        # Created an instance of the class
+    d =  c('localhost:32323', 0)                       # Created an instance of the class
+#    d = c('[fe80::9927:65fc:e9e8:f33a%eth0]:32323', 0)  # RPi 4 Ethernet to Windows OmniSim IPv6
     d.Connected = True
     print(f"Setup: Connected to OmniSim {n} OK")
     return d
