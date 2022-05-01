@@ -38,7 +38,7 @@ class ImageArrayElementTypes(DocIntEnum):
     Int64 = 7, 'Unused in Alpaca 2022'
     UInt16 = 8, 'Unused in Alpaca 2022'
 
-class ImageMetadata(object):
+class ImageMetadata:
     """Metadata describing the returned ImageArray data
 
         Notes:

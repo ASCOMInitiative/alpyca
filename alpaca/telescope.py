@@ -45,7 +45,7 @@ class TelescopeAxes(DocIntEnum):
     axisSecondary   = 1, 'Secondary axis (e.g., Declination or Altitude).'
     axisTertiary    = 2, 'Tertiary axis (e.g. imager rotator/de-rotator).'
 
-class Rate(object):
+class Rate:
     """Describes a range of rates supported by the :py:meth:`MoveAxis()` method"""
 
     def __init__(
