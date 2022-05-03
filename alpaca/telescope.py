@@ -1,5 +1,45 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# telescope - Implements ASCOM Alpaca Telescope device classes and enums
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel <ethan.chappel@gmail.com>
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from datetime import datetime
-from typing import List, Any
+from typing import List
 import dateutil.parser
 from alpaca.docenum import DocIntEnum
 from alpaca.device import Device
@@ -83,8 +123,9 @@ class Telescope(Device):
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
         Raises:
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         super().__init__(address, "telescope", device_number, protocol)
@@ -96,8 +137,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: If the mount cannot report its alignment mode.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return AlignmentModes(self._get("alignmentmode"))
@@ -109,8 +151,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: Alt-Az not implemented by the device
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("altitude")
@@ -122,8 +165,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException:Not implemented by the device
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes: 
             * The area takes into account any obstructions; it is the actual
@@ -139,8 +183,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: Alt-Az not implemented by the device
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("aperturediameter")
@@ -151,8 +196,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * True if the telescope is stopped in the Home position. Can be True
@@ -172,8 +218,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * True if the telescope is stopped in the Park position. Can be True
@@ -198,8 +245,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: Alt-Az not implemented by the device
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * Azimuth is per the usual alt/az coordinate convention: degrees
@@ -214,8 +262,9 @@ class Telescope(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
  
         Notes:
             * See :py:meth:`FindHome()`
@@ -229,8 +278,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * See :py:meth:`Park()`
@@ -244,8 +294,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`PulseGuide`
@@ -259,8 +310,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`DeclinationRate`
@@ -274,8 +326,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`PulseGuide()`.
@@ -289,8 +342,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`SetPark()`
@@ -304,8 +358,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`SideOfPier`.
@@ -320,8 +375,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`RightAscensionRate`.
@@ -335,8 +391,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:attr:`Tracking`.
@@ -350,8 +407,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`SlewToCoordinates()`, :py:meth:`SlewToCoordinatesAsync()`
@@ -371,8 +429,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * :py:attr:`CanSlew` will be True if CanSlewAsync is True.
@@ -392,8 +451,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`SlewToAltAz()` and :py:meth:`SlewToAltAzAsync()`.
@@ -412,8 +472,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * :py:attr:`CanSlewAltAz` will be True if CanSlewAltAzAsync is True.
@@ -432,8 +493,9 @@ class Telescope(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`SyncToCoordinates()`.
@@ -447,8 +509,9 @@ class Telescope(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`SyncToAltAz()`.
@@ -462,8 +525,9 @@ class Telescope(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`Unpark()` and :py:meth:`Park()`.
@@ -477,8 +541,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * Declination will be in the equinox given by the current value of 
@@ -495,8 +560,9 @@ class Telescope(Device):
             NotImplementedException: If :py:attr:`CanSetDeclinationRate` is False,
             yet an attempt is made to write to this property.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * DeclinationRate is an offset from 0 (no change in declination), given in arc seconds
@@ -524,8 +590,9 @@ class Telescope(Device):
             NotImplementedException: If either reading or writing of this 
                 property is not implemented
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * If the driver does not know whether the attached telescope does its 
@@ -551,8 +618,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * See :py:class:`EquatorialCoordinateType`. 
@@ -569,8 +637,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: Focal length is not available from the mount
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("focallength")
@@ -583,8 +652,9 @@ class Telescope(Device):
             InvalidValueException: If an invalid guide rate is set
             NotImplementedException: Rate cannot be set, :py:attr:`CanSetGuideRates` = False
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * This is the rate for both hardware/relay guiding and for 
@@ -608,8 +678,9 @@ class Telescope(Device):
             InvalidValueException: If an invalid guide rate is set
             NotImplementedException: Rate cannot be set, :py:attr:`CanSetGuideRates` = False
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * This is the rate for both hardware/relay guiding and for 
@@ -635,8 +706,9 @@ class Telescope(Device):
         Raises:
             NotImplementedException: Pulse guiding is not supported 
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
           * A pulse guide command may be so short that you won't see this equal to True. 
@@ -652,8 +724,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("rightascension")
@@ -666,8 +739,9 @@ class Telescope(Device):
             NotImplementedException: If :py:attr:`CanSetRightAscensionRate` is False,
             yet an attempt is made to write to this property.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * RightAscensionRate is an offset from the currently selected :py:attr:TrackingRate`
@@ -704,8 +778,9 @@ class Telescope(Device):
                 (e.g.force-flipping) by writing to SideOfPier 
                 (:py:attr:`CanSetPierSide` = False).
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking) if writing SideOfPier to force a 
@@ -730,8 +805,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * It is required for a driver to calculate this from the system clock if 
@@ -755,8 +831,9 @@ class Telescope(Device):
             InvalidOperationException: If the application must set the SiteElevation
                 before reading it, but has not. See Notes.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * Some mounts supply this via input to their control systems, in 
@@ -783,8 +860,9 @@ class Telescope(Device):
             InvalidOperationException: If the application must set the SiteLatitude
                 before reading it, but has not. See Notes.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This is geodetic (map) latitude, degrees, WGS84, positive North.
@@ -812,8 +890,9 @@ class Telescope(Device):
             InvalidOperationException: If the application must set the SiteLatitude
                 before reading it, but has not. See Notes.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This is geodetic (map) longitude, degrees, WGS84, **positive East**.
@@ -841,8 +920,9 @@ class Telescope(Device):
             NotImplementedException: If the property is not implemented (none of the CanSlew
                 properties are True, this is a manual mount)
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This is the correct property to use to determine *successful* completion of 
@@ -875,8 +955,9 @@ class Telescope(Device):
             InvalidValueException: If the given settling time is invalid (negative or 
                 ridiculously high)
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
 
         """
@@ -896,8 +977,9 @@ class Telescope(Device):
             InvalidOperationException: If the application must set the TargetDeclination
                 before reading it, but has not. See Notes.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This is a pre-set target coordinate for :py:meth:`SlewToTargetAsync()`
@@ -921,8 +1003,9 @@ class Telescope(Device):
             InvalidOperationException: If the application must set the TargetRightAscension
                 before reading it, but has not. See Notes.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This is a pre-set target coordinate for :py:meth:`SlewToTargetAsync()`
@@ -943,8 +1026,9 @@ class Telescope(Device):
             NotImplementedException: If writing to the property is not implemented. 
                 :py:attr:`CanSetTracking` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * When on, the mount will use the last selected :py:attr:`TrackingRate`.
@@ -968,8 +1052,9 @@ class Telescope(Device):
             NotImplementedException: If the mount doesn't support writing this 
                 property to change the tracking rate.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * Even if the mount doesn't support changing this, it will report the
@@ -987,8 +1072,9 @@ class Telescope(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * At a minimum, this list will contain an item for 
@@ -1014,8 +1100,9 @@ class Telescope(Device):
                 mount cannot provide this property itslef and a value has 
                 not yet be established by writing to the property.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * Changing time by writing to this property can be done with either a
@@ -1052,8 +1139,9 @@ class Telescope(Device):
         Raises:
             InvalidValueException: An invalid axis value is specified.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * See :py:meth:`MoveAxis()` for details.
@@ -1074,8 +1162,9 @@ class Telescope(Device):
         Raises:
             InvalidValueException: An invalid axis value is specified.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         return self._get("canmoveaxis", Axis=Axis.value)
@@ -1089,8 +1178,9 @@ class Telescope(Device):
         Raises:
             InvalidValueException: An invalid axis value is specified.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         return self._get("destinationsideofpier", RightAscension=RightAscension, Declination=Declination)
@@ -1103,8 +1193,9 @@ class Telescope(Device):
                 deprecation of sync methods, this should be required.
             InvalidOperationException: TODO [Review New] If the mount is parked (:py:attr:`AtPark` = True)
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes: 
             * Effective only after an asynchronous slew/move call to 
@@ -1128,8 +1219,9 @@ class Telescope(Device):
             NotImplementedException: If this feature is not implemented (:py:attr:`CanFindHome` = False)
             InvalidOperationException: If the mount is parked (:py:attr:`AtPark` = True)
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
        
         Notes:
             * Returns only after the home position has been found. At this point the AtHome 
@@ -1156,8 +1248,9 @@ class Telescope(Device):
             InvalidOperationException: If the mount is parked (:py:attr:`AtPark` = True)
             InvalidValueException: If the axis or rate value is not valid.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -1183,8 +1276,9 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException:If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException:An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`AtPark` property
@@ -1210,8 +1304,9 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support pulse guiding 
                 (:py:attr:`CanPulseGuide` property is False)
             NotConnectedException: If the device is not connected.
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * **Asynchronous**: The method returns as soon the pulse-guiding operation
@@ -1238,8 +1333,9 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support the setting
                 of the park position. In this case :py:attr:`CanSetPark` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         self._put("setpark")
@@ -1266,8 +1362,9 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support alt/az slewing. 
                 In this case :py:attr:`CanSlewAltAz` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -1301,8 +1398,9 @@ class Telescope(Device):
                 to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
             InvalidValueException: If either of the coordinates are invalid 
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -1335,8 +1433,9 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support async slewing
                 to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -1363,8 +1462,9 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support alt/az
                 sync. In this case :py:attr:`CanSyncAltAz` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         self._put("synctoaltaz", Azimuth=Azimuth, Altitude=Altitude)
@@ -1382,8 +1482,9 @@ class Telescope(Device):
                 coordinate synchronization. In this case 
                 :py:attr:`CanSync` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         self._put(
@@ -1400,8 +1501,9 @@ class Telescope(Device):
                 coordinate synchronization. In this case 
                 :py:attr:`CanSync` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         self._put("synctotarget")
@@ -1413,8 +1515,9 @@ class Telescope(Device):
             NotImplementedException: If this method is not implemented. In this case 
                 :py:attr:`CanUnpark` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * Unparking a mount that is not parked is harmless and will always be

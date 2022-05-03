@@ -1,3 +1,43 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# rotator - Implements ASCOM Alpaca Rotator device class
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel <ethan.chappel@gmail.com>
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from alpaca.device import Device
 
 class Rotator(Device):
@@ -17,8 +57,9 @@ class Rotator(Device):
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
         Raises:
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         super().__init__(address, "rotator", device_number, protocol)
@@ -29,8 +70,9 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         return self._get("canreverse")
@@ -41,8 +83,9 @@ class Rotator(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * This is the correct property to use to determine *successful* completion of 
@@ -60,8 +103,9 @@ class Rotator(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             Value is in degrees counterclockwise from the rotator's mechanical index.
@@ -75,8 +119,9 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * Position is in degrees counterclockwise
@@ -97,8 +142,9 @@ class Rotator(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             Rotation is normally in degrees counterclockwise as viewed
@@ -119,8 +165,9 @@ class Rotator(Device):
         Raises:
             NotImplementedException: If this property is not available from the device
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("stepsize")
@@ -143,8 +190,9 @@ class Rotator(Device):
         Raises:
             NotImplementedException: The rotator cannot be programmatically halted.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * You should try to call this method aftr initialization to see if halting is
@@ -172,8 +220,9 @@ class Rotator(Device):
             InvalidValueException: The given position change results in a position
                 outside 0 <= position < 360.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -204,8 +253,9 @@ class Rotator(Device):
                 0 <= position < 360. [or does it just apply modulo 360? 
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -236,8 +286,9 @@ class Rotator(Device):
                 0 <= position < 360. [or does it just apply modulo 360? 
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -265,8 +316,9 @@ class Rotator(Device):
                 0 <= position < 360. [or does it just apply modulo 360? 
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * Once this method has been called and the sync offset determined, both 

@@ -17,10 +17,7 @@ def test_reversal(device, settings, disconn):
     old = d.Reverse
     d.Reverse = not d.Reverse
     assert d.Reverse !=  old
-    if platform.system() == "Windows":
-        assert d.StepSize == 1.0   # BUG Fixed value in OmniSim (Shows 0.8)
-    else:
-        assert d.StepSize == 0.75  # BUG Fixed value in OmniSim (Shows 0.8)
+    assert d.StepSize == 0.75  # BUG Fixed value in OmniSim (Shows 0.8)
 
 def test_offset(device, settings, disconn):
     d = device

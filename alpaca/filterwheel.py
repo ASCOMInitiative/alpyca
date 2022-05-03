@@ -1,5 +1,45 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# filterwheel - Implements ASCOM Alpaca FilterWheel device class
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel <ethan.chappel@gmail.com>
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from alpaca.device import Device
-from typing import List, Any
+from typing import List
 
 class FilterWheel(Device):
     """ASCOM Standard IFilterWheelV2 interface."""
@@ -26,8 +66,9 @@ class FilterWheel(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes: 
             * The offset values in this list are in the same order as the filters in the wheel
@@ -43,8 +84,9 @@ class FilterWheel(Device):
         
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes: 
             * The names in this lisat are in the same order as the filters in the wheel
@@ -66,8 +108,9 @@ class FilterWheel(Device):
         Raises:
             InvalidValueException: If an invalid filter number is written to Position.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             **Asynchronous** (non-blocking): Writing to Position returns as soon as the 

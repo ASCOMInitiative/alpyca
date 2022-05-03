@@ -1,6 +1,46 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# dome - Implements ASCOM Alpaca dome device class
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel <ethan.chappel@gmail.com>
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from alpaca.docenum import DocIntEnum
 from alpaca.device import Device
-from typing import List, Any
+from typing import List
 
 class ShutterState(DocIntEnum):
     """Indicates the current state of the shutter or roof"""
@@ -27,8 +67,9 @@ class Dome(Device):
             protocol (str, optional): Only if device needs https. Defaults to "http".
         
         Raises:
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         super().__init__(address, "dome", device_number, protocol)
@@ -42,8 +83,9 @@ class Dome(Device):
                 control / placement of its observing opening (including a roll-off roof).
                 In this case :py:attr:`CanSetAltitude` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * The specified altitude (*referenced to the dome center/equator*) is of the 
@@ -96,8 +138,9 @@ class Dome(Device):
             NotImplementedException: If the dome does not support parking.
                 In this case :py:attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             Set only following a park() operation and reset with any slew operation.
@@ -120,8 +163,9 @@ class Dome(Device):
                 control / placement of its observing opening (including roll-off roof).
                 In this case :py:attr:`CanSetAzimuth` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * Azimuth has the usual sense of True North zero and increasing clockwise
@@ -157,8 +201,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("canfindhome")
@@ -169,8 +214,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("canpark")
@@ -181,8 +227,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("cansetaltitude")
@@ -193,8 +240,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("cansetazimuth")
@@ -205,8 +253,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("cansetpark")
@@ -217,8 +266,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("cansetshutter")
@@ -229,8 +279,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * If this is True, then the exposed Dome interface is part of an integrated 
@@ -253,8 +304,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """             
         return self._get("cansyncazimuth")
@@ -267,8 +319,9 @@ class Dome(Device):
             NotImplementedException: If the dome does not have a controllable
                 shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This property is the correct way to monitor an in-progress shutter
@@ -291,8 +344,9 @@ class Dome(Device):
                 integrated dome/telescope control system which offers controllable
                 dome slaving. In this case :py:attr:`CanSlave` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Attention:
             An ASCOM Dome device does not include transformations for mount/optics to
@@ -367,8 +421,9 @@ class Dome(Device):
             NotImplementedException: If the dome does not have a controllable
                 shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct 
@@ -400,8 +455,9 @@ class Dome(Device):
             NotImplementedException: If the dome does not support homing.
             NotConnectedException: If the device is not connected
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`AtHome` property
@@ -425,8 +481,9 @@ class Dome(Device):
             NotImplementedException: If the dome does not have a controllable
                 shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct 
@@ -465,8 +522,9 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             ParkedException: TODO [REVIEW-not in C# docs] If :py:attr:`AtPark` is True
             SlavedException: TODO [REVIEW-Not in C# docs] If :py:attr:`Slaved` is True
-            DriverException:If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException:An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`AtPark` property
@@ -487,8 +545,9 @@ class Dome(Device):
                 of the park position. In this case :py:attr:`CanSetPark` will be False.
             NotConnectedException: If the device is not connected
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         self._put("setpark")
@@ -508,8 +567,9 @@ class Dome(Device):
                 (altitude) control. In this case :py:attr:`CanSetAltitude` will be False.
             NotConnectedException: If the device is not connected
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -546,8 +606,9 @@ class Dome(Device):
                 (azimuth) control. In this case :py:attr:`CanSetAzimuth` will be False.
             NotConnectedException: If the device is not connected
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
@@ -581,8 +642,9 @@ class Dome(Device):
                 synchronization. In this case :py:attr:`CanSyncAzimuth` will be False.
             NotConnectedException: If the device is not connected
             SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         """
         self._put("synctoazimuth", Azimuth=Azimuth)

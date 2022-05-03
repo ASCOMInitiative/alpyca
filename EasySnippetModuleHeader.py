@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
-# docenum - Implements subclass that allows doc strings on IntEnum
+# $TM_FILENAME_BASE - Implements ASCOM Alpaca ${1:device} device class
 #
 # Part of the Alpyca Client application interface package
 #
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel
 #
 # Python Compatibility: Requires Python 3.7 or later
 # Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
@@ -34,32 +35,5 @@
 # SOFTWARE.
 # -----------------------------------------------------------------------------
 # Edit History:
-# 02-May-22 (rbd) Initial Edit
+# $CURRENT_DATE-$CURRENT_MONTH_SHORT-$CURRENT_YEAR_SHORT (rbd) Initial Edit
 # -----------------------------------------------------------------------------
-
-from enum import IntEnum
-class DocIntEnum(IntEnum):
-    """Used to provide textual documentation for Enum classes
-    
-    Example:
-        ::
-
-            class CameraStates(DocIntEnum):
-                \"\"\"Current condition of the Camera\"\"\"
-                cameraIdle      = 0, 'Inactive'
-                cameraWaiting   = 1, 'Waiting for ??'
-                cameraExposing  = 2, 'Acquiring photons'
-                cameraReading   = 3, 'Reading from the sensor'
-                cameraDownload  = 4, 'Downloading the image data'
-                cameraError     = 5, 'An error condition exists'
-
-    References
-        https://stackoverflow.com/questions/50473951/how-can-i-attach-documentation-to-members-of-a-python-enum/50473952#50473952
-
-    """
-    def __new__(cls, value, doc=None):
-        self = int.__new__(cls, value)  # calling super().__new__(value) here would fail
-        self._value_ = value
-        if doc is not None:
-            self.__doc__ = doc
-        return self

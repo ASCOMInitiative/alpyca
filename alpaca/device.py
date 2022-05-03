@@ -1,5 +1,45 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# device - Implements ASCOM Alpaca Device superclass
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#           Ethan Chappel <ethan.chappel@gmail.com>
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from threading import Lock
-from typing import List, Any
+from typing import List
 import requests
 import random
 from alpaca.exceptions import *     # Sorry Python purists
@@ -369,10 +409,13 @@ class Device:
             response (Response): Response from Alpaca server to check.
 
         Notes:
-            Depending on the error number, the appropriate ASCOM exception type
-            will be raised. See the ASCOM Alpaca API Reference for the reserved
-            error codes and their corresponding exceptions. NOTE that DriverException
-            and AlpacaRequestException take error code and message.
+            * Depending on the error number, the appropriate ASCOM exception type
+              will be raised. See the ASCOM Alpaca API Reference for the reserved
+              error codes and their corresponding exceptions. NOTE that DriverException
+              and AlpacaRequestException take error code and message.
+            * If an unassigned error code in the range 0x400 <= code <= 0x4FF
+              is received, a DriverException will also be raised.
+
 
         """
         if response.status_code in range(200, 204):

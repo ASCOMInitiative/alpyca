@@ -1,3 +1,42 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# observingconditions - Implements ASCOM Alpaca ObservingConditions device class
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 from alpaca.device import Device
 
 class ObservingConditions(Device):
@@ -34,8 +73,9 @@ class ObservingConditions(Device):
                 All devices must accept 0.0 to specify that an instantaneous value 
                 is to be made available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * AveragePeriod returns the time period (hours) over which sensor readings will be 
@@ -55,8 +95,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("cloudcover")
@@ -68,8 +109,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("dewpoint")
@@ -81,8 +123,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         
         """
@@ -95,8 +138,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             Not "corrected to sea level" as often encountered in weather reports.
@@ -112,8 +156,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("rainrate")
@@ -125,8 +170,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("skybrightness")
@@ -138,8 +184,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("skyquality")
@@ -151,8 +198,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("skytemperature")
@@ -164,8 +212,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("starfwhm")
@@ -177,8 +226,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("temperature")
@@ -190,8 +240,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * **Meterological standards** Wind direction is that from which the wind 
@@ -209,8 +260,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("windgust")
@@ -222,8 +274,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("windspeed")
@@ -234,8 +287,9 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         self._put("refresh")
@@ -254,8 +308,9 @@ class ObservingConditions(Device):
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied PropertyName is not valid.
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("sensordescription", PropertyName=PropertyName)
@@ -273,8 +328,9 @@ class ObservingConditions(Device):
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied PropertyName is not valid.
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         """
         return self._get("timesincelastupdate", PropertyName=PropertyName)

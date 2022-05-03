@@ -1,3 +1,42 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# discovery - Implements ASCOM Alpaca discovery functions
+#
+# Part of the Alpyca Client application interface package
+#
+# Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+#
+# Python Compatibility: Requires Python 3.7 or later
+# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# GitHub: https://github.com/BobDenny/alpyca-client
+#
+# -----------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2022 Ethan Chappel and Bob Denny
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-May-22 (rbd) Initial Edit
+# -----------------------------------------------------------------------------
+
 import json
 import socket
 import netifaces
@@ -111,10 +150,9 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                         # Can't bind socket to ::1 and successfully send.
                         # So lookfor source == dest and substitute later.
                         # Reject everything but real link-local, including
-                        # the ISATAP addresses. TODO Combine with short circuit
-                        if not (addr.startswith('fe80')): 
-                            continue;
-                        if (addr.startswith('fe80::5efe') or
+                        # the ISATAP addresses.
+                        if (not addr.startswith('fe80') or
+                                addr.startswith('fe80::5efe') or
                                 addr.startswith('fe80::200:5efe')):
                             continue
                         scope = addr.split('%')[1]
