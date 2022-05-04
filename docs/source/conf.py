@@ -20,7 +20,7 @@ sys.setrecursionlimit(1500)                         # Prevent Python crash on in
 
 # -- Project information -----------------------------------------------------
 
-project = 'Alpyca - Python Client Library'
+project = 'Alpyca Client Library'
 copyright = '2022, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
@@ -42,7 +42,8 @@ extensions = [
         'sphinx.ext.autodoc', 
         'sphinx.ext.autosummary',
         'sphinx.ext.napoleon',
-        'enum_tools.autoenum'   #https://enum-tools.readthedocs.io/en/latest/api/autoenum.html
+        'enum_tools.autoenum',      # https://enum-tools.readthedocs.io/en/latest/api/autoenum.html
+        'rinoh.frontend.sphinx'     # May not be needed
 ]
 
 # Autodoc settings (override defaults)
@@ -64,6 +65,11 @@ napoleon_preprocess_types = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -93,9 +99,8 @@ html_theme = 'sphinx_rtd_theme'  # https://sphinx-themes.org/sample-sites/sphinx
 
 rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
                         target='alpyca-client',     # output file (alpyca-client.pdf)
-                        title='Alpyca Client Library')]  
+                        title='Alpyca Client Library',
+                        subtitle='Alpha Test Release 0.1.0',
+                        author='Robert B. Denny <rdenny@dc3.com>',
+                        logo='alpaca128.png')]  
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']

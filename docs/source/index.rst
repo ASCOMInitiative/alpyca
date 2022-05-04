@@ -1,10 +1,28 @@
-.. image:: alpaca128.png
-    :height: 92px
-    :width: 128px
-    :align: right
-    
-Welcome to the Alpyca Client Library
-====================================
+..
+    The rinohtype PDF builder I use chokes on right-justified images
+    failing to wrap them with the text. It also chokes on the |xxx|
+    format hyperlinks to externals that I use for opening in a separate
+    tab. Therefore I have html and rinoh conditionals in these docs (typ)
+    Don't ask me why I had to repeat the main title for html and rinoh
+    separately....
+
+.. only:: html
+
+    .. image:: alpaca128.png
+        :height: 92px
+        :width: 128px
+        :align: right
+
+    ====================================
+    Welcome to the Alpyca Client Library
+    ====================================
+
+.. only:: rinoh
+
+    ====================================
+    Welcome to the Alpyca Client Library
+    ====================================
+
 This document describes the Alpyca Client package for Python 3. The package provides all of the ASCOM Standard 
 universal interfaces to astronomical devices using the Alpaca network protocol. As an application developer, your
 usage of the various devices is simplified and universal, independent of the particular make/model of device.
@@ -14,11 +32,27 @@ are *not* connected to a Windows machine, but instead speak Alpaca natively. The
 middleware gives an Alpaca interface to any Windows-resident device, allowing you to use the device via 
 this library from any platform on the net or local host.
 
-For background see |about| on the |ascsite|. As an astronomy developer wanting to use Alpaca, we suggest 
-you look over |devhelp| join the |supforum|.
+.. only:: html
 
-.. Attention::
-    Alpaca is not dependent on Windows in any way! See |about|.
+    For background see |about| on the |ascsite|. As an astronomy developer wanting to use Alpaca, we suggest 
+    you look over |devhelp| join the |supforum|.
+
+    .. Attention::
+        Alpaca is not dependent on Windows. See |about|.
+
+.. only:: rinoh
+
+    For background see 
+    `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_
+    on the 
+    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_. 
+    As an astronomy developer wanting to use Alpaca, we suggest 
+    you look over 
+    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_ and join the 
+    `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_.
+
+    .. Attention::
+        Alpaca is not dependent on Windows! See `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_.
 
 .. |ascsite| raw:: html
 
@@ -33,7 +67,7 @@ you look over |devhelp| join the |supforum|.
 .. |devhelp| raw:: html
 
     <a href="https://ascom-standards.org/AlpacaDeveloper/Index.htm" target="_blank">
-    Alpaca Developers</a> (external)
+    Alpaca Developers Info</a> (external)
 
 .. |supforum| raw:: html
 

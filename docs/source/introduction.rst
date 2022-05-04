@@ -1,12 +1,33 @@
-.. image:: alpaca128.png
-    :height: 92px
-    :width: 128px
-    :align: right
+..
+    The rinohtype PDF builder I use chokes on right-justified images
+    failing to wrap them with the text. It also chokes on the |xxx|
+    format hyperlinks to externals that I use for opening in a separate
+    tab. Therefore I have html and rinoh conditionals in these docs (typ)
+    
+.. only:: html
+
+    .. image:: alpaca128.png
+        :height: 92px
+        :width: 128px
+        :align: right
     
 Introduction and Quick Start
 ============================
-This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
-For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
+
+.. only:: html
+
+    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
+    For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
+
+.. only:: rinoh
+
+    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
+    For more information see the
+    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_, 
+    specifically the
+    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_ 
+    section, and the
+    `Alpaca API Reference (PDF) <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_.
 
 .. _intro-stat:
 
@@ -44,8 +65,18 @@ than software. There are some very important things to be aware of:
 Simple Example
 --------------
 
-Run the self-contained cross-platform |omnisim| on your local system, then execute this little program::
+.. only:: html
 
+    Run the self-contained cross-platform |omnisim| on your local system
+
+.. only:: rinoh
+
+    Run the self-contained cross-platform
+    `Alpaca Omni Simulator <https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme>`_
+    on your local system
+
+Then execute this little program::
+    
     import time
     from alpaca.telescope import *      # Multiple Classes including Enumerations
     from alpaca.exceptions import *     # Or just the exceptions you want to catch
@@ -118,15 +149,33 @@ Output::
  
 Common Misconceptions and Confusions
 ------------------------------------
-Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
-provide a strong framework for reliability and integrity. We see newcomers to programming 
-looking for help on the |supforum|. There are a few subject areas within which misconceptions
-and confusion are common. Before starting an application development project with Alpyca Client,
-you may benefit from reviewing the following design principles that are *foundational*:
 
-* |princ|
-* |async|
-* |excep|
+.. only:: html
+
+    Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
+    provide a strong framework for reliability and integrity. We see newcomers to programming 
+    looking for help on the |supforum|. There are a few subject areas within which misconceptions
+    and confusion are common. Before starting an application development project with Alpyca Client,
+    you may benefit from reviewing the following design principles that are *foundational*:
+
+    * |princ|
+    * |async|
+    * |excep|
+
+.. only:: rinoh
+
+    Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
+    provide a strong framework for reliability and integrity. We see newcomers to programming 
+    looking for help on the
+    `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_. 
+    There are a few subject areas within which misconceptions
+    and confusion are common. Before starting an application development project with Alpyca Client,
+    you may benefit from reviewing the following design principles that are *foundational*:
+
+    * `The General Principles <https://ascom-standards.org/AlpacaDeveloper/Principles.htm>`_
+    * `Asynchronous APIs <https://ascom-standards.org/AlpacaDeveloper/Async.htm>`_
+    * `Exceptions in ASCOM <https://ascom-standards.org/AlpacaDeveloper/Exceptions.htm>`_
+
 
 .. |ascsite| raw:: html
 
@@ -136,7 +185,7 @@ you may benefit from reviewing the following design principles that are *foundat
 .. |devhelp| raw:: html
 
     <a href="https://ascom-standards.org/AlpacaDeveloper/Index.htm" target="_blank">
-    Alpaca Developers</a> (external)
+    Alpaca Developers Info</a> (external)
 
 .. |apiref| raw:: html
 

@@ -1,8 +1,16 @@
-.. image:: alpaca128.png
-    :height: 92px
-    :width: 128px
-    :align: right
+..
+    The rinohtype PDF builder I use chokes on right-justified images
+    failing to wrap them with the text. It also chokes on the |xxx|
+    format hyperlinks to externals that I use for opening in a separate
+    tab. Therefore I have html and rinoh conditionals in these docs (typ)
     
+.. only:: html
+
+    .. image:: alpaca128.png
+        :height: 92px
+        :width: 128px
+        :align: right
+        
 Frequently Asked Questions
 ==========================
 
@@ -27,13 +35,32 @@ places where an async operation can fail:
    a :py:class:`~alpaca.exceptions.DriverException`), it means the device *failed to finish the 
    operation successfully*. In this case, the device is compromsed and requires special attention.
 
-**Use Caution:**
+.. caution::
 
-Have a look at this article |excpdang|. While the article uses the C# language and acync/await
-to illustrate the so-called "dangers" (failing to await), the exact same principles apply here.
-In the example above, you really must use IsMoving to determine completion. It is the 'await'
-in this cross-language/cross-platform environment. If you ignore IsMoving and instead 
-“double-check” the results by comparing your request with the results, you run several risks
+    .. only:: html
+        
+        Have a look at this article |excpdang|. While the article uses the C# language and acync/await
+        to illustrate the so-called "dangers" (failing to await), the exact same principles apply here.
+        In the example above, you really must use 
+        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
+        to determine completion. It is the 'await'
+        in this cross-language/cross-platform environment. If you ignore 
+        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and instead 
+        “double-check” the results by comparing your request with the results, you run several risks
+
+    .. only:: rinoh
+
+        Have a look at this article
+        `Why exceptions in async methods are “dangerous” in C# <https://medium.com/@alexandre.malavasi/why-exceptions-in-async-methods-are-dangerous-in-c-fda7d382b0ff>`_. 
+        While the article uses the C# language and acync/await
+        to illustrate the so-called "dangers" (failing to await), the exact same principles apply here.
+        In the example above, you really must use 
+        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
+        to determine completion. It is the 'await'
+        in this cross-language/cross-platform environment. If you ignore 
+        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and instead 
+        “double-check” the results by comparing your request with the results, you run several risks
+
 
 1. A lost exception (an integrity bust),
 2. a false completion indication if the device passes through the requested 
