@@ -35,6 +35,8 @@
 # -----------------------------------------------------------------------------
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
+# 03-May-22 (rbd) Remove import of 're' no longer used. IPv6 query comments, 
+#                 default timeout is 2 sec.
 # -----------------------------------------------------------------------------
 
 import json
@@ -42,7 +44,6 @@ import socket
 import netifaces
 import platform
 from typing import List
-import re
 
 port = 32227
 AlpacaDiscovery = "alpacadiscovery1"
@@ -54,21 +55,21 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     
     Returns a list of strings of the form ``ipaddress:port``,
     each corresponding to a discovered Alpaca device
-    server. Use :py:mod:`alpaca.management` functions to enumerate the 
+    server. Use :doc:`alpaca.management` functions to enumerate the 
     devices.
 
     Args:
-        numquery: Number of discovery queries to send
+        numquery: Number of discovery queries to send (default 2)
         timeout: Time (sec.) to allow for responses to each
-        discovery query. Optional, defaults to 2 seconds.
+            discovery query. Optional, defaults to 2 seconds.
     
     Raises:
        To be determined.
     
     Notes:
         * This function uses IPV4
-        * UDP protocol, restricted to the LAN/VLAN is used to perform the query. 
-        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`
+        * UDP protocol using multicasts and restricted to the LAN/VLAN is used to perform the query. 
+        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
           for Discovery details. 
 
     """
@@ -120,22 +121,23 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
     
     Returns a list of strings of the form ``[ipv6address%intfc]:port``,
     each corresponding to a discovered Alpaca device server. 
-    Use :py:mod:`alpaca.management` functions to enumerate the 
+    Use :doc:`alpaca.management` functions to enumerate the 
     devices.
 
     Args:
-        numquery: Number of discovery queries to send
+        numquery: Number of discovery queries to send (default 2)
         timeout: Time (sec.) to allow for responses to the discovery 
-        query. Optional, defaults to 5 seconds.
+            query. Optional, defaults to 2 seconds.
     
     Raises:
        To be determined.
 
     Notes:
         * This function uses IPV6
-        * UDP protocol, restricted to the LAN/VLAN attached to each interface,
-          is used to perform the query. Does not query glovsl IPv6.
-        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`
+        * UDP protocol, restricted link-local addresses to the LAN/VLAN attached to each
+          interface, is used to perform the query. Does not query global IPv6.
+        * ISATAP addresses are specifically excluded.
+        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
           for Discovery details. 
 
     """

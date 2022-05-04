@@ -36,6 +36,7 @@
 # -----------------------------------------------------------------------------
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
+# 03-May-22 (rbd) Fix DriverException wording to final agreed text.
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -108,8 +109,9 @@ class Device:
                 ActionName. The supported action names are listed in 
                 :py:attr:`SupportedActions`.
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException:An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This method, combined with :py:attr:`SupportedActions`, is the supported 
@@ -130,8 +132,9 @@ class Device:
         Raises:
             NotImplementedException: If no actions at all are supported
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
                 
         Attention:
             **Deprecated**, will most likely result in 
@@ -156,8 +159,9 @@ class Device:
         Raises:
             NotImplementedException: If no actions at all are supported
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
                 
         Attention:
             **Deprecated**, will most likely result in 
@@ -181,8 +185,9 @@ class Device:
         Raises:
             NotImplementedException: If no actions at all are supported
             NotConnectedException: If the device is not connected
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
                 
         Attention:
             **Deprecated**, will most likely result in 
@@ -201,8 +206,9 @@ class Device:
         See Notes below. 
 
         Raises:      
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
         
         Notes:
             * The Connected property sets and reports the state of connection to 
@@ -227,8 +233,9 @@ class Device:
 
         Raises:
             NotConnectedException: If the device status is unavailable
-            DriverException: If the device cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes: 
             * This describes the *device*, not the driver. See the :py:attr:`DriverInfo`
@@ -248,8 +255,9 @@ class Device:
             Python list of strings (see Notes)
         
         Raises:
-            DriverException: If the driver cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException:An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes: 
             * This describes the *driver* not the device. See the :py:attr:`Description`
@@ -268,8 +276,9 @@ class Device:
         """String containing only the major and minor version of the *driver*.
         
         Raises:
-            DriverException: If the driver cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException:An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:        
             * This must be in the form "n.n". It should not to be confused with the 
@@ -286,8 +295,9 @@ class Device:
         """ASCOM Device interface definition version that this device supports.
         
         Raises:
-            DriverException: If the driver cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:        
             * This is a single integer indicating the version of this specific
@@ -318,8 +328,9 @@ class Device:
             Python list of strings (see Notes)
 
         Raises:
-            DriverException: If the driver cannot *successfully* complete the request. 
-                This exception may be encountered on any call to the device.
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
 
         Notes:
             * This method, combined with :py:meth:`Action())`, is the supported 

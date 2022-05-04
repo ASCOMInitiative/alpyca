@@ -1491,8 +1491,8 @@ class Camera(Device):
         
         Notes:
             * **Asynchronous**: The method returns as soon pulse-guiding operation
-              has been *successfully* started with :py:attr:`IsPulseGuiding' property True. 
-              However, you may find that :py:attr:`IsPulseGuiding' is False when you get 
+              has been *successfully* started with :py:attr:`IsPulseGuiding` property True. 
+              However, you may find that :py:attr:`IsPulseGuiding` is False when you get 
               around to checking it if the 'pulse' is short. This is still a success if you
               get False back and not an exception. See :ref:`async_faq`
             * Some cameras have implemented this as a Synchronous (blocking) operation.

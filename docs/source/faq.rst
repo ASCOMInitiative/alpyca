@@ -1,3 +1,8 @@
+.. image:: alpaca128.png
+    :height: 92px
+    :width: 128px
+    :align: right
+    
 Frequently Asked Questions
 ==========================
 

@@ -1,6 +1,11 @@
-Management
-==========
-Provides information about an Alpaca device server found via :py:mod:`alpaca.discovery`, 
+.. image:: alpaca128.png
+    :height: 92px
+    :width: 128px
+    :align: right
+    
+Alpaca Device Server Management
+===============================
+Provides information about an Alpaca device server found via :doc:`alpaca.discovery`, 
 and the devices which are provided by that server. For more information see 
 the |apiref|. 
 

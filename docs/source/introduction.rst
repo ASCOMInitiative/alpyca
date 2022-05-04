@@ -1,3 +1,8 @@
+.. image:: alpaca128.png
+    :height: 92px
+    :width: 128px
+    :align: right
+    
 Introduction and Quick Start
 ============================
 This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
@@ -16,9 +21,74 @@ changes as of that time. If there are any significant changes, we will release a
 updated (compatible) library as soon as  possible. We wanted to get you started 
 in the right direction!
 
+General Usage Pattern
+---------------------
+To connect and control a device, the basic steps are:
+
+1. Import the device class and Alpaca exceptions you plan to catch
+2. Create an instance of the device class, giving the IP:port and device indes on the server
+3. Connect to the device
+4. Call methods and read/write properties as desired, catching exceptions(!)
+5. Assure that you disconnect from the device.
+
+You will be controlling *physical devices* with your function calls here. Devices are more susceptible to problems
+than software. There are some very important things to be aware of:
+
+- Some of the methods (initiator functions) are non-blocking (asynchronous) and will return right away if the operation 
+  was *started* successfully. These are clearly marked in the docs. You must validate that the operation completed 
+  (later) by reading a *completion property* which is documented with each non-blocking function. 
+- You will receive an exception wherever anything fails to complete *successfully*. Not only might an initiator raise an
+  exception, but the completion property will raise one as well if the operation failed *while in progress*. Use a 
+  ``finally`` clause to assure that you disconnect from the device no matter what.
+
+Simple Example
+--------------
+
+Run the self-contained cross-platform |omnisim| on your local system, then execute this little program::
+
+    import time
+    from alpaca.telescope import *      # Multiple Classes including Enumerations
+    from alpaca.exceptions import *     # Or just the exceptions you want to catch
+
+    T = Telescope('localhost:32323', 0) # Local Omni Simulator
+    try:
+        T.Connected = True
+        print(f'Connected to {T.Name}')
+        print(T.Description)
+        T.Tracking = True               # Needed for slewing (see below)
+        print('Starting slew...')
+        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 50)    # 2 hrs east of meridian
+        while(T.Slewing):
+            time.sleep(5)               # What do a few seconds matter?
+        print('... slew completed successfully.')
+        print(f'RA={T.RightAscension} DE={T.Declination}')
+        print('Turning off tracking then attempting to slew...')
+        T.Tracking = False
+        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)    # A bit more east of meridian
+        # This will fail for tracking being off
+        print("... you won't get here!")
+    except Exception as e:              # You can do better than this (InvalidOperationException)
+        print(f'Slew failed: {str(e)}')
+    finally:                            # Assure that you disconnect
+        print("Disconnecting...")
+        T.Connected = False
+    
+Results::
+
+    Connected to Alpaca Telescope Sim
+    Software Telescope Simulator for ASCOM
+    Starting slew...
+    ... slew completed successfully.
+    RA=10.939969572854931 DE=50
+    Turning off tracking then attempting to slew...
+    Slew failed: SlewToCoordinatesAsync is not allowed when tracking is False
+    Disconnecting...
+    done
+
+
 Member Capitalization
 ---------------------
-This help file provides detailed descripions of the ASCOM Interfaces for all supported device types.
+This help file provides detailed descriptions of the ASCOM Interfaces for all supported device types.
 Note that, rather than follow :pep:`8`, the method and property names, as well as enumerations 
 and exceptions, all follow the capitalization that has historically been assigned to ASCOM
 interface members. The Class and member descriptions, notes, and exceptions raised all 
@@ -92,6 +162,11 @@ you may benefit from reviewing the following design principles that are *foundat
 
     <a href="https://ascom-standards.org/AlpacaDeveloper/Exceptions.htm" target="_blank">
     Exceptions in ASCOM</a> (external)
+
+.. |omnisim| raw:: html
+
+    <a href="https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme" target="_blank">
+    Alpaca Omni Simulator</a> (external)
 
 
 
