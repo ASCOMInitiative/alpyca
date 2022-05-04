@@ -26,7 +26,7 @@ General Usage Pattern
 To connect and control a device, the basic steps are:
 
 1. Import the device class and Alpaca exceptions you plan to catch
-2. Create an instance of the device class, giving the IP:port and device indes on the server
+2. Create an instance of the device class, giving the IP:port and device index on the server
 3. Connect to the device
 4. Call methods and read/write properties as desired, catching exceptions(!)
 5. Assure that you disconnect from the device.
@@ -36,7 +36,7 @@ than software. There are some very important things to be aware of:
 
 - Some of the methods (initiator functions) are non-blocking (asynchronous) and will return right away if the operation 
   was *started* successfully. These are clearly marked in the docs. You must validate that the operation completed 
-  (later) by reading a *completion property* which is documented with each non-blocking function. 
+  *successfully* (later) by reading a *completion property* which is documented with each non-blocking function. 
 - You will receive an exception wherever anything fails to complete *successfully*. Not only might an initiator raise an
   exception, but the completion property will raise one as well if the operation failed *while in progress*. Use a 
   ``finally`` clause to assure that you disconnect from the device no matter what.
