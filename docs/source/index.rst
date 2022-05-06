@@ -90,9 +90,11 @@ this library from any platform on the net or local host.
 
     faq
 
-Indices and tables
-==================
+.. only:: html
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`

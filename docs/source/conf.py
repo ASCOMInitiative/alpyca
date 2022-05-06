@@ -102,5 +102,6 @@ rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
                         title='Alpyca Client Library',
                         subtitle='Alpha Test Release 0.1.0',
                         author='Robert B. Denny <rdenny@dc3.com>',
-                        logo='alpaca128.png')]  
+                        logo='alpaca1000.png',
+                        template='alpyca.rtt')]  
 

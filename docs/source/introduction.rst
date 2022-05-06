@@ -95,10 +95,10 @@ Then execute this little program::
         print(f'RA={T.RightAscension} DE={T.Declination}')
         print('Turning off tracking then attempting to slew...')
         T.Tracking = False
-        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)    # A bit more east of meridian
+        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)    # 5 deg slew N
         # This will fail for tracking being off
         print("... you won't get here!")
-    except Exception as e:              # You can do better than this (InvalidOperationException)
+    except Exception as e:              # Should catch specific InvalidOperationException
         print(f'Slew failed: {str(e)}')
     finally:                            # Assure that you disconnect
         print("Disconnecting...")

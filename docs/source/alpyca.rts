@@ -1,0 +1,43 @@
+;
+; Rinoh style sheet for use with Alpyca documentation
+; Extends the built-in 'sphinx' stylesheet
+;
+[STYLESHEET]
+name=Alpyca
+base=sphinx
+
+[VARIABLES]
+serif_typeface=PT Serif
+sans_typeface=Roboto
+mono_typeface=Source Code Pro
+
+[default: Paragraph]
+font_size=11pt
+line_spacing=fixed(13pt,leading(0))
+
+[external hyperlink]
+font_color=#294ea3
+
+[code block]
+background_color=#ffffcc
+
+[attention admonition]
+background_color=#ffff99
+
+[caution admonition]
+background_color=#ffcc66
+
+[object signature]
+background_color=ccccff
+
+;
+; Actually the Alpyca docs use "Notes:" and it's not picked up
+; here. If you change the source to "Note:" then it works.
+; I have an open question on how to make Notes: a synonym for  
+; "Note" but I suspect it is happening within Sphinx before 
+; the rinoh Sphinx-Builder gets 'hold of it. 
+;
+[note admonition]
+background_color=#e6e6ff
+
+
