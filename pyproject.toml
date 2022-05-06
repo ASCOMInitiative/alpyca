@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "alpaca-client"
+name = "alpyca-client"
 version = "0.1.0"
 description = "Client API for all ASCOM Alpaca devices, management, and discovery"
 authors = ["Robert B. Denny <rdenny@dc3.com>"]
