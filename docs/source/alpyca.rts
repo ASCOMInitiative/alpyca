@@ -27,6 +27,9 @@ background_color=#ffff99
 [caution admonition]
 background_color=#ffcc66
 
+[warning admonition]
+background_color=#ffcc66
+
 [object signature]
 background_color=ccccff
 
