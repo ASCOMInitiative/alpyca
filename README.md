@@ -32,7 +32,7 @@ The dependencies listed above are automatically installed with alpyca-client.
 ## Current Status & Documentation
 
 The library is in a developmental/alpha stage. The documentation is extensive and available
-online as **[Alpaca Client Library](https://ascom-standards.org/alpyca/)** as well as a
+online as **[Alpyca Client Library](https://ascom-standards.org/alpyca/)** as well as a
 **[PDF Document here](https://ascom-standards.org/alpyca/alpyca-client.pdf)**.
 
 ## Feedback and Discussion
