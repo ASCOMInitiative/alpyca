@@ -151,7 +151,6 @@ pointing states are, then:
 | **Normal** (pierEast)         | Where the mechanical Dec is in the range -90 deg to +90 deg |
 +-------------------------------+-------------------------------------------------------------+
 |**Beyond the pole** (pierWest) | Where the mechanical Dec is in the range -180 deg to -90    |
-+-------------------------------+                                                             |
 |                               | deg or +90 deg to +180 deg                                  |
 +-------------------------------+-------------------------------------------------------------+
 
