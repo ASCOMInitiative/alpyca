@@ -19,7 +19,7 @@ Introduction and Quick Start
     This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
     For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
 
-.. only:: rinoh
+.. only:: rinoh or rst
 
     This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
     For more information see the
@@ -69,7 +69,7 @@ Simple Example
 
     Run the self-contained cross-platform |omnisim| on your local system
 
-.. only:: rinoh
+.. only:: rinoh or rst
 
     Run the self-contained cross-platform
     `Alpaca Omni Simulator <https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme>`_
@@ -162,7 +162,7 @@ Common Misconceptions and Confusions
     * |async|
     * |excep|
 
-.. only:: rinoh
+.. only:: rinoh or rst
 
     Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
     provide a strong framework for reliability and integrity. We see newcomers to programming 
