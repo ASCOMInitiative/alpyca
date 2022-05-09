@@ -2,7 +2,7 @@
 name = "alpyca-client"
 version = "0.1.0"
 description = "Client API for all ASCOM Alpaca devices, management, and discovery"
-authors = ["Robert B. Denny <rdenny@dc3.com>"]
+authors = ["Robert B. Denny <rdenny@dc3.com>", "Ethan Chappel <ethan.chappel@gmail.com"]
 license = "LICENSE"
 readme = "README.md"
 documentation = "https://ascom-standards.org/alpyca/index.html"
@@ -20,6 +20,8 @@ packages = [
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/BobDenny/alpyca-client/issues"
+"ASCOM Initiative" = "https://ascom-standards.org/"
+"ASCOM Developer Forum" = "https://ascomtalk.groups.io/g/Developer/"
 
 [tool.poetry.dependencies]
 python = "^3.7"
