@@ -33,7 +33,7 @@ Introduction and Quick Start
 
 Status of This Document
 -----------------------
-The descriptions of the ASCOM Standard interfaces implemented in Alpyca Client are 
+The descriptions of the ASCOM Standard interfaces implemented in Alpyca are 
 our best efforts as of May 2022. At that time, the ASCOM Core Team announced that 
 they are formalizing the operation of the non-blocking (asynchronous) methods 
 in the standards documentation. This library manual includes additional information 
@@ -41,6 +41,16 @@ and clarification of the asynchronous methods which follows the formal specifica
 changes as of that time. If there are any significant changes, we will release an 
 updated (compatible) library as soon as  possible. We wanted to get you started 
 in the right direction!
+
+Installation
+------------
+Requires Python 3.7 or later. The package installs from PyPi as::
+
+    pip install Alpyca
+
+or if you have the source code in a tar file, extract it and run::
+
+    python3 setup.py install
 
 General Usage Pattern
 ---------------------
@@ -127,7 +137,7 @@ follow the universal ASCOM standards established long ago.
 
 Numeric Datatypes
 -----------------
-The Alpyca Client library takes care of numeric conversions so you always work in native 
+The Alpyca library takes care of numeric conversions so you always work in native 
 Python numbers. When comparing numeric datatypes here in Python 3, keep the following in mind:
 
 * Python 3's ``float`` is equivalent to a double-precision floating point in other languages 
@@ -155,7 +165,7 @@ Common Misconceptions and Confusions
     Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
     provide a strong framework for reliability and integrity. We see newcomers to programming 
     looking for help on the |supforum|. There are a few subject areas within which misconceptions
-    and confusion are common. Before starting an application development project with Alpyca Client,
+    and confusion are common. Before starting an application development project with Alpyca,
     you may benefit from reviewing the following design principles that are *foundational*:
 
     * |princ|
@@ -169,7 +179,7 @@ Common Misconceptions and Confusions
     looking for help on the
     `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_. 
     There are a few subject areas within which misconceptions
-    and confusion are common. Before starting an application development project with Alpyca Client,
+    and confusion are common. Before starting an application development project with Alpyca,
     you may benefit from reviewing the following design principles that are *foundational*:
 
     * `The General Principles <https://ascom-standards.org/AlpacaDeveloper/Principles.htm>`_

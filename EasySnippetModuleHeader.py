@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 # $TM_FILENAME_BASE - Implements ASCOM Alpaca ${1:device} device class
 #
-# Part of the Alpyca Client application interface package
+# Part of the Alpyca application interface package
 #
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 #           Ethan Chappel

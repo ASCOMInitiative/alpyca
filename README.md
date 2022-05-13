@@ -1,13 +1,17 @@
-# alpyca-client (0.1.0 Alpha)
+# alpyca (2.0.0-dev1)
 
-## Python 3.7+ client interface for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
+## Python 3.7+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
-<img align="right" width="210" height="166" hspace="20" vspace="20" src="https://ascom-standards.org/alpyca/readme-assets/AlpacaLogo210.png">Produced by the [ASCOM Initiative](https://ascom-standards.org), and inspired by [Ethan Chappel's Alpyca](https://github.com/EthanChappel/Alpyca).
-When this releases to production as **alpyca-client**, Ethan's original alpyca package on PyPi will redirect to this official ASCOM Alpaca package. It's intended that there will be a companion **alpyca-server** library for astronomy devices.
+<img align="right" width="210" height="166" hspace="20" vspace="20" src="https://ascom-standards.org/alpyca/readme-assets/AlpacaLogo210.png">
+
+Produced by the [ASCOM Initiative](https://ascom-standards.org/), and derived from Ethan Chappel's
+Alpyca 1.0.0. Ethan kindly released the name **Alpyca** to the ASCOM Initiative, hence this expanded
+package starts life as Version 2.0.0-dev1.
 
 ## Requirements
 
-This package runs under Python 3.7 or later. It is compatible with most Linux distros, Windows , and MacOS. Dependencies are minimal: [requests](https://pypi.org/project/requests/),
+This package runs under Python 3.7 or later. It is compatible with most Linux distros, Windows , and MacOS.
+Dependencies are minimal: [requests](https://pypi.org/project/requests/),
 [netifaces](https://pypi.org/project/netifaces/),
 [typing-extensions](https://pypi.org/project/typing-extensions/),
 [python-dateutil](https://pypi.org/project/python-dateutil/), and
@@ -15,10 +19,10 @@ This package runs under Python 3.7 or later. It is compatible with most Linux di
 
 ## Installation
 
-The library installs from PyPi as
+The package installs from PyPi as
 
 ```sh
-pip install alpyca-client
+pip install alpyca
 ```
 
 or if you have the source code in a tar file, extract it and run
@@ -27,17 +31,19 @@ or if you have the source code in a tar file, extract it and run
 python3 setup.py install
 ```
 
-The dependencies listed above are automatically installed with alpyca-client.
+The dependencies listed above are automatically installed with alpyca.
 
 ## Current Status & Documentation
 
-The library is in a developmental/alpha stage. The documentation is extensive and available
-online as **[Alpaca Client Library](https://ascom-standards.org/alpyca/)** as well as a
-**[PDF Document here](https://ascom-standards.org/alpyca/alpyca-client.pdf)**.
+This version 2.0.0-dev1 is a developmental/alpha release. The documentation is
+extensive and available
+online as **[Alpyca: API Library for Alpaca](https://ascom-standards.org/alpyca/)** as well as a
+**[PDF Document here](https://ascom-standards.org/alpyca/alpyca.pdf)**.
 
 ## Feedback and Discussion
 
-Feedback can be given on the [ASCOM Driver and Application Development Support Forum](https://ascomtalk.groups.io/g/Developer).
+Feedback can be given on the
+[ASCOM Driver and Application Development Support Forum](https://ascomtalk.groups.io/g/Developer).
 Please note that the protocols are universal and strictly curated. This library is an
 _implementation_ of the protocols, not the protocols themselves. For background please visit
 [About Alpaca and ASCOM](https://ascom-standards.org/About/Index.htm), as well as the
@@ -53,7 +59,7 @@ which will give you fully functional simulators for _all_ Alpaca devices, as wel
 OpenAPI/Swagger interface to the Alpaca RESTful endpoints (_see the details below_). This example will
 use the Telescope simulator. Assuming you are running the Omni Simulator on your local host
 at its default port of 32323, its address is then <code>localhost:32323</code>. Here is a sample
-program using alpaca-client:
+program using alpaca:
 
 ```python
     import time
@@ -116,13 +122,13 @@ server and simulated devices. Once you get this running you are ready to try the
 ## ASCOM Remote
 
 Any current ASCOM COM device that is hosted on a Windows system can have an Alpaca interface added via the
-[ASCOM Remote](https://github.com/ASCOMInitiative/ASCOMRemote/releases/latest) app. This app allows you to
+**[ASCOM Remote Windows app](https://github.com/ASCOMInitiative/ASCOMRemote/releases/latest)**. This app allows you to
 expose any of your Windows-hosted astronomy devices to the Alpaca world, making them reachable from programs
-using alpyca-client.
+using alpyca.
 
 ## Wireshark
 
-If you are interested in monitoring the HTTP/REST traffic that alpyca-client creates and exchanges with the
+If you are interested in monitoring the HTTP/REST traffic that alpyca creates and exchanges with the
 Alpaca devices, you can install the [Wireshark network protocol analyzer](https://www.wireshark.org/).
 One thing that trips people up is making the installation so that Wireshark has access to all of the
 network insterfaces without needing root provs (linux) or running "As Administrator" on Windows. Pay close

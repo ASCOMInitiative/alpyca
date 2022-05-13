@@ -14,16 +14,16 @@
         :align: right
 
     ====================================
-    Welcome to the Alpyca Client Library
+    Welcome to the Alpyca Library
     ====================================
 
 .. only:: rinoh
 
     ====================================
-    Welcome to the Alpyca Client Library
+    Welcome to the Alpyca Library
     ====================================
 
-This document describes the Alpyca Client package for Python 3. The package provides all of the ASCOM Standard 
+This document describes the Alpyca package for Python 3. The package provides all of the ASCOM Standard 
 universal interfaces to astronomical devices using the Alpaca network protocol. As an application developer, your
 usage of the various devices is simplified and universal, independent of the particular make/model of device.
 For example, the same code can be used to control any ASCOM-compatible telescope. This includes not only 
@@ -31,6 +31,8 @@ telescopes that are controlled with classic ASCOM/COM on a Windows machine, but 
 are *not* connected to a Windows machine, but instead speak Alpaca natively. The Windows ASCOM Remote 
 middleware gives an Alpaca interface to any Windows-resident device, allowing you to use the device via 
 this library from any platform on the net or local host.
+
+**Start Here:** :doc:`introduction`
 
 .. only:: html
 

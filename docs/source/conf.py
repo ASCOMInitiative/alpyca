@@ -20,12 +20,12 @@ sys.setrecursionlimit(1500)                         # Prevent Python crash on in
 
 # -- Project information -----------------------------------------------------
 
-project = 'Alpyca Client Library'
+project = 'Alpyca: API Library for Alpaca'
 copyright = '2022, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1 alpha'
+release = '2.0.0-dev1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -35,7 +35,7 @@ release = '0.1 alpha'
 # ones.
 # RBD Added autodoc (https://www.sphinx-doc.org/en/master/usage/quickstart.html)
 # and Napoleon https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
-# for Alpyca Client project Python and Extended Google docstrings Also added 
+# for Alpyca project Python and Extended Google docstrings Also added 
 # enum-tools[sphinx] to support :: autoenum: in the .rst files.
 #
 extensions = [
@@ -98,8 +98,8 @@ html_theme = 'sphinx_rtd_theme'  # https://sphinx-themes.org/sample-sites/sphinx
 # Invokes as > sphinx-build -b rinoh source build/PDF  (I have a makepdf.bat)
 
 rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
-                        target='alpyca-client',     # output file (alpyca-client.pdf)
-                        title='Alpyca Client Library',
+                        target='alpyca',     # output file (alpyca.pdf)
+                        title='Alpyca Library',
                         subtitle='Alpha Test Release 0.1.0',
                         author='Robert B. Denny <rdenny@dc3.com>',
                         logo='alpaca1000.png',

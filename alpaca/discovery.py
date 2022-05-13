@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 # discovery - Implements ASCOM Alpaca discovery functions
 #
-# Part of the Alpyca Client application interface package
+# Part of the Alpyca application interface package
 #
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 #
@@ -37,6 +37,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 03-May-22 (rbd) Remove import of 're' no longer used. IPv6 query comments, 
 #                 default timeout is 2 sec.
+# 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # -----------------------------------------------------------------------------
 
 import json

@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 # rotator - Implements ASCOM Alpaca Rotator device class
 #
-# Part of the Alpyca Client application interface package
+# Part of the Alpyca application interface package
 #
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 #           Ethan Chappel <ethan.chappel@gmail.com>
@@ -36,6 +36,7 @@
 # -----------------------------------------------------------------------------
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
+# 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
