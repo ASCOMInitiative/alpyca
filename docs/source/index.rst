@@ -32,7 +32,8 @@ are *not* connected to a Windows machine, but instead speak Alpaca natively. The
 middleware gives an Alpaca interface to any Windows-resident device, allowing you to use the device via 
 this library from any platform on the net or local host.
 
-**Start Here:** :doc:`introduction`
+    .. Tip::
+        **Start Here:** :doc:`introduction`
 
 .. only:: html
 

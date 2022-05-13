@@ -35,7 +35,7 @@ places where an async operation can fail:
    a :py:class:`~alpaca.exceptions.DriverException`), it means the device *failed to finish the 
    operation successfully*. In this case, the device is compromsed and requires special attention.
 
-.. caution::
+.. tip::
 
     .. only:: html
         
