@@ -241,15 +241,10 @@
     <Content Include="docs\source\alpaca.switch.rst" />
     <Content Include="docs\source\alpaca.telescope.rst" />
     <Content Include="docs\source\alpacaclasses.rst" />
-    <Content Include="docs\source\alpacamodules.rst" />
-    <Content Include="docs\source\camerasample.rst" />
-    <Content Include="docs\source\docintenum.rst" />
-    <Content Include="docs\source\examples.rst" />
     <Content Include="docs\source\index.rst" />
     <Content Include="docs\source\introduction.rst" />
     <Content Include="docs\source\make.bat" />
     <Content Include="docs\source\Makefile" />
-    <Content Include="docs\source\miscellany.rst" />
     <Content Include="LICENSE.txt" />
     <Content Include="poetry.lock" />
     <Content Include="pyproject.toml" />
