@@ -20,6 +20,8 @@ packages = [
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/BobDenny/alpyca/issues"
+"ASCOM Initiative" = "https://ascom-standards.org/"
+"ASCOM Developer Forum" = "https://ascomtalk.groups.io/g/Developer/"
 
 [tool.poetry.dependencies]
 python = "^3.7"

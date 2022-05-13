@@ -17,7 +17,7 @@
     Welcome to the Alpyca Library
     ====================================
 
-.. only:: rinoh
+.. only:: rinoh or rst
 
     ====================================
     Welcome to the Alpyca Library
@@ -42,7 +42,7 @@ this library from any platform on the net or local host.
     .. Attention::
         Alpaca is not dependent on Windows. See |about|.
 
-.. only:: rinoh
+.. only:: rinoh or rst
 
     For background see 
     `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_

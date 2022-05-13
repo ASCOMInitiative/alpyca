@@ -8,9 +8,9 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=source
-set BUILDDIR=build/PDF
+set BUILDDIR=build/RST
 
-%SPHINXBUILD% -b rinoh %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+%SPHINXBUILD% -b rst %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
 :end

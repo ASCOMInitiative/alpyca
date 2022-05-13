@@ -48,7 +48,7 @@ places where an async operation can fail:
         :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and instead 
         “double-check” the results by comparing your request with the results, you run several risks
 
-    .. only:: rinoh
+    .. only:: rinoh or rst
 
         Have a look at this article
         `Why exceptions in async methods are “dangerous” in C# <https://medium.com/@alexandre.malavasi/why-exceptions-in-async-methods-are-dangerous-in-c-fda7d382b0ff>`_. 
@@ -151,7 +151,6 @@ pointing states are, then:
 | **Normal** (pierEast)         | Where the mechanical Dec is in the range -90 deg to +90 deg |
 +-------------------------------+-------------------------------------------------------------+
 |**Beyond the pole** (pierWest) | Where the mechanical Dec is in the range -180 deg to -90    |
-+-------------------------------+                                                             |
 |                               | deg or +90 deg to +180 deg                                  |
 +-------------------------------+-------------------------------------------------------------+
 
