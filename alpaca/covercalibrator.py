@@ -37,6 +37,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 04-Jun-22 (rbd) 2.0.0-dev1 Fix capitalization of OpenCover 
 # -----------------------------------------------------------------------------
 
 from alpaca.docenum import DocIntEnum
@@ -318,7 +319,6 @@ class CoverCalibrator(Device):
               :py:attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
               rather than :py:class:`~CoverStatus.Unknown`
             
-            
         """
-        self._put("OpenCover")
+        self._put("opencover")
 
