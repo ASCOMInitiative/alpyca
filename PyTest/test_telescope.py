@@ -18,14 +18,7 @@ def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test properties:")
-    # BUGBUG 0.1.2 OmniSim settings (only, not the property itself!!)
-    # have Polar and German reversed
-    if d.AlignmentMode == AlignmentModes.algPolar:
-        assert s['AlignMode'] == AlignmentModes.algGermanPolar.value
-    elif d.AlignmentMode == AlignmentModes.algGermanPolar:
-        assert s['AlignMode'] == AlignmentModes.algPolar.value
-    else:
-        assert d.AlignmentMode.value == s['AlignMode']
+    assert d.AlignmentMode.value == s['AlignMode']
     assert d.ApertureArea == s['ApertureArea']
     assert d.ApertureDiameter == s['Aperture']
     assert d.CanFindHome == s['CanFindHome']
