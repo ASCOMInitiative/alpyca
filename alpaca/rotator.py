@@ -67,13 +67,18 @@ class Rotator(Device):
 
     @property
     def CanReverse(self) -> bool:
-        """The rotator supports the Reverse method
+        """The rotator supports the Reverse method (see Notes)
 
         Raises:
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
+        
+        Notes:
+            * For IRotatorV3 drivers and later(:py:attr:`InterfaceVersion` >= 3)
+              CanReverse is always True. 
+            * For more info on reversal see the :py:attr:`Reverse` property.
         
         """
         return self._get("canreverse")
