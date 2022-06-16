@@ -131,7 +131,7 @@ using alpyca.
 If you are interested in monitoring the HTTP/REST traffic that alpyca creates and exchanges with the
 Alpaca devices, you can install the [Wireshark network protocol analyzer](https://www.wireshark.org/).
 One thing that trips people up is making the installation so that Wireshark has access to all of the
-network insterfaces without needing root provs (linux) or running "As Administrator" on Windows. Pay close
+network insterfaces without needing root privs (linux) or running "As Administrator" on Windows. Pay close
 attention the installation steps on this. On WIndows the capture driver installation will require elevation,
 as it is a privileged module. For example installinn on Linux (e.g Debian/Raspberry Pi) you'll see this,
 and **be sure to answer Yes**.
