@@ -37,6 +37,8 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 16-Jun-22 (rbd) 2.0.0-dev3 Doc changes to CanReverse, markup correction to 
+#                            Sync(), no changes to logic.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -328,7 +330,7 @@ class Rotator(Device):
 
         Notes:
             * Once this method has been called and the sync offset determined, both 
-              the :py:meth:`MoveAbsolute()' method and the :py:attr:`Position`
+              the :py:meth:`MoveAbsolute()` method and the :py:attr:`Position`
               property will function in synced coordinates rather than mechanical 
               coordinates. The sync offset will persist across driver starts and 
               device reboots. 
