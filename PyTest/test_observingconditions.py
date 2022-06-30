@@ -43,4 +43,5 @@ def test_observingconditions(device, settings, disconn):
     assert s['WindSpeedOverride'] == True, "WindSpeed value must be overridden"
     assert d.WindSpeed == s['WindSpeedOverride Value'], 'WindSpeed value mismatch'
     assert d.TimeSinceLastUpdate('CloudCover') <= s['Sensor Read Period'], 'Update time mismatch'
+    assert d.SensorDescription('WindSpeed') == 'ObservingConditions Simulated WindSpeed sensor' # Hard wired in OmniSim
     

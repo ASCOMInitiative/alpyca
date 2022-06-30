@@ -36,6 +36,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 30-Jun-22 (rbd) 2.0.0-dev2 Remove @property decorator from SensorDescription.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -295,7 +296,6 @@ class ObservingConditions(Device):
         """
         self._put("refresh")
 
-    @property
     def SensorDescription(self, PropertyName: str) -> str:
         """Description of the sensor providing the requested property
         
