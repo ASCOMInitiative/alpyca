@@ -37,6 +37,8 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 30-Jun-22 (rbd) 2.0.0-dev2 Remove @property decorator from SensorDescription.
+#                 Correct the parameter name for TimeSinceLastUpdate() and
+#                 SensorDescription() to be 'SensorName' throughout. 
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -296,11 +298,11 @@ class ObservingConditions(Device):
         """
         self._put("refresh")
 
-    def SensorDescription(self, PropertyName: str) -> str:
+    def SensorDescription(self, SensorName: str) -> str:
         """Description of the sensor providing the requested property
         
         Args:
-            PropertyName: A string containing the name of the ObservingConditions
+            SensorName: A string containing the name of the ObservingConditions
                 meterological property for which the sensor description is desired.
                 For example "WindSpeed" (for :py:attr:`WindSpeed`) would retrieve 
                 a description of the sensor used to measure the wind speed.
@@ -308,19 +310,19 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
-            InvalidValueException: The supplied PropertyName is not valid.
+            InvalidValueException: The supplied SensorName is not valid.
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
         """
-        return self._get("sensordescription", PropertyName=PropertyName)
+        return self._get("sensordescription", SensorName=SensorName)
 
-    def TimeSinceLastUpdate(self, PropertyName: str) -> str:
+    def TimeSinceLastUpdate(self, SensorName: str) -> str:
         """Elapsed time (sec) since last update of the sensor providing the requested property
         
         Args:
-            PropertyName: A string containing the name of the ObservingConditions
+            SensorName: A string containing the name of the ObservingConditions
                 meterological property for which the time since last update is 
                 desired. For example "WindSpeed" (for :py:attr:`WindSpeed`) would 
                 retrieve the time since the wind speed was last updated by its sensor.
@@ -328,10 +330,10 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
-            InvalidValueException: The supplied PropertyName is not valid.
+            InvalidValueException: The supplied SensorName is not valid.
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
         """
-        return self._get("timesincelastupdate", PropertyName=PropertyName)
+        return self._get("timesincelastupdate", SensorName=SensorName)
