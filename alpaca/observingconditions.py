@@ -90,7 +90,7 @@ class ObservingConditions(Device):
               average reading. 
         
         """
-        return self._get("averagePeriod")
+        return self._get("averageperiod")
 
     @property
     def CloudCover(self) -> float:
