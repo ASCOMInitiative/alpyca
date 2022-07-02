@@ -36,9 +36,10 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
-# 30-Jun-22 (rbd) 2.0.0-dev2 Remove @property decorator from SensorDescription.
+# 30-Jun-22 (rbd) 2.0.0-dev3 Remove @property decorator from SensorDescription.
 #                 Correct the parameter name for TimeSinceLastUpdate() and
 #                 SensorDescription() to be 'SensorName' throughout. 
+# 30-Jun-22 (dvn) 2.0.0-dev3 Fix capital 'P' in averageperiod get.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
