@@ -13,20 +13,23 @@
         :width: 128px
         :align: right
 
-    =================
-    Welcome to Alpyca
-    =================
+    =====================
+    Welcome to Alpyca 2.0
+    =====================
 
 .. only:: rinoh or rst
 
-    =================
-    Welcome to Alpyca
-    =================
+    =====================
+    Welcome to Alpyca 2.0
+    =====================
 
-This document describes the Alpyca package, a Python API Library for ASCOM Alpaca. 
-The package provides all of the ASCOM Standard 
-universal interfaces to astronomical devices using the Alpaca network protocol. As an application developer, your
-usage of the various devices is simplified and universal, independent of the particular make/model of device.
+This document describes the Alpyca package, a Python API client library for ASCOM Alpaca, produced by the 
+ASCOM Initiative, and derived from Ethan Chappel's Alpyca 1.0.0. Ethan kindly released the name
+**Alpyca** to the ASCOM Initiative, hence this expanded package starts life as Version 2.0.
+
+The package provides all of the ASCOM Standard universal interfaces to astronomical devices using the 
+Alpaca network protocol. As an application developer, your usage of the various devices is simplified 
+and universal, independent of the particular make/model of device.
 
 .. only:: html
 

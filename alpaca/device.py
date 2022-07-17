@@ -38,6 +38,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 03-May-22 (rbd) Fix DriverException wording to final agreed text.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 17-Jul-22 (rbd) 2.0.1rc1 Speed up by re-using ports via requests.Session().
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -85,6 +86,8 @@ class Device:
             self.device_type,
             self.device_number
         )
+        self.rqs = requests.Session()
+
     # ------------------------------------------------
     # CLASS VARIABLES - SHARED ACROSS DEVICE INSTANCES
     # ------------------------------------------------
@@ -376,7 +379,7 @@ class Device:
         # TODO - Catch and handle connect failures nicely
         try:
             Device._ctid_lock.acquire()
-            response = requests.get("%s/%s" % (self.base_url, attribute), 
+            response = self.rqs.get("%s/%s" % (self.base_url, attribute), 
                             params=pdata, timeout=tmo, headers=hdrs)
             Device._client_trans_id += 1
         finally:
@@ -406,7 +409,7 @@ class Device:
         # TODO - Catch and handle connect failures nicely
         try:
             Device._ctid_lock.acquire()
-            response = requests.put("%s/%s" % (self.base_url, attribute), 
+            response = self.rqs.put("%s/%s" % (self.base_url, attribute), 
                             data=pdata, timeout=tmo, headers=hdrs)
             Device._client_trans_id += 1
         finally:
@@ -414,7 +417,7 @@ class Device:
         self.__check_error(response)
         return response.json()  # TODO Is this right? json()?
 
-    def __check_error(self, response: requests.Response) -> None:
+    def __check_error(self, response) -> None:
         """Alpaca exception handler (ASCOM exception types)
 
         Args:
