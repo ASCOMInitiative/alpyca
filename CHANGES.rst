@@ -1,14 +1,18 @@
-Version 2.0.1-rc1 (2022-07-17)
+Version 2.0.1 (2022-07-26)
 ==============================
 
-- Release candidate. 
+- First production release
+
+Changes since 2.0.1-rc1
+-----------------------
+
+- Documentation corrections, no logic changes
 
 Changes since 2.0.0-dev2
 ------------------------
 
-- Improve speed via re-use of sockets (<code>Connection: keep-alive</code>) for device HTTP.
-- <code>ObservingConditions.SensorDescription()</code> has been fixed to accept the sensor name
-- Parameters for <code>ObservingConditions.TimeSinceLastUpdate()</code> and
-  <code>ObservingConditions.SensorDescription()</code> have been corrected to <code>SensorName</code>.
-- Correct <code>ObservingConditions.AveragePeriod</code> to remove capital P from URI
-
+- Improve speed via re-use of sockets (``Connection: keep-alive``) for device HTTP.
+- ``ObservingConditions.SensorDescription)`` has been fixed to accept the sensor name
+- Parameters for ``ObservingConditions.TimeSinceLastUpdate()`` and
+  ``ObservingConditions.SensorDescription()`` have been corrected to ``SensorName``.
+- Correct ``ObservingConditions.AveragePeriod`` to remove capital P from URI

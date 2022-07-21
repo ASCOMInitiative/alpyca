@@ -26,7 +26,7 @@ copyright = '2022, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.0-dev2'
+release = '2.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,10 +43,12 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
+    # https://github.com/sphinx-contrib/restbuilder
+    'sphinxcontrib.restbuilder',  
     # https://enum-tools.readthedocs.io/en/latest/api/autoenum.html
     'enum_tools.autoenum',
-    'rinoh.frontend.sphinx',    # May not be needed
-    'sphinxcontrib.restbuilder'  # https://github.com/sphinx-contrib/restbuilder
+    # https://github.com/brechtm/rinohtype  Makes PDF
+    'rinoh.frontend.sphinx'
 ]
 
 # Autodoc settings (override defaults)
@@ -80,8 +82,7 @@ html_static_path = ['_static']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-
-# -- Options for HTML output -------------------------------------------------
+# -- Options for HTML output --
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes and the link below for a more comprehensive list.
@@ -90,12 +91,8 @@ exclude_patterns = []
 # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 html_theme = 'sphinx_rtd_theme'
 
-# -- Options for PDF Output using rinohtype ----------------------------------
+# -- Options for PDF Output using rinohtype --
 
-# The rinoh app that was installed died on my Windows system. I found this on
-# GitHub and applied the fix: * Fixed rinoh # (rbd 16-Apr-2022)
-# Apply patch from https://github.com/python/cpython/issues/88625#issuecomment-1093919783
-# The patched resource.py is in site-packages as usual. This resulted in a working rinoh!
 # Here are the settings per the rinohtype docs
 #   https://www.mos6581.org/rinohtype/master/index.html#
 # The docs for the available rinoh_documents options are at
@@ -105,7 +102,7 @@ html_theme = 'sphinx_rtd_theme'
 rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
                         target='alpyca',            # output file (alpyca.pdf)
                         title='Alpyca Library',
-                        subtitle='Release 2.0.1rc1',
+                        subtitle='Release 2.0.1',
                         author='Robert B. Denny <rdenny@dc3.com>',
                         logo='alpaca1000.png',
                         template='alpyca.rtt')]
