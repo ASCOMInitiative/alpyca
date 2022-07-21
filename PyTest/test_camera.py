@@ -41,7 +41,7 @@ def test_props(device, settings, disconn):
     v = s['ReadoutModes']
     assert d.ReadoutModes == v.split(',')
     assert d.SensorName == s['SensorName']
-    assert d.SensorType == SensorTypes(s['SensorType'])
+    assert d.SensorType == SensorType(s['SensorType'])
 
 def test_cooler(device, settings, disconn):
     d = device

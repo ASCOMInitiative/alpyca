@@ -58,7 +58,7 @@ class CameraStates(DocIntEnum):
     cameraDownload  = 4, 'Downloading the image data'
     cameraError     = 5, 'An error condition exists'
 
-class SensorTypes(DocIntEnum):    # TODO This is singular in the ASCOM spec
+class SensorType(DocIntEnum):
     """Type of sensor in the Camera. Names should be self-explanatory."""
     Monochrome      = 0
     Color           = 1
