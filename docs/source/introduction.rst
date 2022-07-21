@@ -34,13 +34,17 @@ Introduction and Quick Start
 Status of This Document
 -----------------------
 The descriptions of the ASCOM Standard interfaces implemented in Alpyca are 
-our best efforts as of May 2022. At that time, the ASCOM Core Team announced that 
-they are formalizing the operation of the non-blocking (asynchronous) methods 
-in the standards documentation. This library manual includes additional information 
-and clarification of the asynchronous methods which follows the formal specification 
-changes as of that time. If there are any significant changes, we will release an 
-updated (compatible) library as soon as  possible. We wanted to get you started 
-in the right direction!
+our best efforts as of May 2022. At that time, the ASCOM Core Team announced
+that they are formalizing the operation of the non-blocking (asynchronous)
+methods in the standards documentation. This library manual includes
+additional information and clarification of the asynchronous methods which
+follows the formal specification changes as of July 2022. If there are any
+resulting changes to the inte3rface definitions, we will release an updated
+(compatible) library as soon as possible.
+
+.. note:: 
+    Changes to the interfaces will never be breaking. Your code using this 
+    library is safe from being broken by such changes. 
 
 Installation
 ------------
@@ -57,20 +61,26 @@ General Usage Pattern
 To connect and control a device, the basic steps are:
 
 1. Import the device class and Alpaca exceptions you plan to catch
-2. Create an instance of the device class, giving the IP:port and device index on the server
+2. Create an instance of the device class, giving the IP:port and device
+   index on the server
 3. Connect to the device
 4. Call methods and read/write properties as desired, catching exceptions(!)
 5. Assure that you disconnect from the device.
 
-You will be controlling *physical devices* with your function calls here. Devices are more susceptible to problems
-than software. There are some very important things to be aware of:
+You will be controlling *physical devices* with your function calls here.
+Devices are more susceptible to problems than software. There are some
+very important things to be aware of:
 
-- Some of the methods (initiator functions) are non-blocking (asynchronous) and will return right away if the operation 
-  was *started* successfully. These are clearly marked in the docs. You must validate that the operation completed 
-  *successfully* (later) by reading a *completion property* which is documented with each non-blocking function. 
-- You will receive an exception wherever anything fails to complete *successfully*. Not only might an initiator raise an
-  exception, but the completion property will raise one as well if the operation failed *while in progress*. Use a 
-  ``finally`` clause to assure that you disconnect from the device no matter what.
+- Some of the methods (initiator functions) are non-blocking (asynchronous)
+  and will return right away if the operation was *started* successfully.
+  These are clearly marked in the docs. You must validate that the operation
+  completes *successfully* (later) by reading a *completion property* which
+  is documented with each non-blocking function.
+- You will receive an exception wherever anything fails to complete
+  *successfully*. Not only might an initiator raise an exception, but the
+  completion property will raise one as well if the operation failed
+  *while in progress*. Use a ``finally`` clause to assure that you disconnect
+  from the device no matter what.
 
 Simple Example
 --------------

@@ -13,9 +13,9 @@
     
 Alpaca Device Server Management
 ===============================
-Provides information about an Alpaca device server found via :doc:`alpaca.discovery`, 
-and the devices which are provided by that server. For more information see 
-the |apiref|. 
+Provides information about an Alpaca device server found via 
+:doc:`alpaca.discovery`, and the devices which are provided by 
+that server. For more information see the |apiref|. 
 
 Example using the Management functions::
 

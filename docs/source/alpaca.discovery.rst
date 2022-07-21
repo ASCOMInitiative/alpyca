@@ -13,12 +13,13 @@
     
 Alpaca Device Server Discovery
 ==============================
-This module provides Alpaca device server discovery service. Search your local network 
-segment (or VLAN) for Alpaca device *servers*, returning a list consisting
-of ``ipaddress:port`` strings for each one found. 
-Each Alpaca device server may provide access to multiple Alpaca device types,
-and multiple Alpaca devices of a given type. Use the :doc:`alpaca.management` functions to 
-learn the details of the served device(s).
+This module provides Alpaca device server discovery service. Search your
+local network segment (or VLAN) for Alpaca device *servers*, returning 
+a list consisting of ``ipaddress:port`` strings for each one found. 
+Each Alpaca device server may provide access to multiple Alpaca device
+types, and multiple Alpaca devices of a given type. Use the 
+:doc:`alpaca.management` functions to learn the details of the 
+served device(s).
 
 Example::
 
@@ -33,7 +34,8 @@ Output::
 
 
 
-This example shows one Alpaca server on the local host, two Alpaca servers on the LAN.
+This example shows one Alpaca server on the local host, two Alpaca servers
+on the LAN.
 
 .. automodule:: alpaca.discovery
    :members:

@@ -23,39 +23,47 @@
     Welcome to Alpyca 2.0
     =====================
 
-This document describes the Alpyca package, a Python API client library for ASCOM Alpaca, produced by the 
-ASCOM Initiative, and derived from Ethan Chappel's Alpyca 1.0.0. Ethan kindly released the name
-**Alpyca** to the ASCOM Initiative, hence this expanded package starts life as Version 2.0.
+This document describes the Alpyca package, a Python API client library for
+ASCOM Alpaca, produced by the ASCOM Initiative, and derived from Ethan
+Chappel's Alpyca 1.0.0. Ethan kindly released the name **Alpyca** to the ASCOM
+Initiative, hence this expanded package starts life as Version 2.0.
 
-The package provides all of the ASCOM Standard universal interfaces to astronomical devices using the 
-Alpaca network protocol. As an application developer, your usage of the various devices is simplified 
-and universal, independent of the particular make/model of device.
+The package provides all of the ASCOM Standard universal interfaces to
+astronomical devices using the Alpaca network protocol. As an application
+developer, your usage of the various devices is simplified and universal,
+independent of the particular make/model of device.
 
 .. only:: html
 
-    For example, the same code can be used to control any ASCOM-compatible telescope. This includes not only 
-    telescopes that are controlled with classic ASCOM/COM on a Windows machine, but also any telescopes which
-    are *not* connected to a Windows machine, but instead speak Alpaca natively. The Windows 
-    |remote| gives an Alpaca interface to any Windows-resident device, allowing you to use the device via 
-    this library from any platform on the net or local host.
+    For example, the same code can be used to control any ASCOM-compatible
+    telescope. This includes not only telescopes that are controlled with
+    classic ASCOM/COM on a Windows machine, but also any telescopes which
+    are *not* connected to a Windows machine, but instead speak Alpaca
+    natively. The Windows |remote| gives an Alpaca interface to any 
+    Windows-resident device, allowing you to use the device via this library
+    from any platform on the net or local host.
 
     .. Tip::
         **Start Here:** :doc:`introduction`
 
-    For background see |about| on the |ascsite|. As an astronomy developer wanting to use Alpaca, we suggest 
-    you look over |devhelp| join the |supforum|.
+    For background see |about| on the |ascsite|. As an astronomy developer
+    wanting to use Alpaca, we suggest you look over |devhelp| and join 
+    the |supforum|.
 
     .. Attention::
         Alpaca is not dependent on Windows. See |about|.
 
 .. only:: rinoh or rst
 
-    For example, the same code can be used to control any ASCOM-compatible telescope. This includes not only 
-    telescopes that are controlled with classic ASCOM/COM on a Windows machine, but also any telescopes which
-    are *not* connected to a Windows machine, but instead speak Alpaca natively. The Windows 
+    For example, the same code can be used to control any ASCOM-compatible
+    telescope. This includes not only telescopes that are controlled with
+    classic ASCOM/COM on a Windows machine, but also any telescopes which
+    are *not* connected to a Windows machine, but instead speak Alpaca 
+    natively. The Windows 
     `ASCOM Remote middleware <https://github.com/ASCOMInitiative/ASCOMRemote/releases>`_ 
-    gives an Alpaca interface to any Windows-resident device, allowing you to use the device via 
-    this library from any platform on the net or local host.
+    gives an Alpaca interface to any Windows-resident device, allowing you 
+    to use the device via this library from any platform on the net or 
+    local host.
 
     .. Tip::
         **Start Here:** :doc:`introduction`
