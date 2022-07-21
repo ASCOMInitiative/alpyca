@@ -1347,7 +1347,7 @@ class Camera(Device):
         return self._get("sensorname")
 
     @property
-    def SensorType(self) -> SensorTypes:
+    def SensorType(self) -> SensorType:
         """The type of sensor within the camera.
 
         Raises:
@@ -1362,7 +1362,7 @@ class Camera(Device):
               aware of the capabilities of the specific camera model.
 
         """
-        return SensorTypes(self._get("sensortype"))
+        return SensorType(self._get("sensortype"))
     
     @property
     def SetCCDTemperature(self) -> float:
