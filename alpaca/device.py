@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -39,6 +39,7 @@
 # 03-May-22 (rbd) Fix DriverException wording to final agreed text.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 17-Jul-22 (rbd) 2.0.1rc1 Speed up by re-using ports via requests.Session().
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -415,7 +416,7 @@ class Device:
         finally:
             Device._ctid_lock.release()
         self.__check_error(response)
-        return response.json()  # TODO Is this right? json()?
+        return response.json()
 
     def __check_error(self, response) -> None:
         """Alpaca exception handler (ASCOM exception types)

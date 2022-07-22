@@ -7,7 +7,7 @@
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------

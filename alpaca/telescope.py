@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -37,6 +37,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
@@ -202,13 +203,13 @@ class Telescope(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
+            * This is the correct property to use to determine *successful* completion of 
+              the (non-blocking) :py:meth:`FindHome()` operation. See :ref:`async_faq`
             * True if the telescope is stopped in the Home position. Can be True
               only following a FindHome() operation.
             * Will become False immediately upon any slewing operation
             * Will always be False if the telescope does not support homing. Use
               :py:attr:`CanFindHome` to determine if the mount supports homing.
-            * TODO [REVIEW] This should be the completion property for async
-              FindHomeAsync().
 
         """
         return self._get("athome")
@@ -224,6 +225,8 @@ class Telescope(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
+            * This is the correct property to use to determine *successful* completion of 
+              the (non-blocking) :py:meth:`Park()` operation. See :ref:`async_faq`
             * True if the telescope is stopped in the Park position. Can be True
               only following successful completion of a :py:meth:`Park()` operation.
             * When parked, the telescope will be stationary or restricted to a small 
@@ -232,9 +235,6 @@ class Telescope(Device):
               attempts to slew enabling tracking while parked will raise an exception.
             * Will always be False if the telescope does not support parking. Use
               :py:attr:`CanPark` to determine if the mount supports parking.
-            * TODO [REVIEW] This should be the completion property for async
-              ParkAsync(). I  think we have established that Park is already
-              asynch? If so I will document that.
 
         """
         return self._get("atpark")
@@ -929,8 +929,7 @@ class Telescope(Device):
             * This is the correct property to use to determine *successful* completion of 
               a (non-blocking) :py:meth:`SlewToCoordinatesAsync()`, :py:meth:`SlewToTargetAsync()`,
               :py:meth:`SlewToCoordinatesAsync()`, or by writing to :py:attr:`SideOfPier`
-              to force a flip. 
-            * See :ref:`async_faq`
+              to force a flip. See :ref:`async_faq`
             * Slewing will be True immediately upon 
               returning from any of these calls, and will remain True until *successful* 
               completion, at which time Slewing will become False.
@@ -1190,9 +1189,7 @@ class Telescope(Device):
         """Immediatley stops an asynchronous slew in progress.
 
         Raises:
-            NotImplementedException: If this feature is not implemented. TODO with the 
-                deprecation of sync methods, this should be required.
-            InvalidOperationException: TODO [Review New] If the mount is parked (:py:attr:`AtPark` = True)
+            InvalidOperationException: If the mount is parked (:py:attr:`AtPark` = True)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
@@ -1210,11 +1207,13 @@ class Telescope(Device):
         self._put("abortslew")
 
     def FindHome(self) -> None:
-        """Move the mount to the "home" position.
+        """Start moving the mount to the "home" position.
 
-        **BLOCKING** This will not return until completed. TODO This should be 
-        deprecated and we need a FindHomeAsync(). The docs and the simulator both
-        implement sync behavior. 
+        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True 
+        if the homing operation has *successfully* been started, or 
+        :py:attr:`Slewing` = False which means the mount is already at its
+        home position (and of course :py:attr:`AtHome` will already be True).
+        See Notes, and :ref:`async_faq` 
         
         Raises:
             NotImplementedException: If this feature is not implemented (:py:attr:`CanFindHome` = False)
@@ -1225,8 +1224,11 @@ class Telescope(Device):
                 The device did not *successfully* complete the request.
        
         Notes:
-            * Returns only after the home position has been found. At this point the AtHome 
-              property will be True. TODO [needs change!]
+            * **Asynchronous** (non-blocking): Use the :py:attr:`AtHome` property
+              to monitor the operation. When the mount has  
+              *successfully* reached its home position, :py:attr:`Slewing` 
+              becomes False and :py:attr:`AtHome` 
+              becomes True. See :ref:`async_faq`
 
         """
         self._put("findhome", 60)   # Extended timeout for bleeping sync method
@@ -1268,15 +1270,14 @@ class Telescope(Device):
         if the park operation has *successfully* been started, or 
         :py:attr:`Slewing` = False which means the mount is already parked 
         (and of course :py:attr:`AtPark` will already be True). See Notes, 
-        and :ref:`async_faq`  TODO [Review] I believe most mounts already 
-        implement this async. Should we just go with it?
+        and :ref:`async_faq` 
 
         Raises:
             NotImplementedException: If the mount does not support parking. 
                 In this case :py:attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            ParkedException: If :py:attr:`AtPark` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException:An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -1358,7 +1359,7 @@ class Telescope(Device):
             Altitude: Altitude coordinate (degrees, positive up).
 
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: If :py:attr:`AtPark` is True
             InvalidValueException: If either of the coordinates are invalid 
             NotImplementedException: If the mount does not support alt/az slewing. 
                 In this case :py:attr:`CanSlewAltAz` will be False.
@@ -1394,7 +1395,7 @@ class Telescope(Device):
             Declination: Declination coordinate (degrees).
         
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: If :py:attr:`AtPark` is True
             NotImplementedException: If the mount does not support async slewing
                 to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
             InvalidValueException: If either of the coordinates are invalid 
@@ -1430,7 +1431,7 @@ class Telescope(Device):
         See Notes, and :ref:`async_faq`
 
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: If :py:attr:`AtPark` is True
             NotImplementedException: If the mount does not support async slewing
                 to equatorial coordinates. In this case :py:attr:`CanSlewAsync` will be False.
             NotConnectedException: If the device is not connected
@@ -1458,7 +1459,7 @@ class Telescope(Device):
             Altitude: Corrected Altitude coordinate (degrees, positive up).
 
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: If :py:attr:`AtPark` is True
             InvalidValueException: If either of the coordinates are invalid 
             NotImplementedException: If the mount does not support alt/az
                 sync. In this case :py:attr:`CanSyncAltAz` will be False.
@@ -1478,7 +1479,7 @@ class Telescope(Device):
             Declination: Corrected Declination coordinate (degrees).
 
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: [REVIEW] If :py:attr:`AtPark` is True
             NotImplementedException: If the mount does not support equatorial
                 coordinate synchronization. In this case 
                 :py:attr:`CanSync` will be False.
@@ -1497,7 +1498,7 @@ class Telescope(Device):
         :py:attr:`TargetDeclination`. 
 
         Raises:
-            ParkedException: TODO [REVIEW] If :py:attr:`AtPark` is True
+            ParkedException: If :py:attr:`AtPark` is True
             NotImplementedException: If the mount does not support equatorial
                 coordinate synchronization. In this case 
                 :py:attr:`CanSync` will be False.

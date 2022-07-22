@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -37,6 +37,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -48,7 +49,7 @@ class Focuser(Device):
     Attention:
         It is possible to command the focuser to a position exceeding 
         its limits (see notes for :py:attr:`MaxStep`) without receiving
-        an exception. This is by design.  TODO [REVIEW]
+        an exception. This is by design.
 
     """
     def __init__(
@@ -265,7 +266,7 @@ class Focuser(Device):
                 value of the :py:attr:`Absolute` property. 
             
         Raises:
-            InvalidValueException: TODO [REVIEW] If Position would result in a movement beyond 
+            InvalidValueException: If Position would result in a movement beyond 
                 :py:attr:`MaxStep`.
             InvalidOperationException: **IFocuserV2 and earlier only** Raised if 
                 :py:attr:`TempComp` is true and a Move() is attempted. This 

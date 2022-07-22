@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -37,6 +37,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -524,7 +525,7 @@ class Camera(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * TODO Some cameras have multiple gain modes, resulting in this value changing.
+            * Some cameras have multiple gain modes, resulting in this value changing.
             * It is recommended that this property be retrieved only after a connection is 
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -804,7 +805,7 @@ class Camera(Device):
         return self._get("heatsinktemperature")
 
     @property
-    def ImageArray(self) -> List[int]:      # TODO This could be Float
+    def ImageArray(self) -> List[int]:
         """Return a multidimensional list containing the exposure pixel values.
 
         Raises:
@@ -1523,8 +1524,7 @@ class Camera(Device):
                 :py:attr:`BinY`, :py:attr:`NumX`, :py:attr:`NumY`, :py:attr:`StartX`,
                 and :py:attr:`StartY` form an illegal combination.
             InvalidOperationException: If :py:attr:`CanAsymmetricBin` is False, yet
-                :py:attr:`BinX` is not equal to :py:attr:`BinY`. TODO Is this right?
-                Isn't this another combination of illegal *values*?
+                :py:attr:`BinX` is not equal to :py:attr:`BinY`.
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions. You may get this

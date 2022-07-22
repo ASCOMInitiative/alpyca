@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -39,6 +39,7 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 16-Jun-22 (rbd) 2.0.0-dev3 Doc changes to CanReverse, markup correction to 
 #                            Sync(), no changes to logic.
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -257,9 +258,8 @@ class Rotator(Device):
             Position: The requested angle, degrees.
             
         Raises:
-            InvalidValueException: TODO [REVIEW] The given position is
-                0 <= position < 360. [or does it just apply modulo 360? 
-                Then what is an "invalid" value?]
+            InvalidValueException: The given position is
+                0 <= position < 360. 
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
@@ -272,7 +272,7 @@ class Rotator(Device):
               the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
             * Calling Move causes the TargetPosition property to change to  the
               value of the Position parameter (modulo 
-              360 degrees [TODO REVIEW]), then starts rotation to TargetPosition. 
+              360 degrees), then starts rotation to TargetPosition. 
               Position includes the effect of any previous Sync() operation.
         
         """
@@ -290,7 +290,7 @@ class Rotator(Device):
             Position: The requested angle, degrees.
 
         Raises:
-            InvalidValueException: TODO [REVIEW] The given position is
+            InvalidValueException: The given position is
                 0 <= position < 360. [or does it just apply modulo 360? 
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
@@ -320,7 +320,7 @@ class Rotator(Device):
             Position: The requested angle, degrees.
 
         Raises:
-            InvalidValueException: TODO [REVIEW] The given position is
+            InvalidValueException: The given position is
                 0 <= position < 360. [or does it just apply modulo 360? 
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected

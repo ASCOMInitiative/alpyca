@@ -8,7 +8,7 @@
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
 # Python Compatibility: Requires Python 3.7 or later
-# Doc Environment: Sphinx v4.5.0 with autodoc, autosummary, napoleon, and autoenum
+# Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/BobDenny/alpyca-client
 #
 # -----------------------------------------------------------------------------
@@ -37,6 +37,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # -----------------------------------------------------------------------------
 
 from alpaca.docenum import DocIntEnum
@@ -156,8 +157,8 @@ class Dome(Device):
     def Azimuth(self) -> float:
         """Dome azimuth (degrees) of the opening to the sky
 
-        TODO - Clarify  that this does not include the geometric transformations needed 
-        for mount and optics configurations. See notes and attention. 
+        This this does not include the geometric transformations needed 
+        for mount and optics configurations. See :ref:`dome-faq`.
 
         Raises:
             NotImplementedException: If the dome does not support directional (azimuth)
@@ -330,8 +331,6 @@ class Dome(Device):
               immediately after returning from an :py:meth:`OpenShutter()` call, 
               and :py:class:`~ShutterState.shutterClosing' immediately after 
               returning from a :py:meth:`CloseShutter()` call.
-            * TODO Really? If actual shutter status can not be read, then reports 
-              back the last shutter state. 
 
         """
         return ShutterState(self._get("shutterstatus"))
@@ -369,14 +368,9 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: TODO Is this right? Must raise an error if :py:attr:`Slaved` 
-                is true, if TODO [WHAT? or SlavedException?] not supported, 
-                if a communications failure TODO [comm errors are everywhere] 
-                occurs, or if the opening can not reach the requested azimuth or altitude, 
-                or if it fails to open or close the roof/shutter, in other words, 
-                if the device cannot *successfully complete* a previous movement 
-                request. This exception may be encountered on any call to the device.
-                TODO REVIEW, way too wordy. The key is "successfully complete" right?
+            DriverException: If the device cannot *successfully complete* 
+                a previous movement request. This exception may be encountered 
+                on any call to the device.
         
         Notes:
             * This is the correct property to use to determine *successful* completion of 
@@ -396,7 +390,7 @@ class Dome(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: TODO [REVIEW comm failure is EVERYWHERE!]
+            DriverException:
                 If a communications failure occurs, or if the AbortSlew()
                 request itself fails in some way. This exception may be encountered 
                 on any call to the device. 
@@ -438,7 +432,7 @@ class Dome(Device):
               :py:attr:`~ShutterState.shutterClosing` as you would expect.
 
         Attention:
-            TODO [REVIEW] This operation is not cross-coupled in any way with the currently
+            This operation is not cross-coupled in any way with the currently
             requested :py:attr:`Azimuth` and :py:attr:`Altitude`. Opening and closing 
             are used to shield and expose the opening to the sky, wherever it is 
             specified to be. 
@@ -455,7 +449,7 @@ class Dome(Device):
         Raises:
             NotImplementedException: If the dome does not support homing.
             NotConnectedException: If the device is not connected
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -500,7 +494,7 @@ class Dome(Device):
               :py:attr:`~ShutterState.shutterOpening` as you would expect.
 
         Attention:
-            TODO REVIEW This operation is not cross-coupled in any way with the currently
+            This operation is not cross-coupled in any way with the currently
             requested :py:attr:`Azimuth` and :py:attr:`Altitude`. Opening and closing 
             are used to shield and expose the opening to the sky, wherever it is 
             specified to be. 
@@ -521,8 +515,8 @@ class Dome(Device):
             NotImplementedException: If the dome does not support parking. 
                 In this case :py:attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: TODO [REVIEW-not in C# docs] If :py:attr:`AtPark` is True
-            SlavedException: TODO [REVIEW-Not in C# docs] If :py:attr:`Slaved` is True
+            ParkedException: If :py:attr:`AtPark` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException:An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -545,7 +539,7 @@ class Dome(Device):
             NotImplementedException: If the dome does not support the setting
                 of the park position. In this case :py:attr:`CanSetPark` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -567,7 +561,7 @@ class Dome(Device):
             NotImplementedException: If the dome opening does not support vertical 
                 (altitude) control. In this case :py:attr:`CanSetAltitude` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -583,7 +577,7 @@ class Dome(Device):
               of the position of the opening.
 
         Attention: 
-            TODO [REVIEW] If the opening is closed, this method must still complete, 
+            If the opening is closed, this method must still complete, 
             with the dome controller accepting the requested position as its
             :py:attr:`Altitude` property. Later, when opening,
             via :py:meth:`OpenShutter()`, the last received/current 
@@ -606,7 +600,7 @@ class Dome(Device):
             NotImplementedException: If the dome does not support rotational 
                 (azimuth) control. In this case :py:attr:`CanSetAzimuth` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
@@ -624,7 +618,7 @@ class Dome(Device):
               position of the opening. 
 
         Attention: 
-            TODO [REVIEW] If the shutter is closed, this method will still complete, 
+            If the shutter is closed, this method will still complete, 
             with the dome controller accepting the requested position as its
             :py:attr:`Azimuth` property. Later, when the shutter is opened 
             via :py:meth:`OpenShutter()`, the last received/current 
@@ -642,7 +636,7 @@ class Dome(Device):
             NotImplementedException: If the shutter does not support azimuth
                 synchronization. In this case :py:attr:`CanSyncAzimuth` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: TODO [REVIEW] If :py:attr:`Slaved` is True
+            SlavedException: If :py:attr:`Slaved` is True
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
