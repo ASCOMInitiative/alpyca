@@ -50,7 +50,7 @@ Installation
 ------------
 Requires Python 3.7 or later. The package installs from PyPi as::
 
-    pip install Alpyca
+    pip install alpyca
 
 or if you have the source code in a tar file, extract it and run::
 
