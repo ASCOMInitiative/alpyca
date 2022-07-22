@@ -8,7 +8,7 @@
 #
 # Python Compatibility: Requires Python 3.7 or later
 # Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
-# GitHub: https://github.com/BobDenny/alpyca-client
+# GitHub: https://github.com/ASCOMInitiative/alpyca
 #
 # -----------------------------------------------------------------------------
 # MIT License
