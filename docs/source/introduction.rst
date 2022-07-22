@@ -38,8 +38,8 @@ our best efforts as of May 2022. At that time, the ASCOM Core Team announced
 that they are formalizing the operation of the non-blocking (asynchronous)
 methods in the standards documentation. This library manual includes
 additional information and clarification of the asynchronous methods which
-follows the formal specification changes as of July 2022. If there are any
-resulting changes to the inte3rface definitions, we will release an updated
+follows the formalization agreements as of July 2022. If there are any
+resulting changes to the interface definitions, we will release an updated
 (compatible) library as soon as possible.
 
 .. note:: 
@@ -139,21 +139,24 @@ Results::
 
 Member Capitalization
 ---------------------
-This help file provides detailed descriptions of the ASCOM Interfaces for all supported device types.
-Note that, rather than follow :pep:`8`, the method and property names, as well as enumerations 
-and exceptions, all follow the capitalization that has historically been assigned to ASCOM
-interface members. The Class and member descriptions, notes, and exceptions raised all 
-follow the universal ASCOM standards established long ago.
+This help file provides detailed descriptions of the ASCOM Interfaces
+for all supported device types. Note that, rather than follow :pep:`8`, 
+the method and property names, as well as enumerations and exceptions,
+all follow the capitalization that has historically been assigned to ASCOM
+interface members. The Class and member descriptions, notes, and exceptions
+raised all follow the universal ASCOM standards established long ago.
 
 Numeric Datatypes
 -----------------
-The Alpyca library takes care of numeric conversions so you always work in native 
-Python numbers. When comparing numeric datatypes here in Python 3, keep the following in mind:
+The Alpyca library takes care of numeric conversions so you always work in
+native Python numbers. When comparing numeric datatypes here in Python 3,
+keep the following in mind:
 
-* Python 3's ``float`` is equivalent to a double-precision floating point in other languages 
+* Python 3's ``float`` is equivalent to a double-precision floating point
+  in other languages 
   (e.g. ``double`` in C#, 64-bit)
-* Python 3's ``int`` is not restricted by the number of bits, and can expand to the limit 
-  of available memory.
+* Python 3's ``int`` is not restricted by the number of bits, and can 
+  expand to the limit of available memory.
 
 Example::
 

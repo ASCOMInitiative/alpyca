@@ -14,7 +14,7 @@ Camera-Related Constants
 ------------------------
 .. autoenum:: CameraStates
     :members:
-.. autoenum:: SensorTypes
+.. autoenum:: SensorType
     :members:
 .. autoenum:: ImageArrayElementTypes
     :members:
