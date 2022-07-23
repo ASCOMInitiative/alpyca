@@ -6,7 +6,8 @@ Version 2.0.1 (2022-07-26)
 Changes since 2.0.1-rc1
 -----------------------
 
-- Documentation corrections, no logic changes
+- Camera.SensorTypes was corrected to Camera.SensorType in the interface
+- Documentation corrections and clarifications
 
 Changes since 2.0.0-dev2
 ------------------------
