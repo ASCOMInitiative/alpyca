@@ -3,22 +3,22 @@
     failing to wrap them with the text. It also chokes on the |xxx|
     format hyperlinks to externals that I use for opening in a separate
     tab. Therefore I have html and rinoh conditionals in these docs (typ)
-    
+
 .. only:: html
 
     .. image:: alpaca128.png
         :height: 92px
         :width: 128px
         :align: right
-    
+
 Alpaca Device Server Discovery
 ==============================
 This module provides Alpaca device server discovery service. Search your
-local network segment (or VLAN) for Alpaca device *servers*, returning 
-a list consisting of ``ipaddress:port`` strings for each one found. 
+local network segment (or VLAN) for Alpaca device *servers*, returning
+a list consisting of ``ipaddress:port`` strings for each one found.
 Each Alpaca device server may provide access to multiple Alpaca device
-types, and multiple Alpaca devices of a given type. Use the 
-:doc:`alpaca.management` functions to learn the details of the 
+types, and multiple Alpaca devices of a given type. Use the
+:doc:`alpaca.management` functions to learn the details of the
 served device(s).
 
 Example::

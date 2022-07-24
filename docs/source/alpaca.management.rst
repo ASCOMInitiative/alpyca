@@ -3,19 +3,19 @@
     failing to wrap them with the text. It also chokes on the |xxx|
     format hyperlinks to externals that I use for opening in a separate
     tab. Therefore I have html and rinoh conditionals in these docs (typ)
-    
+
 .. only:: html
 
     .. image:: alpaca128.png
         :height: 92px
         :width: 128px
         :align: right
-    
+
 Alpaca Device Server Management
 ===============================
-Provides information about an Alpaca device server found via 
-:doc:`alpaca.discovery`, and the devices which are provided by 
-that server. For more information see the |apiref|. 
+Provides information about an Alpaca device server found via
+:doc:`alpaca.discovery`, and the devices which are provided by
+that server. For more information see the |apiref|.
 
 Example using the Management functions::
 

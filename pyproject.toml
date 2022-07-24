@@ -42,6 +42,17 @@ testpaths = [
     "PyTest"
 ]
 
+[tool.rstcheck]
+ignore_directives = [
+    "autoclass",
+    "automodule",
+    "autofunction",
+    "autoenum"
+]
+ignore_messages = [
+    "Hyperlink target .* is not referenced"
+]
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

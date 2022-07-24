@@ -22,7 +22,7 @@ Camera-Related Constants
 Example: Acquiring an Image, Creating FITS Image
 ------------------------------------------------
 
-Using numpy and astropy.io.fits, connect to an Alpaca Camera, 
+Using numpy and astropy.io.fits, connect to an Alpaca Camera,
 acquire a short image, download and make a local FITS file::
 
     import os
@@ -37,7 +37,7 @@ acquire a short image, download and make a local FITS file::
     #
     c = Camera('localhost:32323', 0)    # Connect to the ALpaca Omni Simulator
     c.Connected = True
-    c.BinX = 1 
+    c.BinX = 1
     c.BinY = 1
     # Assure full frame after binning change
     c.StartX = 0
@@ -72,7 +72,7 @@ acquire a short image, download and make a local FITS file::
     else:
         nda = np.array(img, dtype=imgDataType).transpose(2,1,0)
     #
-    # Create the FITS header and common FITS fields 
+    # Create the FITS header and common FITS fields
     #
     hdr = fits.Header()
     hdr['COMMENT'] = 'FITS (Flexible Image Transport System) format defined in Astronomy and'

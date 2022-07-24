@@ -3,29 +3,29 @@
     failing to wrap them with the text. It also chokes on the |xxx|
     format hyperlinks to externals that I use for opening in a separate
     tab. Therefore I have html and rinoh conditionals in these docs (typ)
-    
+
 .. only:: html
 
     .. image:: alpaca128.png
         :height: 92px
         :width: 128px
         :align: right
-    
+
 Introduction and Quick Start
 ============================
 
 .. only:: html
 
-    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
+    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
     For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
 
 .. only:: rinoh or rst
 
-    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol. 
+    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
     For more information see the
-    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_, 
+    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_,
     specifically the
-    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_ 
+    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_
     section, and the
     `Alpaca API Reference (PDF) <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_.
 
@@ -33,7 +33,7 @@ Introduction and Quick Start
 
 Status of This Document
 -----------------------
-The descriptions of the ASCOM Standard interfaces implemented in Alpyca are 
+The descriptions of the ASCOM Standard interfaces implemented in Alpyca are
 our best efforts as of May 2022. At that time, the ASCOM Core Team announced
 that they are formalizing the operation of the non-blocking (asynchronous)
 methods in the standards documentation. This library manual includes
@@ -42,9 +42,9 @@ follows the formalization agreements as of July 2022. If there are any
 resulting changes to the interface definitions, we will release an updated
 (compatible) library as soon as possible.
 
-.. note:: 
-    Changes to the interfaces will never be breaking. Your code using this 
-    library is safe from being broken by such changes. 
+.. note::
+    Changes to the interfaces will never be breaking. Your code using this
+    library is safe from being broken by such changes.
 
 Installation
 ------------
@@ -96,7 +96,7 @@ Simple Example
     on your local system
 
 Then execute this little program::
-    
+
     import time
     from alpaca.telescope import *      # Multiple Classes including Enumerations
     from alpaca.exceptions import *     # Or just the exceptions you want to catch
@@ -123,7 +123,7 @@ Then execute this little program::
     finally:                            # Assure that you disconnect
         print("Disconnecting...")
         T.Connected = False
-    
+
 Results::
 
     Connected to Alpaca Telescope Sim
@@ -140,7 +140,7 @@ Results::
 Member Capitalization
 ---------------------
 This help file provides detailed descriptions of the ASCOM Interfaces
-for all supported device types. Note that, rather than follow :pep:`8`, 
+for all supported device types. Note that, rather than follow :pep:`8`,
 the method and property names, as well as enumerations and exceptions,
 all follow the capitalization that has historically been assigned to ASCOM
 interface members. The Class and member descriptions, notes, and exceptions
@@ -153,9 +153,9 @@ native Python numbers. When comparing numeric datatypes here in Python 3,
 keep the following in mind:
 
 * Python 3's ``float`` is equivalent to a double-precision floating point
-  in other languages 
+  in other languages
   (e.g. ``double`` in C#, 64-bit)
-* Python 3's ``int`` is not restricted by the number of bits, and can 
+* Python 3's ``int`` is not restricted by the number of bits, and can
   expand to the limit of available memory.
 
 Example::
@@ -165,18 +165,18 @@ Example::
     x = 10000000000000000000000000000000000000000000
     x = x + 1
     print (x)
-    
+
 Output::
 
     10000000000000000000000000000000000000000001
- 
+
 Common Misconceptions and Confusions
 ------------------------------------
 
 .. only:: html
 
     Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
-    provide a strong framework for reliability and integrity. We see newcomers to programming 
+    provide a strong framework for reliability and integrity. We see newcomers to programming
     looking for help on the |supforum|. There are a few subject areas within which misconceptions
     and confusion are common. Before starting an application development project with Alpyca,
     you may benefit from reviewing the following design principles that are *foundational*:
@@ -188,9 +188,9 @@ Common Misconceptions and Confusions
 .. only:: rinoh or rst
 
     Throughout the evolution of ASCOM, and particularly recently with Alpaca, our goal has been to
-    provide a strong framework for reliability and integrity. We see newcomers to programming 
+    provide a strong framework for reliability and integrity. We see newcomers to programming
     looking for help on the
-    `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_. 
+    `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_.
     There are a few subject areas within which misconceptions
     and confusion are common. Before starting an application development project with Alpyca,
     you may benefit from reviewing the following design principles that are *foundational*:

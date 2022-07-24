@@ -39,7 +39,7 @@ independent of the particular make/model of device.
     telescope. This includes not only telescopes that are controlled with
     classic ASCOM/COM on a Windows machine, but also any telescopes which
     are *not* connected to a Windows machine, but instead speak Alpaca
-    natively. The Windows |remote| gives an Alpaca interface to any 
+    natively. The Windows |remote| gives an Alpaca interface to any
     Windows-resident device, allowing you to use the device via this library
     from any platform on the net or local host.
 
@@ -47,7 +47,7 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     For background see |about| on the |ascsite|. As an astronomy developer
-    wanting to use Alpaca, we suggest you look over |devhelp| and join 
+    wanting to use Alpaca, we suggest you look over |devhelp| and join
     the |supforum|.
 
     .. Attention::
@@ -58,24 +58,24 @@ independent of the particular make/model of device.
     For example, the same code can be used to control any ASCOM-compatible
     telescope. This includes not only telescopes that are controlled with
     classic ASCOM/COM on a Windows machine, but also any telescopes which
-    are *not* connected to a Windows machine, but instead speak Alpaca 
-    natively. The Windows 
-    `ASCOM Remote middleware <https://github.com/ASCOMInitiative/ASCOMRemote/releases>`_ 
-    gives an Alpaca interface to any Windows-resident device, allowing you 
-    to use the device via this library from any platform on the net or 
+    are *not* connected to a Windows machine, but instead speak Alpaca
+    natively. The Windows
+    `ASCOM Remote middleware <https://github.com/ASCOMInitiative/ASCOMRemote/releases>`_
+    gives an Alpaca interface to any Windows-resident device, allowing you
+    to use the device via this library from any platform on the net or
     local host.
 
     .. Tip::
         **Start Here:** :doc:`introduction`
 
 
-    For background see 
+    For background see
     `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_
-    on the 
-    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_. 
-    As an astronomy developer wanting to use Alpaca, we suggest 
-    you look over 
-    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_ and join the 
+    on the
+    `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_.
+    As an astronomy developer wanting to use Alpaca, we suggest
+    you look over
+    `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_ and join the
     `ASCOM Driver and Application Development Support Forum <https://ascomtalk.groups.io/g/Developer>`_.
 
     .. Attention::
