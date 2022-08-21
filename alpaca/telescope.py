@@ -38,6 +38,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
+# 21-Aug-22 (rbd) 2.0.2 Fix driveRates enum (GitHub issue #3)
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
@@ -56,7 +57,7 @@ class AlignmentModes(DocIntEnum):
 class DriveRates(DocIntEnum):
     """Well-known telescope tracking rates"""
     driveSidereal   = 0, 'Sidereal tracking rate (15.041 arcseconds per second).'
-    drivelunar      = 1, 'Lunar tracking rate (14.685 arcseconds per second).'
+    driveLunar      = 1, 'Lunar tracking rate (14.685 arcseconds per second).'
     driveSolar      = 2, 'Solar tracking rate (15.0 arcseconds per second).'
     driveKing       = 3, 'King tracking rate (15.0369 arcseconds per second).'
 
