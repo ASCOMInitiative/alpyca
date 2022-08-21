@@ -38,7 +38,8 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
-# 21-Aug-22 (rbd) 2.0.2 Fix driveRates enum (GitHub issue #3)
+# 21-Aug-22 (rbd) 2.0.2 Fix driveRates enum (GitHub issue #3). Fix descriptive
+#                 text for pierWest and pierUnknown (GitHub issue $5)
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
@@ -80,8 +81,8 @@ class GuideDirections(DocIntEnum):    # Shared by Camera
 class PierSide(DocIntEnum):
     """The pointing state of the mount"""
     pierEast        = 0, 'Normal pointing state - Mount on the East side of pier (looking West)'
-    pierWest        = 1, 'Unknown or indeterminate.' 
-    pierUnknown     = -1, 'Through the pole pointing state - Mount on the West side of pier (looking East)'
+    pierWest        = 1,  'Through the pole pointing state - Mount on the West side of pier (looking East)'
+    pierUnknown     = -1, 'Unknown or indeterminate.'
 
 class TelescopeAxes(DocIntEnum):
     axisPrimary     = 0, 'Primary axis (e.g., Right Ascension or Azimuth).'
