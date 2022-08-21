@@ -40,6 +40,7 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 17-Jul-22 (rbd) 2.0.1rc1 Speed up by re-using ports via requests.Session().
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
+# 21-Aug-22 (rbd) 2.0.2 Fix DriverVersion to return the string GitHub issue #4
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -293,7 +294,7 @@ class Device:
               value. 
 
         """
-        return float(self._get("driverversion"))
+        return self._get("driverversion")
 
     @property
     def InterfaceVersion(self) -> int:
