@@ -38,6 +38,7 @@
 # 03-May-22 (rbd) Remove import of 're' no longer used. IPv6 query comments, 
 #                 default timeout is 2 sec.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 21-Aug-22 (rbd) 2.0.2 Fix multicast to 127.0.0.1 GitHub Issue #6
 # -----------------------------------------------------------------------------
 
 import json
@@ -94,7 +95,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                             addr = ip['addr']
                             if(addr ==  '127.0.0.1'):
                                 sock.sendto(AlpacaDiscovery.encode(),
-                                            ('127.0.0.1', port))
+                                            ('127.255.255.255', port))
                             elif('broadcast' in ip):
                                 sock.sendto(AlpacaDiscovery.encode(),
                                             (ip['broadcast'], port))
