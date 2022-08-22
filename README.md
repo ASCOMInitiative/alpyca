@@ -1,4 +1,4 @@
-# alpyca (2.0.1rc1)
+# alpyca (2.0.2)
 
 ## Python 3.7+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
@@ -35,7 +35,7 @@ The dependencies listed above are automatically installed with alpyca.
 
 ## Current Status & Documentation
 
-This version 2.0.1rc1 is the first release candidate for 2.0.1. The documentation is
+This version 2.0.2 is the first production release. The documentation is
 extensive and available
 online as **[Alpyca: API Library for Alpaca](https://ascom-standards.org/alpyca/)** as well as a
 **[PDF Document here](https://ascom-standards.org/alpyca/alpyca.pdf)**. See CHANGES.rst for
