@@ -13,15 +13,15 @@
         :width: 128px
         :align: right
 
-    =====================
-    Welcome to Alpyca 2.0
-    =====================
+    =======================
+    Welcome to Alpyca 2.0.2
+    =======================
 
 .. only:: rinoh or rst
 
-    =====================
-    Welcome to Alpyca 2.0
-    =====================
+    =======================
+    Welcome to Alpyca 2.0.2
+    =======================
 
 This document describes the Alpyca package, a Python API client library for
 ASCOM Alpaca, produced by the ASCOM Initiative, and derived from Ethan
@@ -46,6 +46,10 @@ independent of the particular make/model of device.
     .. Tip::
         **Start Here:** :doc:`introduction`
 
+    .. Note::
+        This is version 2.0.2, the first production release. For release notes see
+        |changes| on the |github|.
+
     For background see |about| on the |ascsite|. As an astronomy developer
     wanting to use Alpaca, we suggest you look over |devhelp| and join
     the |supforum|.
@@ -68,8 +72,12 @@ independent of the particular make/model of device.
     .. Tip::
         **Start Here:** :doc:`introduction`
 
+    .. Note::
+        This is version 2.0.2, the first production release. For release notes see
+        `the CHANGES document <https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst>`_
+        on the `Alpyca GitHub repository <https://github.com/ASCOMInitiative/alpyca>`_.
 
-    For background see
+   For background see
     `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_
     on the
     `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_.
@@ -80,6 +88,16 @@ independent of the particular make/model of device.
 
     .. Attention::
         Alpaca is not dependent on Windows! See `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_.
+
+.. |changes| raw:: html
+
+    <a href="https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst" target="_blank">
+    the CHANGES document</a> (external)
+
+.. |github| raw:: html
+
+    <a href="https://github.com/ASCOMInitiative/alpyca/" target="_blank">
+    Alpyca GitHub repository</a>
 
 .. |ascsite| raw:: html
 
