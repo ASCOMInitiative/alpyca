@@ -38,6 +38,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
+# 07-Nov-22 (rbd) 2.0.3 Focuser.Stepsize is a float (GitHub issue #7)
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -163,7 +164,7 @@ class Focuser(Device):
         return self._get("position")
 
     @property
-    def StepSize(self) -> int:
+    def StepSize(self) -> float:
         """Step size (microns) for the focuser.
         
          Raises:

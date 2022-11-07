@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "alpyca"
-version = "2.0.2" 
+version = "2.0.3" 
 description = "API library for all ASCOM Alpaca devices, management, and discovery"
 authors = ["Robert B. Denny <rdenny@dc3.com>"]
 license = "LICENSE"
