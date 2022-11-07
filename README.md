@@ -1,4 +1,4 @@
-# alpyca (2.0.2)
+# alpyca (2.0.3)
 
 ## Python 3.7+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
