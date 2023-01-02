@@ -25,20 +25,22 @@ The package installs from PyPi as
 pip install alpyca
 ```
 
-or if you have the source code in a tar file, extract it and run
+or if you have the source code in a tar file, extract it and run (with **Python 3**)
 
 ```sh
-python3 setup.py install
+python setup.py install
 ```
 
-The dependencies listed above are automatically installed with alpyca.
+The dependencies listed above (and others they may depend on) are automatically 
+installed with alpyca.
 
 ## Current Status & Documentation
 
-This version 2.0.3 is the third production release. The documentation is
-extensive and available
+This version 2.0.4 is the third production release (2.0.3 is unpublished). 
+The documentation is extensive and available
 online as **[Alpyca: API Library for Alpaca](https://ascom-standards.org/alpyca/)** as well as a
-**[PDF Document here](https://ascom-standards.org/alpyca/alpyca.pdf)**. See CHANGES.rst for
+**[PDF Document here](https://ascom-standards.org/alpyca/alpyca.pdf)**. See 
+**[CHANGES.rst](https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst)** (on GitHub) for
 change log.
 
 ## Feedback and Discussion
@@ -55,7 +57,7 @@ the [General Requirements](https://ascom-standards.org/Standards/Requirements.ht
 ## Example
 
 First download, install and run the _cross-platform_
-**[Alpaca Omni Simulator](https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme)**
+**[Alpaca Omni Simulator](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators#readme)**
 which will give you fully functional simulators for _all_ Alpaca devices, as well as a _live_
 OpenAPI/Swagger interface to the Alpaca RESTful endpoints (_see the details below_). This example will
 use the Telescope simulator. Assuming you are running the Omni Simulator on your local host
@@ -107,8 +109,8 @@ program using alpaca:
 
 ## Alpaca Omni Simulators
 
-The ASCOM Alpaca Simulators are [available via GitHub here](https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators).
-Using the \[[Latest](https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators/releases/tag/v0.1.2)\] link, scroll down the
+The ASCOM Alpaca Simulators are [available via GitHub here](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators).
+Using the \[[Latest](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases/latest)\] link, scroll down the
 Assets section and pick the package for your OS and CPU type. Extract all files to a directory and start via
 
 ```sh
@@ -119,6 +121,7 @@ Assets section and pick the package for your OS and CPU type. Extract all files 
 server and simulated devices. Once you get this running you are ready to try the sample above.
 
 ![Initial OmniSim Display](https://ascom-standards.org/alpyca/readme-assets/InitialBrowserAnnotated.png)
+
 
 ## ASCOM Remote
 

@@ -92,7 +92,7 @@ Simple Example
 .. only:: rinoh or rst
 
     Run the self-contained cross-platform
-    `Alpaca Omni Simulator <https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme>`_
+    `Alpaca Omni Simulator <https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators#readme>`_
     on your local system
 
 Then execute this little program::
@@ -237,7 +237,7 @@ Common Misconceptions and Confusions
 
 .. |omnisim| raw:: html
 
-    <a href="https://github.com/DanielVanNoord/ASCOM.Alpaca.Simulators#readme" target="_blank">
+    <a href="https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators#readme" target="_blank">
     Alpaca Omni Simulator</a> (external)
 
 
