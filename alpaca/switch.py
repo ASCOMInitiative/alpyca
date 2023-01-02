@@ -36,6 +36,8 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 01-Jan-23 (rbd) 2.0.4 https://github.com/ASCOMInitiative/alpyca/issues/8
+#                 Change 'ID' to 'Id' for switch parameters. 
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -95,7 +97,7 @@ class Switch(Device):
               limit switch or a sensor.
         
         """
-        return self._get("canwrite", ID=Id)
+        return self._get("canwrite", Id=Id)
 
     def GetSwitch(self, Id: int) -> bool:
         """The state of the specified switch device.
@@ -115,7 +117,7 @@ class Switch(Device):
             * On is True, Off is False.
 
         """
-        return self._get("getswitch", ID=Id)
+        return self._get("getswitch", Id=Id)
 
     def GetSwitchDescription(self, Id: int) -> str:
         """The textual description of the specified switch device.
@@ -134,7 +136,7 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
-        return self._get("getswitchdescription", ID=Id)
+        return self._get("getswitchdescription", Id=Id)
 
     def GetSwitchName(self, Id: int) -> str:
         """The textual name of the specified switch device.
@@ -153,7 +155,7 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
-        return self._get("getswitchname", ID=Id)
+        return self._get("getswitchname", Id=Id)
     
     def GetSwitchValue(self, Id: int) -> float:
         """The value of the specified switch device as a float.
@@ -172,7 +174,7 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
-        return self._get("getswitchvalue", ID=Id)
+        return self._get("getswitchvalue", Id=Id)
 
     def MaxSwitchValue(self, Id: int) -> float:
         """The maximum value of the specified switch device as a double.
@@ -191,7 +193,7 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
-        return self._get("maxswitchvalue", ID=Id)
+        return self._get("maxswitchvalue", Id=Id)
 
     def MinSwitchValue(self, Id: int) -> float:
         """The minimum value of the specified switch device as a double.
@@ -210,7 +212,7 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
         
         """
-        return self._get("minswitchvalue", ID=Id)
+        return self._get("minswitchvalue", Id=Id)
 
     def SetSwitch(self, Id: int, State: bool) -> None:
         """Set a switch device to the specified state
@@ -231,7 +233,7 @@ class Switch(Device):
             * On is True, Off is False.
 
         """
-        self._put("setswitch", ID=Id, State=State)
+        self._put("setswitch", Id=Id, State=State)
 
     def SetSwitchName(self, Id: int, Name: str) -> None:
         """Set a switch device name to the specified value.
@@ -252,7 +254,7 @@ class Switch(Device):
             * On is True, Off is False.
 
         """
-        self._put("setswitchname", ID=Id, Name=Name)
+        self._put("setswitchname", Id=Id, Name=Name)
 
     def SetSwitchValue(self, Id: int, Value: float) -> None:
         """Set a switch device value to the specified value.
@@ -276,7 +278,7 @@ class Switch(Device):
             * On is True, Off is False.
 
         """
-        self._put("setswitchvalue", ID=Id, Value=Value)
+        self._put("setswitchvalue", Id=Id, Value=Value)
 
     def SwitchStep(self, Id: int) -> float:
         """The step size of the specified switch device (see Notes).
@@ -296,4 +298,4 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
 
         """
-        return self._get("switchstep", ID=Id)
+        return self._get("switchstep", Id=Id)

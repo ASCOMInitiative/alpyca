@@ -1,7 +1,12 @@
-Version 2.0.3 (2022-11-15)
+Version 2.0.4 (2023-01-01)
 ==============================
 
-- Second production release
+- Third production release
+
+Changes since 2.0.3
+-------------------
+
+- Switch interface now uses ``Id`` instead of ``ID`` for switch parameters. (`GitHub Issue #8 <https://github.com/ASCOMInitiative/alpyca/issues/8>`_)
 
 Changes since 2.0.2
 -------------------
