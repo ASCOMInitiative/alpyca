@@ -48,7 +48,7 @@ extensions = [
     # https://enum-tools.readthedocs.io/en/latest/api/autoenum.html
     'enum_tools.autoenum',
     # https://github.com/brechtm/rinohtype  Makes PDF
-    #'rinoh.frontend.sphinx'
+    'rinoh.frontend.sphinx'
 ]
 
 # Autodoc settings (override defaults)
@@ -99,10 +99,10 @@ html_theme = 'sphinx_rtd_theme'
 #   https://www.mos6581.org/rinohtype/master/sphinx.html
 # Invokes as > sphinx-build -b rinoh source build/PDF  (I have a makepdf.bat)
 
-# rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
-#                         target='alpyca',            # output file (alpyca.pdf)
-#                         title='Alpyca Library',
-#                         subtitle='Release 2.0.4',
-#                         author='Robert B. Denny <rdenny@dc3.com>',
-#                         logo='alpaca1000.png',
-#                         template='alpyca.rtt')]
+rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
+                        target='alpyca',            # output file (alpyca.pdf)
+                        title='Alpyca Library',
+                        subtitle='Release 2.0.4',
+                        author='Robert B. Denny <rdenny@dc3.com>',
+                        logo='alpaca1000.png',
+                        template='alpyca.rtt')]
