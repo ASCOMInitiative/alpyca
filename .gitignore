@@ -66,6 +66,7 @@ ipython_config.py
 # Environments
 .env
 .venv
+.venvdocs
 env/
 venv/
 ENV/
@@ -107,3 +108,4 @@ ipv6get.py
 HostHdrTest.py
 Alpyca.code-workspace
 disctest.py
+piplist.txt

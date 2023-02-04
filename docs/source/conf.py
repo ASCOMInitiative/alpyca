@@ -34,17 +34,24 @@ release = '2.0.4'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+#
 # RBD Added autodoc (https://www.sphinx-doc.org/en/master/usage/quickstart.html)
 # and Napoleon https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
-# for Alpyca project Python and Extended Google docstrings Also added 
+# for Alpyca project Python and Extended Google docstrings Also added
 # enum-tools[sphinx] to support :: autoenum: in the .rst files.
+#
+#                       =============
+#                       == WARNING ==
+#                       =============
+#   Package importlib-metadata must be 4.11.4 or rinoh will fail
+#   It's possible that any version less than 6.0.0 will work.
 #
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
     # https://github.com/sphinx-contrib/restbuilder
-    'sphinxcontrib.restbuilder',  
+    'sphinxcontrib.restbuilder',
     # https://enum-tools.readthedocs.io/en/latest/api/autoenum.html
     'enum_tools.autoenum',
     # https://github.com/brechtm/rinohtype  Makes PDF
