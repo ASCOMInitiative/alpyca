@@ -1,8 +1,10 @@
 import pytest
 import os
 import sys
+import json
 import platform
 import ast
+import requests
 import xml.etree.ElementTree as ET
 
 @pytest.fixture(scope="module")
@@ -21,22 +23,21 @@ def device(request):
 #
 @pytest.fixture(scope="module")
 def settings(request):
-    n = getattr(request.module, "dev_name")
-    if platform.system() == "Windows":
-        data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{n}/v1/Instance-0.xml"
-    else:                       # TODO No MacOS
-        n = n.lower()
-        data_file = f"{os.getenv('HOME')}/.config/ascom/alpaca/ascom-alpaca-simulator/{n}/v1/instance-0.xml"
-    tree = ET.parse(data_file)
-    root = tree.getroot()
+    n = getattr(request.module, "dev_name").lower()
+    resp = requests.get(f'http://localhost:32323/simulator/v1/{n}/0/xmlprofile?ClientID=0&ClientTransactionID=0')
+    text = eval(resp.content)["Value"]
+    root = ET.ElementTree(ET.fromstring(text)).getroot()
     s = {}
     for i in root.iter("SettingsPair"):
         k = i.find('Key').text
         v = i.find('Value').text
         try:
-            s[k] = ast.literal_eval(v)
+            s[k] = ast.literal_eval(v)      # Numerics
         except:
-            s[k] = v
+            try:
+                s[k] = json.loads(v)        # Boolean strings from XML
+            except:
+                s[k] = v                    # Punt ... string
     print(f"Setup: {n} OminSim Settings retrieved")
     return s
 
@@ -52,19 +53,18 @@ def disconn(request):
 # Common function to get settings for @pytest.mark.skipif() decorators
 #
 def get_settings(device: str):
-    if platform.system() == "Windows":
-        data_file = f"{os.getenv('USERPROFILE')}/.ASCOM/Alpaca/ASCOM-Alpaca-Simulator/{device}/v1/Instance-0.xml"
-    else:                       # TODO No MacOS
-        device = device.lower()
-        data_file = f"{os.getenv('HOME')}/.config/ascom/alpaca/ascom-alpaca-simulator/{device}/v1/instance-0.xml"
-    tree = ET.parse(data_file)
-    root = tree.getroot()
+    resp = requests.get(f'http://localhost:32323/simulator/v1/{device}/0/xmlprofile?ClientID=0&ClientTransactionID=0')
+    text = eval(resp.content)["Value"]
+    root = ET.ElementTree(ET.fromstring(text)).getroot()
     s = {}
     for i in root.iter("SettingsPair"):
         k = i.find('Key').text
         v = i.find('Value').text
         try:
-            s[k] = ast.literal_eval(v)
+            s[k] = ast.literal_eval(v)      # Numerics
         except:
-            s[k] = v
+            try:
+                s[k] = json.loads(v)        # Boolean strings from XML
+            except:
+                s[k] = v                    # Punt ... string
     return s

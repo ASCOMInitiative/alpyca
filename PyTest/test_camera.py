@@ -4,20 +4,22 @@ import pytest
 import conftest
 import time
 
-from alpaca.camera import *             # Sorry Python purists (typ.)
+from alpaca.camera import *                     # Sorry Python purists (typ.)
 from alpaca.exceptions import *
 
-dev_name = "Camera"                     # Device-independent fixtures use this via introspection
+dev_name = "Camera"                             # Device-independent fixtures use this via introspection
 
 #
-# Grab the camera settings for the pytest.mark.skipif() decisions 
+# Grab the camera settings for the pytest.mark.skipif() decisions
 #
 c_sets = conftest.get_settings('Camera')
 
+@pytest.mark.skipif((c_sets['CanFastReadout'] or not 'ReadoutModes' in c_sets), reason='Requires OmniSim FastReadout OFF and ReadoutModes is ON')
 def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test properties:")
+    assert d.InterfaceVersion >= 3              # OmniSim must have ICameraV3 or later
     assert d.CameraXSize == s['CameraXSize']
     assert d.CameraYSize == s['CameraYSize']
     assert d.CanAbortExposure == s['CanAbortExposure']
@@ -30,7 +32,6 @@ def test_props(device, settings, disconn):
     assert d.ExposureMax == s['MaxExposure']
     assert d.ExposureMin == s['MinExposure']
     assert d.ExposureResolution == s['ExposureResolution']
-    #assert d.FastReadout == s['FastReadout']
     assert d.FullWellCapacity == s['FullWellCapacity']
     assert d.HasShutter == s['HasShutter']
     assert d.MaxADU == s['MaxADU']
@@ -39,7 +40,7 @@ def test_props(device, settings, disconn):
     assert d.PixelSizeX == s['PixelSizeX']
     assert d.PixelSizeY == s['PixelSizeY']
     v = s['ReadoutModes']
-    assert d.ReadoutModes == v.split(',')
+    assert d.ReadoutModes == v.split(',')       # Array comparison
     assert d.SensorName == s['SensorName']
     assert d.SensorType == SensorType(s['SensorType'])
 
