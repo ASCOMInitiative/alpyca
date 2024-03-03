@@ -1,0 +1,796 @@
+30-Mar-2022
+-----------
+* Came a long way, restructured. Decided to use Poetry for packaging and publishing. Learned that you need to use virtualenv to create your venvs if you want to activate in a shell and pip from there.
+
+    ===================================================================
+    MORAL: CREATE VENVS WITH VIRTUALENV THEN ADD TO THE VS2019 PROJECT. Then a TCC shell can pip install to the venv.
+    ===================================================================
+
+* Review for Poetry:
+  Install & Config:
+    1. Install poetry globally with the new install-poetry.py per https://python-poetry.org/docs/master/#installation not
+       in a virtual environment! NOTE! I had to download the .py script and run locally. SSL problems (likely my W7 system)
+    2. Configure not to do anything with venvs, leave that to VS2019. poetry configure virtualenvs.create = false
+    3. Add the pw PyPi as a named package repo: poetry config repositories.testpypi https://test.pypi.org/legacy/
+    4. Tell Poetry to use token auth with this: poetry config pypi-token.testpypi <token, be sure it's the test one!>
+  0. Make the VS project and add a virgin venv.
+  1. Open shell and cd to root of project (with a virgin venv!!), then enter the venv (!!) env\Scripts\Activate.bat
+  2. (env) > poetry init to make the pyproject.toml
+  3. In pyproject.toml fill in the other stuff and most importantly the 'packages = [ {include="src/package"} ]' so it knows
+     where your package stuff is!. See https://python-poetry.org/docs/pyproject/. Supply a URL to the GitHub suppore forum.
+  4. poetry add 'xxx' for each dependency, this makes/updates the .lock and also [tool.poetry.dependencies] section.
+  5. poetry install -- This installs the dependencies into the project. AT THIS POINT YOU CAN RUN TESTS.
+  6. poetry build ... the 'stuff' will be in dist ready to publish
+  7. poetry publish -r testpypi to publish to testpypi.
+  8. Try to install the new package (tenv) > pip install -i https://test.pypi.org/simple/ rbd-example-rdenny==0.0.3
+
+30-Mar-2022
+-----------
+* Doing AlpacaClient now:
+  + Re-do the pyproject.toml for poetry, no more build stuff needed
+  + Remove old venv
+  + Create new one with virtualenv so pip works in activated shell. This is now just basic seeded.
+  + Use poetry to add dependencies (see Device.py). Note that the ones that aren't red squiggled are part of Python.
+         FAIL SPECTACULARLY - the C:\Users\Robert B. Denny\AppData\Local\pypoetry\Cache had missing artifacts. I just deleted the
+         whole thing.
+      poetry add requests - ok
+      poetry add netifaces -ok
+      poetry install "No dependencies to install or update"  (there are no extra development dependencies)
+
+31-Mar-2022
+-----------
+* Finally, after gardening my messy Python installations, time to set up to do PyTest based unit testing.
+  This required some reorganizing of the project layout.
+* Use Poetry to install the PyTest package so it knows about it at the time the package is built later.
+  This puts those dependencies into the pyproject.toml under [tool.poetry.dev-dependencies].
+* DAMN ! My gardening ruined virtenv and poetry.
+  + pip install virtenv -> OK runs in shell now
+  + python install.python-poetry.py - damn it's already there.
+  + python install.python-poetry.py --uninstall -> OK
+  + python install.python-poetry.py -> OK but NO ACCESS FROM SHELL
+    > cd %APPDATA%\pypoetry
+    > venv\Scripts\activate.bat
+    (venv) > poetry OK
+  + so this is just the linkage that's broken. Oh  yeah, I need to put poetry bin into my path..... And, sure enough
+    it appears that I dropped the C:\Users\Robert B. Denny\AppData\Roaming\pypoetry\venv\Scripts\poetry.exe from PATH or it changed after my gardening and reinstallation. Whatever. Add  C:\Users\Robert B. Denny\AppData\Roaming\pypoetry\venv\Scripts\poetry.exe to PATH.
+* Back to installing PyTest.
+  + poetry add --dev pytest, put pytest = "^7.1.1" into the pyproject.toml file. > OK
+  + poetry install -- OOPS, added pytest to the .LOCK.
+  * revert the .lock
+  + poetry install --no-dev > OK (no changes to lock)
+  + (venv) > pytest -> OK
+* Time to try a test.
+  + Create PyTest\test_safetymonitor.py
+  + Enter the venv, cd to PyTest, run pytest:
+    (venv) > cd PyTest
+    (venv) > pytest
+================================================= test session starts =================================================
+platform win32 -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
+rootdir: D:\dev\astro\ASCOM Alpaca\AlpycaClient\PyTest
+collected 1 item
+
+test_safetymonitor.py .                                                                                          [100%]
+
+================================================== 1 passed in 0.20s ==================================================
+    -> OK!!!
+* Finally set up VS2019 to use PyTest.
+  + In the Solution Explorer right-click project, Propeties... then in that window on the left Test. Select PyTest.
+  + Now in the Test menu select Test Explorer and get familiar. COOL!!
+  + Run the Not Run test (this one). It ran fine!
+  + Set the IsSafe to false to force a failure. Run it. then expand the Test Explorer to see theTest Detail Summary.
+  + >>> LOOKING GOOD <<<<  (no need for the shell any more, I am such a VS2019 cripple!)
+  + -- Set the Alpaca CLass files to Read Only for  now --
+* Need settings from OmniSimulator: With process-monitor I found the OmniSim settings at C:\Users\Robert B. Denny\.ASCOM\Alpaca\ASCOM-Alpaca-Simulator in subfolders DeviceName\v1\Instance-0.xml. Now to find out how to rad settings from that XML file with Python. FUN!
+  + See ReadOmniSimSettings.py for how to get the settings. Now to turn them into a dictionary.
+* OY!! Earlier I accidentally did a global ssearach/replace on \ to / and it ripped through the modules in venv!!! I had to re-create it. I REMEMBERED TO USE VIRTENV in the SHELL.
+
+01-Apr-2022
+-----------
+* I noticed the Test menu items were dimmed out... for a while ?!?!? While looking for the solution they came back? Anyway, I found that the right way for PyTest to be used is via a PyTest.ini file, see https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref but it seems that the pyproject.toml file is sufficient. https://docs.pytest.org/en/latest/reference/customize.html#config-file-formats For testing a new [tool.pytest.ini_options] section is needed. I wonder if VS2019 uses it? Well I fill in the testpaths but it still took quite a while to light the menu. Maybe opening the test explorer did it. No.
+* I noticed that it is very quiet for successful tests. It doesn't appear to look at the [tool.pytest.ini_options] at all.
+* ==== LESSON: SAVE SETTINGS ON OMNI SIM DEVICES TO POPULATE THE INI FILES ====
+*  While trying to use a class to share one reading of the device's settings, I discovered that __init__() stops PyTest from seeing the module as a test module. I suspect this needs to be a fixture :-( Actually it seems like a fixture is the ticket for reading the device's settings as well as doing the connect as part of setup, and disconnect as part ofthe teardown.
+* Breakthrough, move all the setup and teardown into fixtures in conftest.py which is used by PyTest. No more simconf. The code is independent of the device name. It is able to create the device class from the class name as a string, and then return a handle to a connected device. The connection happens at module scope, remains through all tests of that device, then gets torn down at the end. How cool is that?
+
+04-May-2022
+-----------
+* Much  progress on tests, see Git logs. Imagebytes is now working for ImageArray, more or less.
+* Cloned project into VSCOde on the Raspberry Pi. Ran tests, corrected Camera.py and pushed. Pulled on VS2019/Win, all well.
+
+05-Apr-2022
+-----------
+* Back on VS2019, goal is to get image data into a list of lists so numpy can make an 'nimage'.
+
+07-Apr-2022
+-----------
+* Loads of water under the bridge. I have Camera finisned including ImageBytes support. WooHoo!
+* Install numpy and astropy for testing.
+* WOOHOO producing FITS for Monochrome and bayer. 3-D color not yet.
+
+09-Apr-2022
+-----------
+* WOOHOO All unit tests completed and all but one runs OK. THe pulse guiding in the OmniSim seems weird.
+* What a long road!!!
+
+10-Apr-2022
+-----------
+* Update conftest.py on RPi per Daniel so it finds OmniSim settings on Linux. The tests appear in the tests pane after fixing errors ha ha,
+* Poetry is installed on the RPi.
+* Tests all run on RPi now, and also on Windows.
+* Working with autodocstring. Making a custom template for alpyca to be stored at C:\Users\Robert B. Denny\.vscode\extensions\njpwerner.autodocstring-0.6.1\local\alpyca
+* Install sphinx 4.5.0 (Python3) into the global packages for Python 3.7.
+* Install Autodocstring into VSCode. Per its instructions crate alpaca.mustache as custom template, the 'live' copy is at
+  C:\Users\Robert B. Denny\.vscode\extensions\njpwerner.autodocstring-0.6.1\local\alpaca.mustache.
+* Install Napoleon for using Sphinx to build with Google-like docstrings (the sphinx stuff sucks)
+  https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
+* Run the sphinx-quickstart in the AlpycaClient folder per https://www.sphinx-doc.org/en/master/usage/quickstart.html . I figured out to create a new doc folder at peer with the alpaca packge folder and tell quickstart to put stuff into doc, with the output going into _build. Note that .gitignore already had doc/_build so that's what gave me the idea.
+* NOTE LOOK AT THIS FOR NAPOLEON DOCSTRING https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
+* Failed a few times...
+  https://medium.com/@richdayandnight/a-simple-tutorial-on-how-to-document-your-python-project-using-sphinx-and-rinohtype-177c22a15b5b
+-- TOMORROW --
+
+11-Apr-2022
+-----------
+* Make a doc_test folder and work through this tutorial. I created a simple class and a file of exceptions... more later.
+  === NOTE === I installed Sphinx globally not in the venv. So use a shell that's not tied to the venv.
+* Ran sphinx-quickstart, edited conf.py, added to basically empty index.rst per tutorial
+* Make html ... but not using rinoh to maybe 'automodule' in the .rst is not supported:
+    D:\dev\astro\ASCOM Alpaca\doc_test\docs\source\index.rst:15: ERROR: Unknown directive type "automodule".
+    .. automodule:: api.sample
+* What I got out of this was to create a docs folder within which run sphinx-quickstart, but that won't find anything. See sphinx-apidoc below.
+* sphinx-quickstart -- "Root" means documentation root so take default .
+* In docs/source/conf.py
+    import os
+    import sys
+    sys.path.insert(0, os.path.abspath('..\\..\\api'))  # This has to be from here (doc/source)
+    extensions = [
+            'sphinx.ext.autodoc',
+            'sphinx.ext.autosummary',
+            'sphinx.ext.napoleon'
+    ]
+* Much wrestling. The path is os.path.abspath('..\\..\\api') to find the api .py files
+* I found sphinx-apidoc which generates starter rst files in source. Run when in the docs folder.
+    > sphinx-apidoc -f -o source ..\api
+    Creating file source\device.rst.
+    Creating file source\exceptions.rst.
+    Creating file source\modules.rst.
+  + For now let's get going with the basic index.rst and have it generate some reasonable doc. Remove these and go back to index.rst.
+  + Note that if a specifically called autoexception (or autoclass) has no docstring you will get an error during build that AttributeError: module 'exceptions' has no attribute 'xxxexception'
+  + Making progress in my test. The Dome class is good, the SHutterState enum not....
+  + Need https://enum-tools.readthedocs.io/en/latest/api/autoenum.html to add .. autoenum::
+    1. pip install enum-tools[sphinx] ** HOLY HELL **
+    2. Add enum_tools.autoenum to conf.py extensions
+    3. Example
+        .. module:: dome
+        .. autoclass:: Dome
+            :members:
+        .. autoenum:: ShutterState
+            :members:
+    When you do this, Sphinx finds references to the enum and makes links!!! WOOHOO!!!
+  + Changed Enum types to IntEnum and Sphinx finds the intrisic 'int' type and documents it. I DID THIS IN THE REAL SOURCES TOO.
+  + The instances in  method docs of exceptions are also linked!!! WOOHOO!!!
+  + Oh yeah I had to chage the package from 'api' to 'alpaca' for the imports. THIS WILL CHANGE IN THE REAL THING.
+  + NOW!! LOOK! https://enum-tools.readthedocs.io/en/latest/_modules/enum_tools/demo.html#People See my sample
+    import enum_tools shows error but @enum_tools.documentation.document_enum on ShutterState produces the docs with explanatory text!!
+  + In all cases make html from docs folder is the make process
+  + The command
+    .. module:: covercalibrator
+    .. autoclass:: CoverCalibrator
+        :members:
+        :inherited-members: Device
+    does not include all of the members of Device within the doc of (e.g.) CoverCalibrator
+12-Apr-2022
+-----------
+* Switch gears to look and feel. Alabaster theme sucks. We have the official
+    https://www.sphinx-doc.org/en/master/usage/theming.html
+  as well as the unofficial
+    https://sphinx-themes.org/  <-- THIS IS AWESOME
+* Install new themes (some n/g and removed)
+  pip install sphinx-rtd-theme  (ReadTheDocs, ok)
+  pip install cloud-sptheme  (Finally decided on this one with adjustments in conf.py)
+
+**** OK TIME TO START ON THE REAL THING ****
+* Shell in AlpycaClient\docs > sphinx-apidoc --full -e --tocfile index -o source ..\alpaca
+  + This didn't create separate build folcer but _build. I edited make.bat and Makefile, the moved them up to docs to make source and build folders peers like in the doc-test. You  run make html from the docs folder with source and build under.
+*  Hooray, I resolved the "no alpaca module shit". Point Sphinx to the parent of 'alpaca' folder and it sees the __init__.py in that folder and sees it as a package.
+* enum_tools has to be imported at run time, no way I'm including it and its many dependencies in the package.
+  pip uninstall enum-tools[sphinx] in the main as well as the venv
+  >> OOPS << It has to be in the main site-packages for autoenum in Sphinx.
+14-Apr-2022
+-----------
+* Loads more work with Sphinx done. Learning fast now, finally, after loads of frustration
+* AutoDocString template is in
+  C:\Users\Robert B. Denny\.vscode\extensions\njpwerner.autodocstring-0.6.1\local\alpaca.mustache
+  with a copy in hte AlpycaClient\docs folder.
+* Learned a LOT about cross referencing including use of ~ to remove dotted names leaving last visible.
+
+15-Apr-2022
+-----------
+* From https://stackoverflow.com/questions/39534718/how-to-create-a-pdf-out-of-sphinx-documentation-tool I found rinohtype
+* Installed rinohtype  https://www.mos6581.org/rinohtype/master/index.html
+  pip install rinohtype -- fails.
+* Reference rinohtype on GitHub - https://github.com/brechtm/rinohtype
+
+16-Apr-2022
+-----------
+* Fixed rinoh # (rbd 16-Apr-2022) Apply patch from https://github.com/python/cpython/issues/88625#issuecomment-1093919783
+	diff --git a/src/rinoh/resource.py b/src/rinoh/resource.py
+	index 57143f9d..586a4bb7 100644
+	--- a/src/rinoh/resource.py
+	+++ b/src/rinoh/resource.py
+	@@ -132,7 +132,9 @@ class DynamicEntryPoint(DynamicEntryPointBase):
+	 class DynamicRinohDistribution(ilm.Distribution):
+	     """Distribution for registering resource entry points to at runtime"""
+
+	-    name = ''
+	+    @property
+	+    def name(self):
+	+        return 'rinoh-dynamic-distro'
+
+	     def __init__(self):
+		 self._templates = {}
+  Ref - https://github.com/brechtm/rinohtype
+* BOOYAH!! I made a PDF this morning.
+  Add the rinoh_documents info to docs/source/conf.py
+* CoverCalibrator doc
+* Dome doc
+* Exceptions doc, then I realized Exceptions should not take a number except the two general ones.
+* Re-do exception signatures, fix exception dispatchers in Camera and in Device.
+* Switch from requests package to httpx https://www.python-httpx.org/
+* Add second optional timeout parameter to _get() and _put() funcs in Device mainly for Telescope.FindHome(), which failed
+  unit tests after switching to httpx.
+* Add (w/Poetry) the HTTP/2 support so in the future people can try this out.
+  --- Never mind, don't include this by default ---
+* Fix Telescope unit test after adding timeout for HTTPX to _put() and _get() in Device class.
+
+03-May-2022
+-----------
+* Loads of water under the bridge. Discovery was a big task, and is working great now. Working on the Sphinx docs and tests, adding the module headers via VSCode snippets.
+* Removed refs to and go back to requests. Httpx doesn't work with IPv6, and I got a Dependabot alert on https for security vulnerability. Forget it.
+* --- Time to return to Poetry, fun times ahead ---
+* pyproject.toml is for BOTH Poetry and PyTest. Don't F with the PyTest stuff :-)
+  1. How to adjust the dependencies... ente venv venv\Scripts\Activate.bat Using VSCode PowerSHell (venv)>
+  2. (venv)> poetry check -> all set! (checks pyproject.toml)
+  3. (venv)> poetry show -> WAY TOO MUCH!!! How to start over? Hide poetry.lock and try again
+  4. Now barfs on PyTest in the dev-dependencies I had 7.1.1, pip shows 7.1.2, still barfs.
+  5. Remove entire dev-dependencies section, now barfs on httpx
+  6. Remove httpx manually.
+  7. Now barfs on python-dateutil ^2.8.2 and it is there. Remove requests, netifaces, python-dateutil and maybe start adding back dependencies with poetry add.....
+  8. OK, poetry show (with just Python ^3.7) completes showing no dependencies. We're going to add back and do the lock after that.
+  9. Poetry add netifaces, requests it's making a new lock file.
+  10. (venv)> Poetry show
+	certifi            2021.10.8 Python package for providing Mozilla's CA Bundle.
+	charset-normalizer 2.0.12    The Real First Universal Charset Detector. Open, modern and actively maintained alternative to C...
+	idna               3.3       Internationalized Domain Names in Applications (IDNA)
+	netifaces          0.11.0    Portable network interface information.
+	requests           2.27.1    Python HTTP for Humans.
+	urllib3            1.26.9    HTTP library with thread-safe connection pooling, file post, and more.
+  11. Looking good, dependency chain intact. Onward, python-dateutil, typing-extensions, enum-tools
+  12. Now install PyTest as a development dependency. God help us if this ends up in the package!
+  13. (venv)> poetry show
+	atomicwrites       1.4.0       Atomic file writes.
+	attrs              21.4.0      Classes Without Boilerplate
+	certifi            2021.10.8   Python package for providing Mozilla's CA Bundle.
+	charset-normalizer 2.0.12      The Real First Universal Charset Detector. Open, modern and actively maintained alternative to...
+	colorama           0.4.4       Cross-platform colored terminal text.
+	enum-tools         0.9.0.post1 Tools to expand Python's enum module.
+	idna               3.3         Internationalized Domain Names in Applications (IDNA)
+	importlib-metadata 4.11.3      Read metadata from Python packages
+	iniconfig          1.1.1       iniconfig: brain-dead simple config-ini parsing
+	netifaces          0.11.0      Portable network interface information.
+	packaging          21.3        Core utilities for Python packages
+	pluggy             1.0.0       plugin and hook calling mechanisms for python
+	py                 1.11.0      library with cross-python path, ini-parsing, io, code, log facilities
+	pygments           2.12.0      Pygments is a syntax highlighting package written in Python.
+	pyparsing          3.0.8       pyparsing module - Classes and methods to define and execute parsing grammars
+	pytest             7.1.2       pytest: simple powerful testing with Python
+	python-dateutil    2.8.2       Extensions to the standard Python datetime module
+	requests           2.27.1      Python HTTP for Humans.
+	six                1.16.0      Python 2 and 3 compatibility utilities
+	tomli              2.0.1       A lil' TOML parser
+	typing-extensions  4.2.0       Backported and Experimental Type Hints for Python 3.7+
+	urllib3            1.26.9      HTTP library with thread-safe connection pooling, file post, and more.
+	zipp               3.8.0       Backport of pathlib-compatible object wrapper for zip files
+ 14. (venv)> poetry install
+	Installing dependencies from lock file
+	No dependencies to install or update
+	Installing the current project: alpaca-client (0.1.0)
+	=====================================================  ??
+ 15. (venv)> poetry build
+	 Building alpaca-client (0.1.0)
+	  - Building sdist
+	  - Built alpaca-client-0.1.0.tar.gz
+	  - Building wheel
+	  - Built alpaca_client-0.1.0-py3-none-any.whl
+ 16. Looks OK, but the docs are not there. Yes they will be on ReadTheDocs, but I also want the PDF doc to be included. Build it.
+ 17. Looking good, link to the online html docs on ASCOM-Standards.org for now.
+* TIME TO FINALIZE THE DOCS FOR THE ALPHA RELEASE.
+* Massive upgrade and reorg. Looking good!!!
+
+05-May-2022
+-----------
+* Working on Rinoh style for the doc. The PDF Rinoh docs aren't the key, it's the online ones... See the new template alpyca.rtt and stylesheet alpyca.rts, linked from the Rinoh stuff in conf.py.
+* Success! Restyled the fonts, colors of boxes. Cannot get "Notes" to take as "Note:" though but that's OK because I think the Note being colored will be too  garish. One thing was the indents on DriverException. I was surprised to find that Rinoh is really fussy, and looks for only one space indents on the exceptions, plus I think ending a sentence at the end of a line goofs up the flowing as well.
+* Replace the DriverException text everywhere so it render nice in PDF.
+  (I thought... it didn't work, reverted it all).
+
+06-May-2022
+-----------
+* Cleanup work, write the "real" README (learning Markdown, making image assets online)
+* To use poetry you MUST BE IN THE VENV!!
+* (venv)> poetry build
+  - Built alpaca-client-0.1.0.tar.gz
+  - Building wheel
+  - Built alpaca_client-0.1.0-py3-none-any.whl
+* OK, this looks good. Am I ready for PyPi? No let's do the test one first: See 30-March install 3 and 4 for poetry:
+  1. (venv) > poetry config repositories.testpypi https://test.pypi.org/legacy/
+  2. (venv) > poetry config pypi-token.testpypi pypi-AgENdGVzdC5weXBpLm9yZwIkM2Y2YWUxZmQtZTY0Zi00YmI3LTk5ZjgtMmRmMGM5ZWExYTlmAAIleyJwZXJtaXNzaW9ucyI6ICJ1c2VyIiwgInZlcnNpb24iOiAxfQAABiAXNoFKFvLgbZBngh1Ps2kvFcufRDpJcwFIGvxhZcLc3Q
+* Dry run them publish to Test-PyPi. **IDIOT** Wrong Name. alpaca-client not alpyca-client (DUH)
+* Change the name in pyproject.toml, rebuild, upload. It's there!! I deleted old projects on TestPyPi.
+* On Linux, create new project, and add a venv. MUST OPEN A PYTHON FILE TO ACTIVATE THE EXTENSION. Then pip -m venv .venv and VSCode will pop up the dialog asking if you want to use it as your environment. Cool. Ready to test the package.
+* pip install alpyca-client ... it worked!!! I can run the sample program now. BOOYAH!!
+
+12-May-2022
+-----------
+* Lots of work on making RST extract workable for ASCOM docs. Was
+* Tried to build html docs on **RPi 1** and got a Sphinx error
+    AttributeError: 'DynamicRinohDistribution' object has no attribute _normalized_name'
+  which I miraculously fixed by applying that patch shown on 16-april, and then adding another
+    @property
+    def _normalized_name(self):
+        return "whatthefuck'
+  THE SITE PACKAGES IS IN ~.local/lib/python3.9/site-packages
+* I think I need to put 0.5.4 Rinoh in as I found that the above is fixed. Oh well, some day.
+
+13-May-2022
+-----------
+* Big decision today, change alpyca-client to alpyca.
+  - Rename repo to alpyca on GitHub. THey provide auto-redirect for safety but we do need to change our remotes on all of the dev systems (Pi and Windows)
+  - Rename the project directories on local systems to 'alpyca'
+  - git remote set-url origin https://github.com/BobDenny/alpyca.git
+  - git remote set-url origin https://github.com/BobDenny/alpyca.git
+  - Test with VSCode on Pi and Windows.
+  - VS2019 Rename Solution but renaming pyproj loses the virtual environment....
+    1. Edit solution Alpaca.sln
+        Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Alpyca", "Alpyca.pyproj", "{A7A25108-7BAE-4CE4-8D13-1C1D81C6F2B4}"
+    2. **GIT** Rename AlpycaClient.pyproj to Alpaca.pyproj. -- OK
+  - VS2019 - Git repo etc offline. Tools > Options > Source Control > Plugin Selection > Git -- Now it all works.
+* Published to TestPyPi -- API Key there, so
+  - poetry publish -r testpypi (note the config setup on 06-May). Worked, but TestPyPi changed to 2.0.0.dev1
+
+14-Jun-2022
+-----------
+* Time to build dev2 (with recent fix to CoverCalibrator.OpenCover()) And publish to the real PyPi as 2.0.0.dev1
+  -- Shit!! The virtual environment found in D:\dev\astro\ASCOM Alpaca\AlpycaClient\venv seems to be broken.
+            Recreating virtualenv alpyca-wSAkAOqN-py3.7 in .....
+  -- Guess what? The one on Linux (RPI4B #1) is fine. We're gonna build there. Maybe fix Windows later.
+  -- Now trying to run tests on Linux and getting problems. Run here. maybe in the cooler VS2019 test explorer.
+     Looks like the path to the test .py files are stale as well, still showing alpyca-client when accessed from
+     the test mode.
+  -- Trying to run tests in VS2019 ... can't find them any more. WTF?? HOW FUN!!!!! All of the tests are listed.
+        Starting pytest discovery for the Alpyca project. This can take up to 60 seconds.
+        cd D:\dev\astro\ASCOM Alpaca\alpyca\
+        set PYTHONPATH=D:\dev\astro\ASCOM Alpaca\alpyca\
+        D:\dev\astro\ASCOM Alpaca\alpyca\venv\Scripts\python.exe C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2019\COMMUNITY\COMMON7\IDE\EXTENSIONS\MICROSOFT\PYTHON\CORE\PythonFiles\testing_tools\run_adapter.py discover pytest --output-file C:\Users\Robert B. Denny\AppData\Local\Temp\tmp288D.tmp -- --cache-clear --rootdir=D:\dev\astro\ASCOM Alpaca\alpyca
+        No test is available in D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\camera.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\covercalibrator.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\device.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\discovery.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\dome.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\exceptions.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\filterwheel.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\focuser.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\management.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\observingconditions.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\rotator.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\safetymonitor.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\switch.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\telescope.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\__init__.py D:\dev\astro\ASCOM Alpaca\alpyca\conftest.py D:\dev\astro\ASCOM Alpaca\alpyca\devtest.py D:\dev\astro\ASCOM Alpaca\alpyca\docs\source\conf.py D:\dev\astro\ASCOM Alpaca\alpyca\ImageTests.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_camera.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_covercalibrator.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_device.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_dome.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_filterwheel.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_focuser.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_rotator.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_safetymonitor.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_switch.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_telescope.py. Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate and try again.
+        ========== Test discovery finished: 0 Tests found in 8.1 sec ==========
+        No tests found to run.
+  -- Great, trying to run this fucking python run_adapter.py module
+        > pwd
+        C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Python\Core\PythonFiles\t
+        esting_tools
+
+        > python -m run_adapter.py
+        C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe: Error while finding module specification f
+        or 'run_adapter.py' (ModuleNotFoundError: __path__ attribute not found on 'run_adapter' while trying to find 'run_adapte
+        r.py')
+
+        NOW WHAT?????
+  -- Well try VSCode on Windows. Maybe THAT will work. How did VS2019 get ruined???
+     Most pass, still having problems trying to "go to test" looking for AlpycaClient. I f-ed myself when I renamed
+     the project I believe. Let's look with Windows Grep. HOLY SHIT!! THe whole .venv is a total MESS!!!
+     Short story: Recreate the .venv with Poetry from scratch after updating all of the packages, then re-run
+     the test suite.
+**** RECREATE .VENV ****
+
+1. Remove requirments.txt it is truly old.
+2. Look at 30-March-22 Poetry startup
+3. Confusion already reigns. I set virtual environments to false, yet
+   > poetry config --list
+	cache-dir = "C:\\Users\\Robert B. Denny\\AppData\\Local\\pypoetry\\Cache"
+	experimental.new-installer = true
+	installer.parallel = true  <======= WTF?????
+	repositories.testpypi.url = "https://test.pypi.org/legacy/"
+	virtualenvs.create = true
+	virtualenvs.in-project = null
+	virtualenvs.path = "{cache-dir}\\virtualenvs"  # C:\Users\Robert B. Denny\AppData\Local\pypoetry\Cache\virtualenvs
+ 4. The venv is a mess, we start over on this but with the existing pyproject.toml.
+    a. Remove the existing venv from the project. Save the folder renamed as venv-old
+    b. pip -m venv .venv (using 'venv' is the recommended way now not virtenv etc.)
+    c. In VS, Add environment, Existing, Prefix path to the .venv folder. Looks good.
+    d. Update pip and setuptools using VS2019
+    e. Test in cmd shall .venv\Scripts\activate.bat -> (.venv) > pip list ---- OK!!
+    f. We are now in a virgin venv.
+ 5. Delete the __pycache__ to hide old stuff too
+ 6. Empty poetry.lock
+ 7. Copy pyproject.toml
+ 8. Now with the shell in the virgin .venv, and looking at pyproject.toml do a "poetry add" for each dependency
+    (.venv) > poetry add requests (already present)
+    (.venv) > poetry add netifaces (already present)
+    (.venv) > poetry add typing-extensions (already present)
+    (.venv) > poetry add python-dateutil (already present)
+    (.venv) > poetry add enum-tools (already present)
+ 9. PyTest goes in as a development dep, not to be included with package!
+    (.venv) > poetry add --dev PyTest
+ 10. I removed the autopep8 dependency from the .toml. A mistake.
+ 11. Now to the install
+    (.venv) > poetry install --no-dev
+    BLOWOUT -- Remove poetry.lock
+    (.venv) > poetry install --no-dev
+    Starts normally but then GIANT BLOWOUT - and leaves a few things in the .venv the C:\Users\Robert B. Denny\AppData\Local\pypoetry\Cache had missing artifacts. I just deleted the whole thing.
+    (.venv) > poetry install --no-dev
+    Actually it needs PyTest and a few others.
+    (.venv) > poetry install ... This puts PyTest into the .venv and lock. This is good.
+ 12. For the unit tests I need pytz, numpy, and astropy.io.fits also. Let's use poetry so others will need my versions or later.
+    (.venv) > poetry add --dev pytz
+    --- stand by for shit ---
+    (.venv) > poetry add --dev numpy (FAIL on Python 3.7) - Look in PyPi and find 1.20.3 OK on Python >= 3.7
+    (.venv) > poetry add --dev "numpy=1.20.3"  - Crazy Regsvr32 popups!!!
+    (.venv) > poetry add --dev astropy  - Crazy Regsvr32 popups!!! then it also said no-go on 3.7 python so
+    (.venv) > poetry add --dev "astropy=4.3.1"
+    --- long story, **** it. Not going to install for dev with poetry. Will install with pip and be done --
+    NET RESULT IN THE .TOML
+	[tool.poetry.dependencies]
+	python = "^3.7"
+	requests = "^2.27.1"
+	netifaces = "^0.11.0"
+	typing-extensions = "^4.2.0"
+	python-dateutil = "^2.8.2"
+	enum-tools = "^0.9.0"
+
+	[tool.poetry.dev-dependencies]
+	pytest = "^7.1.2"
+	pytz = "^2022.1"
+ 13. Install numpy and astropy with VS2019 package manager, Got numpy 1.21.6 with update t 1.22.4 showing but n/g for Python 3.7, and I got astropy 4.3.1 which is what I was trying to add! Well to hell with it. It affects only tests.
+* TESTS RUN (including removal of bug workaround for OmniSim in test_telescope)
+* Build the package
+  (.venv) > poetry build
+    - Built alpyca-2.0.0.dev1.tar.gz
+    - Building wheel
+    - Built alpyca-2.0.0.dev1-py3-none-any.whl
+* Now to publish to Test-PyPi just to make sure.
+  -- Delete the existing 2.0.0.dev-1
+* === OOPS - VSCode does not know of the new .venv. Good time to find out how!!
+  Ctrl-Shift-P > Select Interpreter > Alpaca folder > Select the .venv
+  That does it.
+* Then, remember poetry config --list and turn off the creation of venvs:
+    - (.venv) > poetry config virtualenvs.create false
+* Complete setting up poetry to publish to Test PyPi
+    - (.venv) > poetry config repositories.testpypi https://test.pypi.org/legacy/ (already set)
+    - Go onto Test PyPi and get the unique identifier for the March 28 token. I have no idea where I put it so
+        3f6ae1fd-e64f-4bb7-99f8-2df0c9ea1a9f
+    - (.venv) > poetry config pypi-token.testpypi 3f6ae1fd-e64f-4bb7-99f8-2df0c9ea1a9f
+    - poetry config --list (the token does not show)
+ (.venv) > poetry config --list
+    cache-dir = "C:\\Users\\Robert B. Denny\\AppData\\Local\\pypoetry\\Cache"
+    experimental.new-installer = true
+    installer.parallel = true
+    repositories.testpypi.url = "https://test.pypi.org/legacy/"
+    virtualenvs.create = false
+    virtualenvs.in-project = null
+    virtualenvs.path = "{cache-dir}\\virtualenvs"  # C:\Users\Robert B. Denny\AppData\Local\pypoetry\Cache\virtualenvs
+
+* Finally(!!)
+  -- poetry  publish -r testpypi -> SHIT that token is wrong. I need to make a new one or find out where in
+     hell I put the one from before.
+  -- Get new token, save in A-Office Procedures, then reconfigure poetry with that one.
+  -- poetry publish -r testpypi -- SHIT!!
+        HTTP Error 400: This filename has already been used, use a different version.
+        See https://test.pypi.org/help/#file-name-reuse for more information.
+        I f'ed up now I can't upload a replacement 2.0.0.dev1 WTF???
+  - DAMN IT now I need to build it as dev2. Fix the toml file and documentation.
+* HOORAY - It's in TestPyPi *  Test in the Alpyca Test project.
+ I installed it to the RPI4 #1 in alpyca-test and it worked. I probably should make a new .venv for it.
+ I did do this and it failed for no netifaces. I had to use the full command
+    python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ alpyca
+ This allowed it to find and install the stuff that's not in the test index. OK!!!
+
+15-Jun-2022
+-----------
+* After the massive Python restoration
+  1. poetry build, OK
+  2. Get token from the real PyPi, put in A Offfice Procedures
+  3. poetry config pypi-token.pypi ...whatever...
+  4. poetry publish OK
+* Check PyPi, it looks fine.
+* Make a fresh PDF on the Windows system. it succeeded.
+* Move the repo to ASCOM Iniative
+* Update the PDF and upload to ascom-standards/alpyca
+* Test on RPI4B #1 - Alpyca Test project. Remove and rebuild the .venv., run the test, OK!!! Only one issue, pylance says that 'from alpaca.telescope' doesn't exist and red squiggles it. It runs OK though. Other packages in the .venv fail in PyLance too. THis has to be the way I set the imterpreter after creating the .venv.
+* AH! I went into PyLance settings and added '.venv' as an extra path, and now it finds the import. Actually  that is the ONLY path it should be using. More research.
+* I removed that and went into VSCode (on the RPi4B #1)
+  + Set Activate Env in Current Terminal
+  + Testing: PyTest Enabled (this wasn't set????)
+  + Unkown how but the problem seems to have fixed itself. I removed the path from PyLance right?
+* Back to the Alpyca project on the RPI - IO added pytest to the .venv for the .venv on the RPI.
+  Update PIP -- BUT DO NOT UPDATE OTHERS THEY ARE LOCKED FOR DIST!!!
+* Wrapping up. Can't debug tests on RPi, the paths have AlpycaClient in them. DOes jhave them in there though. Pytest --collect-only does not help. Where does it keep those collected tests and paths???
+* I DELETED __pycache__ in the PyTest folder of the project. That was it!!
+* Had to update tests for fixes in the Omni Simulator.
+
+16-Jun-2022
+-----------
+* Updated documentation only for Rotator.CanReverse per Rick Burke and Daniel.
+
+xx-Jun-2022
+-----------
+* See Git commit log for several capitalization and parameter fixed.
+
+17-Jul-2022
+-----------
+* Rick found that I'm not doing Connection;Keeplive. Yeeks. Switch to using requests.Session() in Device.py.
+* Update docs and configs to make 2.0.1rc1 -> poetry build OK -> Make HTML OK, makepdf OK
+* Note: https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
+* === PUBLISH 2.0.1-rc1 ===
+
+21-Jul-2022
+===========
+* Start working on the 2.0.1 production release. Most of this is going to be documentation, all of the TODO items.
+* Setting up VSCode and Rinohtype to do Sphinx docs on the Pi.
+* DIsabled the LeXStudio reStructuredText extension because of spurious errors on enum_tools.autoenum. There are no problems with this at build time, but the extension wrongly failed to import the package and gave "Problems" errors on multiple .rst files that use the ..autoenum:: directive.
+* SEE BELOW FOR SOLUTIONS - DOCS ARE HERE https://docs.restructuredtext.net/#
+* Tried the pre-release of LeXStudio reStructuredText extension. Same problems. Removed the extension.
+  - Filed GitHub bug report https://github.com/vscode-restructuredtext/vscode-restructuredtext/issues/398
+* Actually this led to needing to get all of the sphinx and rinoh pieces into the .venv because the reStructuredText extension depends on the esbonio language server, and that is actually real-time rendering the document at design time! So I had to install the following into the .venv
+   - doc8
+   - rstcheck
+   - restructuredtext-lint
+   - rinohtype (0.5.4 fixed)
+   - sphinxcontrib-restbuilder
+   - sphinx-toobox
+* SPHINX UPDATED TO 5.0.2 ALSO
+* Tested make html on Windows ... no errors.
+
+22-Jul-2022
+-----------
+* On Raspberry Pi, many packages had updates including Sphinx. I added the above to the alpyca .venv there.
+  NOW on both systems the esbonio server is running as show on the status bar lower right. Hooray!!
+* STILL HAVE ERRORS - As soon as I open a .rst file it immediately red-underlines everything apparently it is not liking the CRLF newlines on Windows. Found literal carriage return doc8(D004). To suppress this on Windows, in VSCode Settings
+per https://github.com/vscode-restructuredtext/vscode-restructuredtext/issues/84:
+    "restructuredtext.linter.doc8.extraArgs": [
+        "--ignore D002",
+        "--ignore D004"
+    ]
+* It also says d:\dev\astro\ASCOM Alpaca\Alpyca\.venv\Scripts\python.exe: No module named rstcheck.__main__; 'rstcheck' is a package and cannot be directly executed rstcheck. Looking in the reStructuredText docs undr the Linter article at https://docs.restructuredtext.net/articles/linter.html# I see
+    rstcheck 6 is includes too many breaking changes, so it is not supported.
+so I rolled rstcheck back to 5.0.0 on both Windows and Linux (even though it looks OK on Linux with 6.0.0-post1). I need to know if reStructuredText is even working at all on Linux (I see syntax highlighting but that is from the other extension). We'll test with autocompletion.
+* WELL ... I just went into reStructuredText settings,Restructuredtext › Linter: Disabled Linters and it gave me a droplist from which I selected rstcheck. I'll live without the "enhanced checks" it offers for now.
+* Later I attemppted to "fix" rstcheck by re-enabling it, then adding an empty __main__.py to its package folder in the .venv site-packages. Fiddled and gave up.
+
+23-Jul-2022
+-----------
+* Trying to solve the rstcheck I ran into the issue where shells which `source .venv/bin/activate` do not switch to the virtual environment. Furthermore, as a result DOING SPHINX IN THE SHELL STILL USES THE OLD 4.5 stuff!!
+  - Does it ever end? pip install -U sphinx says sphinx-tabs is incompatible, as well as autodocsumm but if I try to upgrade them they uninstall Sphinx 5.0.3 and roll back to sphinx 4.5.0!!!! WHAT CRAP!! Oh well I've been using Sphinx 4.5 OK so let it stay.
+* MYSTERY SOLVED IN SHELL - The /bin/activate had the old alpyca-client path in it. This solved several problems. Wow!
+* Now to see if I can fix the reStructuredText extension. I found this
+     https://docs.restructuredtext.net/articles/development.html#build-from-source
+  in one of the issues (researching before filing my #400), and I thought I might give it a whirl. Amazingly I already had Yarn and node installed on RPI 4 #1 due to my code-server hacking in May. so off I go...
+  1. yarn install -> two warnings engine vscode appears to be invalid
+     warning restructuredtext@190.1.4: The engine "vscode" appears to be invalid
+     warning vscode-languageclient@6.1.4 The engine "vscode" appears to be invalid
+     (I wonder if this is a result of my code-server hacking in May??)
+  2. Got warning to update yarn did it now on 1.22.19
+  3. yarn compile
+     Got two warnings restructuredtext@190.1.4: The engine "vscode" appears to be invalid
+     It succeeded.
+  4. code . succeeded and it appears to have started the just built extension!
+  5. Its log says it needs doc8, rstcheck, and restructuredtext-lint which I need to add to the global site packages.
+  6. Restart code and those problems are gone. One other - "Sphinx" object has no attribute 'add_javascript'. I traced this to the conf.py that is in this project, at the end, to trigger google analytics. Forget it. I commented that shit out.
+  7. This is interesting!! He has a test index.rst, a conf.py, everything. I see the error. wow. Now what??: How do I get it to debug?
+  8. BOOYAH!!! I found that if you define the path to rstcheck in the extension's settings, it executes it that way. So simply putting 'rstcheck' into the path setting eliminates the problem!!!
+* OK, now rstcheck is giving errors on valid hyperlinks like dome-faq in the faq.rst and is referenced in other docs and docstrings. The docs for this cool tool are at https://rstcheck.readthedocs.io/en/latest/
+* On WIndows this is still failing to catch errors, on Linux it detects 7 errors: 2 long lines, 5 unreferenced .. _abc: hyperlinks.
+* OK ON LINUX 6.0.0-post1 is looking great. It finds the 5 unreferenced links and 2 long lines (giant hyperlinks) inside VSCode and also if invoked on the command line in a shell pointing to the same document.
+* Windows??? It seems not to be running. If I execute it against faq.rst it will show errors on the "unreferenced" hyperlinks, but not within VSCode while editing the doc.  Also note that the author says it is unstable on WIndows as shown in https://github.com/rstcheck/rstcheck/issues/107. Maybe it's choking on spaces in the path. I'll look for where to add quotes around the file name on output..... I found the place where the rstcheck error messages are sent to the output (runner.py, line 242) and added double quotes to the document path. Confirmed this by running in the shell and seeing the offending doc path quotes in the error messages. Dang it, it didn't help.
+* Went to RPI 4 #3 and DAMN IT, it's nto picking up rstcheck's errors either!!! I made the chnges to the activate, and settings synced to get rstcheck as the path. If I run it from the command line it finds all of the errors, but they don't feed back into reStructuredText. WHat suc ks is that reStructuredText doesn't give any logging output for  shit.
+
+24-Jul-2022
+-----------
+* Solved the problem on RPi 4 #3 ... the mass transfer of the .venv from #1 to #3 failed to set the 'x' bit on all of the files in .venv/bin and so it was revertring to the global data and pip. Once I did that, I then uninstalled rstcheck and its core, then
+  - pip install rstcheck[sphinx] <====
+  - Now it is working on RPi 4 #3 HOORAY
+
+21-Aug-2020
+-----------
+* Debugger is now throwing errors on VSCode
+(.venv) D:\dev\astro\ASCOM Alpaca\Alpyca> cmd /C ""d:\dev\astro\ASCOM Alpaca\Alpyca\.venv\Scripts\python.exe" "c:\Users\Robert B. Denny\.vscode\extensions\ms-python.python-2022.12.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher" 63799 -- -m devtest "
+W+00000.031: /handling #1 request "launch" from Adapter/
+             Failed to set up job object
+
+             Traceback (most recent call last):
+               File "c:\Users\Robert B. Denny\.vscode\extensions\ms-python.python-2022.12.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher/../..\debugpy\launcher\debuggee.py", line 139, in spawn
+                 winapi.kernel32.AssignProcessToJobObject(job_handle, process_handle)
+               File "c:\Users\Robert B. Denny\.vscode\extensions\ms-python.python-2022.12.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher/../..\debugpy\launcher\winapi.py", line 67, in impl
+                 raise ctypes.WinError()
+             PermissionError: [WinError 5] Access is denied.
+=== DAMN IT === Looks like a new Python Extension 2022.12.1 was installed YESTERDAY 8/20         ===
+=== Tried back-revving Python extension to 2022.6.0 (way back). Still a problem so that's not it.===
+
+=== SHIT ALSO ON VS2019 ===
+W+00000.031: /handling #1 request "launch" from Adapter/
+             Failed to set up job object
+
+             Traceback (most recent call last):
+               File "c:\program files (x86)\microsoft visual studio\2019\communi
+ty\common7\ide\extensions\microsoft\python\core\debugpy\launcher/../..\debugpy\l
+auncher\debuggee.py", line 136, in spawn
+                 winapi.kernel32.AssignProcessToJobObject(job_handle, process_ha
+ndle)
+               File "c:\program files (x86)\microsoft visual studio\2019\communi
+ty\common7\ide\extensions\microsoft\python\core\debugpy\launcher/../..\debugpy\l
+auncher\winapi.py", line 68, in impl
+                 raise ctypes.WinError()
+             PermissionError: [WinError 5] Access is denied.
+* OK, let's look at the actual statement: LOSER
+* Run in Admin mode - EVEN WITH UAC OFF!! WTF??
+
+22-Aug-2022
+-----------
+* Time to build 2.0.2. Edit the docs and control files, COMMIT 2.0.2
+  + poetry update. check that the latest packages were installed here
+  + With new packages, run PyTest suite. Device test needed change for DriverVersion returning string (GitHub Issue #4)
+  + poetry build.
+  + poetry publish -r testpypi (ok)
+  + Over to the test folder and its own .venv
+  + pip install -- upgrade -i https://test.pypi.org/simple/ Alpyca (installed 2.0.2!)
+  + Run the AlpycaTest program to make sure it's there
+* Time to actually publish 2.0.2 on PyPi
+  + poetry publish (oooooohhhhh boy)  == SHIT! THE README IS FOR THE RC == Sigh, forget it. not worth -> 2.0.3.
+
+07-Nov-22
+---------
+=== DEBUGGER ON VSCODE LOOKS OK ===
+  - Ran devtest and it works fine
+* Tried to preview CHANGES.rst and Esbonio fails to start on the Windows VSCode with
+    'd:\dev\astro\ASCOM' is not recognized as an internal or external command, operable program or batch file.
+  - The Setting for Esbonio › Server: Python Path does not seem to affect this. On a WHIM I reverted to 189.1.0 and it started working.
+* Working on 2.0.3, changes to README, CHANGES, docs\conf.py, pyproj.toml, and Focuser.StepSize per GitHub issue #7
+
+02-Jan-2023
+-----------
+* Time for build 2.0.4
+  + Corrections for GitHub Issue #8 (ID -> Id in Switch) and test_device -> 0.3 version for Omni Sim
+  + Above done on Linux, synced with Win, the following done with VSCode on Win.
+  + Passes all tests with OmniSim 0.3
+  + Poetry update to get the latest packages
+  + Again passes pyTest tests
+  + Run Poetry Update on Linux. Now I have a Poetry-modified Poetry.Lock on both. Committed and Git did a branch merge. Cool.
+  + poetry build
+  + poetry publish -r testpypi (ok)
+  + Over to AlpycaTest project, confirm that 2.0.4 is installed with pip and Pip Manager.pip
+* Reviewed README and found updates needed. Lesson learned above. I changed these, then
+  + poetry build
+  + poetry publish (er.......)
+
+===== BREAK =====
+* Now I can no longer make either HTML nor PDF with Sphinx. Somehow the Poetry Update installed some shit that broke Sphinx. Now I am here:
+  + pip install --upgrade sphinx
+	ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+	sphinx-toolbox 3.1.2 requires docutils<0.18,>=0.16, but you have docutils 0.18.1 which is incompatible.
+	sphinx-rtd-theme 1.0.0 requires docutils<0.18, but you have docutils 0.18.1 which is incompatible.
+	autodocsumm 0.2.8 requires Sphinx<5.0,>=2.2, but you have sphinx 5.3.0 which is incompatible.
+  + Make html
+    Running Sphinx v5.3.0
+	Exception occurred:
+	  File "D:\dev\astro\ASCOM Alpaca\Alpyca\.venv\lib\site-packages\rinoh\resource.py", line 187, in <module>
+	    _DISTRIBUTION = DynamicRinohDistribution()
+	TypeError: Can't instantiate abstract class DynamicRinohDistribution with abstract methods locate_file, read_text
+	The full traceback has been saved in C:\Users\ROBERT~1.DEN\AppData\Local\Temp\sphinx-err-oxg19q1v.log, if you want to report the issue to the developers.
+	Please also report this if it was a user error, so that a better error message can be provided next time.
+	A bug report can be filed in the tracker at <https://github.com/sphinx-doc/sphinx/issues>. Thanks!
+  + Last part of the traceback
+	  File "d:\dev\astro\ASCOM Alpaca\Alpyca\.venv\lib\site-packages\rinoh\__init__.py", line 41, in <module>
+	    from . import resource
+	  File "d:\dev\astro\ASCOM Alpaca\Alpyca\.venv\lib\site-packages\rinoh\resource.py", line 187, in <module>
+	    _DISTRIBUTION = DynamicRinohDistribution()
+	TypeError: Can't instantiate abstract class DynamicRinohDistribution with abstract methods locate_file, read_text
+
+* SO this is rinoh. I temporarily commented out 'rinoh.frontend.sphinx' in the Sphinx conf.py. Now I can build the HTML at least.
+* !! FOUND DANIEL LINKS !! in docs and readme. FIx these (omni sim)
+* Now to find out what broke rinoh.
+  + Go to https://github.com/brechtm/rinohtype/issues, do not see this one. Start a new one.
+  + Advises to install latest via pip install https://github.com/brechtm/rinohtype/archive/refs/heads/master.zip which succeeded and
+    installed rinohtype 0.5.5 and god knows what else.  Then uncommented rinhh.frontend.sphinx in conf.py but still have the same
+    error. Also makepdf fails the same way.
+  + Create new issue on his GitHub. https://github.com/brechtm/rinohtype/issues/389
+  + Discovered that by deactivating to global site packages I can build PDF!!!! This-five-sucks.
+* Deactivated the venv, rinoh works! After fixing conf.py to enable the plugin and settings, it builds!!
+  + Copied this to the ASCOM site along with the HTML
+
+04-Feb-2023
+-----------
+* By deactivating the venv here, I can build html even with the 'rinoh.frontend.sphinx' in extensions.
+* BOOYAH! I can also build PDF here on W7 in the global site packages. Now let's use pip list to show the versions of the bits.
+  The interesting this is that the SystemLog says that the global site packages have been updated. It's weird I thought I
+  had stripped old venv and built a new one......
+* Build a new .venvdocs for Alpyca on W7 with the recipe. Selrct the .venvdocs, validate that Pip Manager is looking at
+  it, then add the following with Pip Manager:
+  + sphinx -> 5.3.0 (due to Pyton 3.7 here on W7) tons of stuff
+  + sphinxcontrib_restbuilder -> 0.3
+  + sphinx_rtd_theme -> 1.1.1
+  + rinohtype -> 0.5.4
+  + enum-tools -> 0.9.0.post1
+  + sphinx_toolbox (req'd by enum_tools.autoenum) -> 3.4.0
+  + Failed on netifaces and dateutil, so need these
+    - netifaces -> 0.11.0
+    - python-dateutil -> 2.8.2
+  + At this point can successfully build HTML Alpyca docs WITHOUT RINOH EXTENSION.
+  + With rinoh extension, Can't instantiate abstract class DynamicRinohDistribution with abstract methods locate_file, read_text
+  + Back rev docutils, sphinx_autodoc_typehints, sphinx-toolbox to versions in global site-packges. No luck, still fails.
+  + The rinoh/resource.py is untouched yet it works so this is no longer the issue.
+  + Spelunking in the code for rinoh/resource in the area of that DynamicRinoh, I noticed that it uses importlib. In the .venvdocs
+    importlib-metadata is at 6.0.0, yet in the successful global packages, it is 4.11.3. On a wild hair whim, I downgraded that,
+    and BOOYAH!! I can make HTML and PDF!
+* Downgraded importlib-metadata to 4.11.3 in the global site packages for all of the systems. on the W10 system it says that
+  keyring 23.13.1 requires at least importlib-metadata 4.11.4. I tried that one and it's OK with Rinoh as well!.So let'safe
+  make it 4.11.4 everywhere.
+* THIS IS SO STUPID ON MY PART -- THE GITHUB ISSUE SAYS IT RIGHT THERE. I didn't know what they meant by importlib-metadata. DUH!!
+
+========================== 2 0 2 4 ===========================
+
+27-Feb-2024
+-----------
+* Refreshing on Alpyca (client package). Looking OK on the W7 system with the '.venv':poetry VE. On RPi #1 loads of VSCode
+  updating extensions. **W10 IS RAW COPY OF W7 DISK** NEEDS NEW VENV ETC.
+* PyTest on RPi #1 is running!!!
+
+29-Feb-2024
+-----------
+* Getting this going on the W10 system
+  --------------------------------------------------
+* POETRY DOCS ARE AT https://python-poetry.org/docs/
+  --------------------------------------------------
+* Blow away the .venv from the W7 system that came from disk copying D:\
+* Make a new venv python -m venv .venv, tell VSCode to use it. OK.
+* Using Pip Manager VSCODE, update pip and setuptools
+* Get Alpyca environment running onm W10. Needs poetry. New scheme from
+  https://python-poetry.org/docs/#installing-with-the-official-installer
+  installs poetry globally and with its own venv, then to get started you need
+  Poetry's bin directory (C:\Users\rdenn\AppData\Roaming\Python\Scripts)
+  in your `PATH` environment variable. Using the W10 environment editor, I
+  added the path to my env vars, not the system ones. Log out-in. OK.
+  poetry --version works
+* Now to load up the new virgin.venv for this project with the stuff I need. This project has already been initialized
+  by Poetry (in the past on the W7 system) so there are already a pyproject.py and poetry.lock files.
+========================================================
+  CREATE BRANCH 'platform7' AND PUBLISH. SWITCH TO THIS.
+========================================================
+  + I want to update all of the dependencies. From poetry Basic Usage (scroll to end) I can either use 'poetry update'
+    or just delete poetry.lock and do the poetry install using the packages in pyproject.toml. I decided to do the
+    'poetry update' method, which succeeded. Hooray!
+  + AMAZING, it did not change pyproject.toml, but poetry.lock is not full of latest versions. COOL!
+* Using poetry install PyTest and Sphinx. See "Dependency Groups" in the Poetry docs. I want to do exactly that, have
+  dependencies for testing, and for documentation. Note that the existring pyproject.toml has a dependency Groups
+  [tool.poetry.dev-dependencies] and per the docs this should be migrated to group dotted notation
+  [tool.poetry.group.dev.dependencies] for a 'dev' group. I am going to add 'test' and 'docs' groups.
+  + The 'poetry update' above installed pytest and pytz from [tool.poetry.dev-dependencies] and put them into poetry.lock.
+    I hand edited the pyproject.toml to put pytest and pytz into [tool.poetry.group.test.dependencies]
+* Now to update the test packages per pip's latest version:
+  + Pytest 7.4.4 -> 8.0.2
+  + pytz 2022.7.1 -> 2024.1
+* Try to run PyTest!! Looking good, I see stuff that needs to be changed for Platform 7, but the Device and Focuser
+  tests now pass with the 0.4 Omni Simulator.
+* Switch to Daniel's /simulator/ setttings endpoints. See conftest.py.
+
+01-Mar-2024
+-----------
+* Got reading XML from the /simulator endpoints working, with some baroque Python.
+* Converting to native Python was broken for Boolean, I was living on borrowed time!! Fixed.
+
+03-Mar-2024
+-----------
+* All tests pass on W10 system with latest (March 2) 0.4 omni sim, with 3 caveats in Telescope
+  + Settings XML uses CanSetPointingState for Property CanSetPierSide. Commented out because, even though the OmniSim
+    "Set Side of Pier" checkbox is set, Property CanSetPierSide  is always False.
+  + GuideRateRightAscension and GuideRateDeclination can succefully be written to, however the value coming back
+    is always 0.00417807...

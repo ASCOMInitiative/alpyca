@@ -226,9 +226,9 @@ def test_pulse_guiding(device, settings, disconn):
     assert d.CanSetGuideRates, "OmniSim must have Guide Rates enabled"
     print("  Set and check some guide rates")
     d.GuideRateRightAscension = 0.001
-    #assert d.GuideRateRightAscension == 0.001  # BUGBUG? Stuck
+    #assert d.GuideRateRightAscension == 0.001  #BUGBUG? Stuck
     d.GuideRateDeclnation = 0.002
-    #assert d.GuideRateDeclination == 0.002     # BUGBUG? Stuck
+    #assert d.GuideRateDeclination == 0.002     #BUGBUG? Stuck
     print("  Do a PulseGuide North and check that it ends in prescribed time")
     d.PulseGuide(GuideDirections.guideNorth, 500)
     assert d.IsPulseGuiding
