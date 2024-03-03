@@ -14,11 +14,12 @@ dev_name = "Camera"                             # Device-independent fixtures us
 #
 c_sets = conftest.get_settings('Camera')
 
-@pytest.mark.skipif((c_sets['CanFastReadout'] or not 'ReadoutModes' in c_sets), reason='Requires OmniSim FastReadout OFF and ReadoutModes is ON')
 def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test properties:")
+    assert s['CanFastReadout'] == False, 'OmniSim FastReadout must be OFF'
+    assert 'ReadoutModes' in s, 'OmniSim ReadoutModes must be ON'
     assert d.InterfaceVersion >= 3              # OmniSim must have ICameraV3 or later
     assert d.CameraXSize == s['CameraXSize']
     assert d.CameraYSize == s['CameraYSize']
@@ -51,7 +52,7 @@ def test_cooler(device, settings, disconn):
     assert d.CanSetCCDTemperature, 'OmniSim Can Set CCD Temperature must be ON'
     assert d.CanGetCoolerPower, 'OmniSim Can Get Cooler Power must be ON'
 
-@pytest.mark.skipif((c_sets['GainMode'] != 1 or c_sets['OffsetMode'] != 1), reason='Requires OmniSim Gain and Offset modes to be "Gain Names"')
+@pytest.mark.skipif((c_sets['GainMode'] != 1 or c_sets['OffsetMode'] != 1), reason='Requires OmniSim Gain and Offset modes to be "Named"')
 def test_named_gains_offsets(device, settings, disconn):
     d = device
     s = settings
