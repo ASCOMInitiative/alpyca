@@ -794,3 +794,9 @@ auncher\winapi.py", line 68, in impl
     "Set Side of Pier" checkbox is set, Property CanSetPierSide  is always False.
   + GuideRateRightAscension and GuideRateDeclination can succefully be written to, however the value coming back
     is always 0.00417807...
+
+05-Mar-2024
+-----------
+* Start of changes for Platform 7 per https://ascom-standards.org/newdocs/relnotes.html. New
+  OperationCancelledException, async additions to device common members, async
+  additions to CoverCalibrator and Switch. HTML DOCS ARE BUILDING!

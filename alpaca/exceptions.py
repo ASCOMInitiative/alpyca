@@ -36,6 +36,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 05-Mar-24 (rbd) 3.0.0-pre For Platform 7 add OperationCancelledException.
 # -----------------------------------------------------------------------------
 
 class ActionNotImplementedException(Exception):
@@ -48,11 +49,11 @@ class ActionNotImplementedException(Exception):
         super().__init__(message)
 
 class AlpacaRequestException(Exception):
-    """Raised by the device's Alpaca server for unknown or illegal requests. 
-    
+    """Raised by the device's Alpaca server for unknown or illegal requests.
+
     The number is the HTTP response code (4xx or 5xx) and the message
     is a concatenation of the server's response text and the URL.
-    
+
     """
     def __init__(
         self,
@@ -63,9 +64,9 @@ class AlpacaRequestException(Exception):
 
 class DriverException(Exception):
     """Numeric value: 0x500 - 0xFFF
-    
+
     The number is assigned by the driver and will be a number from 0x500 - 0xFFF
-    
+
     """
     def __init__(
         self,
@@ -115,6 +116,15 @@ class NotImplementedException(Exception):
         self.number = 0x400
         super().__init__(message)
 
+class OperationCancelledException(Exception):
+    """Numeric value: 0x40E (1038)"""
+    def __init__(
+        self,
+        message: str
+    ):
+        self.number = 0x40E
+        super().__init__(message)
+
 class ParkedException(Exception):
     """Numeric value: 0x408 (1032)"""
     def __init__(
@@ -136,12 +146,12 @@ class SlavedException(Exception):
 # Replaced with DriverException per agreement 30-Apr-2022
 # class UnknownAscomException(Exception):
 #     """ Unknown Error Code in Alpaca response
-    
-#     Raised by the  library if the driver returns an error code that is 
+
+#     Raised by the  library if the driver returns an error code that is
 #     not part of the Alpaca 2022 specification, that is, a code from 0x400
-#     through 0x4FF that is not listed here for one of the other defined 
-#     exceptions. The message will contain the number followed by the 
-#     message from the driver. 
+#     through 0x4FF that is not listed here for one of the other defined
+#     exceptions. The message will contain the number followed by the
+#     message from the driver.
 
 #     """
 #     def __init__(
