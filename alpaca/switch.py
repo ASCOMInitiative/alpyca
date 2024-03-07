@@ -38,8 +38,8 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 01-Jan-23 (rbd) 2.0.4 https://github.com/ASCOMInitiative/alpyca/issues/8
 #                 Change 'ID' to 'Id' for switch parameters.
-# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7, add Master Interfaces
-#                 refs to all members
+# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
+# 07-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -77,6 +77,16 @@ class Switch(Device):
             * Number of switch devices managed by this driver. Devices are numbered from 0
               to MaxSwitch - 1.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |MaxSwitch|
+
+            .. |MaxSwitch| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitch" target="_blank">
+                Switch.MaxSwitch</a> (external)
+
         """
         return self._get("maxswitch")
 
@@ -99,12 +109,22 @@ class Switch(Device):
             * Examples of switches that cannot be written to include a
               limit switch or a sensor.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |CanAsync|
+
+            .. |CanAsync| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanAsync" target="_blank">
+                Switch.CanAsync()</a> (external)
+
         """
         return self._get("canasync", Id=Id)
 
     def CancelAsync(self, Id: int) -> None:
         """Cancels an in-progress asynchronous state change operation. See :py:meth:`SetAsync` and
-        :py:meth:`SetAsyncValue` for details of asynchroous switch operations.
+        :py:meth:`SetAsyncValue` for details of asynchronous switch operations.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -121,6 +141,16 @@ class Switch(Device):
               will raise an :py:class:`OperationCancelledException`; thereafter calls
               to :py:meth:`StateChangeComplete` for the switch will return ``False``.
             * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |CancelAsync|
+
+            .. |CancelAsync| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CancelAsync" target="_blank">
+                Switch.CancelAsync()</a> (external)
 
         """
         return self._put("cancelasync", Id=Id)
@@ -143,6 +173,16 @@ class Switch(Device):
             * Examples of witches that cannot be written to include a
               limit switch or a sensor.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |CanWrite|
+
+            .. |CanWrite| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanWrite" target="_blank">
+                Switch.CanWrite()</a> (external)
+
         """
         return self._get("canwrite", Id=Id)
 
@@ -163,6 +203,16 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |GetSwitch|
+
+            .. |GetSwitch| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitch" target="_blank">
+                Switch.GetSwitch()</a> (external)
+
         """
         return self._get("getswitch", Id=Id)
 
@@ -181,6 +231,16 @@ class Switch(Device):
 
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |GetSwitchDescription|
+
+            .. |GetSwitchDescription| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchDescription" target="_blank">
+                Switch.GetSwitchDescription()</a> (external)
 
         """
         return self._get("getswitchdescription", Id=Id)
@@ -201,6 +261,16 @@ class Switch(Device):
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |GetSwitchName|
+
+            .. |GetSwitchName| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchName" target="_blank">
+                Switch.GetSwitchName()</a> (external)
+
         """
         return self._get("getswitchname", Id=Id)
 
@@ -219,6 +289,17 @@ class Switch(Device):
 
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |GetSwitchValue|
+
+            .. |GetSwitchValue| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchValue" target="_blank">
+                Switch.GetSwitchValue()</a> (external)
 
         """
         return self._get("getswitchvalue", Id=Id)
@@ -239,6 +320,16 @@ class Switch(Device):
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |MaxSwitchValue|
+
+            .. |MaxSwitchValue| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitchValue" target="_blank">
+                Switch.MaxSwitchValue()</a> (external)
+
         """
         return self._get("maxswitchvalue", Id=Id)
 
@@ -257,6 +348,16 @@ class Switch(Device):
 
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |MinSwitchValue|
+
+            .. |MinSwitchValue| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MinSwitchValue" target="_blank">
+                Switch.MinSwitchValue()</a> (external)
 
         """
         return self._get("minswitchvalue", Id=Id)
@@ -284,6 +385,15 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |SetAsync|
+
+            .. |SetAsync| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsync" target="_blank">
+                Switch.SetAsync()</a> (external)
         """
         self._put("setasync", Id=Id, State=State)
 
@@ -313,9 +423,17 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |SetAsyncValue|
+
+            .. |SetAsyncValue| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsyncValue" target="_blank">
+                Switch.SetAsyncValue()</a> (external)
         """
         self._put("setasyncvalue", Id=Id, Value=Value)
-
 
     def SetSwitch(self, Id: int, State: bool) -> None:
         """Set a switch device to the specified state
@@ -356,6 +474,15 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |SetSwitchName|
+
+            .. |SetSwitchName| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchName" target="_blank">
+                Switch.SetSwitchName()</a> (external)
         """
         self._put("setswitchname", Id=Id, Name=Name)
 
@@ -380,6 +507,15 @@ class Switch(Device):
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |SetSwitchValue|
+
+            .. |SetSwitchValue| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchValue" target="_blank">
+                Switch.SetSwitchValue()</a> (external)
         """
         self._put("setswitchvalue", Id=Id, Value=Value)
 
@@ -403,6 +539,15 @@ class Switch(Device):
         Notes:
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |StateChangeComplete|
+
+            .. |StateChangeComplete| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.StateChangeComplete" target="_blank">
+                Switch.StateChangeComplete()</a> (external)
         """
         return self._get("statechangecomplete", Id=Id)
 
@@ -423,5 +568,14 @@ class Switch(Device):
             * Step size is the difference between successive values of the device.
             * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |SwitchStep|
+
+            .. |SwitchStep| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SwitchStep" target="_blank">
+                Switch.SwitchStep()</a> (external)
         """
         return self._get("switchstep", Id=Id)

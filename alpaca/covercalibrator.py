@@ -40,6 +40,7 @@
 # 04-Jun-22 (rbd) 2.0.0-dev1 Fix capitalization of OpenCover
 # 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
 # 06-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
+# 07-Mar-24 (rbd) 3.0.0-pre Fix Master refs to show () on methods
 # -----------------------------------------------------------------------------
 
 from alpaca.docenum import DocIntEnum
@@ -315,7 +316,7 @@ class CoverCalibrator(Device):
             .. |CalibratorOff| raw:: html
 
                 <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOff" target="_blank">
-                CoverCalibrator.CalibratorOff</a> (external)
+                CoverCalibrator.CalibratorOff()</a> (external)
 
         """
         self._put("calibratoroff")
@@ -362,7 +363,7 @@ class CoverCalibrator(Device):
             .. |CalibratorOn| raw:: html
 
                 <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOn" target="_blank">
-                CoverCalibrator.CalibratorOn</a> (external)
+                CoverCalibrator.CalibratorOn()</a> (external)
 
         """
         self._put("calibratoron", Brightness=BrightnessVal)
@@ -399,7 +400,7 @@ class CoverCalibrator(Device):
             .. |CloseCover| raw:: html
 
                 <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CloseCover" target="_blank">
-                CoverCalibrator.CloseCover</a> (external)
+                CoverCalibrator.CloseCover()</a> (external)
 
         """
         self._put("closecover")
@@ -431,7 +432,7 @@ class CoverCalibrator(Device):
             .. |HaltCover| raw:: html
 
                 <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.HaltCover" target="_blank">
-                CoverCalibrator.HaltCover</a> (external)
+                CoverCalibrator.HaltCover()</a> (external)
 
         """
         self._put("haltcover")
@@ -468,7 +469,7 @@ class CoverCalibrator(Device):
             .. |OpenCover| raw:: html
 
                 <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.OpenCover" target="_blank">
-                CoverCalibrator.OpenCover</a> (external)
+                CoverCalibrator.OpenCover()</a> (external)
 
         """
         self._put("opencover")
