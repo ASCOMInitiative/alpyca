@@ -47,8 +47,11 @@ release = '3.0.0'
 #   It's possible that any version less than 6.0.0 will work.
 #
 extensions = [
+    # https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
     'sphinx.ext.autodoc',
+    # https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html
     'sphinx.ext.autosummary',
+    # https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
     'sphinx.ext.napoleon',
     # https://github.com/sphinx-contrib/restbuilder
     'sphinxcontrib.restbuilder',
@@ -97,6 +100,11 @@ exclude_patterns = []
 #
 # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 html_theme = 'sphinx_rtd_theme'
+
+#
+# Clean up ugly aspects of Read The Docs. See comments in the css
+#
+html_style = 'css/ascom.css'
 
 # -- Options for PDF Output using rinohtype --
 

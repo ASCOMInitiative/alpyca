@@ -37,7 +37,9 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 01-Jan-23 (rbd) 2.0.4 https://github.com/ASCOMInitiative/alpyca/issues/8
-#                 Change 'ID' to 'Id' for switch parameters. 
+#                 Change 'ID' to 'Id' for switch parameters.
+# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7, add Master Interfaces
+#                 refs to all members
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -52,7 +54,7 @@ class Switch(Device):
         protocol: str = "http"
     ):
         """Initialize the Switch object.
-              
+
         Args:
             address (str): IP address and port of the device (x.x.x.x:pppp)
             device_number (int): The index of the device (usually 0)
@@ -74,9 +76,54 @@ class Switch(Device):
         Notes:
             * Number of switch devices managed by this driver. Devices are numbered from 0
               to MaxSwitch - 1.
-        
+
         """
         return self._get("maxswitch")
+
+    def CanAsync(self, Id: int) -> bool:
+        """The specified switch device can operate asynchronously.
+        See :py:meth:`SetAsync` and :py:meth:`SetAsyncValue`.
+
+        Args:
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
+
+        Notes:
+            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Examples of switches that cannot be written to include a
+              limit switch or a sensor.
+
+        """
+        return self._get("canasync", Id=Id)
+
+    def CancelAsync(self, Id: int) -> None:
+        """Cancels an in-progress asynchronous state change operation. See :py:meth:`SetAsync` and
+        :py:meth:`SetAsyncValue` for details of asynchroous switch operations.
+
+        Args:
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
+
+        Notes:
+            * On return, the next call to :py:meth:`StateChangeComplete` for this switch
+              will raise an :py:class:`OperationCancelledException`; thereafter calls
+              to :py:meth:`StateChangeComplete` for the switch will return ``False``.
+            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+        """
+        return self._put("cancelasync", Id=Id)
 
     def CanWrite(self, Id: int) -> bool:
         """The specified switch device can be written to.
@@ -92,10 +139,10 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * Examples of witches that cannot be written to include a
               limit switch or a sensor.
-        
+
         """
         return self._get("canwrite", Id=Id)
 
@@ -113,7 +160,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
@@ -133,8 +180,8 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
-        
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
         """
         return self._get("getswitchdescription", Id=Id)
 
@@ -152,11 +199,11 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
-        
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
         """
         return self._get("getswitchname", Id=Id)
-    
+
     def GetSwitchValue(self, Id: int) -> float:
         """The value of the specified switch device as a float.
 
@@ -171,8 +218,8 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
-        
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
         """
         return self._get("getswitchvalue", Id=Id)
 
@@ -190,8 +237,8 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
-        
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
         """
         return self._get("maxswitchvalue", Id=Id)
 
@@ -209,10 +256,66 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
-        
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
         """
         return self._get("minswitchvalue", Id=Id)
+
+    def SetAsync(self, Id: int, State: bool) -> None:
+        """Asynchronouly Set a switch to the specified boolean on/off state.
+
+        Args:
+            Id: the specified switch number (see Notes)
+            State: The required control state
+
+        Raises:
+            NotImplementedException: If :py:meth:`CanAsync` ``= False`` for switch ``Id``
+            InvalidValueException: The ``Id`` is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
+
+        Notes:
+            * **Asynchronous** (non-blocking): The method returns as soon as the state change
+              operation has been successfully started, with :py:meth:`StateChangeComplete` for
+              switch ``Id = False``. After the state change has completed
+              :py:meth:`StateChangeComplete` becomes True.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * On is True, Off is False.
+
+        """
+        self._put("setasync", Id=Id, State=State)
+
+    def SetAsyncValue(self, Id: int, Value: float) -> None:
+        """Asynchronouly Set a switch to the specified value
+
+        Args:
+            Id: the specified switch number (see Notes)
+            Value: The value to be set, between :py:meth:`MinSwitchValue`` and :py:meth:`MaxSwitchValue`
+                for switch ``Id``
+
+        Raises:
+            NotImplementedException: If :py:meth:`CanAsync` ``= False`` for switch ``Id``
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`), or if the
+                given value is not between :py:meth:`MinSwitchValue` and :py:meth:`MaxSwitchValue`
+                for the given switch ``Id``.
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
+
+        Notes:
+            * **Asynchronous** (non-blocking): The method returns as soon as the state change
+              operation has been successfully started, with :py:meth:`StateChangeComplete` for
+              switch ``Id = False``. After the state change has completed
+              :py:meth:`StateChangeComplete` becomes True.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * On is True, Off is False.
+
+        """
+        self._put("setasyncvalue", Id=Id, Value=Value)
+
 
     def SetSwitch(self, Id: int, State: bool) -> None:
         """Set a switch device to the specified state
@@ -229,7 +332,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
@@ -250,7 +353,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
@@ -261,12 +364,12 @@ class Switch(Device):
 
         Args:
             Id: the specified switch number (see Notes)
-            Value: Value to be set, between :py:attr:`MinSwitchValue` and 
+            Value: Value to be set, between :py:attr:`MinSwitchValue` and
                 :py:attr:`MinSwitchValue`.
 
         Raises:
             InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`), or
-                the Value is out of range, not between :py:attr:`MinSwitchValue` and 
+                the Value is out of range, not between :py:attr:`MinSwitchValue` and
                 :py:attr:`MinSwitchValue`.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
@@ -274,11 +377,34 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
         self._put("setswitchvalue", Id=Id, Value=Value)
+
+    def StateChangeComplete(self, Id: int) -> bool:
+        """True if the last :py:meth:`SetAsync` or :py:meth:`SetAsyncValue`
+        has completed and the switch is in the requested state.
+
+        Args:
+            Id: the specified switch number (see Notes)
+
+        Raises:
+            NotImplementedException: If :py:meth:`CanAsync` is ``False`` for switch ``Id``
+            OperationCancelledException: If an in-progress state change is cancelled by a call to
+                :py:meth:`CancelAsync` call for switch ``Id``
+            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by
+                one of the more specific ASCOM exceptions.
+                The device did not *successfully* complete the request.
+
+        Notes:
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+
+        """
+        return self._get("statechangecomplete", Id=Id)
 
     def SwitchStep(self, Id: int) -> float:
         """The step size of the specified switch device (see Notes).
@@ -295,7 +421,7 @@ class Switch(Device):
 
         Notes:
             * Step size is the difference between successive values of the device.
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` - 1.
+            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         """
         return self._get("switchstep", Id=Id)

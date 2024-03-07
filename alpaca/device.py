@@ -42,6 +42,7 @@
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 21-Aug-22 (rbd) 2.0.2 Fix DriverVersion to return the string GitHub issue #4
 # 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
+# 06-Mar-24 (rbd) 3.0.0-pre Add stubbed Master Interfaces refs to all members
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -102,6 +103,8 @@ class Device:
     def Action(self, ActionName: str, *Parameters) -> str:
         """Invoke the specified device-specific custom action
 
+        **Common to all devices**
+
         Args:
             ActionName: A name from :py:attr:`SupportedActions` that represents
                 the action to be carried out.
@@ -124,11 +127,26 @@ class Device:
             * This method, combined with :py:attr:`SupportedActions`, is the supported
               mechanic for adding non-standard functionality.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Action()``, find this specific
+            device's specification, and see ``Action()`` there.
+
+            .. |master| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions" target="_blank">
+                ASCOM Master Interface Definitions</a> (external)
+
+
         """
         return self._put("action", Action=ActionName, Parameters=Parameters)["Value"]
 
     def CommandBlind(self, Command: str, Raw: bool) -> None:
         """Transmit an arbitrary string to the device and does not wait for a response.
+
+        **Common to all devices**
 
         Args:
             Command: The literal command string to be transmitted.
@@ -147,12 +165,20 @@ class Device:
             **Deprecated**, will most likely result in
             :py:exc:`~alpaca.exceptions.NotImplementedException`
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``CommandBlind()``, find this specific
+            device's specification, and see ``CommandBlind()`` there.
 
         """
         self._put("commandblind", Command=Command, Raw=Raw)
 
     def CommandBool(self, Command: str, Raw: bool) -> bool:
         """Transmit an arbitrary string to the device and wait for a boolean response.
+
+        **Common to all devices**
 
         Returns:
             The True/False response from the command
@@ -174,11 +200,20 @@ class Device:
             **Deprecated**, will most likely result in
             :py:exc:`~alpaca.exceptions.NotImplementedException`
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``CommandBool()``, find this specific
+            device's specification, and see ``CommandBool()`` there.
+
         """
         return self._put("commandbool", Command=Command, Raw=Raw)["Value"]
 
     def CommandString(self, Command: str, Raw: bool) -> str:
         """Transmit an arbitrary string to the device and wait for a string response.
+
+        **Common to all devices**
 
         Returns:
             The string response from the command
@@ -200,12 +235,21 @@ class Device:
             **Deprecated**, will most likely result in
             :py:exc:`~alpaca.exceptions.NotImplementedException`
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``CommandString()``, find this specific
+            device's specification, and see ``CommandString()`` there.
+
         """
         return self._put("commandstring", Command=Command, Raw=Raw)["Value"]
 
     def Connect(self) -> None:
         """Connect to the device **asynchronously**.
 
+        **Common to all devices**
+
         Returns:
             Nothing
 
@@ -215,13 +259,23 @@ class Device:
                 The device did not *successfully* complete the request.
 
         Note:
-            **Non-Blocking** Use :py:attr`Connecting` to indicate completion.
+            **Non-Blocking** Use :py:attr:`Connecting` to indicate completion.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Connect()``, find this specific
+            device's specification, and see ``Connect()`` there.
+
         """
         return self._put("connect")
 
     def Disconnect(self) -> None:
         """Disconnect from the device **asynchronously**.
 
+        **Common to all devices**
+
         Returns:
             Nothing
 
@@ -229,19 +283,45 @@ class Device:
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
+
         Note:
-            **Non-Blocking** Use :py:attr`Connecting` to indicate completion.
+            **Non-Blocking** Use :py:attr:`~Device.Connecting` to indicate completion.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Disconnect()``, find this specific
+            device's specification, and see ``Disconnect()`` there.
+
         """
         return self._put("disconnect")
 
     @property
     def Connecting(self) -> bool:
-        """True if a py:meth:`Connect` or :py:meth`Disconnect` is in progress.
+        """Returns ``True`` while the device is undertaking an asynchronous
+        :py:meth:`Connect` or :py:meth:`Disconnect` operation.
+
+        **Common to all devices**
 
         Raises:
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
+
+        Note:
+            * Use this property to determine when an (async)
+              :py:meth:`Connect` or :py:meth:`Disconnect` has completed,
+              at which time it will transition from ``True`` to ``False``.
+            * Present only in Platform 7 (2024) devices. Check the device's
+              :py:attr:`InterfaceVersion`.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Connecting``, find this specific
+            device's specification, and see ``Connecting`` there.
 
         """
         return self._get("connecting")
@@ -249,6 +329,8 @@ class Device:
     @property
     def Connected(self) -> bool:
         """(Read/Write) Retrieve or set the connected state of the device.
+
+        **Common to all devices**
 
         Set True to connect to the device hardware. Set False to disconnect
         from the device hardware. You can also read the property to check
@@ -261,15 +343,22 @@ class Device:
                 The device did not *successfully* complete the request.
 
         Notes:
-            * The Connected property sets and reports the state of connection to
-              the device hardware. For a hub this means that Connected will be
-              True when the first driver connects and will only be set to False
+            * The ``Connected`` property sets and reports the state of connection to
+              the device hardware. For a hub this means that ``Connected`` will be
+              ``True`` when the first driver connects and will only be set to False
               when all drivers have disconnected. A second driver may find that
-              Connected is already True and setting Connected to False does not
-              report Connected as False. This is not an error because the physical
-              state is that the hardware connection is still True.
-            * Multiple calls setting Connected to true or false will not cause
+              ``Connected`` is already ``True`` and setting ``Connected`` to False does not
+              report ``Connected`` as False. This is not an error because the physical
+              state is that the hardware connection is still ``True``.
+            * Multiple calls setting ``Connected`` to ``True`` or false will not cause
               an error.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Connected``, find this specific
+            device's specification, and see ``Connected`` there.
 
         """
         return self._get("connected")
@@ -280,6 +369,8 @@ class Device:
     @property
     def Description(self) -> str:
         """Description of the **device** such as manufacturer and model number.
+
+        **Common to all devices**
 
         Raises:
             NotConnectedException: If the device status is unavailable
@@ -294,6 +385,13 @@ class Device:
               that it can be used in FITS image headers, which are limited
               to 80 characters including the header name.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Description``, find this specific
+            device's specification, and see ``Description`` there.
+
         """
         return self._get("description")
 
@@ -302,12 +400,20 @@ class Device:
         """List of key-value pairs representing the operational properties
         of the device
 
+        **Common to all devices**
+
         Raises:
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
-        #TODO - Point to master docs or names of the properties.
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``DeviceState``, find this specific
+            device's specification, and see ``DeviceState`` there.
+
         """
         response = self._get("devicestate")
         return response
@@ -315,6 +421,8 @@ class Device:
     @property
     def DriverInfo(self) -> List[str]:
         """Descriptive and version information about the ASCOM **driver**
+
+        **Common to all devices**
 
         Returns:
             Python list of strings (see Notes)
@@ -333,12 +441,21 @@ class Device:
               version and copyright data. . To get the driver version in a parse-able
               string, use the :py:attr:`DriverVersion` property.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``DriverInfo``, find this specific
+            device's specification, and see ``DriverInfo`` there.
+
         """
         return [i.strip() for i in self._get("driverinfo").split(",")]
 
     @property
     def DriverVersion(self) -> str:
         """String containing only the major and minor version of the *driver*.
+
+        **Common to all devices**
 
         Raises:
             DriverException:An error occurred that is not described by
@@ -352,12 +469,21 @@ class Device:
               as the decimal point you may need to make accommodations to parse the
               value.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``DriverVersion``, find this specific
+            device's specification, and see ``DriverVersion`` there.
+
         """
         return self._get("driverversion")
 
     @property
     def InterfaceVersion(self) -> int:
         """ASCOM Device interface definition version that this device supports.
+
+        **Common to all devices**
 
         Raises:
             DriverException: An error occurred that is not described by
@@ -371,6 +497,13 @@ class Device:
               :py:attr:`DriverVersion` property, which is the major.minor version
               of the driver for  this device.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``InterfaceVersion``, find this specific
+            device's specification, and see ``InterfaceVersion`` there.
+
         """
         return int(self._get("interfaceversion"))
 
@@ -378,9 +511,18 @@ class Device:
     def Name(self) -> str:
         """The short name of the *driver*, for display  purposes.
 
+        **Common to all devices**
+
         Raises:
             DriverException: If the driver cannot *successfully* complete the request.
                 This exception may be encountered on any call to the device.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``Name``, find this specific
+            device's specification, and see ``Name`` there.
 
         """
         return self._get("name")
@@ -388,6 +530,8 @@ class Device:
     @property
     def SupportedActions(self) -> List[str]:
         """The list of custom action names supported by this driver
+
+        **Common to all devices**
 
         Returns:
             Python list of strings (see Notes)
@@ -398,7 +542,7 @@ class Device:
                 The device did not *successfully* complete the request.
 
         Notes:
-            * This method, combined with :py:meth:`Action())`, is the supported
+            * This method, combined with :py:meth:`Action`, is the supported
               mechanic for adding non-standard functionality.
             * SupportedActions is a "discovery" mechanism that enables clients to know
               which Actions a device supports without having to exercise the Actions
@@ -406,10 +550,17 @@ class Device:
               people / equipment safety issues if actions are called unexpectedly
               or out of a defined process sequence. It follows from this that
               SupportedActions must return names that match the spelling of
-              :py:meth:`Action()`
+              :py:meth:`Action`
               names exactly, without additional descriptive text. However, returned
               names may use any casing because the ActionName parameter of
-              :py:meth:`Action()` is case insensitive.
+              :py:meth:`Action` is case insensitive.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            Alpyca uses a common Device class but this is not available in the
+            |master|. To see the reference info for ``SupportedActions``, find this specific
+            device's specification, and see ``SupportedActions`` there.
 
         """
         return self._get("supportedactions")
