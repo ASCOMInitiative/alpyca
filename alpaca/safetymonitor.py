@@ -36,19 +36,20 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
+# 08-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
 # -----------------------------------------------------------------------------
 from alpaca.device import Device
 
 class SafetyMonitor(Device):
     """ASCOM Standard ISafetyMonitor V1 Interface.
-    
+
     Provides a single property that indicates whether it is safe to expose
     the observatory instruments to the outside environment, or not. The
-    measurements of meterological conditions that your application (or a 
+    measurements of meterological conditions that your application (or a
     separate weather monitoring system) uses to make this decision will
-    most often come from sensors that are accessed through the 
+    most often come from sensors that are accessed through the
     :py:class:`~alpaca.observingconditions.ObservingConditions` interface.
-    
+
     """
 
     def __init__(
@@ -58,7 +59,7 @@ class SafetyMonitor(Device):
         protocol: str = "http"
     ):
         """Initialize the SafetyMonitor object.
-              
+
         Args:
             address (str): IP address and port of the device (x.x.x.x:pppp)
             device_number (int): The index of the device (usually 0)
@@ -76,6 +77,15 @@ class SafetyMonitor(Device):
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
-        
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |IsSafe|
+
+            .. |IsSafe| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/safetymonitor.html#SafetyMonitor.IsSafe" target="_blank">
+                SafetyMonitor.IsSafe</a> (external)
         """
         return self._get("issafe")

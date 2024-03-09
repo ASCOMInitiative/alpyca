@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
-# switch - Implements ASCOM Alpaca Switch device class
+# switch - Implements ASCOM Alpaca Switch class
 #
 # Part of the Alpyca application interface package
 #
@@ -40,6 +40,8 @@
 #                 Change 'ID' to 'Id' for switch parameters.
 # 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
 # 07-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
+# 08-Mar-24 (rbd) 3.0.0-pre Clarify switch vs driver vs device etc. No
+#                 logic changes.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -53,7 +55,7 @@ class Switch(Device):
         device_number: int,
         protocol: str = "http"
     ):
-        """Initialize the Switch object.
+        """Initialize the Switch device.
 
         Args:
             address (str): IP address and port of the device (x.x.x.x:pppp)
@@ -65,7 +67,7 @@ class Switch(Device):
 
     @property
     def MaxSwitch(self) -> int:
-        """Count of switch devices managed by this driver.
+        """Count of switches managed by this device.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -74,7 +76,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Number of switch devices managed by this driver. Devices are numbered from 0
+            * Number of switches managed by this device. Switches are numbered from 0
               to MaxSwitch - 1.
 
         .. admonition:: Master Interfaces Reference
@@ -91,7 +93,7 @@ class Switch(Device):
         return self._get("maxswitch")
 
     def CanAsync(self, Id: int) -> bool:
-        """The specified switch device can operate asynchronously.
+        """The specified switch can operate asynchronously.
         See :py:meth:`SetAsync` and :py:meth:`SetAsyncValue`.
 
         Args:
@@ -105,7 +107,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * Examples of switches that cannot be written to include a
               limit switch or a sensor.
 
@@ -140,7 +142,7 @@ class Switch(Device):
             * On return, the next call to :py:meth:`StateChangeComplete` for this switch
               will raise an :py:class:`OperationCancelledException`; thereafter calls
               to :py:meth:`StateChangeComplete` for the switch will return ``False``.
-            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -156,7 +158,7 @@ class Switch(Device):
         return self._put("cancelasync", Id=Id)
 
     def CanWrite(self, Id: int) -> bool:
-        """The specified switch device can be written to.
+        """The specified switch can be written to.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -169,7 +171,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Switch devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * Examples of witches that cannot be written to include a
               limit switch or a sensor.
 
@@ -187,7 +189,7 @@ class Switch(Device):
         return self._get("canwrite", Id=Id)
 
     def GetSwitch(self, Id: int) -> bool:
-        """The state of the specified switch device.
+        """The state of the specified switch.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -200,7 +202,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -217,7 +219,7 @@ class Switch(Device):
         return self._get("getswitch", Id=Id)
 
     def GetSwitchDescription(self, Id: int) -> str:
-        """The textual description of the specified switch device.
+        """The textual description of the specified switch.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -230,7 +232,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -246,7 +248,7 @@ class Switch(Device):
         return self._get("getswitchdescription", Id=Id)
 
     def GetSwitchName(self, Id: int) -> str:
-        """The textual name of the specified switch device.
+        """The textual name of the specified switch.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -259,7 +261,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -275,7 +277,7 @@ class Switch(Device):
         return self._get("getswitchname", Id=Id)
 
     def GetSwitchValue(self, Id: int) -> float:
-        """The value of the specified switch device as a float.
+        """The value of the specified switch as a float.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -288,7 +290,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
 
         .. admonition:: Master Interfaces Reference
@@ -305,7 +307,7 @@ class Switch(Device):
         return self._get("getswitchvalue", Id=Id)
 
     def MaxSwitchValue(self, Id: int) -> float:
-        """The maximum value of the specified switch device as a double.
+        """The maximum value of the specified switch as a double.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -318,7 +320,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -334,7 +336,7 @@ class Switch(Device):
         return self._get("maxswitchvalue", Id=Id)
 
     def MinSwitchValue(self, Id: int) -> float:
-        """The minimum value of the specified switch device as a double.
+        """The minimum value of the specified switch as a double.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -347,7 +349,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -382,7 +384,7 @@ class Switch(Device):
               operation has been successfully started, with :py:meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
               :py:meth:`StateChangeComplete` becomes True.
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -420,7 +422,7 @@ class Switch(Device):
               operation has been successfully started, with :py:meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
               :py:meth:`StateChangeComplete` becomes True.
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -436,7 +438,7 @@ class Switch(Device):
         self._put("setasyncvalue", Id=Id, Value=Value)
 
     def SetSwitch(self, Id: int, State: bool) -> None:
-        """Set a switch device to the specified state
+        """Set a switch to the specified state
 
         Args:
             Id: the specified switch number (see Notes)
@@ -450,14 +452,14 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
         self._put("setswitch", Id=Id, State=State)
 
     def SetSwitchName(self, Id: int, Name: str) -> None:
-        """Set a switch device name to the specified value.
+        """Set a switch name to the specified value.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -471,7 +473,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -487,7 +489,7 @@ class Switch(Device):
         self._put("setswitchname", Id=Id, Name=Name)
 
     def SetSwitchValue(self, Id: int, Value: float) -> None:
-        """Set a switch device value to the specified value.
+        """Set a switch value to the specified value.
 
         Args:
             Id: the specified switch number (see Notes)
@@ -504,7 +506,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -537,7 +539,7 @@ class Switch(Device):
                 The device did not *successfully* complete the request.
 
         Notes:
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -552,7 +554,7 @@ class Switch(Device):
         return self._get("statechangecomplete", Id=Id)
 
     def SwitchStep(self, Id: int) -> float:
-        """The step size of the specified switch device (see Notes).
+        """The step size of the specified switch (see Notes).
 
         Args:
             Id: the specified switch number (see Notes)
@@ -566,7 +568,7 @@ class Switch(Device):
 
         Notes:
             * Step size is the difference between successive values of the device.
-            * Devices are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
