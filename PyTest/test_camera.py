@@ -18,9 +18,9 @@ def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test properties:")
+    assert d.InterfaceVersion >= 3, 'OmniSim must have ICameraV3 or later'
     assert s['CanFastReadout'] == False, 'OmniSim FastReadout must be OFF'
     assert 'ReadoutModes' in s, 'OmniSim ReadoutModes must be ON'
-    assert d.InterfaceVersion >= 3              # OmniSim must have ICameraV3 or later
     assert d.CameraXSize == s['CameraXSize']
     assert d.CameraYSize == s['CameraYSize']
     assert d.CanAbortExposure == s['CanAbortExposure']

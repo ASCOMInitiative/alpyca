@@ -37,7 +37,7 @@ pytz = "^2022.1"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "--setupshow -ra"
+addopts = "--setupshow -rA"
 testpaths = [
     "PyTest"
 ]

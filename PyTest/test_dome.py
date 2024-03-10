@@ -24,7 +24,7 @@ def test_props(device, settings, disconn):
 def test_shutter(device, disconn):
     d = device
     print("Test shutter motion:")
-    assert d.CanSetShutter
+    assert d.CanSetShutter, 'OmniSim must have a controllable shutter'
     assert d.ShutterStatus != ShutterState.shutterError
     if d.ShutterStatus != ShutterState.shutterClosed:
         print("  Closing the shutter")
@@ -52,8 +52,8 @@ def test_shutter(device, disconn):
 def test_altaz(device, disconn):
     d = device
     print("Test alt/az motion:")
-    assert d.CanSetAzimuth
-    assert d.CanSetAltitude
+    assert d.CanSetAzimuth, 'OmniSim must have Azimuth (rotation) enabled'
+    assert d.CanSetAltitude, 'OmniSim must have Altitude control enabled'
     print("  Start rotate to az 90")
     d.SlewToAzimuth(90)
     print("  Start slew to alt 60")
@@ -81,10 +81,10 @@ def test_altaz(device, disconn):
 def test_park(device, disconn):
     d = device
     print("Test parking (check can-flags):")
-    assert d.CanPark
-    assert d.CanSetPark
-    assert d.CanSetAzimuth
-    assert d.CanSyncAzimuth
+    assert d.CanSetAzimuth, 'OmniSim must have Azimuth (rotation) enabled'
+    assert d.CanSetAltitude, 'OmniSim must have Altitude control enabled'
+    assert d.CanPark, 'OmniSim must have Parking enabled'
+    assert d.CanSetPark, 'OmniSim must have Set Parking enabled'
     print("  Start slew to az 27")
     d.SlewToAzimuth(27)
     print('  ', end = '')
@@ -122,8 +122,10 @@ def test_park(device, disconn):
 
 def test_home(device, disconn):
     d = device
-    print("Test homing (check can-flag):")
-    assert d.CanFindHome
+    print("Test homing (check can-flags):")
+    assert d.CanSetAzimuth, 'OmniSim must have Azimuth (rotation) enabled'
+    assert d.CanSetAltitude, 'OmniSim must have Altitude control enabled'
+    assert d.CanFindHome, "OmniSim must have homing enabled"
     print("  Start slew to az 90")
     print('  ', end = '')
     d.SlewToAzimuth(90)

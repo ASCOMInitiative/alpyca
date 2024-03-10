@@ -1,8 +1,7 @@
 import pytest
-import os
+import time
 import sys
 import json
-import platform
 import ast
 import requests
 import xml.etree.ElementTree as ET
@@ -15,7 +14,10 @@ def device(request):
     c = getattr(sys.modules[f"alpaca.{n.lower()}"], n)  # Creates a device class by string name :-)
     d =  c('localhost:32323', 0)                       # Created an instance of the class
 #    d = c('[fe80::9927:65fc:e9e8:f33a%eth0]:32323', 0)  # RPi 4 Ethernet to Windows OmniSim IPv6
-    d.Connected = True
+    #d.Connected = True
+    d.Connect()
+    while d.Connecting:
+        time.sleep(0.5)
     print(f"Setup: Connected to OmniSim {n} OK")
     return d
 #
@@ -45,7 +47,8 @@ def settings(request):
 def disconn(request):
     global d
     yield
-    d.Connected = False
+    #d.Connected = False
+    d.Disconnect()
     n = getattr(request.module, "dev_name")
     print(f"Teardown: {n} Disconnected")
 

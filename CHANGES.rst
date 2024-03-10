@@ -1,5 +1,18 @@
-Version 2.0.4 (2023-01-01)
+Version 3.0.0-pre (2024-03-10)
 ==============================
+
+This release includes the interface additions and documentation clarificaions for asynchronous
+behavior which are part of ASCOM Platform 7.
+
+Changes since 2.0.4
+-------------------
+
+- Added interface members as described in `Release Notes for Interfaces as of ASCOM Platform 7 <https://ascom-standards.org/newdocs/relnotes.html#release-notes-for-interfaces-as-of-ascom-platform-7>`_
+  and `published in November 2023 <https://ascomtalk.groups.io/g/Developer/message/7066>`_ on the ASCOM Developer Forum.
+  These have been included in the package unit tests and validated to the best of our abilities.
+- Documentation of each interface member now contains a link to the corresponding member in the
+  `ASCOM Master Interfaces (Alpaca and COM) <https://ascom-standards.org/newdocs/#ascom-master-interfaces-alpaca-and-com>`_
+  which serves as the definitive source of documentation (though it is generic and not Python specific).
 
 Changes since 2.0.2 (2.0.3 unpublished)
 ---------------------------------------

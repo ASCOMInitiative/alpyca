@@ -800,3 +800,15 @@ auncher\winapi.py", line 68, in impl
 * Start of changes for Platform 7 per https://ascom-standards.org/newdocs/relnotes.html. New
   OperationCancelledException, async additions to device common members, async
   additions to CoverCalibrator and Switch. HTML DOCS ARE BUILDING!
+
+08-Mar-2024
+-----------
+* PyTest new members for Platform 7. New Connect()/Disconnect()/Connecting replaces property-write
+  Connected. OK.
+* New CalibratorChanging and CoverMoving properties replace brightness and cover state checks
+  for completion. OK.
+* Looking for print() statement outputs from the tests. Needed to change [tool.pytest.ini_options]
+  in pyproject.toml addopts = "--setupshow -rA" (the capital 'A' for all, 'a' for all except success).
+  Note that some PyTest references don't list 'setupshow' which traces fixture usages. A must!
+* TADA! All of the unit tests pass with the OmniSim 0.4.0-alpha01+e33cd8e7d7b17e46126799230fba409e2568a4
+  version.
