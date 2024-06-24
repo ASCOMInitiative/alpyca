@@ -8,6 +8,10 @@ Camera Class
     Alpyca document is provided *for your convenience*. If there is any question,
     the info in |master| is the official specification.
 
+.. Note::
+
+    See the :ref:`Example` below.
+
 .. the |master| link is in device.py and thus is accessible to all of the device
    specific document contexts.
 
@@ -29,6 +33,8 @@ Camera-Related Constants
     :members:
 .. autoenum:: ImageArrayElementTypes
     :members:
+
+.. _Example:
 
 Example: Acquiring an Image, Creating FITS Image
 ------------------------------------------------

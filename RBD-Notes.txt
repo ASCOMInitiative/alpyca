@@ -812,3 +812,13 @@ auncher\winapi.py", line 68, in impl
   Note that some PyTest references don't list 'setupshow' which traces fixture usages. A must!
 * TADA! All of the unit tests pass with the OmniSim 0.4.0-alpha01+e33cd8e7d7b17e46126799230fba409e2568a4
   version.
+
+18-Jun-2024
+-----------
+*  W10 now bitching about "set pytest path" ... running with current .venv. The workspace is not being
+   GIT synced so this did not get zapped. F**K.
+   - I put in a pytest path in the workspace file and it seems to work!! 6 tests passed but there is a
+     Discovery Error after SafetyMonitor though. OH Refresh Tests and they are all there!!
+     *** ALL TESTS PASS *** Hooray!
+* Esbonio wrestling. More bits needed to go inn with PIP. Then after restart a new esbonio went in.
+  I did not try to build docs. Laterz and I need to zero back in on poetry.

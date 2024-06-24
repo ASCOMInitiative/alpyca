@@ -1087,9 +1087,14 @@ class Camera(Device):
               below.
             * Automatically adapts to devices returning either JSON image data or the much
               faster ImageBytes format. In either case the returned nested list array
-              contains standard Python int or float pixel values. See
-              https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
+              contains standard Python int or float pixel values. See the
+              |ImageBytes|.
               See :py:attr:`ImageArrayInfo` for metadata covering the returned image data.
+
+            .. |ImageBytes| raw:: html
+
+                <a href="https://github.com/ASCOMInitiative/ASCOMRemote/raw/main/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf" target="_blank">
+                    Alpaca API Reference</a> (external)
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -2054,6 +2059,7 @@ class Camera(Device):
               to determine if the exposure has been *successfully*
               completed. See :ref:`async_faq`
             * Refer to :py:attr:`ImageReady` for additional info.
+            * See the :ref:`Example` below.
 
         .. admonition:: Master Interfaces Reference
             :class: green
