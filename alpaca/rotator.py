@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@
 # 16-Jun-22 (rbd) 2.0.0-dev3 Doc changes to CanReverse, markup correction to
 #                            Sync(), no changes to logic.
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
-# 08-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members.
+# 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device

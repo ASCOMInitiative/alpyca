@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,8 +41,8 @@
 # 17-Jul-22 (rbd) 2.0.1rc1 Speed up by re-using ports via requests.Session().
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 21-Aug-22 (rbd) 2.0.2 Fix DriverVersion to return the string GitHub issue #4
-# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
-# 06-Mar-24 (rbd) 3.0.0-pre Add stubbed Master Interfaces refs to all members
+# 05-Mar-24 (rbd) 3.0.0 New members for Platform 7
+# 06-Mar-24 (rbd) 3.0.0 Add stubbed Master Interfaces refs to all members
 # -----------------------------------------------------------------------------
 
 from threading import Lock

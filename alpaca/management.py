@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -57,12 +57,12 @@ def __check_error(response: requests.Response) -> None:
 
     """
     if response.status_code != 200:
-        raise AlpacaRequestException(response.status_code, 
+        raise AlpacaRequestException(response.status_code,
                 f"{response.text} (URL {response.url})")
 
 def __ipv6_safe_get(endpoint: str, addr: str) -> str:
     """HTTP GET from endpoint with IPv6-safe Host: header
-    
+
         Args:
             endpoint: The endpoint path starting with /
             addr: full address (IPV6 or IPv4) of server
@@ -82,13 +82,13 @@ def __ipv6_safe_get(endpoint: str, addr: str) -> str:
 
 def apiversions(addr: str) -> List[int]:
     """Returns a list of supported Alpaca API version numbers
-    
+
     Args:
         addr: An `address:port` string from discovery
 
     Raises:
         AlpacaRequestException: Method or parameter error, internal Alpaca server error
-    
+
     Notes:
         * Currently (April 2022) this will be [1]
 
@@ -100,16 +100,16 @@ def apiversions(addr: str) -> List[int]:
 
 def description(addr: str) -> str:
     """Return a description of the device as a whole (the server)
-    
+
     Args:
         addr: An `address:port` string from discovery
 
     Raises:
         AlpacaRequestException: Method or parameter error, internal Alpaca server error
-    
+
     Notes:
         * This is the description of the server at the given `address:port`,
-          which may serve multiple Alpaca devices. 
+          which may serve multiple Alpaca devices.
 
     """
     response = __ipv6_safe_get(f'/management/v{API_VERSION}/description', addr)
@@ -119,9 +119,9 @@ def description(addr: str) -> str:
 
 def configureddevices(addr: str) -> List[dict]:
     """Return a list of dictionaries describing each device served by this Alpaca Server
-    
+
     Each element of the returned list is a dictionary of properties of each Alpaca
-    device served by the server at `addr`. The dictionaries consist of the following 
+    device served by the server at `addr`. The dictionaries consist of the following
     elements:
 
         :DeviceName: The name of the device
@@ -129,7 +129,7 @@ def configureddevices(addr: str) -> List[dict]:
         :DeviceType: The ASCOM standard name for the type of device
 
         :DeviceNumber: The index of the device among devices of the same type. See Notes.
-        
+
         :UniqueID: A "globally unique ID" identifying this device
 
     Args:

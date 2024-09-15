@@ -13,7 +13,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
-# 05-Mar-24 (rbd) 3.0.0-pre For Platform 7 add OperationCancelledException.
+# 05-Mar-24 (rbd) 3.0.0 For Platform 7 add OperationCancelledException.
 # -----------------------------------------------------------------------------
 
 class ActionNotImplementedException(Exception):

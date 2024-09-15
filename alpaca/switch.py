@@ -13,7 +13,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,9 +38,9 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 01-Jan-23 (rbd) 2.0.4 https://github.com/ASCOMInitiative/alpyca/issues/8
 #                 Change 'ID' to 'Id' for switch parameters.
-# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
-# 07-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
-# 08-Mar-24 (rbd) 3.0.0-pre Clarify switch vs driver vs device etc. No
+# 05-Mar-24 (rbd) 3.0.0 New members for Platform 7
+# 07-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 08-Mar-24 (rbd) 3.0.0 Clarify switch vs driver vs device etc. No
 #                 logic changes.
 # -----------------------------------------------------------------------------
 

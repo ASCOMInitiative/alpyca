@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,9 +38,9 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 04-Jun-22 (rbd) 2.0.0-dev1 Fix capitalization of OpenCover
-# 05-Mar-24 (rbd) 3.0.0-pre New members for Platform 7
-# 06-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
-# 07-Mar-24 (rbd) 3.0.0-pre Fix Master refs to show () on methods
+# 05-Mar-24 (rbd) 3.0.0 New members for Platform 7
+# 06-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 07-Mar-24 (rbd) 3.0.0 Fix Master refs to show () on methods
 # -----------------------------------------------------------------------------
 
 from alpaca.docenum import DocIntEnum

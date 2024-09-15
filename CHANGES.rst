@@ -1,7 +1,7 @@
-Version 3.0.0-pre (2024-03-10)
-==============================
+Version 3.0.0
+=============
 
-This release includes the interface additions and documentation clarificaions for asynchronous
+This production release includes the interface additions and documentation clarifications for asynchronous
 behavior which are part of ASCOM Platform 7.
 
 Changes since 2.0.4

@@ -26,6 +26,7 @@ copyright = '2022-2024, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
 # The full version, including alpha/beta/rc tags
+version = '3.0.0'
 release = '3.0.0'
 
 
@@ -100,6 +101,12 @@ exclude_patterns = []
 #
 # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 html_theme = 'sphinx_rtd_theme'
+
+#
+# This sets a standard logo for pages, and will be used for the sidebar
+# TOC as well.
+#
+html_logo = 'alpaca128.png'
 
 #
 # Clean up ugly aspects of Read The Docs. See comments in the css

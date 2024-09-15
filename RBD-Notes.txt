@@ -822,3 +822,23 @@ auncher\winapi.py", line 68, in impl
      *** ALL TESTS PASS *** Hooray!
 * Esbonio wrestling. More bits needed to go inn with PIP. Then after restart a new esbonio went in.
   I did not try to build docs. Laterz and I need to zero back in on poetry.
+
+14-Sep-2024
+-----------
+* Well now Unittest Discovery Error. So DAMN fragile!!!!!!!!!!!!! I had to re-configure it for
+  PyTest and test_*.py, then re-start and now it has disacovered the tests. Sheesh.
+* Great! Pass all tests with OmniSim 0.4.0-rc01+481bc7b080d10737ad96e9735ed5b4eb0949f415
+* Referring back to 29-Feb for poetry. First update the dependencies needed (see tool.poetry.dependencies)
+  - Use pipmanager to update requests, netifaces, python-dateutil, typing-extensions, enum-tools.
+  - Poetry update...
+    - Updating certifi (2024.2.2 -> 2024.8.30)
+    - Updating idna (3.6 -> 3.9)
+    - Updating packaging (23.2 -> 24.0)
+    - Downgrading pluggy (1.4.0 -> 1.2.0)
+    - Downgrading typing-extensions (4.12.2 -> 4.7.1)
+    - Downgrading enum-tools (0.12.0 -> 0.9.0.post1)
+    - Downgrading pytest (8.0.2 -> 7.4.4)
+    - Downgrading pytz (2024.1 -> 2022.7.1)
+    - Downgrading requests (2.32.3 -> 2.31.0)
+  - **WHY** Oh wow -- These are dependencies in the tree that have a max value! Anyway we're good now.
+* Tests complete again. Need OmniSim before opening test section.

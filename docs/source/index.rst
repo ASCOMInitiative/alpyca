@@ -47,8 +47,8 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.0.0-pre the fourth release, as a pre-release. For
-        release notes see |changes| on the |github|.
+        This is version 3.0.0 a major release for ASCOM Platform 7.
+        For release notes see |changes| on the |github|.
 
     For background see |about| on the |ascsite|. As an astronomy developer
     wanting to use Alpaca, we suggest you look over |devhelp| and join
@@ -73,8 +73,8 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.0.0, the fourth release, as a pre-release. For release
-        notes see `the CHANGES document
+        This is version 3.0.0, a major release for ASCOM Platform 7.
+        For release notes see `the CHANGES document
         <https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst>`_ on
         the `Alpyca GitHub repository
         <https://github.com/ASCOMInitiative/alpyca>`_.

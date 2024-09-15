@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 21-Aug-22 (rbd) 2.0.2 Fix driveRates enum (GitHub issue #3). Fix descriptive
 #                 text for pierWest and pierUnknown (GitHub issue #5)
-# 08-Mar-24 (rbd) 3.0.0-pre Add Master Interfaces refs to all members
+# 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
