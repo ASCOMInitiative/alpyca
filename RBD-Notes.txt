@@ -324,7 +324,7 @@ test_safetymonitor.py .                                                         
   - Built alpaca_client-0.1.0-py3-none-any.whl
 * OK, this looks good. Am I ready for PyPi? No let's do the test one first: See 30-March install 3 and 4 for poetry:
   1. (venv) > poetry config repositories.testpypi https://test.pypi.org/legacy/
-  2. (venv) > poetry config pypi-token.testpypi pypi-AgENdGVzdC5weXBpLm9yZwIkM2Y2YWUxZmQtZTY0Zi00YmI3LTk5ZjgtMmRmMGM5ZWExYTlmAAIleyJwZXJtaXNzaW9ucyI6ICJ1c2VyIiwgInZlcnNpb24iOiAxfQAABiAXNoFKFvLgbZBngh1Ps2kvFcufRDpJcwFIGvxhZcLc3Q
+  2. (venv) > poetry config pypi-token.testpypi ...whatever...
 * Dry run them publish to Test-PyPi. **IDIOT** Wrong Name. alpaca-client not alpyca-client (DUH)
 * Change the name in pyproject.toml, rebuild, upload. It's there!! I deleted old projects on TestPyPi.
 * On Linux, create new project, and add a venv. MUST OPEN A PYTHON FILE TO ACTIVATE THE EXTENSION. Then pip -m venv .venv and VSCode will pop up the dialog asking if you want to use it as your environment. Cool. Ready to test the package.
@@ -338,7 +338,7 @@ test_safetymonitor.py .                                                         
   which I miraculously fixed by applying that patch shown on 16-april, and then adding another
     @property
     def _normalized_name(self):
-        return "whatthefuck'
+        return "whatthe****'
   THE SITE PACKAGES IS IN ~.local/lib/python3.9/site-packages
 * I think I need to put 0.5.4 Rinoh in as I found that the above is fixed. Oh well, some day.
 
@@ -375,7 +375,7 @@ test_safetymonitor.py .                                                         
         No test is available in D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\camera.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\covercalibrator.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\device.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\discovery.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\dome.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\exceptions.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\filterwheel.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\focuser.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\management.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\observingconditions.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\rotator.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\safetymonitor.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\switch.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\telescope.py D:\dev\astro\ASCOM Alpaca\alpyca\alpaca\__init__.py D:\dev\astro\ASCOM Alpaca\alpyca\conftest.py D:\dev\astro\ASCOM Alpaca\alpyca\devtest.py D:\dev\astro\ASCOM Alpaca\alpyca\docs\source\conf.py D:\dev\astro\ASCOM Alpaca\alpyca\ImageTests.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_camera.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_covercalibrator.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_device.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_dome.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_filterwheel.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_focuser.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_rotator.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_safetymonitor.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_switch.py D:\dev\astro\ASCOM Alpaca\alpyca\PyTest\test_telescope.py. Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate and try again.
         ========== Test discovery finished: 0 Tests found in 8.1 sec ==========
         No tests found to run.
-  -- Great, trying to run this fucking python run_adapter.py module
+  -- Great, trying to run this ****ing python run_adapter.py module
         > pwd
         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Python\Core\PythonFiles\t
         esting_tools
@@ -469,7 +469,7 @@ test_safetymonitor.py .                                                         
     - (.venv) > poetry config repositories.testpypi https://test.pypi.org/legacy/ (already set)
     - Go onto Test PyPi and get the unique identifier for the March 28 token. I have no idea where I put it so
         3f6ae1fd-e64f-4bb7-99f8-2df0c9ea1a9f
-    - (.venv) > poetry config pypi-token.testpypi 3f6ae1fd-e64f-4bb7-99f8-2df0c9ea1a9f
+    - (.venv) > poetry config pypi-token.testpypi ...whatever...
     - poetry config --list (the token does not show)
  (.venv) > poetry config --list
     cache-dir = "C:\\Users\\Robert B. Denny\\AppData\\Local\\pypoetry\\Cache"
@@ -842,3 +842,34 @@ auncher\winapi.py", line 68, in impl
     - Downgrading requests (2.32.3 -> 2.31.0)
   - **WHY** Oh wow -- These are dependencies in the tree that have a max value! Anyway we're good now.
 * Tests complete again. Need OmniSim before opening test section.
+* Checkpoint commit / sync (7011925)
+
+16-Sep-2024
+-----------
+* Back to preparing Alpyca 3.0.0, Tweak the docs including README.
+* Using the W10 system now. My steps above for 02-Jan-2023. Repeat here:
+  + poetry build
+  + poetry publish -r testpypi -- failed -- "Repository testpypi is not defined" - From above (06-May-2022)
+    1. (venv) > poetry config repositories.testpypi https://test.pypi.org/legacy/
+    2. (venv) > poetry config pypi-token.testpypi ...whatever...
+  + poetry publish -r testpypi -- failed --
+    - Uploading alpyca-3.0.0-py3-none-any.whl FAILED
+      HTTP Error 403: Invalid or non-existent authentication information. See https://test.pypi.org/help/#invalid-auth for more information.
+    - (eventually) Make a new token damn it. "alpyca3"
+      poetry config pypi-token.testpypi ...whatever...
+      poetry publish -r testpypi ... OK!
+      Saved new token on Documents A-Office-Procedures PyPi folder and also Dropbox/crypted and KeePass
+    - Make a new token for PyPi as well
+      poetry config pypi-token ...whatever...
+      Saved new token on Documents A-Office-Procedures PyPi folder and also Dropbox/crypted and KeePass
+  + Over to AlpycaTest project, confirm that 2.0.4 is installed with pip and Pip Manager.pip
+    - Create new .venv3 to simulate fresh insatll and validate dependencies
+    - python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ alpyca
+      Looks good alpyca 3.0.0 and only its dependencies shows.
+    - Run test program with OmniSim -- OK!!
+      Change to use new Connect()/Disconnect()
+    - Test with the sample from the docs. OK!!
+  + Make final tweaks to README
+  + Poetry build to capture that
+=== READY FOR POETRY PUBLISH ===
+

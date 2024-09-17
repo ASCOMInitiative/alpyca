@@ -1,4 +1,4 @@
-# alpyca (2.0.4)
+# alpyca 3.0.0 (ASCOM Platform 7)
 
 ## Python 3.7+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
@@ -6,7 +6,9 @@
 
 Produced by the [ASCOM Initiative](https://ascom-standards.org/), and derived from Ethan Chappel's
 Alpyca 1.0.0. Ethan kindly released the name **Alpyca** to the ASCOM Initiative, hence this expanded
-package starts life as Version 2.0.
+package started life as Version 2.0. With 3.0.0 it has been expanded to support the additions in
+ASCOM Platform 7. **NOTE** This package runs on Linux, MacOS, and Windows. It has no depencence on the
+Windows ASCOM PLatform. Alpaca does not depend on Windows.
 
 ## Requirements
 
@@ -19,7 +21,7 @@ Dependencies are minimal: [requests](https://pypi.org/project/requests/),
 
 ## Installation
 
-The package installs from PyPi as
+The package installs from [PyPi](https://pypi.org/) as
 
 ```sh
 pip install alpyca
@@ -31,17 +33,21 @@ or if you have the source code in a tar file, extract it and run (with **Python 
 python setup.py install
 ```
 
-The dependencies listed above (and others they may depend on) are automatically 
+The dependencies listed above (and others they may depend on) are automatically
 installed with alpyca.
 
 ## Current Status & Documentation
 
-This version 2.0.4 is the third production release (2.0.3 is unpublished). 
-The documentation is extensive and available
-online as **[Alpyca: API Library for Alpaca](https://ascom-standards.org/alpyca/)** as well as a
-**[PDF Document here](https://ascom-standards.org/alpyca/alpyca.pdf)**. See 
-**[CHANGES.rst](https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst)** (on GitHub) for
-change log.
+This version 3.0.0. This release incorporates the additions to the ASCOM Interfaces that
+were introduced with ASCOM Platform 7.
+
+The documentation is extensive and available online as **[Alpyca: API Library
+for Alpaca](https://ascom-standards.org/alpyca/)** as well as a **[PDF Document
+here](https://ascom-standards.org/alpyca/alpyca.pdf)**. Each element of the
+package references the relevant documentation in the **[ASCOM Master Interfaces
+Document](https://ascom-standards.org/newdocs/)** See
+**[CHANGES.rst](https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst)**
+(on GitHub) for change log.
 
 ## Feedback and Discussion
 
@@ -57,12 +63,14 @@ the [General Requirements](https://ascom-standards.org/Standards/Requirements.ht
 ## Example
 
 First download, install and run the _cross-platform_
-**[Alpaca Omni Simulator](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators#readme)**
+**[Alpaca Omni Simulator](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases)**
 which will give you fully functional simulators for _all_ Alpaca devices, as well as a _live_
 OpenAPI/Swagger interface to the Alpaca RESTful endpoints (_see the details below_). This example will
 use the Telescope simulator. Assuming you are running the Omni Simulator on your local host
 at its default port of 32323, its address is then <code>localhost:32323</code>. Here is a sample
-program using alpaca:
+program using Alpaca:
+
+**REQUIRES [LATEST OMNI SIM](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases) WITH PLATFORM 7 CONNECTION SEMANTICS**:
 
 ```python
     import time
@@ -70,11 +78,13 @@ program using alpaca:
     from alpaca.exceptions import *     # Or just the exceptions you want to catch
 
     T = Telescope('localhost:32323', 0) # Local Omni Simulator
+    T.Connect()                         # New async connect
+    while T.Connecting
+        time.sleep(1)
+    print(f'Connected to {T.Name}')
+    print(T.Description)
+    T.Tracking = True               # Needed for slewing (see below)
     try:
-        T.Connected = True
-        print(f'Connected to {T.Name}')
-        print(T.Description)
-        T.Tracking = True               # Needed for slewing (see below)
         print('Starting slew...')
         T.SlewToCoordinatesAsync(T.SiderealTime + 2, 50)    # 2 hrs east of meridian
         while(T.Slewing):
@@ -90,7 +100,7 @@ program using alpaca:
         print(f'Slew failed: {str(e)}')
     finally:                            # Assure that you disconnect
         print("Disconnecting...")
-        T.Connected = False
+        T.Disconnect()
 ```
 
 ### Results
@@ -107,11 +117,12 @@ program using alpaca:
     done
 ```
 
+See how easliy  exceptions are handled? The error message came from the OmniSim.
+
 ## Alpaca Omni Simulators
 
 The ASCOM Alpaca Simulators are [available via GitHub here](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators).
-Using the \[[Latest](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases/latest)\] link, scroll down the
-Assets section and pick the package for your OS and CPU type. Extract all files to a directory and start via
+Scroll down to the Assets section and pick the package for your OS and CPU type. Extract all files to a directory and start via the installed icon or command line
 
 ```sh
 ./ascom-alpaca.simulators
@@ -121,7 +132,6 @@ Assets section and pick the package for your OS and CPU type. Extract all files 
 server and simulated devices. Once you get this running you are ready to try the sample above.
 
 ![Initial OmniSim Display](https://ascom-standards.org/alpyca/readme-assets/InitialBrowserAnnotated.png)
-
 
 ## ASCOM Remote
 
@@ -137,7 +147,7 @@ Alpaca devices, you can install the [Wireshark network protocol analyzer](https:
 One thing that trips people up is making the installation so that Wireshark has access to all of the
 network insterfaces without needing root privs (linux) or running "As Administrator" on Windows. Pay close
 attention the installation steps on this. On WIndows the capture driver installation will require elevation,
-as it is a privileged module. For example installinn on Linux (e.g Debian/Raspberry Pi) you'll see this,
+as it is a privileged module. For example installing on Linux (e.g Debian/Raspberry Pi) you'll see this,
 and **be sure to answer Yes**.
 
 ![Wireshark Privileges](https://ascom-standards.org/alpyca/readme-assets/WireSharkPrivs.png)
