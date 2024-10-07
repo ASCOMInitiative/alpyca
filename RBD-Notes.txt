@@ -873,3 +873,103 @@ auncher\winapi.py", line 68, in impl
   + Poetry build to capture that
 === READY FOR POETRY PUBLISH ===
 
+07-Oct-2024
+-----------
+* Merge platform 7 branch with master. In VSCode, switch to Master. Then Merge platform 7. 
+  **********
+  ***FAIL***
+  **********
+    2024-10-07 09:21:58.909 [info] > git log --oneline --cherry master...master@{upstream} -- [67ms]
+    2024-10-07 09:21:59.604 [info] > git pull --tags origin master [692ms]
+    2024-10-07 09:21:59.604 [info] From https://github.com/BobDenny/alpyca
+    * branch            master     -> FETCH_HEAD
+    fatal: Not possible to fast-forward, aborting.
+    2024-10-07 09:21:59.666 [info] > git config --get commit.template [58ms]
+    2024-10-07 09:21:59.674 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/master refs/remotes/master [63ms]
+    2024-10-07 09:21:59.738 [info] > git status -z -uall [61ms]
+    2024-10-07 09:21:59.741 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [59ms]
+  - Showing 13 push one pull. But I see that my 'master' here has the wrong remote, left over from moving the repo from my git to the ASCOM Initiative. BUT... how is it that I have been working in te platform7 branch and it has apprently been going into the ASCOM repo not mine. I no longer have the alpyca repo at all. Check out platform 7 in VSCode. I no longer have the alpyca repo at all. Yet git remote -v shows https://github.com/BobDenny/alpyca.git (fetch) and (push). I did check and from VSCode I've been pushing to the platform 7 branch on the right (ASCOM) repo. WTF?? I show the wrong remote locally yet it has been working????????? W*T*F*??
+  - git remote set-url origin https://github.com/ASCOMInitiative/alpyca.git
+  - git remote set-url --push origin https://github.com/ASCOMInitiative/alpyca.git
+* Try merge again 
+  **********
+  ***FAIL***
+  **********
+  When switching to master in VSCode:
+	2024-10-07 09:46:51.778 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [55ms]
+	2024-10-07 09:46:54.656 [info] > git checkout -q master [65ms]
+	2024-10-07 09:46:54.717 [info] > git config --get commit.template [58ms]
+	2024-10-07 09:46:54.726 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/master refs/remotes/master [63ms]
+	2024-10-07 09:46:54.825 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [93ms]
+	2024-10-07 09:46:54.825 [info] > git status -z -uall [97ms]
+	2024-10-07 09:46:54.892 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/master refs/remotes/master [61ms]
+	2024-10-07 09:46:54.950 [info] > git config --local branch.master.vscode-merge-base [55ms]
+	2024-10-07 09:46:54.950 [warning] [Git][config] git config failed: Failed to execute git
+	2024-10-07 09:46:55.023 [info] > git reflog master --grep-reflog=branch: Created from *. [70ms]
+	2024-10-07 09:46:55.081 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [56ms]
+	2024-10-07 09:46:55.082 [info] fatal: ref refs/remotes/origin/HEAD is not a symbolic ref
+	2024-10-07 09:46:55.082 [warning] [Repository][getDefaultBranch] Failed to get default branch details: Failed to execute git.
+	2024-10-07 09:46:55.165 [info] > git merge-base refs/heads/master refs/remotes/origin/master [78ms]
+	2024-10-07 09:46:55.242 [info] > git diff --name-status -z --diff-filter=ADMR 756c9e177cf3e69affaf3e4289784dbef00ba3f4...refs/remotes/origin/master [73ms]
+  -- an even BIGGER WTF ---  Now what????? Searching web is loaded with exotic garbage!!! "HEAD is not a symbolic ref" WTF???
+  - In VSCode with master checked out, Discard all changes. Did nothing. Same with unstage all changes. Nothing. 
+  - Tried to Sync 1 up and 13 down anyway,
+	2024-10-07 09:55:06.367 [info] > git log --oneline --cherry master...master@{upstream} -- [66ms]
+	2024-10-07 09:55:07.878 [info] > git pull --tags origin master [1508ms]
+	2024-10-07 09:55:07.878 [info] From https://github.com/ASCOMInitiative/alpyca
+	 * branch            master     -> FETCH_HEAD
+	fatal: Not possible to fast-forward, aborting.
+	2024-10-07 09:55:07.939 [info] > git config --get commit.template [58ms]
+	2024-10-07 09:55:07.949 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/master refs/remotes/master [64ms]
+	2024-10-07 09:55:08.013 [info] > git status -z -uall [60ms]
+	2024-10-07 09:55:08.016 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [59ms]
+  - Has the correct remote now but still hosed. 
+    WHAT THE HELL TO DO NOW???????????????????????????????????
+* Shows 1 incoming change (some Thunder Client files) and 13 outgoing changes (the real stuff). 
+  - I tried to pull (just the incoming)
+	2024-10-07 10:03:36.798 [info] > git log --oneline --cherry master...master@{upstream} -- [69ms]
+	2024-10-07 10:03:37.497 [info] > git pull --tags origin master [696ms]
+	2024-10-07 10:03:37.498 [info] From https://github.com/ASCOMInitiative/alpyca
+	 * branch            master     -> FETCH_HEAD
+	fatal: Not possible to fast-forward, aborting.
+	2024-10-07 10:03:37.558 [info] > git config --get commit.template [57ms]
+	2024-10-07 10:03:37.568 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/master refs/remotes/master [63ms]
+	2024-10-07 10:03:37.633 [info] > git status -z -uall [62ms]
+	2024-10-07 10:03:37.636 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [62ms]
+* Tried in VSCode to revert the commit of those THunderClient files. Now I am getting loads of messages about them!!
+* Shooting in the dark, it appears this is relted to a weird commit I did to Master while on platform7??/ Thunder Client stuff (4 files). So confusing. 
+* Switching to platform7 branch now shows messages about those ThunderClient files.
+	2024-10-07 10:19:01.432 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [53ms]
+	2024-10-07 10:19:04.662 [info] > git checkout -q Platform7 [65ms]
+	2024-10-07 10:19:04.723 [info] > git config --get commit.template [57ms]
+	2024-10-07 10:19:04.726 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/Platform7 refs/remotes/Platform7 [58ms]
+	2024-10-07 10:19:04.791 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [57ms]
+	2024-10-07 10:19:04.795 [info] > git status -z -uall [66ms]
+	2024-10-07 10:19:04.860 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/Platform7 refs/remotes/Platform7 [58ms]
+	2024-10-07 10:19:04.916 [info] > git config --local branch.Platform7.vscode-merge-base [53ms]
+	2024-10-07 10:19:04.972 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/origin/master refs/remotes/origin/master [52ms]
+	2024-10-07 10:19:05.030 [info] > git merge-base refs/heads/Platform7 refs/remotes/origin/Platform7 [54ms]
+	2024-10-07 10:19:05.090 [info] > git diff --name-status -z --diff-filter=ADMR 1fc445b12648fb19e26bd4ce096cab29d438d359...refs/remotes/origin/Platform7 [57ms]
+	2024-10-07 10:19:05.925 [info] > git config --get commit.template [69ms]
+	2024-10-07 10:19:05.933 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/Platform7 refs/remotes/Platform7 [72ms]
+	2024-10-07 10:19:06.035 [info] > git status -z -uall [97ms]
+	2024-10-07 10:19:06.073 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [132ms]
+	2024-10-07 10:19:06.091 [info] > git ls-tree -l 756c9e177cf3e69affaf3e4289784dbef00ba3f4 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderActivity.json [139ms]
+	2024-10-07 10:19:06.096 [info] > git ls-tree -l 756c9e177cf3e69affaf3e4289784dbef00ba3f4 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderEnvironment.json [126ms]
+	2024-10-07 10:19:06.100 [info] > git ls-tree -l 756c9e177cf3e69affaf3e4289784dbef00ba3f4 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderCollection.json [139ms]
+	2024-10-07 10:19:06.103 [info] > git ls-tree -l eebbbcf1552024f629a537ccaf5862afbb4cb220 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderActivity.json [146ms]
+	2024-10-07 10:19:06.125 [info] > git ls-tree -l eebbbcf1552024f629a537ccaf5862afbb4cb220 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderEnvironment.json [151ms]
+	2024-10-07 10:19:06.126 [info] > git ls-tree -l eebbbcf1552024f629a537ccaf5862afbb4cb220 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderCollection.json [161ms]
+	2024-10-07 10:19:06.147 [info] > git ls-tree -l 756c9e177cf3e69affaf3e4289784dbef00ba3f4 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderclient.json [165ms]
+	2024-10-07 10:19:06.156 [info] > git ls-tree -l eebbbcf1552024f629a537ccaf5862afbb4cb220 -- D:\dev\astro\ASCOM Alpaca\Alpyca\thunder-tests\thunderclient.json [170ms]
+	2024-10-07 10:19:06.234 [info] > git show --textconv 756c9e177cf3e69affaf3e4289784dbef00ba3f4:thunder-tests/thunderActivity.json [124ms]
+	2024-10-07 10:19:06.241 [info] > git show --textconv 756c9e177cf3e69affaf3e4289784dbef00ba3f4:thunder-tests/thunderEnvironment.json [127ms]
+	2024-10-07 10:19:06.256 [info] > git show --textconv 756c9e177cf3e69affaf3e4289784dbef00ba3f4:thunder-tests/thunderCollection.json [137ms]
+	2024-10-07 10:19:06.260 [info] > git show --textconv eebbbcf1552024f629a537ccaf5862afbb4cb220:thunder-tests/thunderActivity.json [136ms]
+	2024-10-07 10:19:06.260 [info] > git show --textconv eebbbcf1552024f629a537ccaf5862afbb4cb220:thunder-tests/thunderEnvironment.json [128ms]
+	2024-10-07 10:19:06.261 [info] > git show --textconv eebbbcf1552024f629a537ccaf5862afbb4cb220:thunder-tests/thunderCollection.json [116ms]
+	2024-10-07 10:19:06.269 [info] > git show --textconv 756c9e177cf3e69affaf3e4289784dbef00ba3f4:thunder-tests/thunderclient.json [113ms]
+	2024-10-07 10:19:06.280 [info] > git show --textconv eebbbcf1552024f629a537ccaf5862afbb4cb220:thunder-tests/thunderclient.json [105ms]
+* GOOD GOD!!! I'm  scared to DEATH to merge at the remote. And It appears that I can't simply undo the merge I did locally here. My local master repo is **HOSED**. 
+* Screw this. I will restore the Alpyca development folder from my system backup, effectively unwinding all of this shit.
+
