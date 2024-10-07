@@ -14,6 +14,17 @@ help, see :ref:`dome-faq`  For some history, see the |xxx|
     <a href="https://ascom-standards.org/Initiative/History.htm#domehist" target="_blank">
     Dome Interface Standard in the History of ASCOM and Alpaca Development</a> (external)
 
+.. admonition:: Master Interfaces Reference
+    :class: green
+
+    These green boxes in each interface member each have a link to the
+    corresponding member definition in the |master|. The information in this
+    Alpyca document is provided *for your convenience*. If there is any question,
+    the info in |master| is the official specification.
+
+.. the |master| link is in device.py and thus is accessible to all of the device
+   specific document contexts.
+
 .. module:: alpaca.dome
 .. autoclass:: Dome
     :members:

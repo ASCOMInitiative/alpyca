@@ -17,7 +17,7 @@ Introduction and Quick Start
 .. only:: html
 
     This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
-    For more information see the |ascsite|, specifically the |devhelp| section, and the |apiref|.
+    For more information see the |ascsite|, specifically the |devhelp| section, and the |master|.
 
 .. only:: rinoh or rst
 
@@ -34,17 +34,18 @@ Introduction and Quick Start
 Status of This Document
 -----------------------
 The descriptions of the ASCOM Standard interfaces implemented in Alpyca are
-our best efforts as of May 2022. At that time, the ASCOM Core Team announced
-that they are formalizing the operation of the non-blocking (asynchronous)
-methods in the standards documentation. This library manual includes
-additional information and clarification of the asynchronous methods which
-follows the formalization agreements as of July 2022. If there are any
-resulting changes to the interface definitions, we will release an updated
-(compatible) library as soon as possible.
+our best efforts as of February 2024, including the results of over a year of
+discussion and decisions, ultimately resulting in the new interface revisions
+in the ASCOM Platform 7. None of these changes are breaking. They are additions
+needed to support asynchronous operations for Alpaca, and clarifications of existing
+documentation to specificallly describe already asynchronous interface members.
+For details see `Release Notes for Interfaces as of ASCOM Platform 7
+<https://ascom-standards.org/newdocs/relnotes.html#release-notes-for-interfaces-as-of-ascom-platform-7>`_
 
 .. note::
-    Changes to the interfaces will never be breaking. Your code using this
-    library is safe from being broken by such changes.
+    Changes to the interfaces are *not* breaking. Your code using this
+    library is safe from being broken by such changes in the future, as
+    we never make breaking changes to interface members.
 
 Installation
 ------------
@@ -62,8 +63,8 @@ To connect and control a device, the basic steps are:
 
 1. Import the device class and Alpaca exceptions you plan to catch
 2. Create an instance of the device class, giving the IP:port and device
-   index on the server
-3. Connect to the device
+   index on the Alpaca server for the device(s)
+3. Connect to the Alpaca server/device
 4. Call methods and read/write properties as desired, catching exceptions(!)
 5. Assure that you disconnect from the device.
 
@@ -80,7 +81,10 @@ very important things to be aware of:
   *successfully*. Not only might an initiator raise an exception, but the
   completion property will raise one as well if the operation failed
   *while in progress*. Use a ``finally`` clause to assure that you disconnect
-  from the device no matter what.
+  from the device no matter what. Please see |princ|.
+- Asking the device to do something by calling an (asynchronous) method requires
+  you to wait until the device indicates it has completed your request. Please
+  see |async|.
 
 Simple Example
 --------------
@@ -103,7 +107,9 @@ Then execute this little program::
 
     T = Telescope('localhost:32323', 0) # Local Omni Simulator
     try:
-        T.Connected = True
+        T.Connect()                     # Asynchronous in Platform 7
+        while t.Connecting:
+            time.sleep(0.5)
         print(f'Connected to {T.Name}')
         print(T.Description)
         T.Tracking = True               # Needed for slewing (see below)
@@ -210,10 +216,10 @@ Common Misconceptions and Confusions
     <a href="https://ascom-standards.org/AlpacaDeveloper/Index.htm" target="_blank">
     Alpaca Developers Info</a> (external)
 
-.. |apiref| raw:: html
+.. |master| raw:: html
 
-    <a href="https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf"
-    target="_blank">Alpaca API Reference (PDF)</a> (external)
+    <a href="https://ascom-standards.org/newdocs/#ascom-master-interfaces-alpaca-and-com"
+    target="_blank">ASCOM Master Interfaces (Alpaca and COM)</a> (external)
 
 .. |supforum| raw:: html
 

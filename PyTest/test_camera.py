@@ -4,13 +4,13 @@ import pytest
 import conftest
 import time
 
-from alpaca.camera import *             # Sorry Python purists (typ.)
+from alpaca.camera import *                     # Sorry Python purists (typ.)
 from alpaca.exceptions import *
 
-dev_name = "Camera"                     # Device-independent fixtures use this via introspection
+dev_name = "Camera"                             # Device-independent fixtures use this via introspection
 
 #
-# Grab the camera settings for the pytest.mark.skipif() decisions 
+# Grab the camera settings for the pytest.mark.skipif() decisions
 #
 c_sets = conftest.get_settings('Camera')
 
@@ -18,6 +18,9 @@ def test_props(device, settings, disconn):
     d = device
     s = settings
     print("Test properties:")
+    assert d.InterfaceVersion >= 3, 'OmniSim must have ICameraV3 or later'
+    assert s['CanFastReadout'] == False, 'OmniSim FastReadout must be OFF'
+    assert 'ReadoutModes' in s, 'OmniSim ReadoutModes must be ON'
     assert d.CameraXSize == s['CameraXSize']
     assert d.CameraYSize == s['CameraYSize']
     assert d.CanAbortExposure == s['CanAbortExposure']
@@ -30,7 +33,6 @@ def test_props(device, settings, disconn):
     assert d.ExposureMax == s['MaxExposure']
     assert d.ExposureMin == s['MinExposure']
     assert d.ExposureResolution == s['ExposureResolution']
-    #assert d.FastReadout == s['FastReadout']
     assert d.FullWellCapacity == s['FullWellCapacity']
     assert d.HasShutter == s['HasShutter']
     assert d.MaxADU == s['MaxADU']
@@ -39,7 +41,7 @@ def test_props(device, settings, disconn):
     assert d.PixelSizeX == s['PixelSizeX']
     assert d.PixelSizeY == s['PixelSizeY']
     v = s['ReadoutModes']
-    assert d.ReadoutModes == v.split(',')
+    assert d.ReadoutModes == v.split(',')       # Array comparison
     assert d.SensorName == s['SensorName']
     assert d.SensorType == SensorType(s['SensorType'])
 
@@ -50,7 +52,7 @@ def test_cooler(device, settings, disconn):
     assert d.CanSetCCDTemperature, 'OmniSim Can Set CCD Temperature must be ON'
     assert d.CanGetCoolerPower, 'OmniSim Can Get Cooler Power must be ON'
 
-@pytest.mark.skipif((c_sets['GainMode'] != 1 or c_sets['OffsetMode'] != 1), reason='Requires OmniSim Gain and Offset modes to be "Gain Names"')
+@pytest.mark.skipif((c_sets['GainMode'] != 1 or c_sets['OffsetMode'] != 1), reason='Requires OmniSim Gain and Offset modes to be "Named"')
 def test_named_gains_offsets(device, settings, disconn):
     d = device
     s = settings

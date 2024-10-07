@@ -7,6 +7,17 @@ equatorial  position angle (PA) on the sky. By calling
 solving etc.), you can cause the rotator (and imager) to work in PA for you
 as well as other apps that might be using the rotator.
 
+.. admonition:: Master Interfaces Reference
+    :class: green
+
+    These green boxes in each interface member each have a link to the
+    corresponding member definition in the |master|. The information in this
+    Alpyca document is provided *for your convenience*. If there is any question,
+    the info in |master| is the official specification.
+
+.. the |master| link is in device.py and thus is accessible to all of the device
+   specific document contexts.
+
 .. module:: alpaca.rotator
 .. autoclass:: Rotator
     :members:

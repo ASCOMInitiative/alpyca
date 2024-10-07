@@ -22,11 +22,12 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = 'Alpyca: API Library for Alpaca'
-copyright = '2022, ASCOM Initiative, MIT License'
+copyright = '2022-2024, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.4'
+version = '3.0.0'
+release = '3.0.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -47,8 +48,11 @@ release = '2.0.4'
 #   It's possible that any version less than 6.0.0 will work.
 #
 extensions = [
+    # https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
     'sphinx.ext.autodoc',
+    # https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html
     'sphinx.ext.autosummary',
+    # https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
     'sphinx.ext.napoleon',
     # https://github.com/sphinx-contrib/restbuilder
     'sphinxcontrib.restbuilder',
@@ -98,6 +102,30 @@ exclude_patterns = []
 # https://sphinx-themes.org/sample-sites/sphinx-rtd-theme/
 html_theme = 'sphinx_rtd_theme'
 
+#
+# https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html
+#
+html_theme_options = {
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': -1,
+    'prev_next_buttons_location': 'both',
+    'style_external_links': True,
+    'style_nav_header_background': '#000040',
+    'vcs_pageview_mode': 'edit',
+}
+
+#
+# This sets a standard logo for pages, and will be used for the sidebar
+# TOC as well.
+#
+html_logo = 'alpaca128.png'
+
+#
+# Clean up ugly aspects of Read The Docs. See comments in the css
+#
+html_style = 'css/ascom.css'
+
 # -- Options for PDF Output using rinohtype --
 
 # Here are the settings per the rinohtype docs
@@ -109,7 +137,7 @@ html_theme = 'sphinx_rtd_theme'
 rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
                         target='alpyca',            # output file (alpyca.pdf)
                         title='Alpyca Library',
-                        subtitle='Release 2.0.4',
+                        subtitle='Release 3.0.0',
                         author='Robert B. Denny <rdenny@dc3.com>',
                         logo='alpaca1000.png',
                         template='alpyca.rtt')]

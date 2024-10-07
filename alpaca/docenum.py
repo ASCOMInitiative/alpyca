@@ -13,7 +13,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@
 from enum import IntEnum
 class DocIntEnum(IntEnum):
     """Used to provide textual documentation for Enum classes
-    
+
     Example:
         ::
 

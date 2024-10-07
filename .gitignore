@@ -99,7 +99,6 @@ dmypy.json
 /PackageTesting
 /.vs
 /OmniSimSettings.lnk
-/RBD-Notes.txt
 /TestResults
 /devtest.py
 /3-color-sample.fits
@@ -109,3 +108,4 @@ HostHdrTest.py
 Alpyca.code-workspace
 disctest.py
 piplist.txt
+ConfigReadTest.py

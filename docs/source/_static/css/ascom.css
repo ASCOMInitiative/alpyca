@@ -1,0 +1,144 @@
+/*
+    These are adjustments to the Read The Docs Sphinx theme. The CSS that comes
+    with ReadTheDocs is theme.css, so it is imported and they overrides applied
+    here. https://docs.readthedocs.io/en/stable/guides/adding-custom-css.html
+    and using the MS Edge DevTools to see what CSS is in effect.
+
+    Bob Denny    29-Aug-2023
+ */
+@import 'theme.css';    /* From Sphinx 7.2.4
+
+    /*
+        ----------------------------------------------------------------
+        Reported errors (Edge DevTools) in the theme for modern browsers
+        ----------------------------------------------------------------
+
+        '-ms-text-size-adjust' is not supported by Chrome, Chrome Android, Edge, Firefox,
+        Safari. Add 'text-size-adjust' to support Chrome 54+, Chrome Android 54+, Edge 79+.
+        NOTE: Specifics should be listed before generics.
+    */
+    html {
+        font-size: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+    /*
+        '-ms-filter' is not supported by Chrome, Chrome Android. Add 'filter' to
+        support Chrome 53+, Chrome Android 53+.
+    */
+    .fa-rotate-90 {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+        filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    /*
+        'user-select' is not supported by Safari, Safari on iOS. Add '-webkit-user-select'
+        to support Safari 3+, Safari on iOS 3+.
+    */
+    .rst-content .linenodiv pre {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    /*
+        'filter' should be listed after '-ms-filter'.
+    */
+    @media print {
+        * {
+            box-shadow: none;
+            text-shadow: none;
+            -ms-filter: none;
+            filter: none;
+        }
+    }
+    /*
+        Make the format expandable with browser width
+        https://stackoverflow.com/a/28172705/159508 (I already had the overrides by importing theme.css)
+    */
+    .wy-nav-content {
+        max-width: none;    /* No margin on the right, looks natural.*/
+    }
+    /*
+        ---------------------------------
+        Customization of content literals
+        ---------------------------------
+
+        Make the extremely ugly ``xxx`` code literals look better
+    */
+    .rst-content code.literal, .rst-content tt.literal {
+        color: #000;
+        white-space: normal;
+        border: none;
+        font-size: 95%;
+        padding: 0px;
+        font-family: Cascadia Code,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+    }
+    /*
+        Same with the module and class xrefs
+    */
+    .rst-content code.xref, .rst-content tt.xref, a .rst-content code, a .rst-content tt {
+        color: #2980b9 !important;
+        overflow-wrap: normal;
+        /* border: 1px solid; */
+        /* padding: 2px 5px; */
+        border: none;
+        font-family: Cascadia Code,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+        font-weight: 500;       /* Bold these a bit */
+        font-size: 95%;
+    }
+    /*
+        -------------------------------
+        Customization of Sidebar Styles
+        -------------------------------
+
+        Make the extremely ugly ``xxx`` code literals look better
+    */
+    /*
+        Increae font size of sidebar headings
+    */
+    .wy-menu-vertical a {
+        font-size: 100%;
+    }
+    /*
+        Increase font size for sidebar sub-headings
+    */
+    .wy-menu-vertical li.toctree-l3, .wy-menu-vertical li.toctree-l4
+    {
+        font-size: 1.0em;
+    }
+    /*
+        Increase the sidebar font for member names and add Cascadia Code
+    */
+    .rst-content .wy-menu-vertical li tt, .wy-menu-vertical li .rst-content tt, .wy-menu-vertical li code {
+        font-family: Cascadia Code,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+        font-size:90% !important;
+    }
+    /*
+        Reduce indentation and tighten line spacing of members listings
+    */
+    .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a {
+        padding: .3em 1em .3em 4em;
+    }
+    /*
+        ------------------------------
+        Customizing of Member Headings
+        ------------------------------
+
+        Increase size of member section headings
+        I have no ides how this works, but  it does :-)
+    */
+    .html.writer-html4 .rst-content dl:not(.docutils)>dt, html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.citation):not(.glossary):not(.simple)>dt {
+        font-size: 120%;
+        border-top: 6px solid #6ab0de;
+    }
+    /*
+        ----------------------------------
+        Custom admonition styles
+           :class: xxxx
+        ------------------------------
+    */
+    .admonition.green > .admonition-title {
+        background-color: darkseagreen;
+    }

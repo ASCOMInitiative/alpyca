@@ -13,7 +13,7 @@
 # -----------------------------------------------------------------------------
 # MIT License
 #
-# Copyright (c) 2022 Ethan Chappel and Bob Denny
+# Copyright (c) 2022-2024 Ethan Chappel and Bob Denny
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@
 # -----------------------------------------------------------------------------
 # Edit History:
 # 02-May-22 (rbd) Initial Edit
-# 03-May-22 (rbd) Remove import of 're' no longer used. IPv6 query comments, 
+# 03-May-22 (rbd) Remove import of 're' no longer used. IPv6 query comments,
 #                 default timeout is 2 sec.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Aug-22 (rbd) 2.0.2 Fix multicast to 127.0.0.1 GitHub Issue #6
@@ -54,25 +54,25 @@ AlpacaResponse = "AlpacaPort"
 
 def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     """Discover Alpaca device servers on the IPV4 LAN/VLAN
-    
+
     Returns a list of strings of the form ``ipaddress:port``,
     each corresponding to a discovered Alpaca device
-    server. Use :doc:`alpaca.management` functions to enumerate the 
+    server. Use :doc:`alpaca.management` functions to enumerate the
     devices.
 
     Args:
         numquery: Number of discovery queries to send (default 2)
         timeout: Time (sec.) to allow for responses to each
             discovery query. Optional, defaults to 2 seconds.
-    
+
     Raises:
        To be determined.
-    
+
     Notes:
         * This function uses IPV4
-        * UDP protocol using multicasts and restricted to the LAN/VLAN is used to perform the query. 
+        * UDP protocol using multicasts and restricted to the LAN/VLAN is used to perform the query.
         * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
-          for Discovery details. 
+          for Discovery details.
 
     """
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -120,17 +120,17 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
 
 def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
     """Discover Alpaca device servers on the IPV6 LAN/VLAN
-    
+
     Returns a list of strings of the form ``[ipv6address%intfc]:port``,
-    each corresponding to a discovered Alpaca device server. 
-    Use :doc:`alpaca.management` functions to enumerate the 
+    each corresponding to a discovered Alpaca device server.
+    Use :doc:`alpaca.management` functions to enumerate the
     devices.
 
     Args:
         numquery: Number of discovery queries to send (default 2)
-        timeout: Time (sec.) to allow for responses to the discovery 
+        timeout: Time (sec.) to allow for responses to the discovery
             query. Optional, defaults to 2 seconds.
-    
+
     Raises:
        To be determined.
 
@@ -140,7 +140,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
           interface, is used to perform the query. Does not query global IPv6.
         * ISATAP addresses are specifically excluded.
         * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
-          for Discovery details. 
+          for Discovery details.
 
     """
     my_plat = platform.system()
@@ -163,7 +163,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                         try:
                             sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
                             if my_plat == 'Linux':
-                                sock.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE, 
+                                sock.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE,
                                                 (interface + '\0').encode())
                             elif my_plat == "Windows":
                                 sock.bind((addr, 0))                    # Force send from this IP
@@ -180,7 +180,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                                     if(addr.startswith(remip)):
                                         ipp = f"[::1]:{remport}"        # Substitute loopback
                                     else:
-                                        ipp = f"[{remip}%{scope}]:{remport}"    # External Alpaca 
+                                        ipp = f"[{remip}%{scope}]:{remport}"    # External Alpaca
                                     if ipp not in addrs:                # Avoid dupes if numquery > 1
                                         addrs.append(ipp)
                                 except:

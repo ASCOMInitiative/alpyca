@@ -1,8 +1,8 @@
 #
 # PyTest Unit tests for Device superclass
-# For simplicity this uses the SafetyMonitor device. 
-# The strings are static and not accessible via the 
-# OmniSim XML settings file. 
+# For simplicity this uses the SafetyMonitor device.
+# The strings are static and not accessible via the
+# OmniSim XML settings file.
 import pytest
 import conftest
 
@@ -18,11 +18,11 @@ def test_device(device, disconn):
     print(f"  DriverInfo:       {device.DriverInfo}")
     assert device.DriverInfo == ['SafetyMonitor Simulator Drivers']
     print(f"  DriverVersion:    {device.DriverVersion}")
-    assert device.DriverVersion == '0.3'  # Some day not hardwired. New 0.3 OmniSim.
+    assert device.DriverVersion == '0.4'  # Some day not hardwired. New 0.3 OmniSim.
     print(f"  InterfaceVersion: {device.InterfaceVersion}")
-    assert device.InterfaceVersion == 2
+    assert device.InterfaceVersion == 3
     print(f"  Name:             {device.Name}")
-    assert device.Name == "Alpaca SafetyMonitor Sim"
+    assert device.Name == "Alpaca Safety Monitor Simulator"
     print(f"  SupportedActions: {device.SupportedActions}")
     assert device.SupportedActions == []
 
