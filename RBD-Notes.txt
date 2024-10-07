@@ -880,3 +880,6 @@ auncher\winapi.py", line 68, in impl
   - Dump the entire local Alpyca folder and restore from overnight backup, followed by a cleanup of those
     files and a second merge attempt, which worked including the push to remote.
 * Updated the Git remote which was old - pointing to the repo from last year!! Why did anything work ha ha?
+* Publish to rel PyPi -- Invalid auth!!
+  - poetry config pypi-token.pypi ... whatever ... -> OK
+  - poetry publish -> OK! Shows on PyPi OK.
