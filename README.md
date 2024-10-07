@@ -62,10 +62,16 @@ the [General Requirements](https://ascom-standards.org/Standards/Requirements.ht
 
 ## Example
 
-First download, install and run the _cross-platform_
-**[Alpaca Omni Simulator](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases)**
-which will give you fully functional simulators for _all_ Alpaca devices, as well as a _live_
-OpenAPI/Swagger interface to the Alpaca RESTful endpoints (_see the details below_). This example will
+This requires the _cross-platform_ ASCOM Omni Simulators which will give you
+fully functional simulators for _all_ Alpaca devices, as well as a _live_
+OpenAPI/Swagger interface to the Alpaca RESTful endpoints (_see the details
+below_). If you are on a Windows system, the Omni Simulators are included with
+the [ASCOM Platform 7](https://ascom-standards.org/). If you are on Linux or
+MacOS, you can get the _cross-platform_ OmniSimulators from GitHub at the
+**[Omni Simulators
+Repo](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases)**.
+
+This example will
 use the Telescope simulator. Assuming you are running the Omni Simulator on your local host
 at its default port of 32323, its address is then <code>localhost:32323</code>. Here is a sample
 program using Alpaca:
@@ -121,15 +127,20 @@ See how easliy  exceptions are handled? The error message came from the OmniSim.
 
 ## Alpaca Omni Simulators
 
-The ASCOM Alpaca Simulators are [available via GitHub here](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators).
-Scroll down to the Assets section and pick the package for your OS and CPU type. Extract all files to a directory and start via the installed icon or command line
+The ASCOM Alpaca Simulators are included in [ASCOM Platform
+7](https://ascom-standards.org/) or if you are on Linux or MacOS, they are
+[available via GitHub
+here](https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators). Scroll down
+to the Assets section and pick the package for your OS and CPU type.
 
 ```sh
 ./ascom-alpaca.simulators
 ```
 
-(or the equivalent on Windows or MacOS). A web browser should appear. This is the primary user interface to the simulator
-server and simulated devices. Once you get this running you are ready to try the sample above.
+(or the equivalent on Windows or MacOS). You may need to open a web browser to
+`http://localhost:32323` if that option is off in the server settings. This is
+the primary user interface to the simulator server and simulated devices. Once
+you get this running you are ready to try the sample above.
 
 ![Initial OmniSim Display](https://ascom-standards.org/alpyca/readme-assets/InitialBrowserAnnotated.png)
 
