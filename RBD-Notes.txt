@@ -879,3 +879,4 @@ auncher\winapi.py", line 68, in impl
   - delete a sad story of Git jibberish. Caused by presence of 4 Thunder Test Cnfiguration files on Master.
   - Dump the entire local Alpyca folder and restore from overnight backup, followed by a cleanup of those
     files and a second merge attempt, which worked including the push to remote.
+* Updated the Git remote which was old - pointing to the repo from last year!! Why did anything work ha ha?
