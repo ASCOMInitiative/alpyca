@@ -4,6 +4,16 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+# For rinoh bug
+# https://github.com/brechtm/rinohtype/issues/414#issuecomment-1640887769
+
+from rinoh.frontend.rst import DocutilsInlineNode
+
+class Desc_Sig_Space(DocutilsInlineNode):
+    pass
+
+
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,

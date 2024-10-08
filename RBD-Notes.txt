@@ -883,3 +883,23 @@ auncher\winapi.py", line 68, in impl
 * Publish to rel PyPi -- Invalid auth!!
   - poetry config pypi-token.pypi ... whatever ... -> OK
   - poetry publish -> OK! Shows on PyPi OK.
+
+08-Oct-2024
+-----------
+* Build 3.0.0 doc and publish at https://ascom-standards.org/alpyca/
+  - HTML OK
+  - Of course the ****ing PDF won't build.
+    Exception occurred:
+      File "C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\frontend\__init__.py", line 30, in map_node
+        raise NotImplementedError("{}:{} the '{}' node is not yet supported "
+    NotImplementedError: None:None the 'desc_sig_space' node is not yet supported (rinoh.frontend.sphinx.nodes)
+  - Applied the fix to conf.py that's in the Master Docs.
+  - Failed again, later in the process
+    Exception occurred:
+      File "C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\flowable.py", line 298, in flow_inner
+        assert container.advance2(padding_border_bottom)
+    AssertionError
+    The full traceback has been saved in C:\Users\rdenn\AppData\Local\Temp\sphinx-err-mm7pfrzg.log, if you want to report the issue to the developers.
+    Please also report this if it was a user error, so that a better error message can be provided next time.
+    A bug report can be filed in the tracker at <https://github.com/sphinx-doc/sphinx/issues>. Thanks!
+  - Move to the Raspberry Pi #1 and do this on Linux. Damn.
