@@ -903,3 +903,35 @@ auncher\winapi.py", line 68, in impl
     Please also report this if it was a user error, so that a better error message can be provided next time.
     A bug report can be filed in the tracker at <https://github.com/sphinx-doc/sphinx/issues>. Thanks!
   - Move to the Raspberry Pi #1 and do this on Linux. Damn.
+* Try to build PDF on Raspberry Pi -- Failed there too, in the same way. Probably some error in the doc. Here's the entire Rinoh output in case the log shows something that might be causing it.
+    (.venv) pi@rpi1:~/Documents/alpyca/docs $ make rinoh
+    Running Sphinx v6.0.0
+    loading pickled environment... done
+    [autosummary] generating autosummary for: alpaca.camera.rst, alpaca.covercalibrator.rst, alpaca.device.rst, alpaca.discovery.rst, alpaca.dome.rst, alpaca.exceptions.rst, alpaca.filterwheel.rst, alpaca.focuser.rst, alpaca.management.rst, alpaca.observingconditions.rst, alpaca.rotator.rst, alpaca.safetymonitor.rst, alpaca.switch.rst, alpaca.telescope.rst, alpacaclasses.rst, faq.rst, index.rst, introduction.rst
+    building [mo]: targets for 0 po files that are out of date
+    building [rinoh]: all documents
+    updating environment: [config changed ('version')] 18 added, 0 changed, 0 removed
+    reading sources... [100%] introduction
+    looking for now-outdated files... none found
+    pickling environment... done
+    checking consistency... done
+    processing alpyca... index introduction alpacaclasses alpaca.camera alpaca.covercalibrator alpaca.dome alpaca.filterwheel alpaca.focuser alpaca.observingconditions alpaca.rotator alpaca.safetymonitor alpaca.switch alpaca.telescope alpaca.device alpaca.exceptions alpaca.discovery alpaca.management faq resolving references...
+    rinohtype 0.5.4 (2022-06-17)  Copyright (c) Brecht Machiels and contributors
+    This program comes with ABSOLUTELY NO WARRANTY. Its use is subject
+    to the terms of the GNU Affero General Public License version 3.
+    rendering...
+    References cache read from /home/pi/Documents/alpyca/docs/build/rinoh/alpyca.rtc
+    PT Serif does not include a normal medium upright font. Falling back to normal regular upright
+    PTSerif-Regular does not contain glyph for unicode index 0x2192 (→)age 7
+    51% [====================                    ] ETA 04:30 (04:41) page 153
+    Exception occurred:
+      File "/home/pi/Documents/alpyca/.venv/lib/python3.9/site-packages/rinoh/flowable.py", line 298, in flow_inner
+        assert container.advance2(padding_border_bottom)
+    AssertionError
+    The full traceback has been saved in /tmp/sphinx-err-bnddkko9.log, if you want to report the issue to the developers.
+    Please also report this if it was a user error, so that a better error message can be provided next time.
+    A bug report can be filed in the tracker at <https://github.com/sphinx-doc/sphinx/issues>. Thanks!
+    make: *** [Makefile:20: rinoh] Error 2
+  - Same exact error. Not a single hint about possible document content (or context) that would cause this.
+  - Tried deleting the doctrees and rinoh folders in build, didn't help.
+    ** NEVER MIND THE PDF ** I'm not going to waste my time on this one right now. I'll wait till someone actually cares and tries to get the PDF then tackle it then.
