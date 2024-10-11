@@ -949,3 +949,50 @@ auncher\winapi.py", line 68, in impl
     Damn it. Now I gotta look at the generated stuff in HTML Telescope Classes for a botch.
     I found some RST errors but no luck getting it to build.
     It's in the comments stuff in telescope.py right? Autoclass makes the RST and that chokes rinoh.
+* Re-publish the fixes to the docs. No logic changes so no update to the alpyca package 3.0.0.
+
+11-Oct-2024
+-----------
+* Locate the offending docstrings in telescope.py that prevent PDF building. By successive approximation it came down to this bit of docstring
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            |DestinationSideOfPier|
+
+            .. |DestinationSideOfPier| raw:: html
+
+                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DestinationSideOfPier" target="_blank">
+                Telescope.DestinationSideOfPier()</a> (external)
+    """
+  - It renders perfectly in HTML\
+* Actually after several more hours and countless trials, I determined that the class name "DestinationSideOfPier" itself causes the process to become unstable and die. So what to do?
+
+* OHHHHHH ... Those Master Interfaces References with the external links |xxx| are not even rendered by Rinoh. Each one really needs to be coded with .. only:: html and .. only:: rinoh.  **UGLY RIGHT NOW **
+* Final docstring syntax for Master Interfaces, e.g.
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            .. only:: html
+
+                |CanMoveAxis|
+
+                .. |CanMoveAxis| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanMoveAxis" target="_blank">
+                    Telescope.CanMoveAxis()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanMoveAxis() <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanMoveAxis>`_
+
+      """
+  - This works fine. Now... what a pain to make these changes throughout!!!
+* Still DestinationSideOfPier blows Rinoh out of the  water.
+* DECISION FOR NOW -- NO PDF DOCUMENT. I TRIED AND WAS WILLING TO PUT IN A LOAD OF WORK, BUT ONE DAMN INTERFACE MEMBER BLOWS UP! WTF? MAYBE LATER I'LL
+* Oh wait... reviewing the error:
+    Exception occurred:
+      File "C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\flowable.py", line 297, in flow_inner
+        assert container.advance2(padding_border_bottom)
+    AssertionError
+  I wonder if a Rinoh style sheet could solve this. I think I'll file an issue on his GitHub repo.
+  https://github.com/brechtm/rinohtype/issues/435
