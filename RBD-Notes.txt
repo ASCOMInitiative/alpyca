@@ -935,3 +935,17 @@ auncher\winapi.py", line 68, in impl
   - Same exact error. Not a single hint about possible document content (or context) that would cause this.
   - Tried deleting the doctrees and rinoh folders in build, didn't help.
     ** NEVER MIND THE PDF ** I'm not going to waste my time on this one right now. I'll wait till someone actually cares and tries to get the PDF then tackle it then.
+
+10-Oct-2024
+-----------
+* This PDF error is probably a result of some trash in my RST. Let's try to find it by isolation.
+  - Removing alpacaclasses from index, and it builds
+  - By process of elimination in alpacaclasses, it's in alpaca.telescope.rst.
+  - Furthermore it's in
+    .. module:: alpaca.telescope
+    .. autoclass:: Telescope
+        :members:
+        :inherited-members:
+    Damn it. Now I gotta look at the generated stuff in HTML Telescope Classes for a botch.
+    I found some RST errors but no luck getting it to build.
+    It's in the comments stuff in telescope.py right? Autoclass makes the RST and that chokes rinoh.

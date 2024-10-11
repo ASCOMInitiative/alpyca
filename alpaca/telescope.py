@@ -426,7 +426,7 @@ class Telescope(Device):
 
     @property
     def CanSetGuideRates(self) -> bool:
-        """The guiding rates for :py:meth:'PulseGuide()` can be adjusted
+        """The guiding rates for :py:meth:`PulseGuide()` can be adjusted
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -1812,7 +1812,7 @@ class Telescope(Device):
         Notes:
             * **Asynchronous**: The method returns as soon the pulse-guiding operation
               has been *successfully* started, with :py:attr:`IsPulseGuiding` property True.
-              However, you may find that :py:attr:`IsPulseGuiding' is False when you get
+              However, you may find that :py:attr:`IsPulseGuiding` is False when you get
               around to checking it if the 'pulse' is short. This is still a success if you
               get False back and not an exception. See :ref:`async_faq`
             * Some mounts have implemented this as a Synchronous (blocking) operation. This
