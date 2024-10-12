@@ -1,7 +1,8 @@
 ;
 ; Rinohtype template configuration which just uses the default 'book'
 ; template but specifies alpycastyle.rts style sheet (which overrides
-; and extends the default styles). 
+; and extends the default styles). For details see the Book template
+; source code at https://www.mos6581.org/rinohtype/master/src/book.html
 ;
 [TEMPLATE_CONFIGURATION]
 name = Alpyca template configuration
