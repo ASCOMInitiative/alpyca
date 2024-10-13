@@ -995,9 +995,13 @@ auncher\winapi.py", line 68, in impl
         assert container.advance2(padding_border_bottom)
     AssertionError
   I wonder if a Rinoh style sheet could solve this. I think I'll file an issue on his GitHub repo.
-  https://github.com/brechtm/rinohtype/issues/435
+  RINOH ISSUE: https://github.com/brechtm/rinohtype/issues/435
 * Meanwhile, review the Rinoh style and control files alpyca.rts and alpyca.rtt while reviewing the 0.55 Rinoh Manual.
 * Looked for the style log, https://www.mos6581.org/rinohtype/master/elementstyling.html but Alpyca's build process doesn't produce one. AlpycaDevice's one does!!! I can't see how to change this and the doc says nothing about this being an option.
+* FOUND STYLE SHEETS AND TEMPLATES DEFAULTS
+  Templates: C\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\templates (I use book)
+  Style Sheets: C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\data\stylesheets (I use sphinx)
+* I grabbed sphinx.rts and it is in References
 
 12-Oct-2024
 -----------
@@ -1036,6 +1040,15 @@ auncher\winapi.py", line 68, in impl
   - Add space-above=2pt and space_below=2pt to [paragraph] other stuff commented out. BOOM fails. Always padding_border_bottom as usual.
   - Looking at the default sphinx stylesheet, guessing [body] space_below=5pt (0->5). BOOM
   - Forget all of that, just change the object signature color to be less blue. That looks OK.
-
 * GIVEN THE GOOFY FORMATTING AND FAQ CROSS REFERENCE TITLES, AND OTHER STUFF, IS THIS WORTH IT?
+  WELL, YES
 
+13-Oct-2024
+-----------
+* Good morning! I changed the serif-typeface to Roboto (sans serif) and commented out all of the [default: Paragraph] settings, The document renders with the  html and rinoh sections OK. It even renders without the "failed to converge" process. This looks good.
+* Now to tackle the spacing ugliness in DriverException. Cannot wrap source, must be all on one line. Autodoc requirement for PDF. Still OK for html.
+* ** SUCCESS ** Both HTML and PDF look good though I would like the 11 pt font for PDF. Too bad. Too fragile.
+* Now to fix up the DriverException sections, and the html-vs-rinoh sections for Master Interfaces Reference.
+* Also there are cross references to FAQs that show in PDF as section numbers instead of their titles. Look at the Note: at the beginning of the Camera Class for example. It should read See the "Example: Acquiring an Image, Creating FITS Image below" (and it does in HTML) but in PDF it reads "See the Section 3.1.3 below". Now what??
+  - Maybe this is configurable in the template? I grabbed the book template from, C\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\templates and put it into References. Looking at it I think the processing of references is in C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\reference.py. There is shows that a reference is supposed to be the section number. I want the section and title or just the title. Now how to make it happen???
+  RINOH ISSUE: https://github.com/brechtm/rinohtype/issues/437

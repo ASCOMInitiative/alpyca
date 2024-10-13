@@ -12,15 +12,17 @@ base=sphinx
 serif_typeface=Roboto
 sans_typeface=Roboto
 mono_typeface=Source Code Pro
-
+;
+; These will cause a failure in Rinoh. So will some typeface changes above. Same error in all cases:
+; https://github.com/brechtm/rinohtype/issues/435
+; Exception occurred:
+;   File "C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\flowable.py", line 297, in flow_inner
+;     assert container.advance2(padding_border_bottom)
+; AssertionError
+;
 [default: Paragraph]
 ;;font_size=11pt
 ;;line_spacing=fixed(14pt,leading(0))
-;;space_above=2pt
-;;space_below=2pt
-
-[body]
-;;space_below=5pt
 
 [external hyperlink]
 font_color=#294ea3
