@@ -79,9 +79,7 @@ class ObservingConditions(Device):
                 All devices must accept 0.0 to specify that an instantaneous value
                 is to be made available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * AveragePeriod returns the time period (hours) over which sensor readings will be
@@ -110,9 +108,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -133,9 +129,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -156,9 +150,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -179,9 +171,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             Not "corrected to sea level" as often encountered in weather reports.
@@ -206,9 +196,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -229,9 +217,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -252,9 +238,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -275,9 +259,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -298,9 +280,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -321,9 +301,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -344,9 +322,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Meterological standards** Wind direction is that from which the wind
@@ -373,9 +349,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -396,9 +370,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This property is not available.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -418,9 +390,7 @@ class ObservingConditions(Device):
         Raises:
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -447,9 +417,7 @@ class ObservingConditions(Device):
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied SensorName is not valid.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -476,9 +444,7 @@ class ObservingConditions(Device):
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied SensorName is not valid.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green

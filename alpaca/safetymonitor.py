@@ -74,9 +74,7 @@ class SafetyMonitor(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green

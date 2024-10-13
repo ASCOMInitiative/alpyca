@@ -91,9 +91,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * The brightness value will be 0 when :py:attr:`CalibratorState` is
@@ -118,9 +116,7 @@ class CoverCalibrator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
             * Use this property to determine when an (async)
@@ -147,9 +143,7 @@ class CoverCalibrator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If no calibrator is present, the state will be
@@ -189,9 +183,7 @@ class CoverCalibrator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
             * Use this property to determine when an (async)
@@ -218,9 +210,7 @@ class CoverCalibrator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If no cover is present, the state will be
@@ -259,9 +249,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This is a mandatory property if a calibrator device is present
@@ -333,9 +321,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): If the calibrator requires time
@@ -377,9 +363,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): :py:attr:`CoverState` indicates the
@@ -412,9 +396,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This will  stop any cover movement as soon as possible and
@@ -446,9 +428,7 @@ class CoverCalibrator(Device):
             NotImplementedException: When :py:attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): :py:attr:`CoverState` indicates the

@@ -1045,10 +1045,23 @@ auncher\winapi.py", line 68, in impl
 
 13-Oct-2024
 -----------
-* Good morning! I changed the serif-typeface to Roboto (sans serif) and commented out all of the [default: Paragraph] settings, The document renders with the  html and rinoh sections OK. It even renders without the "failed to converge" process. This looks good.
+* Good morning! I changed the serif-typeface to Roboto (sans serif) and commented out all of the [default: Paragraph] settings, The document renders with the html and rinoh sections OK. It even renders without the "failed to converge" process. This looks good.
 * Now to tackle the spacing ugliness in DriverException. Cannot wrap source, must be all on one line. Autodoc requirement for PDF. Still OK for html.
 * ** SUCCESS ** Both HTML and PDF look good though I would like the 11 pt font for PDF. Too bad. Too fragile.
 * Now to fix up the DriverException sections, and the html-vs-rinoh sections for Master Interfaces Reference.
 * Also there are cross references to FAQs that show in PDF as section numbers instead of their titles. Look at the Note: at the beginning of the Camera Class for example. It should read See the "Example: Acquiring an Image, Creating FITS Image below" (and it does in HTML) but in PDF it reads "See the Section 3.1.3 below". Now what??
   - Maybe this is configurable in the template? I grabbed the book template from, C\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\templates and put it into References. Looking at it I think the processing of references is in C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\reference.py. There is shows that a reference is supposed to be the section number. I want the section and title or just the title. Now how to make it happen???
   RINOH ISSUE: https://github.com/brechtm/rinohtype/issues/437
+  WORST CASE: Use :ref:`Link title <label name>` format which I should be able to do with global search and destroy.
+  NOPE! Rinoh ignores the explicit title and still renders to the section number :-(. Added to the issue. Is there any other workaround?
+* OK Fix the DriverException description excess word spacing for PDF by putting it on one line. Use Replace in Files on all devide .py.
+  - LOSER!! Caused Rinoh crash, the usual padding_border_bottom error. THIS IS SO DELICATE!!!!!
+  - Try again in filterwheel. OK
+  - Do each device one at a time. Start with Camera and do each .PY file one at a time. Actually do global search/replace then uncomment a class at a time in alpacaclasses. Camera and CoverCalibrator are OK. Dome died. Skipping that, filterwheel OK. Add focuser, OK. Add ObservingConditions, OK. Add Rotator OK.
+* For the cross references by number instead of title, I got a reply from Brett to put a magic incantation into the alpyca.rts stylesheet. It worked!!
+* Now back to chasing the botch in the unwrapping of DriverException. Add SafetyMonitor OK. Add switch. OK. Add Telescope, WOW OK!! Add device, OK!!! So... only Dome dies??? WTF? Replace dome...IT RENDERED!! Well what the hell??? Oh well, I'll take it. I zapped the Build folder contents beforehand.
+=========== HTML ONLINE UPDATED WITH THESE CHANGES ===========
+- switch to .venv -
+=========== RAN UNIT TESTS TO MAKE SURE I DIDN'T SCORCH THE CODE ===========
+- switch back to P11 global -
+

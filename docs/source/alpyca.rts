@@ -24,6 +24,12 @@ mono_typeface=Source Code Pro
 ;;font_size=11pt
 ;;line_spacing=fixed(14pt,leading(0))
 
+; https://github.com/brechtm/rinohtype/issues/437
+; https://stackoverflow.com/questions/68571864
+; https://github.com/brechtm/rinohtype/issues/244
+[linked reference]
+type = custom
+
 [external hyperlink]
 font_color=#294ea3
 

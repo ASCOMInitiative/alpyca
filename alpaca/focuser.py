@@ -77,9 +77,7 @@ class Focuser(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             True means the focuser is capable of absolute position; that is, being
@@ -104,9 +102,7 @@ class Focuser(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This is the correct property to use to determine *successful* completion of
@@ -133,9 +129,7 @@ class Focuser(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * For most focusers this is the same as the :py:attr:`MaxStep` property. This is
@@ -159,9 +153,7 @@ class Focuser(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * The focuser can step between 0 and MaxStep. If an attempt is made to
@@ -188,9 +180,7 @@ class Focuser(Device):
             NotImplementedException: The device is a relative focuser (:py:attr:`Absolute`
                 is False)
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Do not use this as a way to determine if a (non-blocking) :py:meth:`Move()`
@@ -217,9 +207,7 @@ class Focuser(Device):
             NotImplementedException: If the device does not intrinsically
                 know what the step size is.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -242,9 +230,7 @@ class Focuser(Device):
                 is False, indicating that this focuser does not have temperature
                 compensation. In that case reading TempComp will always return False.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Setting TempComp to True puts the focuser into temperature tracking mode;
@@ -273,9 +259,7 @@ class Focuser(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -296,9 +280,7 @@ class Focuser(Device):
         Raises:
             NotImplementedException: The temperature is not available for this device.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Historically (prior to 2019) no units were specified for this property.
@@ -324,9 +306,7 @@ class Focuser(Device):
         Raises:
             NotImplementedException: The focuser cannot be programmatically halted.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * You should try to call this method aftr initialization to see if halting is
@@ -366,9 +346,7 @@ class Focuser(Device):
                 to catch this for older focusers (2018).
             NotImplementedException: The focuser cannot be programmatically halted.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): The method returns as soon as the focus

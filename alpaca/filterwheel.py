@@ -68,9 +68,7 @@ class FilterWheel(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * The offset values in this list are in the same order as the filters in the wheel
@@ -95,9 +93,7 @@ class FilterWheel(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * The names in this lisat are in the same order as the filters in the wheel
@@ -128,9 +124,7 @@ class FilterWheel(Device):
         Raises:
             InvalidValueException: If an invalid filter number is written to Position.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             **Asynchronous** (non-blocking): Writing to Position returns as soon as the

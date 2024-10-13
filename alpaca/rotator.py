@@ -62,9 +62,7 @@ class Rotator(Device):
             protocol (str, optional): Only if device needs https. Defaults to "http".
 
         Raises:
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         """
         super().__init__(address, "rotator", device_number, protocol)
@@ -75,9 +73,7 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * For IRotatorV3 drivers and later(:py:attr:`InterfaceVersion` >= 3)
@@ -102,9 +98,7 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This is the correct property to use to determine *successful* completion of
@@ -131,9 +125,7 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             Value is in degrees counterclockwise from the rotator's mechanical index.
@@ -156,9 +148,7 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Position is in degrees counterclockwise
@@ -188,9 +178,7 @@ class Rotator(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             Rotation is normally in degrees counterclockwise as viewed
@@ -220,9 +208,7 @@ class Rotator(Device):
         Raises:
             NotImplementedException: If this property is not available from the device
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -263,9 +249,7 @@ class Rotator(Device):
         Raises:
             NotImplementedException: The rotator cannot be programmatically halted.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * You should try to call this method aftr initialization to see if halting is
@@ -302,9 +286,7 @@ class Rotator(Device):
             InvalidValueException: The given position change results in a position
                 outside 0 <= position < 360.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -343,9 +325,7 @@ class Rotator(Device):
             InvalidValueException: The given position is
                 0 <= position < 360.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -385,9 +365,7 @@ class Rotator(Device):
                 0 <= position < 360. [or does it just apply modulo 360?
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
@@ -424,9 +402,7 @@ class Rotator(Device):
                 0 <= position < 360. [or does it just apply modulo 360?
                 Then what is an "invalid" value?]
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Once this method has been called and the sync offset determined, both

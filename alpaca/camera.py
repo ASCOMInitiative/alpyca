@@ -182,9 +182,7 @@ class Camera(Device):
 
             NotImplementedException: Monochrome cameras throw this exception,
                 colour cameras do not.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
             InvalidValueException: If not valid.
 
         Notes:
@@ -245,9 +243,7 @@ class Camera(Device):
 
         Raises:
             InvalidValueException: If the given binning value is invalid
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Will default to 1 when the camera connection is established.
@@ -280,9 +276,7 @@ class Camera(Device):
 
         Raises:
             InvalidValueException: If the given binning value is invalid
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Will default to 1 when the camera connection is established.
@@ -315,9 +309,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the camera status is unavailable
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -337,9 +329,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -364,9 +354,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -391,9 +379,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Some cameras support :py:meth:`AbortExposure()`, which allows the exposure to be
@@ -422,9 +408,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If true, the camera can have different binning on the X and Y axes, as
@@ -451,9 +435,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -478,9 +460,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -505,9 +485,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -532,9 +510,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If True, the camera's cooler setpoint can be adjusted. If False, the
@@ -563,9 +539,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Some cameras support :py:meth:`StopExposure()`, which allows the exposure to be
@@ -595,9 +569,7 @@ class Camera(Device):
         Raises:
             InvalidValueException: If data unavailable.
             NotImplementedException: If not supported (no cooler)
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -618,9 +590,7 @@ class Camera(Device):
         Raises:
             NotConnectedException: If the device is not connected
             NotImplementedException: If not supported (no cooler)
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Warning:
             Turning the cooler off when the cooler is operating at high delta-T
@@ -650,9 +620,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If not supported (no cooler)
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -672,9 +640,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Some cameras have multiple gain modes, resulting in this value changing.
@@ -700,9 +666,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -727,9 +691,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -754,9 +716,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This can be used, for example, to specify the resolution of a user interface
@@ -791,9 +751,7 @@ class Camera(Device):
         Raises:
             NotImplementedException: If FastReadout is not supported
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This function may in some cases interact with :py:attr:`ReadoutModes`; for
@@ -822,9 +780,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Reports the full well capacity of the camera in electrons, at the current
@@ -855,9 +811,7 @@ class Camera(Device):
             NotImplementedException: If neither **gains index** mode nor **gains value**
                 mode are supported.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             The Gain property is used to adjust the gain setting of the camera and has
@@ -913,9 +867,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Gain` property is not
                 implemented or is operating in **gains-index** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Gain` is operating in **gain-value** mode:
@@ -950,9 +902,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Gain` property is not
                 implemented or is operating in **gains-index** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Gain` is operating in **gain-value** mode:
@@ -987,9 +937,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Gain` property is not
                 implemented or is operating in **gains-value** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Gain` is operating in the **gains-index** mode:
@@ -1027,9 +975,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             If HasShutter is False, the :py:meth:`StartExposure()` method will ignore the
@@ -1054,9 +1000,7 @@ class Camera(Device):
         Raises:
             NotConnectedException: If the device is not connected
             NotImplementedException: If :py:attr:`CanSetCCDTemperature` is False
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1077,9 +1021,7 @@ class Camera(Device):
         Raises:
             InvalidOperationException: If no image data is available
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * The returned array is in row-major format, and typically must be transposed
@@ -1263,9 +1205,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1290,9 +1230,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1317,9 +1255,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1344,9 +1280,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If binning is active, value is in binned pixels.
@@ -1380,9 +1314,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If binning is active, value is in binned pixels.
@@ -1419,9 +1351,7 @@ class Camera(Device):
             NotImplementedException: If neither **offsets index** mode nor **offsets value**
                 mode are supported.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             The Offset property is used to adjust the offset setting of the camera and has
@@ -1477,9 +1407,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Offset` property is not
                 implemented or is operating in **offsets-index** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Offset` is operating in **offsets-value** mode:
@@ -1514,9 +1442,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Offset` property is not
                 implemented or is operating in **offsets-index** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Offset` is operating in **offsets-value** mode:
@@ -1551,9 +1477,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`Offset` property is not
                 implemented or is operating in **offsets-value** mode.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             When :py:attr:`Offset` is operating in the **offsets-index** mode:
@@ -1634,9 +1558,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1661,9 +1583,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1690,9 +1610,7 @@ class Camera(Device):
             InvalidValueException: If the supplied value is not valid (index out of range)
             NotImplementedException: If :py:attr:`CanFastReadout` is True.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * ReadoutMode is an index into the array :py:attr:`ReadoutModes`, and
@@ -1728,9 +1646,7 @@ class Camera(Device):
             NotImplementedException: If the :py:attr:`ReadoutMode` property is not
                 implemented.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Readout modes may be available from the camera, and if so then
@@ -1768,9 +1684,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Returns the name (data sheet part number) of the sensor, e.g. ICX285AL.
@@ -1813,9 +1727,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * It is recommended that this property be retrieved only after a connection is
@@ -1842,9 +1754,7 @@ class Camera(Device):
             InvalidValueException: If set to a value outside the camera's valid
                 temperature setpoint range.
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1867,9 +1777,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If binning is active, value is in binned pixels.
@@ -1903,9 +1811,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * If binning is active, value is in binned pixels.
@@ -1942,9 +1848,7 @@ class Camera(Device):
                 on-board stacking with user-supplied sub-exposure interval.
             NotConnectedException: If the device is not connected.
             InvalidValueException: The supplied duration is not valid.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1967,9 +1871,7 @@ class Camera(Device):
         Raises:
             NotConnectedException: If the device is not connected.
             InvalidOperationException: If not currently possible (e.g. during image download)
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Unlike :py:meth:`StopExposure()` this method simply discards any
@@ -2001,9 +1903,7 @@ class Camera(Device):
             NotImplementedException: If the camera does not support pulse guiding
                 (:py:attr:`CanPulseGuide` property is False)
             NotConnectedException: If the device is not connected.
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon pulse-guiding operation
@@ -2081,9 +1981,7 @@ class Camera(Device):
                 and save the already-acquired image data (:py:attr:`CanStopExposure` is False)
             NotConnectedException: If the device is not connected.
             InvalidOperationException: If not currently possible (e.g. during image download)
-            DriverException: An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Unlike :py:meth:`AbortExposure()` this method cuts an exposure short
