@@ -79,7 +79,7 @@ independent of the particular make/model of device.
         the `Alpyca GitHub repository
         <https://github.com/ASCOMInitiative/alpyca>`_.
 
-   For background see
+    For background see
     `About Alpaca and ASCOM <https://ascom-standards.org/About/Index.htm>`_
     on the
     `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_.

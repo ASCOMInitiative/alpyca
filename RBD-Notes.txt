@@ -997,6 +997,45 @@ auncher\winapi.py", line 68, in impl
   I wonder if a Rinoh style sheet could solve this. I think I'll file an issue on his GitHub repo.
   https://github.com/brechtm/rinohtype/issues/435
 * Meanwhile, review the Rinoh style and control files alpyca.rts and alpyca.rtt while reviewing the 0.55 Rinoh Manual.
-* Looked for the style log, https://www.mos6581.org/rinohtype/master/elementstyling.html but Alpyca's build process doesn't produce one. AlpycaDevice's one does!!! I can't see how to change this and the doc says nothing about this bieng an option.
+* Looked for the style log, https://www.mos6581.org/rinohtype/master/elementstyling.html but Alpyca's build process doesn't produce one. AlpycaDevice's one does!!! I can't see how to change this and the doc says nothing about this being an option.
 
+12-Oct-2024
+-----------
+* Well I tried again today with DestinationSideOfPier having .. only:: html for Master Interfaces Reference and the PDF built. SO my next task is to fix all of the Master Interfaces Reference sections with ..only:: html and also the .. only:: rinoh section as above.
+* Then I decided to tackle this:
+      PT Serif does not include a normal medium upright font. Falling back to normal regular upright
+      PTSerif-Regular does not contain glyph for unicode index 0x2192 (→)age 7
+  - Tried to change serif_typeface (in alpyca.rts Rinoh stylesheet) to DejaVu Serif, and I got the assert on padding_border_bottom! but at a much earlier page. Woah. I'm on the trail now.
+  - Commented out the serif_typeface in the stylesheet. It uses TeX Gyre Pagella by default. And... it hits the padding_border-bottom error very early!!
+  - Looks like I want to learn to read a style log. I've apparently been incredibly lucky with PT Serif.
+  - Looking at the style logs they are **identical** for either the successful run with PT Serif and for the fast fail using default TeX Gyre Pagella. The font names do not appear in the style log!!
+  - Playing with the  style sheet starting with the lucky good settings, change font_size to 12, BOOM.
+  - Leave that and comment out the line_spacing, BOOM
+  - Back to 11 font_size leave line_spacing commented out,
+  - Now change line_spacing=fixed(14pt,leading(0))  (12 -> 14 pt) OK
+  - Now font_size=12, line_spacing=16, serif_typeface=PT Serif this rendered OK, but with these warnings:
+      Tab did not fall into any of the tab stops. (page 343):15 (01:38) page 343
+      Tab did not fall into any of the tab stops. (page 345):09 (01:38) page 345
+      Tab did not fall into any of the tab stops. (page 347):04 (01:39) page 347
+      Tab did not fall into any of the tab stops. (page 349):00 (01:39) page 349
+    and this is GIGANTIC!! Ugly!!
+  - Back to font_size=10, line_spacing=12, serif_typeface=Merriweather (for the other warnings). Well same BS Merriweather does not include a normal medium upright font. Falling back to normal regular upright. It downloaded Merriweather though. BOOM
+  - Increase line_spacing to 14, BOOM immediately.
+  - Eliminate line_spacing BOOM
+  - Back to first principles, eliminate font_size, serif_face, and line_spacing. OK but UGLY
+  - Try Merriweather only - BOOM
+  - Try PT Serif and no font_size or line_spacing BOOM WHAT THE HELL???
+  - PT Serif and font_size=11 or line_spacing=14, this should be OK as it was above. Man this stuff is FRAGILE!!
+      Tab did not fall into any of the tab stops. (page 209):07 (01:31) page 209
+      Tab did not fall into any of the tab stops. (page 211):00 (01:31) page 211
+    This rendered OK.
+  - Just change font to Merriweather, BOOM. What the hell??? Apparently I have been incredibly plcky for having chosen PT Serif.
+  - OK, let's see if the stuff in DestinationSideOfPier renders with no font_size, serif_face, or line_spacing. OK!!
+  - Now add in the ..only:: rinoh link for the PDF, OK!!! Let's check it. OK!! I don't like the serif used.
+  - Now change the serif font to Roboto (sans serif). Will it build?  YES!!
+  - Add space-above=2pt and space_below=2pt to [paragraph] other stuff commented out. BOOM fails. Always padding_border_bottom as usual.
+  - Looking at the default sphinx stylesheet, guessing [body] space_below=5pt (0->5). BOOM
+  - Forget all of that, just change the object signature color to be less blue. That looks OK.
+
+* GIVEN THE GOOFY FORMATTING AND FAQ CROSS REFERENCE TITLES, AND OTHER STUFF, IS THIS WORTH IT?
 

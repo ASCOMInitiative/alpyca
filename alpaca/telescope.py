@@ -1641,12 +1641,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |DestinationSideOfPier|
+            .. only:: html
 
-            .. |DestinationSideOfPier| raw:: html
+                |DestinationSideOfPier|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DestinationSideOfPier" target="_blank">
-                Telescope.DestinationSideOfPier()</a> (external)
+                .. |DestinationSideOfPier| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DestinationSideOfPier" target="_blank">
+                    Telescope.DestinationSideOfPier()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.DestinationSideOfPier() <https://ascom-standards.org/newdocs/telescope.html#Telescope.DestinationSideOfPier>`_
         """
         return self._get("destinationsideofpier", RightAscension=RightAscension, Declination=Declination)
 
