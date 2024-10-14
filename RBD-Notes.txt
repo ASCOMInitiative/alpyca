@@ -1054,7 +1054,7 @@ auncher\winapi.py", line 68, in impl
   RINOH ISSUE: https://github.com/brechtm/rinohtype/issues/437
   WORST CASE: Use :ref:`Link title <label name>` format which I should be able to do with global search and destroy.
   NOPE! Rinoh ignores the explicit title and still renders to the section number :-(. Added to the issue. Is there any other workaround?
-* OK Fix the DriverException description excess word spacing for PDF by putting it on one line. Use Replace in Files on all devide .py.
+* OK Fix the DriverException description excess word spacing for PDF by putting it on one line. Use Replace in Files on all device .py.
   - LOSER!! Caused Rinoh crash, the usual padding_border_bottom error. THIS IS SO DELICATE!!!!!
   - Try again in filterwheel. OK
   - Do each device one at a time. Start with Camera and do each .PY file one at a time. Actually do global search/replace then uncomment a class at a time in alpacaclasses. Camera and CoverCalibrator are OK. Dome died. Skipping that, filterwheel OK. Add focuser, OK. Add ObservingConditions, OK. Add Rotator OK.
@@ -1069,4 +1069,14 @@ auncher\winapi.py", line 68, in impl
   - Thru Telescope.CanSetRightAscensionRate ...OK!! Got to CanUnpark, OK!!
   - Thru SiderealTime -- OK!!
 
-
+14-Oct-2024
+-----------
+* Onward with the Master Interfaces boxes. Through AxisRates()... hanging in there!! Through SlewToAltAzAsync() looking good. I may get lucky. Telescope completed!! WOOHOO.
+* OK, I got sick of this copy paste stuff and decided to take a wild stab at the crashes.
+    File "C:\Users\rdenn\AppData\Roaming\Python\Python311\site-packages\rinoh\flowable.py", line 297, in flow_inner
+      assert container.advance2(padding_border_bottom)
+  - I commented out the assert statement to see what happens even though the asserted condition is not met. So I uncommented the font_size= and line_spacing= in the alpyca.rts style sheet and ran it. It renders!! However, inspection of the PDF shows that the blocks of code formed by simply indenting text (the installation commands and the sample program in introduction.py) have zero padding at the bottom! They look bad. This is with the font_size of 11. Still bad at default 10pt. Well I can't find anything else that's messed up.
+  - Experimentation has shown that the code blocks formed by indenting text (samples etc) are indeed treated by rinoh as [code block].
+  - I set the [code block] padding_bottom and nothing changed. Same with space_below (reading from the default sphinx.rts stylesheet for parameter names).
+  - I can't believe how much better the PDF looks with font_size=11 and line_spacing=fixed(14pt,leading(0)). Would crash rinoh 100% before I commented out that assert.
+  - So now I need to learn how to read the style log for [code block]

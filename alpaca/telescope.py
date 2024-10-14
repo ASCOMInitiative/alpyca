@@ -1207,11 +1207,6 @@ class Telescope(Device):
 
                 |RARateFAQ|
 
-                .. |RARateFAQ| raw:: html
-
-                    <a href="https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used" target="_blank">
-                    What are RightAscensionRate and DeclinationRate and how are they used?</a> (external)
-
             .. only:: rinoh
 
                 `Telescope.RightAscensionRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscensionRate>`_
@@ -1328,12 +1323,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SiteElevation|
+            .. only:: html
 
-            .. |SiteElevation| raw:: html
+                |SiteElevation|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteElevation" target="_blank">
-                Telescope.SiteElevation</a> (external)
+                .. |SiteElevation| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteElevation" target="_blank">
+                    Telescope.SiteElevation</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SiteElevation <https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteElevation>`_
         """
         return self._get("siteelevation")
     @SiteElevation.setter
@@ -1365,12 +1366,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SiteLatitude|
+            .. only:: html
 
-            .. |SiteLatitude| raw:: html
+                |SiteLatitude|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLatitude" target="_blank">
-                Telescope.SiteLatitude</a> (external)
+                .. |SiteLatitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLatitude" target="_blank">
+                    Telescope.SiteLatitude</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SiteLatitude <https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLatitude>`_
         """
         return self._get("sitelatitude")
     @SiteLatitude.setter
@@ -1405,12 +1412,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SiteLongitude|
+            .. only:: html
 
-            .. |SiteLongitude| raw:: html
+                |SiteLongitude|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLongitude" target="_blank">
-                Telescope.SiteLongitude</a> (external)
+                .. |SiteLongitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLongitude" target="_blank">
+                    Telescope.SiteLongitude</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SiteLongitude <https://ascom-standards.org/newdocs/telescope.html#Telescope.SiteLongitude>`_
         """
         return self._get("sitelongitude")
     @SiteLongitude.setter
@@ -1444,12 +1457,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Slewing|
+            .. only:: html
 
-            .. |Slewing| raw:: html
+                |Slewing|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Slewing" target="_blank">
-                Telescope.Slewing</a> (external)
+                .. |Slewing| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Slewing" target="_blank">
+                    Telescope.Slewing</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Slewing <https://ascom-standards.org/newdocs/telescope.html#Telescope.Slewing>`_
         """
         return self._get("slewing")
 
@@ -1471,12 +1490,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewSettleTime|
+            .. only:: html
 
-            .. |SlewSettleTime| raw:: html
+                |SlewSettleTime|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewSettleTime" target="_blank">
-                Telescope.SlewSettleTime</a> (external)
+                .. |SlewSettleTime| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewSettleTime" target="_blank">
+                    Telescope.SlewSettleTime</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SlewSettleTime <https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewSettleTime>`_
         """
         return self._get("slewsettletime")
     @SlewSettleTime.setter
@@ -1505,12 +1530,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TargetDeclination|
+            .. only:: html
 
-            .. |TargetDeclination| raw:: html
+                |TargetDeclination|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetDeclination" target="_blank">
-                Telescope.TargetDeclination</a> (external)
+                .. |TargetDeclination| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetDeclination" target="_blank">
+                    Telescope.TargetDeclination</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.TargetDeclination <https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetDeclination>`_
         """
         return self._get("targetdeclination")
     @TargetDeclination.setter
@@ -1539,12 +1570,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TargetRightAscension|
+            .. only:: html
 
-            .. |TargetRightAscension| raw:: html
+                |TargetRightAscension|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetRightAscension" target="_blank">
-                Telescope.TargetRightAscension</a> (external)
+                .. |TargetRightAscension| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetRightAscension" target="_blank">
+                    Telescope.TargetRightAscension</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.TargetRightAscension <https://ascom-standards.org/newdocs/telescope.html#Telescope.TargetRightAscension>`_
         """
         return self._get("targetrightascension")
     @TargetRightAscension.setter
@@ -1569,12 +1606,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Tracking|
+            .. only:: html
 
-            .. |Tracking| raw:: html
+                |Tracking|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Tracking" target="_blank">
-                Telescope.Tracking</a> (external)
+                .. |Tracking| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Tracking" target="_blank">
+                    Telescope.Tracking</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Tracking <https://ascom-standards.org/newdocs/telescope.html#Telescope.Tracking>`_
         """
         return self._get("tracking")
     @Tracking.setter
@@ -1605,12 +1648,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TrackingRate|
+            .. only:: html
 
-            .. |TrackingRate| raw:: html
+                |TrackingRate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRate" target="_blank">
-                Telescope.TrackingRate</a> (external)
+                .. |TrackingRate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRate" target="_blank">
+                    Telescope.TrackingRate</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.TrackingRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRate>`_
         """
         return DriveRates(self._get("trackingrate"))
     @TrackingRate.setter
@@ -1632,12 +1681,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TrackingRates|
+            .. only:: html
 
-            .. |TrackingRates| raw:: html
+                |TrackingRates|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRates" target="_blank">
-                Telescope.TrackingRates</a> (external)
+                .. |TrackingRates| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRates" target="_blank">
+                    Telescope.TrackingRates</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.TrackingRates <https://ascom-standards.org/newdocs/telescope.html#Telescope.TrackingRates>`_
         """
         return self._get("trackingrates")
 
@@ -1675,12 +1730,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |UTCDate|
+            .. only:: html
 
-            .. |UTCDate| raw:: html
+                |UTCDate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.UTCDate" target="_blank">
-                Telescope.UTCDate</a> (external)
+                .. |UTCDate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.UTCDate" target="_blank">
+                    Telescope.UTCDate</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.UTCDate <https://ascom-standards.org/newdocs/telescope.html#Telescope.UTCDate>`_
         """
         return dateutil.parser.parse(self._get("utcdate"))
     @UTCDate.setter
@@ -1715,12 +1776,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AxisRates|
+            .. only:: html
 
-            .. |AxisRates| raw:: html
+                |AxisRates|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AxisRates" target="_blank">
-                Telescope.AxisRates()</a> (external)
+                .. |AxisRates| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AxisRates" target="_blank">
+                    Telescope.AxisRates()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.AxisRates() <https://ascom-standards.org/newdocs/telescope.html#Telescope.AxisRates>`_
         """
         l = []
         jList = self._get("axisrates", Axis=Axis.value)
@@ -1739,12 +1806,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanMoveAxis|
+            .. only:: html
 
-            .. |CanMoveAxis| raw:: html
+                |CanMoveAxis|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanMoveAxis" target="_blank">
-                Telescope.CanMoveAxis()</a> (external)
+                .. |CanMoveAxis| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanMoveAxis" target="_blank">
+                    Telescope.CanMoveAxis()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanMoveAxis() <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanMoveAxis>`_
         """
         return self._get("canmoveaxis", Axis=Axis.value)
 
@@ -1795,12 +1868,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AbortSlew|
+            .. only:: html
 
-            .. |AbortSlew| raw:: html
+                |AbortSlew|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AbortSlew" target="_blank">
-                Telescope.AbortSlew()</a> (external)
+                .. |AbortSlew| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AbortSlew" target="_blank">
+                    Telescope.AbortSlew()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.AbortSlew() <https://ascom-standards.org/newdocs/telescope.html#Telescope.AbortSlew>`_
         """
         self._put("abortslew")
 
@@ -1829,12 +1908,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FindHome|
+            .. only:: html
 
-            .. |FindHome| raw:: html
+                |FindHome|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.FindHome" target="_blank">
-                Telescope.FindHome()</a> (external)
+                .. |FindHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.FindHome" target="_blank">
+                    Telescope.FindHome()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.FindHome() <https://ascom-standards.org/newdocs/telescope.html#Telescope.FindHome>`_
         """
         self._put("findhome", 60)   # Extended timeout for bleeping sync method
 
@@ -1865,12 +1950,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MoveAxis|
+            .. only:: html
 
-            .. |MoveAxis| raw:: html
+                |MoveAxis|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.MoveAxis" target="_blank">
-                Telescope.MoveAxis()</a> (external)
+                .. |MoveAxis| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.MoveAxis" target="_blank">
+                    Telescope.MoveAxis()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.MoveAxis() <https://ascom-standards.org/newdocs/telescope.html#Telescope.MoveAxis>`_
         """
         self._put("moveaxis", Axis=Axis.value, Rate=Rate)
 
@@ -1903,12 +1994,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Park|
+            .. only:: html
 
-            .. |Park| raw:: html
+                |Park|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Park" target="_blank">
-                Telescope.Park()</a> (external)
+                .. |Park| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Park" target="_blank">
+                    Telescope.Park()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Park() <https://ascom-standards.org/newdocs/telescope.html#Telescope.Park>`_
         """
         self._put("park")
 
@@ -1947,12 +2044,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |PulseGuide|
+            .. only:: html
 
-            .. |PulseGuide| raw:: html
+                |PulseGuide|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.PulseGuide" target="_blank">
-                Telescope.PulseGuide()</a> (external)
+                .. |PulseGuide| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.PulseGuide" target="_blank">
+                    Telescope.PulseGuide()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.PulseGuide() <https://ascom-standards.org/newdocs/telescope.html#Telescope.PulseGuide>`_
         """
         self._put("pulseguide", Direction=Direction.value, Duration=Duration)
 
@@ -1968,12 +2071,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetPark|
+            .. only:: html
 
-            .. |SetPark| raw:: html
+                |SetPark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SetPark" target="_blank">
-                Telescope.SetPark()</a> (external)
+                .. |SetPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SetPark" target="_blank">
+                    Telescope.SetPark()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SetPark() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SetPark>`_
         """
         self._put("setpark")
 
@@ -2012,12 +2121,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewToAltAzAsync|
+            .. only:: html
 
-            .. |SlewToAltAzAsync| raw:: html
+                |SlewToAltAzAsync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToAltAzAsync" target="_blank">
-                Telescope.SlewToAltAzAsync()</a> (external)
+                .. |SlewToAltAzAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToAltAzAsync" target="_blank">
+                    Telescope.SlewToAltAzAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SlewToAltAzAsync() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToAltAzAsync>`_
         """
         self._put("slewtoaltazasync", Azimuth=Azimuth, Altitude=Altitude)
 
@@ -2058,12 +2173,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewToCoordinatesAsync|
+            .. only:: html
 
-            .. |SlewToCoordinatesAsync| raw:: html
+                |SlewToCoordinatesAsync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToCoordinatesAsync" target="_blank">
-                Telescope.SlewToCoordinatesAsync()</a> (external)
+                .. |SlewToCoordinatesAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToCoordinatesAsync" target="_blank">
+                    Telescope.SlewToCoordinatesAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SlewToCoordinatesAsync() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToCoordinatesAsync>`_
         """
         self._put("slewtocoordinatesasync", RightAscension=RightAscension, Declination=Declination)
 
@@ -2097,12 +2218,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewToTargetAsync|
+            .. only:: html
 
-            .. |SlewToTargetAsync| raw:: html
+                |SlewToTargetAsync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToTargetAsync" target="_blank">
-                Telescope.SlewToTargetAsync()</a> (external)
+                .. |SlewToTargetAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToTargetAsync" target="_blank">
+                    Telescope.SlewToTargetAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SlewToTargetAsync() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SlewToTargetAsync>`_
         """
         self._put("slewtotargetasync")
 
@@ -2125,12 +2252,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SyncToAltAz|
+            .. only:: html
 
-            .. |SyncToAltAz| raw:: html
+                |SyncToAltAz|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToAltAz" target="_blank">
-                Telescope.SyncToAltAz()</a> (external)
+                .. |SyncToAltAz| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToAltAz" target="_blank">
+                    Telescope.SyncToAltAz()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SyncToAltAz() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToAltAz>`_
         """
         self._put("synctoaltaz", Azimuth=Azimuth, Altitude=Altitude)
 
@@ -2152,12 +2285,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SyncToCoordinates|
+            .. only:: html
 
-            .. |SyncToCoordinates| raw:: html
+                |SyncToCoordinates|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToCoordinates" target="_blank">
-                Telescope.SyncToCoordinates()</a> (external)
+                .. |SyncToCoordinates| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToCoordinates" target="_blank">
+                    Telescope.SyncToCoordinates()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SyncToCoordinates() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToCoordinates>`_
         """
         self._put(
             "synctocoordinates", RightAscension=RightAscension, Declination=Declination
@@ -2178,12 +2317,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SyncToTarget|
+            .. only:: html
 
-            .. |SyncToTarget| raw:: html
+                |SyncToTarget|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToTarget" target="_blank">
-                Telescope.SyncToTarget()</a> (external)
+                .. |SyncToTarget| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToTarget" target="_blank">
+                    Telescope.SyncToTarget()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SyncToTarget() <https://ascom-standards.org/newdocs/telescope.html#Telescope.SyncToTarget>`_
         """
         self._put("synctotarget")
 
@@ -2203,11 +2348,17 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Unpark|
+            .. only:: html
 
-            .. |Unpark| raw:: html
+                |Unpark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Unpark" target="_blank">
-                Telescope.Unpark()</a> (external)
+                .. |Unpark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Unpark" target="_blank">
+                    Telescope.Unpark()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Unpark() <https://ascom-standards.org/newdocs/telescope.html#Telescope.Unpark>`_
         """
         self._put("unpark")
