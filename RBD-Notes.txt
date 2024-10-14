@@ -1064,4 +1064,9 @@ auncher\winapi.py", line 68, in impl
 - switch to .venv -
 =========== RAN UNIT TESTS TO MAKE SURE I DIDN'T SCORCH THE CODE ===========
 - switch back to P11 global -
+* Now for the Master Interfaces boxes.
+  - Start with telescope and do just the first three. Does it render? Yes. so press on and to the whole Telescope.
+  - Thru Telescope.CanSetRightAscensionRate ...OK!! Got to CanUnpark, OK!!
+  - Thru SiderealTime -- OK!!
+
 

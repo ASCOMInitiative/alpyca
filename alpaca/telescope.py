@@ -41,6 +41,7 @@
 # 21-Aug-22 (rbd) 2.0.2 Fix driveRates enum (GitHub issue #3). Fix descriptive
 #                 text for pierWest and pierUnknown (GitHub issue #5)
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 13-Oct-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
@@ -145,12 +146,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AlignmentMode|
+            .. only:: html
 
-            .. |AlignmentMode| raw:: html
+                |AlignmentMode|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AlignmentMode" target="_blank">
-                Telescope.AlignmentMode</a> (external)
+                .. |AlignmentMode| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AlignmentMode" target="_blank">
+                    Telescope.AlignmentMode()</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.AlignmentMode <https://ascom-standards.org/newdocs/telescope.html#Telescope.AlignmentMode>`_
         """
         return AlignmentModes(self._get("alignmentmode"))
 
@@ -166,12 +173,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Altitude|
+            .. only:: html
 
-            .. |Altitude| raw:: html
+                |Altitude|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Altitude" target="_blank">
-                Telescope.Altitude</a> (external)
+                .. |Altitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Altitude" target="_blank">
+                    Telescope.Altitude</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Altitude <https://ascom-standards.org/newdocs/telescope.html#Telescope.Altitude>`_
         """
         return self._get("altitude")
 
@@ -191,12 +204,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ApertureArea|
+            .. only:: html
 
-            .. |ApertureArea| raw:: html
+                |ApertureArea|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureArea" target="_blank">
-                Telescope.ApertureArea</a> (external)
+                .. |ApertureArea| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureArea" target="_blank">
+                    Telescope.ApertureArea</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.ApertureArea <https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureArea>`_
         """
         return self._get("aperturearea")
 
@@ -212,12 +231,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ApertureDiameter|
+            .. only:: html
 
-            .. |ApertureDiameter| raw:: html
+                |ApertureDiameter|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureDiameter" target="_blank">
-                Telescope.ApertureDiameter</a> (external)
+                .. |ApertureDiameter| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureDiameter" target="_blank">
+                    Telescope.ApertureDiameter</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.ApertureDiameter <https://ascom-standards.org/newdocs/telescope.html#Telescope.ApertureDiameter>`_
         """
         return self._get("aperturediameter")
 
@@ -241,12 +266,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AtHome|
+            .. only:: html
 
-            .. |AtHome| raw:: html
+                |AtHome|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AtHome" target="_blank">
-                Telescope.AtHome</a> (external)
+                .. |AtHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AtHome" target="_blank">
+                    Telescope.AtHome</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.AtHome <https://ascom-standards.org/newdocs/telescope.html#Telescope.AtHome>`_
         """
         return self._get("athome")
 
@@ -274,12 +305,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AtPark|
+            .. only:: html
 
-            .. |AtPark| raw:: html
+                |AtPark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AtPark" target="_blank">
-                Telescope.AtPark</a> (external)
+                .. |AtPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.AtPark" target="_blank">
+                    Telescope.AtPark</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.AtPark <https://ascom-standards.org/newdocs/telescope.html#Telescope.AtPark>`_
         """
         return self._get("atpark")
 
@@ -299,12 +336,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Azimuth|
+            .. only:: html
 
-            .. |Azimuth| raw:: html
+                |Azimuth|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Azimuth" target="_blank">
-                Telescope.Azimuth</a> (external)
+                .. |Azimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Azimuth" target="_blank">
+                    Telescope.Azimuth</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Azimuth <https://ascom-standards.org/newdocs/telescope.html#Telescope.Azimuth>`_
         """
         return self._get("azimuth")
 
@@ -322,12 +365,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanFindHome|
+            .. only:: html
 
-            .. |CanFindHome| raw:: html
+                |CanFindHome|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanFindHome" target="_blank">
-                Telescope.CanFindHome</a> (external)
+                .. |CanFindHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanFindHome" target="_blank">
+                    Telescope.CanFindHome</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanFindHome <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanFindHome>`_
         """
         return self._get("canfindhome")
 
@@ -345,12 +394,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanPark|
+            .. only:: html
 
-            .. |CanPark| raw:: html
+                |CanPark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPark" target="_blank">
-                Telescope.CanPark</a> (external)
+                .. |CanPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPark" target="_blank">
+                    Telescope.CanPark</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanPark <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPark>`_
         """
         return self._get("canpark")
 
@@ -368,12 +423,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanPulseGuide|
+            .. only:: html
 
-            .. |CanPulseGuide| raw:: html
+                |CanPulseGuide|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPulseGuide" target="_blank">
-                Telescope.CanPulseGuide</a> (external)
+                .. |CanPulseGuide| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPulseGuide" target="_blank">
+                    Telescope.CanPulseGuide</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanPulseGuide <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanPulseGuide>`_
         """
         return self._get("canpulseguide")
 
@@ -391,12 +452,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetDeclinationRate|
+            .. only:: html
 
-            .. |CanSetDeclinationRate| raw:: html
+                |CanSetDeclinationRate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetDeclinationRate" target="_blank">
-                Telescope.CanSetDeclinationRate</a> (external)
+                .. |CanSetDeclinationRate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetDeclinationRate" target="_blank">
+                    Telescope.CanSetDeclinationRate</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetDeclinationRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetDeclinationRate>`_
         """
         return self._get("cansetdeclinationrate")
 
@@ -414,12 +481,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetGuideRates|
+            .. only:: html
 
-            .. |CanSetGuideRates| raw:: html
+                |CanSetGuideRates|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetGuideRates" target="_blank">
-                Telescope.CanSetGuideRates</a> (external)
+                .. |CanSetGuideRates| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetGuideRates" target="_blank">
+                    Telescope.CanSetGuideRates</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetGuideRates <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetGuideRates>`_
         """
         return self._get("cansetguiderates")
 
@@ -437,12 +510,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetPark|
+            .. only:: html
 
-            .. |CanSetPark| raw:: html
+                |CanSetPark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPark" target="_blank">
-                Telescope.CanSetPark</a> (external)
+                .. |CanSetPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPark" target="_blank">
+                    Telescope.CanSetPark</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetPark <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPark>`_
         """
         return self._get("cansetpark")
 
@@ -461,12 +540,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetPierSide|
+            .. only:: html
 
-            .. |CanSetPierSide| raw:: html
+                |CanSetPierSide|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPierSide" target="_blank">
-                Telescope.CanSetPierSide</a> (external)
+                .. |CanSetPierSide| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPierSide" target="_blank">
+                    Telescope.CanSetPierSide</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetPierSide <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetPierSide>`_
         """
         return self._get("cansetpierside")
 
@@ -484,12 +569,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetRightAscensionRate|
+            .. only:: html
 
-            .. |CanSetRightAscensionRate| raw:: html
+                |CanSetRightAscensionRate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetRightAscensionRate" target="_blank">
-                Telescope.CanSetRightAscensionRate</a> (external)
+                .. |CanSetRightAscensionRate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetRightAscensionRate" target="_blank">
+                    Telescope.CanSetRightAscensionRate</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetRightAscensionRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetRightAscensionRate>`_
         """
         return self._get("cansetrightascensionrate")
 
@@ -507,12 +598,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetTracking|
+            .. only:: html
 
-            .. |CanSetTracking| raw:: html
+                |CanSetTracking|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetTracking" target="_blank">
-                Telescope.CanSetTracking</a> (external)
+                .. |CanSetTracking| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetTracking" target="_blank">
+                    Telescope.CanSetTracking</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSetTracking <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSetTracking>`_
         """
         return self._get("cansettracking")
 
@@ -536,12 +633,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSlew|
+            .. only:: html
 
-            .. |CanSlew| raw:: html
+                |CanSlew|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlew" target="_blank">
-                Telescope.CanSlew</a> (external)
+                .. |CanSlew| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlew" target="_blank">
+                    Telescope.CanSlew</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSlew <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlew>`_
         """
         return self._get("canslew")
 
@@ -565,12 +668,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSlewAsync|
+            .. only:: html
 
-            .. |CanSlewAsync| raw:: html
+                |CanSlewAsync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAsync" target="_blank">
-                Telescope.CanSlewAsync</a> (external)
+                .. |CanSlewAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAsync" target="_blank">
+                    Telescope.CanSlewAsync</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSlewAsync <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAsync>`_
         """
         return self._get("canslewasync")
 
@@ -593,12 +702,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSlewAltAz|
+            .. only:: html
 
-            .. |CanSlewAltAz| raw:: html
+                |CanSlewAltAz|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAz" target="_blank">
-                Telescope.CanSlewAltAz</a> (external)
+                .. |CanSlewAltAz| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAz" target="_blank">
+                    Telescope.CanSlewAltAz</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSlewAltAz <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAz>`_
         """
         return self._get("canslewaltaz")
 
@@ -621,12 +736,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSlewAltAzAsync|
+            .. only:: html
 
-            .. |CanSlewAltAzAsync| raw:: html
+                |CanSlewAltAzAsync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAzAsync" target="_blank">
-                Telescope.CanSlewAltAzAsync</a> (external)
+                .. |CanSlewAltAzAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAzAsync" target="_blank">
+                    Telescope.CanSlewAltAzAsync</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSlewAltAzAsync <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSlewAltAzAsync>`_
         """
         return self._get("canslewaltazasync")
 
@@ -644,12 +765,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSync|
+            .. only:: html
 
-            .. |CanSync| raw:: html
+                |CanSync|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSync" target="_blank">
-                Telescope.CanSync</a> (external)
+                .. |CanSync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSync" target="_blank">
+                    Telescope.CanSync</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSync <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSync>`_
         """
         return self._get("cansync")
 
@@ -667,12 +794,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSyncAltAz|
+            .. only:: html
 
-            .. |CanSyncAltAz| raw:: html
+                |CanSyncAltAz|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSyncAltAz" target="_blank">
-                Telescope.CanSyncAltAz</a> (external)
+                .. |CanSyncAltAz| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSyncAltAz" target="_blank">
+                    Telescope.CanSyncAltAz</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanSyncAltAz <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanSyncAltAz>`_
         """
         return self._get("cansyncaltaz")
 
@@ -690,12 +823,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanUnpark|
+            .. only:: html
 
-            .. |CanUnpark| raw:: html
+                |CanUnpark|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanUnpark" target="_blank">
-                Telescope.CanUnpark</a> (external)
+                .. |CanUnpark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.CanUnpark" target="_blank">
+                    Telescope.CanUnpark</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.CanUnpark <https://ascom-standards.org/newdocs/telescope.html#Telescope.CanUnpark>`_
         """
         return self._get("canunpark")
 
@@ -715,12 +854,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Declination|
+            .. only:: html
 
-            .. |Declination| raw:: html
+                |Declination|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Declination" target="_blank">
-                Telescope.Declination</a> (external)
+                .. |Declination| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.Declination" target="_blank">
+                    Telescope.Declination</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.Declination <https://ascom-standards.org/newdocs/telescope.html#Telescope.Declination>`_
         """
         return self._get("declination")
 
@@ -750,12 +895,27 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |DeclinationRate|
+            .. only:: html
 
-            .. |DeclinationRate| raw:: html
+                |DeclinationRate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DeclinationRate" target="_blank">
-                Telescope.DeclinationRate</a> (external)
+                .. |DeclinationRate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DeclinationRate" target="_blank">
+                    Telescope.DeclinationRate</a> (external)
+
+                |RARateFAQ|
+
+                .. |RARateFAQ| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used" target="_blank">
+                    What are RightAscensionRate and DeclinationRate and how are they used?</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.DeclinationRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.DeclinationRate>`_
+                `What are RightAscensionRate and DeclinationRate and how are they used? <https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used>`_
+
         """
         return self._get("declinationrate")
     @DeclinationRate.setter
@@ -787,12 +947,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |DoesRefraction|
+            .. only:: html
 
-            .. |DoesRefraction| raw:: html
+                |DoesRefraction|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DoesRefraction" target="_blank">
-                Telescope.DoesRefraction</a> (external)
+                .. |DoesRefraction| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.DoesRefraction" target="_blank">
+                    Telescope.DoesRefraction</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.DoesRefraction <https://ascom-standards.org/newdocs/telescope.html#Telescope.DoesRefraction>`_
         """
         return self._get("doesrefraction")
     @DoesRefraction.setter
@@ -815,12 +981,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |EquatorialSystem|
+            .. only:: html
 
-            .. |EquatorialSystem| raw:: html
+                |EquatorialSystem|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.EquatorialSystem" target="_blank">
-                Telescope.EquatorialSystem</a> (external)
+                .. |EquatorialSystem| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.EquatorialSystem" target="_blank">
+                    Telescope.EquatorialSystem</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.EquatorialSystem <https://ascom-standards.org/newdocs/telescope.html#Telescope.EquatorialSystem>`_
         """
         return EquatorialCoordinateType(self._get("equatorialsystem"))
 
@@ -836,12 +1008,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FocalLength|
+            .. only:: html
 
-            .. |FocalLength| raw:: html
+                |FocalLength|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.FocalLength" target="_blank">
-                Telescope.FocalLength</a> (external)
+                .. |FocalLength| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.FocalLength" target="_blank">
+                    Telescope.FocalLength</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.FocalLength <https://ascom-standards.org/newdocs/telescope.html#Telescope.FocalLength>`_
         """
         return self._get("focallength")
 
@@ -866,12 +1044,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GuideRateDeclination|
+            .. only:: html
 
-            .. |GuideRateDeclination| raw:: html
+                |GuideRateDeclination|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateDeclination" target="_blank">
-                Telescope.GuideRateDeclination</a> (external)
+                .. |GuideRateDeclination| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateDeclination" target="_blank">
+                    Telescope.GuideRateDeclination</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.GuideRateDeclination <https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateDeclination>`_
         """
         return self._get("guideratedeclination")
     @GuideRateDeclination.setter
@@ -899,12 +1083,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GuideRateRightAscension|
+            .. only:: html
 
-            .. |GuideRateRightAscension| raw:: html
+                |GuideRateRightAscension|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateRightAscension" target="_blank">
-                Telescope.GuideRateRightAscension</a> (external)
+                .. |GuideRateRightAscension| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateRightAscension" target="_blank">
+                    Telescope.GuideRateRightAscension</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.GuideRateRightAscension <https://ascom-standards.org/newdocs/telescope.html#Telescope.GuideRateRightAscension>`_
         """
         return self._get("guideraterightascension")
     @GuideRateRightAscension.setter
@@ -931,12 +1121,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |IsPulseGuiding|
+            .. only:: html
 
-            .. |IsPulseGuiding| raw:: html
+                |IsPulseGuiding|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.IsPulseGuiding" target="_blank">
-                Telescope.IsPulseGuiding</a> (external)
+                .. |IsPulseGuiding| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.IsPulseGuiding" target="_blank">
+                    Telescope.IsPulseGuiding</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.IsPulseGuiding <https://ascom-standards.org/newdocs/telescope.html#Telescope.IsPulseGuiding>`_
         """
         return self._get("ispulseguiding")
 
@@ -952,12 +1148,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |RightAscension|
+            .. only:: html
 
-            .. |RightAscension| raw:: html
+                |RightAscension|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscension" target="_blank">
-                Telescope.RightAscension</a> (external)
+                .. |RightAscension| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscension" target="_blank">
+                    Telescope.RightAscension</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.RightAscension <https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscension>`_
         """
         return self._get("rightascension")
 
@@ -994,19 +1196,26 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |RightAscensionRate|
+            .. only:: html
 
-            .. |RightAscensionRate| raw:: html
+                |RightAscensionRate|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscensionRate" target="_blank">
-                Telescope.RightAscensionRate</a> (external)
+                .. |RightAscensionRate| raw:: html
 
-            |RARateFAQ|
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscensionRate" target="_blank">
+                    Telescope.RightAscensionRate</a> (external)
 
-            .. |RARateFAQ| raw:: html
+                |RARateFAQ|
 
-                <a href="https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used" target="_blank">
-                What are RightAscensionRate and DeclinationRate and how are they used?</a> (external)
+                .. |RARateFAQ| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used" target="_blank">
+                    What are RightAscensionRate and DeclinationRate and how are they used?</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.RightAscensionRate <https://ascom-standards.org/newdocs/telescope.html#Telescope.RightAscensionRate>`_
+                `What are RightAscensionRate and DeclinationRate and how are they used? <https://ascom-standards.org/newdocs/trkoffset-faq.html#what-are-rightascensionrate-and-declinationrate-and-how-are-they-used>`_
         """
         return self._get("rightascensionrate")
     @RightAscensionRate.setter
@@ -1043,12 +1252,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SideOfPier|
+            .. only:: html
 
-            .. |SideOfPier| raw:: html
+                |SideOfPier|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SideOfPier" target="_blank">
-                Telescope.SideOfPier</a> (external)
+                .. |SideOfPier| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SideOfPier" target="_blank">
+                    Telescope.SideOfPier</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SideOfPier <https://ascom-standards.org/newdocs/telescope.html#Telescope.SideOfPier>`_
         """
         return PierSide(self._get("sideofpier"))
     @SideOfPier.setter
@@ -1074,12 +1289,18 @@ class Telescope(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SiderealTime|
+            .. only:: html
 
-            .. |SiderealTime| raw:: html
+                |SiderealTime|
 
-                <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiderealTime" target="_blank">
-                Telescope.SiderealTime</a> (external)
+                .. |SiderealTime| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/telescope.html#Telescope.SiderealTime" target="_blank">
+                    Telescope.SiderealTime</a> (external)
+
+            .. only:: rinoh
+
+                `Telescope.SiderealTime <https://ascom-standards.org/newdocs/telescope.html#Telescope.SiderealTime>`_
         """
         return self._get("siderealtime")
 
