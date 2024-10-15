@@ -106,7 +106,7 @@ class Device:
         **Common to all devices**
 
         Args:
-            ActionName: A name from :py:attr:`SupportedActions` that represents
+            ActionName: A name from :attr:`SupportedActions` that represents
                 the action to be carried out.
             *Parameters: List of required parameters or [] if none are required.
 
@@ -117,14 +117,14 @@ class Device:
             NotImplementedException: If no actions at all are supported
             ActionNotImplementedException: If the driver does not support the requested
                 ActionName. The supported action names are listed in
-                :py:attr:`SupportedActions`.
+                :attr:`SupportedActions`.
             NotConnectedException: If the device is not connected
             DriverException:An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
         Notes:
-            * This method, combined with :py:attr:`SupportedActions`, is the supported
+            * This method, combined with :attr:`SupportedActions`, is the supported
               mechanic for adding non-standard functionality.
 
         .. admonition:: Master Interfaces Reference
@@ -251,7 +251,7 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
-            **Non-Blocking** Use :py:attr:`Connecting` to indicate completion.
+            **Non-Blocking** Use :attr:`Connecting` to indicate completion.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -275,7 +275,7 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
-            **Non-Blocking** Use :py:attr:`~Device.Connecting` to indicate completion.
+            **Non-Blocking** Use :attr:`~Device.Connecting` to indicate completion.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -290,7 +290,7 @@ class Device:
     @property
     def Connecting(self) -> bool:
         """Returns ``True`` while the device is undertaking an asynchronous
-        :py:meth:`Connect` or :py:meth:`Disconnect` operation.
+        :meth:`Connect` or :meth:`Disconnect` operation.
 
         **Common to all devices**
 
@@ -299,10 +299,10 @@ class Device:
 
         Note:
             * Use this property to determine when an (async)
-              :py:meth:`Connect` or :py:meth:`Disconnect` has completed,
+              :meth:`Connect` or :meth:`Disconnect` has completed,
               at which time it will transition from ``True`` to ``False``.
             * Present only in Platform 7 (2024) devices. Check the device's
-              :py:attr:`InterfaceVersion`.
+              :attr:`InterfaceVersion`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -363,7 +363,7 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * This describes the *device*, not the driver. See the :py:attr:`DriverInfo`
+            * This describes the *device*, not the driver. See the :attr:`DriverInfo`
               property for information on the ASCOM driver.
             * The description length will be a maximum of 64 characters so
               that it can be used in FITS image headers, which are limited
@@ -415,13 +415,13 @@ class Device:
                 The device did not *successfully* complete the request.
 
         Notes:
-            * This describes the *driver* not the device. See the :py:attr:`Description`
+            * This describes the *driver* not the device. See the :attr:`Description`
               property for information on the device itself
             * The return is a Python list of strings, the total length of which may be
               hundreds to thousands of characters long. It is intended to display
               detailed information on the ASCOM (COM or Alpaca) driver, including
               version and copyright data. . To get the driver version in a parse-able
-              string, use the :py:attr:`DriverVersion` property.
+              string, use the :attr:`DriverVersion` property.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -446,7 +446,7 @@ class Device:
 
         Notes:
             * This must be in the form "n.n". It should not to be confused with the
-              :py:attr:`InterfaceVersion` property, which is the version of this
+              :attr:`InterfaceVersion` property, which is the version of this
               specification supported by the driver. **Note:** on systems with a comma
               as the decimal point you may need to make accommodations to parse the
               value.
@@ -474,7 +474,7 @@ class Device:
             * This is a single integer indicating the version of this specific
               ASCOM universal interface definition. For example, for ICameraV3,
               this will be 3. It should not to be confused with the
-              :py:attr:`DriverVersion` property, which is the major.minor version
+              :attr:`DriverVersion` property, which is the major.minor version
               of the driver for  this device.
 
         .. admonition:: Master Interfaces Reference
@@ -520,7 +520,7 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * This method, combined with :py:meth:`Action`, is the supported
+            * This method, combined with :meth:`Action`, is the supported
               mechanic for adding non-standard functionality.
             * SupportedActions is a "discovery" mechanism that enables clients to know
               which Actions a device supports without having to exercise the Actions
@@ -528,10 +528,10 @@ class Device:
               people / equipment safety issues if actions are called unexpectedly
               or out of a defined process sequence. It follows from this that
               SupportedActions must return names that match the spelling of
-              :py:meth:`Action`
+              :meth:`Action`
               names exactly, without additional descriptive text. However, returned
               names may use any casing because the ActionName parameter of
-              :py:meth:`Action` is case insensitive.
+              :meth:`Action` is case insensitive.
 
         .. admonition:: Master Interfaces Reference
             :class: green

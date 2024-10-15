@@ -1080,3 +1080,14 @@ auncher\winapi.py", line 68, in impl
   - I set the [code block] padding_bottom and nothing changed. Same with space_below (reading from the default sphinx.rts stylesheet for parameter names).
   - I can't believe how much better the PDF looks with font_size=11 and line_spacing=fixed(14pt,leading(0)). Would crash rinoh 100% before I commented out that assert.
   - So now I need to learn how to read the style log for [code block]
+  - OOHHH Engine a line with :: then indenting lines below creates a code-block!!! Used in introduction.py. See https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#rst-literal-blocks and also see the Sphinx Help "Showing Code Examples". Man it's been a long time but it's coming back!! Pygments does the highlighting. Default is for Python.  I'm not going to sweat the small stuff for PDF!!!
+  - Trying to work on the style sheet. Make tye admonitions have titles on separate line. Again looking at sphinx.rtsm, well [admonition title] keep-with-next=false doesn't do it. I guess that relates to the individual words.
+  - SUCCESS:
+      [builtin admonition:Admonition]
+      inline_title=false
+* OHHHHH ALL OF THE IN-DOC LINKS TO OTHER MEMBERS ACT LIKE LINKS ON HOVER BUT INOP!! This is so bad.
+  - On a whim I tried to remove the :py prefix from :attr: and :meth: and the links WORK!!!!!!!! WOOHOO!!
+    *************
+    WHAT A RELIEF
+    *************
+    NOTE: :py:class: works in PDF already

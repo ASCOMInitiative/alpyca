@@ -92,18 +92,18 @@ class Switch(Device):
 
     def CanAsync(self, Id: int) -> bool:
         """The specified switch can operate asynchronously.
-        See :py:meth:`SetAsync` and :py:meth:`SetAsyncValue`.
+        See :meth:`SetAsync` and :meth:`SetAsyncValue`.
 
         Args:
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * Examples of switches that cannot be written to include a
               limit switch or a sensor.
 
@@ -121,22 +121,22 @@ class Switch(Device):
         return self._get("canasync", Id=Id)
 
     def CancelAsync(self, Id: int) -> None:
-        """Cancels an in-progress asynchronous state change operation. See :py:meth:`SetAsync` and
-        :py:meth:`SetAsyncValue` for details of asynchronous switch operations.
+        """Cancels an in-progress asynchronous state change operation. See :meth:`SetAsync` and
+        :meth:`SetAsyncValue` for details of asynchronous switch operations.
 
         Args:
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * On return, the next call to :py:meth:`StateChangeComplete` for this switch
+            * On return, the next call to :meth:`StateChangeComplete` for this switch
               will raise an :py:class:`OperationCancelledException`; thereafter calls
-              to :py:meth:`StateChangeComplete` for the switch will return ``False``.
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+              to :meth:`StateChangeComplete` for the switch will return ``False``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -158,12 +158,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * Examples of witches that cannot be written to include a
               limit switch or a sensor.
 
@@ -187,12 +187,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -215,12 +215,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -242,12 +242,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -269,12 +269,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
 
         .. admonition:: Master Interfaces Reference
@@ -297,12 +297,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -324,12 +324,12 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -352,17 +352,17 @@ class Switch(Device):
             State: The required control state
 
         Raises:
-            NotImplementedException: If :py:meth:`CanAsync` ``= False`` for switch ``Id``
-            InvalidValueException: The ``Id`` is out of range (see :py:attr:`MaxSwitch`)
+            NotImplementedException: If :meth:`CanAsync` ``= False`` for switch ``Id``
+            InvalidValueException: The ``Id`` is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): The method returns as soon as the state change
-              operation has been successfully started, with :py:meth:`StateChangeComplete` for
+              operation has been successfully started, with :meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
-              :py:meth:`StateChangeComplete` becomes True.
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+              :meth:`StateChangeComplete` becomes True.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -382,23 +382,23 @@ class Switch(Device):
 
         Args:
             Id: the specified switch number (see Notes)
-            Value: The value to be set, between :py:meth:`MinSwitchValue`` and :py:meth:`MaxSwitchValue`
+            Value: The value to be set, between :meth:`MinSwitchValue`` and :meth:`MaxSwitchValue`
                 for switch ``Id``
 
         Raises:
-            NotImplementedException: If :py:meth:`CanAsync` ``= False`` for switch ``Id``
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`), or if the
-                given value is not between :py:meth:`MinSwitchValue` and :py:meth:`MaxSwitchValue`
+            NotImplementedException: If :meth:`CanAsync` ``= False`` for switch ``Id``
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`), or if the
+                given value is not between :meth:`MinSwitchValue` and :meth:`MaxSwitchValue`
                 for the given switch ``Id``.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): The method returns as soon as the state change
-              operation has been successfully started, with :py:meth:`StateChangeComplete` for
+              operation has been successfully started, with :meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
-              :py:meth:`StateChangeComplete` becomes True.
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+              :meth:`StateChangeComplete` becomes True.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -421,12 +421,12 @@ class Switch(Device):
             State: The required control state
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         """
@@ -440,12 +440,12 @@ class Switch(Device):
             Name: The desired (new) name for the switch
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -465,18 +465,18 @@ class Switch(Device):
 
         Args:
             Id: the specified switch number (see Notes)
-            Value: Value to be set, between :py:attr:`MinSwitchValue` and
-                :py:attr:`MinSwitchValue`.
+            Value: Value to be set, between :attr:`MinSwitchValue` and
+                :attr:`MinSwitchValue`.
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`), or
-                the Value is out of range, not between :py:attr:`MinSwitchValue` and
-                :py:attr:`MinSwitchValue`.
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`), or
+                the Value is out of range, not between :attr:`MinSwitchValue` and
+                :attr:`MinSwitchValue`.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
@@ -492,22 +492,22 @@ class Switch(Device):
         self._put("setswitchvalue", Id=Id, Value=Value)
 
     def StateChangeComplete(self, Id: int) -> bool:
-        """True if the last :py:meth:`SetAsync` or :py:meth:`SetAsyncValue`
+        """True if the last :meth:`SetAsync` or :meth:`SetAsyncValue`
         has completed and the switch is in the requested state.
 
         Args:
             Id: the specified switch number (see Notes)
 
         Raises:
-            NotImplementedException: If :py:meth:`CanAsync` is ``False`` for switch ``Id``
+            NotImplementedException: If :meth:`CanAsync` is ``False`` for switch ``Id``
             OperationCancelledException: If an in-progress state change is cancelled by a call to
-                :py:meth:`CancelAsync` call for switch ``Id``
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+                :meth:`CancelAsync` call for switch ``Id``
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -528,13 +528,13 @@ class Switch(Device):
             Id: the specified switch number (see Notes)
 
         Raises:
-            InvalidValueException: The Id is out of range (see :py:attr:`MaxSwitch`)
+            InvalidValueException: The Id is out of range (see :attr:`MaxSwitch`)
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Step size is the difference between successive values of the device.
-            * Switches are numbered from 0 to :py:attr:`MaxSwitch` ``- 1``.
+            * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green

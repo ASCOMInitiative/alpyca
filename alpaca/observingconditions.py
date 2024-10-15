@@ -410,7 +410,7 @@ class ObservingConditions(Device):
         Args:
             SensorName: A string containing the name of the ObservingConditions
                 meterological property for which the sensor description is desired.
-                For example "WindSpeed" (for :py:attr:`WindSpeed`) would retrieve
+                For example "WindSpeed" (for :attr:`WindSpeed`) would retrieve
                 a description of the sensor used to measure the wind speed.
 
         Raises:
@@ -437,7 +437,7 @@ class ObservingConditions(Device):
         Args:
             SensorName: A string containing the name of the ObservingConditions
                 meterological property for which the time since last update is
-                desired. For example "WindSpeed" (for :py:attr:`WindSpeed`) would
+                desired. For example "WindSpeed" (for :attr:`WindSpeed`) would
                 retrieve the time since the wind speed was last updated by its sensor.
 
         Raises:

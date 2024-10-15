@@ -85,16 +85,16 @@ class CoverCalibrator(Device):
 
     @property
     def Brightness(self) -> int:
-        """The current calibrator brightness (0 - :py:attr:`MaxBrightness`)
+        """The current calibrator brightness (0 - :attr:`MaxBrightness`)
 
         Raises:
-            NotImplementedException: When :py:attr:`CalibratorState` is
+            NotImplementedException: When :attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * The brightness value will be 0 when :py:attr:`CalibratorState` is
+            * The brightness value will be 0 when :attr:`CalibratorState` is
               :py:class:`~CalibratorStatus.Off`
 
         .. admonition:: Master Interfaces Reference
@@ -120,9 +120,9 @@ class CoverCalibrator(Device):
 
         Note:
             * Use this property to determine when an (async)
-              :py:meth:`CalibratorOn` or :py:meth:`CalibratorOff` has completed,
+              :meth:`CalibratorOn` or :meth:`CalibratorOff` has completed,
               at which time it will transition from ``True`` to ``False``.
-            * Present only in devices with :py:attr:`InterfaceVersion` ``= 2``.
+            * Present only in devices with :attr:`InterfaceVersion` ``= 2``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -155,13 +155,13 @@ class CoverCalibrator(Device):
               the device is unaware of the calibrator's state e.g. if the hardware
               does not report the device's state and the calibrator has just been
               powered on. You do not need to take special action if this state is
-              returned, you must carry on as usual, calling :py:meth:`CalibratorOn()`
-              and :py:meth:`CalibratorOff()` methods as required.
+              returned, you must carry on as usual, calling :meth:`CalibratorOn()`
+              and :meth:`CalibratorOff()` methods as required.
             * If the calibrator hardware cannot report its state, the device might
               mimic this by recording the last configured state and returning that.
               Driver authors or device manufacturers may also wish to offer users
               the capability of powering up in a known state and driving the
-              hardware to this state when :py:attr:`Connected` is set True.
+              hardware to this state when :attr:`Connected` is set True.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -178,7 +178,7 @@ class CoverCalibrator(Device):
 
     @property
     def CoverMoving(self) -> bool:
-        """``True`` whenever an (async) :py:meth:`OpenCover` or :py:meth:`CloseCover`
+        """``True`` whenever an (async) :meth:`OpenCover` or :meth:`CloseCover`
         operation is in progress.
 
         Raises:
@@ -187,9 +187,9 @@ class CoverCalibrator(Device):
 
         Note:
             * Use this property to determine when an (async)
-              :py:meth:`OpenCover` or :py:meth:`CloseCover` has completed,
+              :meth:`OpenCover` or :meth:`CloseCover` has completed,
               at which time it will transition from ``True`` to ``False``.
-            * Present only in devices with :py:attr:`InterfaceVersion` ``= 2``.
+            * Present only in devices with :attr:`InterfaceVersion` ``= 2``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -220,8 +220,8 @@ class CoverCalibrator(Device):
               the device is unaware of the cover's state e.g. if the hardware
               does not report the device's state and the cover has just been
               powered on. You do not need to take special action if this state is
-              returned, you must carry on as usual, calling :py:meth:`OpenCover()`
-              and :py:meth:`CloseCover()` methods as required.
+              returned, you must carry on as usual, calling :meth:`OpenCover()`
+              and :meth:`CloseCover()` methods as required.
             * If the cover hardware cannot report its state, the device might
               mimic this by recording the last configured state and returning that.
               Driver authors or device manufacturers may also wish to offer users
@@ -246,14 +246,14 @@ class CoverCalibrator(Device):
         """The Brightness value that makes the calibrator deliver its maximum illumination.
 
         Raises:
-            NotImplementedException: When :py:attr:`CalibratorState` is
+            NotImplementedException: When :attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This is a mandatory property if a calibrator device is present
-              (:py:attr:`CalibratorState` is other than
+              (:attr:`CalibratorState` is other than
               :py:class:`~CalibratorStatus.NotPresent`)
             * The value will always be a positive integer, indicating the available
               precision.
@@ -280,7 +280,7 @@ class CoverCalibrator(Device):
         **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Raises:
-            NotImplementedException: When :py:attr:`CalibratorState` is
+            NotImplementedException: When :attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
@@ -289,11 +289,11 @@ class CoverCalibrator(Device):
 
         Notes:
             * **Asynchronous** (non-blocking): If the calibrator requires time
-              to safely stabilise after use, :py:attr:`CalibratorChanging` will
-              become ``True`` and :py:attr:`CalibratorState` will return
-              :py:attr:`~CalibratorStatus.NotReady`. When the calibrator is
-              safely off, :py:attr:`CalibratorChanging` will become ``False``
-              :py:attr:`CalibratorState` will return
+              to safely stabilise after use, :attr:`CalibratorChanging` will
+              become ``True`` and :attr:`CalibratorState` will return
+              :attr:`~CalibratorStatus.NotReady`. When the calibrator is
+              safely off, :attr:`CalibratorChanging` will become ``False``
+              :attr:`CalibratorState` will return
               :py:class:`~CalibratorStatus.Off`. See :ref:`async_faq`.
 
         .. admonition:: Master Interfaces Reference
@@ -318,27 +318,27 @@ class CoverCalibrator(Device):
             Brightness: The calibrator illumination brightness to be set
 
         Raises:
-            NotImplementedException: When :py:attr:`CalibratorState` is
+            NotImplementedException: When :attr:`CalibratorState` is
                 :py:class:`~CalibratorStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous** (non-blocking): If the calibrator requires time
-              to safely stabilise after use, :py:attr:`CalibratorChanging` will
-              become ``True`` and :py:attr:`CalibratorState` will return
-              :py:attr:`~CalibratorStatus.NotReady`. When the calibrator is
-              ready for use, :py:attr:`CalibratorChanging` will become ``False``
-              :py:attr:`CalibratorState` will return
+              to safely stabilise after use, :attr:`CalibratorChanging` will
+              become ``True`` and :attr:`CalibratorState` will return
+              :attr:`~CalibratorStatus.NotReady`. When the calibrator is
+              ready for use, :attr:`CalibratorChanging` will become ``False``
+              :attr:`CalibratorState` will return
               :py:class:`~CalibratorStatus.Ready`. See :ref:`async_faq`.
             * If an error condition arises while turning on the calibrator,
-              :py:attr:`CalibratorState` will be set to :py:class:`~CalibratorStatus.Error`
+              :attr:`CalibratorState` will be set to :py:class:`~CalibratorStatus.Error`
               rather than :py:class:`~CalibratorStatus.Unknown`.
 
         Attention:
             For devices with both cover and calibrator capabilities, this method may
-            change the :py:attr:`CoverState`, if required. This operation is also
-            **asynchronous** (non-blocking) so you may need to wait for :py:attr:`CoverState`
+            change the :attr:`CoverState`, if required. This operation is also
+            **asynchronous** (non-blocking) so you may need to wait for :attr:`CoverState`
             to reach :py:class:`~CoverStatus.Open`. See :ref:`async_faq`
 
         .. admonition:: Master Interfaces Reference
@@ -360,20 +360,20 @@ class CoverCalibrator(Device):
         **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Raises:
-            NotImplementedException: When :py:attr:`CoverState` is
+            NotImplementedException: When :attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): :py:attr:`CoverState` indicates the
+            * **Asynchronous** (non-blocking): :attr:`CoverState` indicates the
               status of the operation once CloseCover() returns. It will be
               :py:class:`~CoverStatus.Moving` immediately after the return of
               CloseCover(), and will remain as long as the operation is progressing
               successfully. See :ref:`async_faq`
             * :py:class:`~CoverStatus.Closed` indicates *successful* completion.
             * If an error condition arises while moving between states,
-              :py:attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
+              :attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
               rather than :py:class:`~CoverStatus.Unknown`
 
         .. admonition:: Master Interfaces Reference
@@ -390,17 +390,17 @@ class CoverCalibrator(Device):
         self._put("closecover")
 
     def HaltCover(self) -> None:
-        """Immediately stops an in-progress :py:meth:`OpenCover()` or :py:meth:`CloseCover()`
+        """Immediately stops an in-progress :meth:`OpenCover()` or :meth:`CloseCover()`
 
         Raises:
-            NotImplementedException: When :py:attr:`CoverState` is
+            NotImplementedException: When :attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This will  stop any cover movement as soon as possible and
-              set a :py:attr:`CoverState` of :py:class:`~CoverStatus.Open`,
+              set a :attr:`CoverState` of :py:class:`~CoverStatus.Open`,
               :py:class:`~CoverStatus.Closed` or :py:class:`~CoverStatus.Unknown`
               as appropriate.
             * If cover movement cannot be interrupted, a
@@ -425,20 +425,20 @@ class CoverCalibrator(Device):
         **Non-blocking**: See Notes, and :ref:`async_faq`
 
         Raises:
-            NotImplementedException: When :py:attr:`CoverState` is
+            NotImplementedException: When :attr:`CoverState` is
                 :py:class:`~CoverStatus.NotPresent`
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): :py:attr:`CoverState` indicates the
+            * **Asynchronous** (non-blocking): :attr:`CoverState` indicates the
               status of the operation once OpenCover() returns. It will be
               :py:class:`~CoverStatus.Moving` immediately after the return of
               OpenCover(), and will remain as long as the operation is progressing
               successfully.  See :ref:`async_faq`
             * :py:class:`~CoverStatus.Open` indicates *successful* completion.
             * If an error condition arises while moving between states,
-              :py:attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
+              :attr:`CoverState` will be set to :py:class:`~CoverStatus.Error`
               rather than :py:class:`~CoverStatus.Unknown`
 
         .. admonition:: Master Interfaces Reference

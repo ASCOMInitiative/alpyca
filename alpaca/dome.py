@@ -82,7 +82,7 @@ class Dome(Device):
         Raises:
             NotImplementedException: If the dome does not support vertical (altitude)
                 control / placement of its observing opening (including a roll-off roof).
-                In this case :py:attr:`CanSetAltitude` will be False.
+                In this case :attr:`CanSetAltitude` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
@@ -95,16 +95,16 @@ class Dome(Device):
               need not know how this is happening, just that the alt/az area of the sky
               will be visible.
             * Do not use Altitude as a way to determine if a (non-blocking)
-              :py:meth:`SlewToAltitude()` has completed. The Altitude may transit through
+              :meth:`SlewToAltitude()` has completed. The Altitude may transit through
               the requested position before finally settling, and may be slightly off
-              when it stops. Use the :py:attr:`Slewing` property.
+              when it stops. Use the :attr:`Slewing` property.
 
         Attention:
             An ASCOM Dome device does not include transformations for mount/optics to
             azimuth and altitude. It is prohibited for a stand-alone Dome control
             device to require cross-linking to query a telescope directly. Your app
             will need to provide the dome-centered alt/az given the geometry of the
-            mount and optics in use. See also the :py:attr:`Slaved` property for details
+            mount and optics in use. See also the :attr:`Slaved` property for details
             on slaving (telescope motion tracking).  Only an *integrated* mount/dome system
             will offer both a Telescope and a Dome interface, and be capable of slaving.
 
@@ -153,7 +153,7 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the dome does not support parking.
-                In this case :py:attr:`CanPark` will be False.
+                In this case :attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
@@ -185,7 +185,7 @@ class Dome(Device):
         Raises:
             NotImplementedException: If the dome does not support directional (azimuth)
                 control / placement of its observing opening (including roll-off roof).
-                In this case :py:attr:`CanSetAzimuth` will be False.
+                In this case :attr:`CanSetAzimuth` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
@@ -194,23 +194,23 @@ class Dome(Device):
               i.e. 90 East, 180 South, 270 West.
             * The specified azimuth (*referenced to the dome center/equator*) is of the
               opening to the sky through which the optics receive light.
-            * You can detect a roll-off roof by :py:attr:`CanSetAzimuth` being False.
+            * You can detect a roll-off roof by :attr:`CanSetAzimuth` being False.
             * It is up to the dome control and driver to determine how best to locate the
               dome aperture in order to expose the specified alt/az area to the sky,
               including positioning clamshell leaves, split shutters, etc. Your app
               need not know how this is happening, just that the alt/az area of the sky
               will be visible.
             * Do not use Azimuth as a way to determine if a (non-blocking)
-              :py:meth:`SlewToAzimuth()` has completed. The Azimuth may transit through
+              :meth:`SlewToAzimuth()` has completed. The Azimuth may transit through
               the requested position before finally settling, and may be slightly off
-              when it stops. Use the :py:attr:`Slewing` property.
+              when it stops. Use the :attr:`Slewing` property.
 
         Attention:
             An ASCOM Dome device does not include transformations for mount/optics to
             azimuth and altitude. It is prohibited for a stand-alone Dome control
             device to require cross-linking to query a telescope directly. Your app
             will need to provide the dome-centered alt/az given the geometry of the
-            mount and optics in use. See also the :py:attr:`Slaved` property for details
+            mount and optics in use. See also the :attr:`Slaved` property for details
             on slaving (telescope motion tracking). Only an *integrated* mount/dome system
             will offer both a Telescope and a Dome interface, and be capable of slaving.
 
@@ -228,7 +228,7 @@ class Dome(Device):
 
     @property
     def CanFindHome(self) -> bool:
-        """The dome can find its home position via :py:meth:`FindHome()`
+        """The dome can find its home position via :meth:`FindHome()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -248,7 +248,7 @@ class Dome(Device):
 
     @property
     def CanPark(self) -> bool:
-        """The dome can be programmatically parked via :py:meth:`Park()`
+        """The dome can be programmatically parked via :meth:`Park()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -268,7 +268,7 @@ class Dome(Device):
 
     @property
     def CanSetAltitude(self) -> bool:
-        """The opening's altitude can be set via :py:meth:`SetAltitude()`
+        """The opening's altitude can be set via :meth:`SetAltitude()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -288,7 +288,7 @@ class Dome(Device):
 
     @property
     def CanSetAzimuth(self) -> bool:
-        """The opening's azimuth can be set via :py:meth:`SetAzimuth()`
+        """The opening's azimuth can be set via :meth:`SetAzimuth()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -308,7 +308,7 @@ class Dome(Device):
 
     @property
     def CanSetPark(self) -> bool:
-        """The dome park position can be set via :py:meth:`SetPark()`
+        """The dome park position can be set via :meth:`SetPark()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -328,7 +328,7 @@ class Dome(Device):
 
     @property
     def CanSetShutter(self) -> bool:
-        """The shutter can be opened and closed via :py:meth:`OpenShutter()` and :py:meth:`CloseShutter()`
+        """The shutter can be opened and closed via :meth:`OpenShutter()` and :meth:`CloseShutter()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -348,7 +348,7 @@ class Dome(Device):
 
     @property
     def CanSlave(self) -> bool:
-        """The opening can be slaved to the telescope/optics via :py:attr:`Slaved` (see Notes)
+        """The opening can be slaved to the telescope/optics via :attr:`Slaved` (see Notes)
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -363,7 +363,7 @@ class Dome(Device):
             azimuth and altitude. It is prohibited for a stand-alone Dome control
             device to require cross-linking to query a telescope directly. Your app
             will need to provide the dome-centered alt/az given the geometry of the
-            mount and optics in use. See also the :py:attr:`Slaved` property for details
+            mount and optics in use. See also the :attr:`Slaved` property for details
             on slaving (telescope motion tracking).
 
         .. admonition:: Master Interfaces Reference
@@ -380,7 +380,7 @@ class Dome(Device):
 
     @property
     def CanSyncAzimuth(self) -> bool:
-        """The opening's azimuth position can be synched via :py:meth:`SyncToAzimuth()`.
+        """The opening's azimuth position can be synched via :meth:`SyncToAzimuth()`.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -404,16 +404,16 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the dome does not have a controllable
-                shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
+                shutter/roof. In this case :attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * This property is the correct way to monitor an in-progress shutter
               movement. It will be :py:class:`~ShutterState.shutterOpening'
-              immediately after returning from an :py:meth:`OpenShutter()` call,
+              immediately after returning from an :meth:`OpenShutter()` call,
               and :py:class:`~ShutterState.shutterClosing' immediately after
-              returning from a :py:meth:`CloseShutter()` call.
+              returning from a :meth:`CloseShutter()` call.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -434,7 +434,7 @@ class Dome(Device):
         Raises:
             NotImplementedException: If the dome controller is not par of an
                 integrated dome/telescope control system which offers controllable
-                dome slaving. In this case :py:attr:`CanSlave` will be False.
+                dome slaving. In this case :attr:`CanSlave` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
@@ -443,7 +443,7 @@ class Dome(Device):
             azimuth and altitude. It is prohibited for a stand-alone Dome control
             device to require cross-linking to query a telescope directly. Your app
             will need to provide the dome-centered alt/az given the geometry of the
-            mount and optics in use. See also the :py:attr:`Slaved` property for details
+            mount and optics in use. See also the :attr:`Slaved` property for details
             on slaving (telescope motion tracking).
 
         .. admonition:: Master Interfaces Reference
@@ -473,7 +473,7 @@ class Dome(Device):
 
         Notes:
             * This is the correct property to use to determine *successful* completion of
-              a (non-blocking) :py:meth:`SlewToAzimuth()` and/or :py:meth:`SlewToAltitude()`
+              a (non-blocking) :meth:`SlewToAzimuth()` and/or :meth:`SlewToAltitude()`
               request. Slewing will be True immediately upon returning from either of these
               calls, and will remain True until *successful* completion, at which time
               Slewing will become False.
@@ -504,8 +504,8 @@ class Dome(Device):
                 on any call to the device.
 
         Notes:
-            * When this call succeeds, :py:attr:`Slewing` will become False, and slaving
-              will have stopped as indicate by :py:attr:`Slaved` becoming False.
+            * When this call succeeds, :attr:`Slewing` will become False, and slaving
+              will have stopped as indicate by :attr:`Slaved` becoming False.
             * By "any part of the dome" is meant the dome itself, the roof, a shutter,
               clamshell leaves, a port, etc. Calling AbortSlew() will stop alt/az
               movement of the opening as well as stopping opening or closing.
@@ -525,30 +525,30 @@ class Dome(Device):
     def CloseShutter(self) -> None:
         """Start to close the shutter or otherwise shield the telescope from the sky
 
-        **Non-blocking**: Returns immediately with :py:attr:`ShutterStatus` =
-        :py:attr:`~ShutterState.shutterClosing` after *successfully* starting the operation.
+        **Non-blocking**: Returns immediately with :attr:`ShutterStatus` =
+        :attr:`~ShutterState.shutterClosing` after *successfully* starting the operation.
         See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not have a controllable
-                shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
+                shutter/roof. In this case :attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct
+            * **Asynchronous** (non-blocking): :attr:`ShutterStatus` is the correct
               property to use for monitoring an in-progress shutter movement. A transition to
               :py:class:`~ShutterState.shutterClosed` indicates a *successfully
-              completed* closure. If it returns with :py:attr:`ShutterStatus`
+              completed* closure. If it returns with :attr:`ShutterStatus`
               :py:class:`~ShutterState.shutterClosed`, it means the shutter was already
               closed, another success. If  See :ref:`async_faq`
             * If another app calls CloseShutter() while the shutter is already closing,
-              the request will be accepted and you will see :py:attr:`ShutterStatus` =
-              :py:attr:`~ShutterState.shutterClosing` as you would expect.
+              the request will be accepted and you will see :attr:`ShutterStatus` =
+              :attr:`~ShutterState.shutterClosing` as you would expect.
 
         Attention:
             This operation is not cross-coupled in any way with the currently
-            requested :py:attr:`Azimuth` and :py:attr:`Altitude`. Opening and closing
+            requested :attr:`Azimuth` and :attr:`Altitude`. Opening and closing
             are used to shield and expose the opening to the sky, wherever it is
             specified to be.
 
@@ -572,15 +572,15 @@ class Dome(Device):
         Raises:
             NotImplementedException: If the dome does not support homing.
             NotConnectedException: If the device is not connected
-            SlavedException: If :py:attr:`Slaved` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): Use the :py:attr:`AtHome` property
+            * **Asynchronous** (non-blocking): Use the :attr:`AtHome` property
               to monitor the operation. When the the home position is has been
-              *successfully* reached, :py:attr:`Azimuth` is synchronized to the appropriate value,
-              :py:attr:`AtHome` becomes True and :py:attr:`Slewing` becomes False. See :ref:`async_faq`
-            * An app should check :py:attr:`AtHome` before calling FindHome().
+              *successfully* reached, :attr:`Azimuth` is synchronized to the appropriate value,
+              :attr:`AtHome` becomes True and :attr:`Slewing` becomes False. See :ref:`async_faq`
+            * An app should check :attr:`AtHome` before calling FindHome().
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -597,32 +597,32 @@ class Dome(Device):
     def OpenShutter(self) -> None:
         """Start to open shutter or otherwise expose telescope to the sky.
 
-        **Non-blocking**: Returns immediately with :py:attr:`ShutterStatus` =
+        **Non-blocking**: Returns immediately with :attr:`ShutterStatus` =
         :py:class:`~ShutterState.shutterOpening` if the opening has *successfully*
         been started. See Notes, and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not have a controllable
-                shutter/roof. In this case :py:attr:`CanSetShutter` will be False.
+                shutter/roof. In this case :attr:`CanSetShutter` will be False.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): :py:attr:`ShutterStatus` is the correct
+            * **Asynchronous** (non-blocking): :attr:`ShutterStatus` is the correct
               property to use for monitoring an in-progress shutter movement. A
               transition to :py:class:`~ShutterState.shutterOpen` indicates a
               *successfully completed* opening. If OpenShutter returns with
-              :py:attr:`ShutterStatus` = :py:attr:`~ShutterState.shutterOpen`
+              :attr:`ShutterStatus` = :attr:`~ShutterState.shutterOpen`
               then the shutter was already open, which is also a success.
               See :ref:`async_faq`
 
             * If another app calls OpenShutter() while the shutter is already opening,
-              the request will be accepted and you will see :py:attr:`ShutterStatus` =
-              :py:attr:`~ShutterState.shutterOpening` as you would expect.
+              the request will be accepted and you will see :attr:`ShutterStatus` =
+              :attr:`~ShutterState.shutterOpening` as you would expect.
 
         Attention:
             This operation is not cross-coupled in any way with the currently
-            requested :py:attr:`Azimuth` and :py:attr:`Altitude`. Opening and closing
+            requested :attr:`Azimuth` and :attr:`Altitude`. Opening and closing
             are used to shield and expose the opening to the sky, wherever it is
             specified to be.
 
@@ -641,29 +641,29 @@ class Dome(Device):
     def Park(self) -> None:
         """Start slewing the dome to its park position.
 
-        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True
+        **Non-blocking**: Returns immediately with :attr:`Slewing` = True
         if the park operation has *successfully* been started, or
-        :py:attr:`Slewing` = False which means the dome is already parked
-        (and of course :py:attr:`AtPark` will already be True). See Notes,
+        :attr:`Slewing` = False which means the dome is already parked
+        (and of course :attr:`AtPark` will already be True). See Notes,
         and :ref:`async_faq`
 
         Raises:
             NotImplementedException: If the dome does not support parking.
-                In this case :py:attr:`CanPark` will be False.
+                In this case :attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: If :py:attr:`AtPark` is True
-            SlavedException: If :py:attr:`Slaved` is True
+            ParkedException: If :attr:`AtPark` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException:An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): Use the :py:attr:`AtPark` property
+            * **Asynchronous** (non-blocking): Use the :attr:`AtPark` property
               to monitor the operation. When the the park position has been
-              *successfully* reached, :py:attr:`Azimuth` is synchronized to the
-              park position, :py:attr:`AtPark` becomes True, and
-              :py:attr:`Slewing` becomes False.  See :ref:`async_faq`
-            * An app should check :py:attr:`AtPark` before calling Park().
+              *successfully* reached, :attr:`Azimuth` is synchronized to the
+              park position, :attr:`AtPark` becomes True, and
+              :attr:`Slewing` becomes False.  See :ref:`async_faq`
+            * An app should check :attr:`AtPark` before calling Park().
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -682,9 +682,9 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the dome does not support the setting
-                of the park position. In this case :py:attr:`CanSetPark` will be False.
+                of the park position. In this case :attr:`CanSetPark` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: If :py:attr:`Slaved` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
@@ -702,7 +702,7 @@ class Dome(Device):
     def SlewToAltitude(self, Altitude: float) -> None:
         """Start slewing the opening to the given altitude (degrees).
 
-        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True
+        **Non-blocking**: Returns immediately with :attr:`Slewing` = True
         if the slewing operation has *successfully* been started.
         See Notes, and :ref:`async_faq`
 
@@ -711,16 +711,16 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the dome opening does not support vertical
-                (altitude) control. In this case :py:attr:`CanSetAltitude` will be False.
+                (altitude) control. In this case :attr:`CanSetAltitude` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: If :py:attr:`Slaved` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+            * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested Altitude has been
-              *successfully* reached, :py:attr:`Slewing` becomes False.
-              If SlewToAltitude() returns with :py:attr:`Slewing` = False then
+              *successfully* reached, :attr:`Slewing` becomes False.
+              If SlewToAltitude() returns with :attr:`Slewing` = False then
               the opening was already at the requested altitude, which is also a
               success See :ref:`async_faq`
             * The specified altitude (*referenced to the dome center/equator*) is
@@ -729,9 +729,9 @@ class Dome(Device):
         Attention:
             If the opening is closed, this method must still complete,
             with the dome controller accepting the requested position as its
-            :py:attr:`Altitude` property. Later, when opening,
-            via :py:meth:`OpenShutter()`, the last received/current
-            :py:attr:`Altitude` is used to position the opening to the sky.
+            :attr:`Altitude` property. Later, when opening,
+            via :meth:`OpenShutter()`, the last received/current
+            :attr:`Altitude` is used to position the opening to the sky.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -748,7 +748,7 @@ class Dome(Device):
     def SlewToAzimuth(self, Azimuth: float) -> None:
         """Start slewing the opening to the given azimuth (degrees).
 
-        **Non-blocking**: Returns immediately with :py:attr:`Slewing` = True
+        **Non-blocking**: Returns immediately with :attr:`Slewing` = True
         if the slewing operation has *successfully* been started.
         See Notes, and :ref:`async_faq`
 
@@ -757,16 +757,16 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the dome does not support rotational
-                (azimuth) control. In this case :py:attr:`CanSetAzimuth` will be False.
+                (azimuth) control. In this case :attr:`CanSetAzimuth` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: If :py:attr:`Slaved` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): Use the :py:attr:`Slewing` property
+            * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested Azimuth has been
-              *successfully* reached, :py:attr:`Slewing` becomes False.
-              If SlewToAzimuth() returns with :py:attr:`Slewing` = False then
+              *successfully* reached, :attr:`Slewing` becomes False.
+              If SlewToAzimuth() returns with :attr:`Slewing` = False then
               the opening was already at the requested azimuth, which is also a
               success See :ref:`async_faq`
             * Azimuth has the usual sense of True North zero and increasing clockwise
@@ -777,10 +777,10 @@ class Dome(Device):
         Attention:
             If the shutter is closed, this method will still complete,
             with the dome controller accepting the requested position as its
-            :py:attr:`Azimuth` property. Later, when the shutter is opened
-            via :py:meth:`OpenShutter()`, the last received/current
-            :py:attr:`Azimuth` is used to re-position the opening to the sky. This
-            may extend the time needed to complete the :py:meth:`OpenShutter()`
+            :attr:`Azimuth` property. Later, when the shutter is opened
+            via :meth:`OpenShutter()`, the last received/current
+            :attr:`Azimuth` is used to re-position the opening to the sky. This
+            may extend the time needed to complete the :meth:`OpenShutter()`
             operation.
 
         .. admonition:: Master Interfaces Reference
@@ -800,9 +800,9 @@ class Dome(Device):
 
         Raises:
             NotImplementedException: If the shutter does not support azimuth
-                synchronization. In this case :py:attr:`CanSyncAzimuth` will be False.
+                synchronization. In this case :attr:`CanSyncAzimuth` will be False.
             NotConnectedException: If the device is not connected
-            SlavedException: If :py:attr:`Slaved` is True
+            SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference

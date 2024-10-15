@@ -21,8 +21,8 @@ mono_typeface=Source Code Pro
 ; AssertionError
 ;
 [default: Paragraph]
-;;font_size=11pt
-;;line_spacing=fixed(14pt,leading(0))
+font_size=11pt
+line_spacing=fixed(14pt,leading(0))
 
 ; https://github.com/brechtm/rinohtype/issues/437
 ; https://stackoverflow.com/questions/68571864
@@ -35,6 +35,9 @@ font_color=#294ea3
 
 [code block]
 background_color=#ffffcc
+
+[builtin admonition:Admonition]
+inline_title=false
 
 [attention admonition]
 background_color=#ffff99

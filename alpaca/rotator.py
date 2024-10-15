@@ -76,9 +76,9 @@ class Rotator(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * For IRotatorV3 drivers and later(:py:attr:`InterfaceVersion` >= 3)
+            * For IRotatorV3 drivers and later(:attr:`InterfaceVersion` >= 3)
               CanReverse is always True.
-            * For more info on reversal see the :py:attr:`Reverse` property.
+            * For more info on reversal see the :attr:`Reverse` property.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -102,8 +102,8 @@ class Rotator(Device):
 
         Notes:
             * This is the correct property to use to determine *successful* completion of
-              a (non-blocking) :py:meth:`Move()` request. IsMoving will be True
-              immediately upon returning from a :py:meth:`Move()` call, and will
+              a (non-blocking) :meth:`Move()` request. IsMoving will be True
+              immediately upon returning from a :meth:`Move()` call, and will
               remain True until *successful* completion, at which time IsMoving will
               become False.
 
@@ -152,12 +152,12 @@ class Rotator(Device):
 
         Notes:
             * Position is in degrees counterclockwise
-            * The :py:meth:`Sync()` method may used to make Position indicate
+            * The :meth:`Sync()` method may used to make Position indicate
               equatorial position angle. This can account for not only an offset
               in the rotator's mechanical position, but also the angle at which
               an attached imager is mounted.
-            * If :py:meth:`Sync()` has never been called, Position will be
-              equal to :py:attr:`MechanicalPosition`. Once called, however,
+            * If :meth:`Sync()` has never been called, Position will be
+              equal to :attr:`MechanicalPosition`. Once called, however,
               the offset will remain across driver starts and device reboots.
 
         .. admonition:: Master Interfaces Reference
@@ -224,12 +224,12 @@ class Rotator(Device):
 
     @property
     def TargetPosition(self) -> float:
-        """The destination angle for :py:meth:`Move()` and MoveAbsolute().
+        """The destination angle for :meth:`Move()` and MoveAbsolute().
 
         Notes:
-            This will contain the new Position, including any :py:meth:`Sync()`
-            offset, immediately upon return from a call to :py:meth:`Move()` or
-            :py:meth:`MoveAbsolute()`.
+            This will contain the new Position, including any :meth:`Sync()`
+            offset, immediately upon return from a call to :meth:`Move()` or
+            :meth:`MoveAbsolute()`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -271,9 +271,9 @@ class Rotator(Device):
     def Move(self, Position: float) -> None:
         """Starts rotation relative to the current position (degrees)
 
-        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if
+        **Non-blocking**: Returns immediately with :attr:`IsMoving` = True if
         the operation has *successfully* been started, or if it returns with
-        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        :attr:`IsMoving` = False, it will already be at the requested position,
         also a success. See Notes, and :ref:`async_faq`
 
         **Also See Notes for details on absolute versus relative movement**.
@@ -290,9 +290,9 @@ class Rotator(Device):
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving` property True.
+              been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
-              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
+              the :attr:`IsMoving` property becomes False.  See :ref:`async_faq`
             * Calling Move causes the TargetPosition property to change to the sum of the
               current angular position and the value of the Position parameter (modulo
               360 degrees), then starts rotation to TargetPosition. Position includes the
@@ -313,9 +313,9 @@ class Rotator(Device):
     def MoveAbsolute(self, Position: float) -> None:
         """Starts rotation to the new position (degrees)
 
-        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if
+        **Non-blocking**: Returns immediately with :attr:`IsMoving` = True if
         the operation has *successfully* been started, or if it returns with
-        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        :attr:`IsMoving` = False, it will already be at the requested position,
         also a success. See Notes, and :ref:`async_faq`
 
         Arguments:
@@ -329,9 +329,9 @@ class Rotator(Device):
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving` property True.
+              been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
-              the :py:attr:`IsMoving` property becomes False.  See :ref:`async_faq`
+              the :attr:`IsMoving` property becomes False.  See :ref:`async_faq`
             * Calling Move causes the TargetPosition property to change to  the
               value of the Position parameter (modulo
               360 degrees), then starts rotation to TargetPosition.
@@ -352,9 +352,9 @@ class Rotator(Device):
     def MoveMechanical(self, Position: float) -> None:
         """Starts rotation to the given mechanical position (degrees)
 
-        **Non-blocking**: Returns immediately with :py:attr:`IsMoving` = True if
+        **Non-blocking**: Returns immediately with :attr:`IsMoving` = True if
         the operation has *successfully* been started, or if it returns with
-        :py:attr:`IsMoving` = False, it will already be at the requested position,
+        :attr:`IsMoving` = False, it will already be at the requested position,
         also a success. See Notes, and :ref:`async_faq`
 
         Arguments:
@@ -369,9 +369,9 @@ class Rotator(Device):
 
         Notes:
             * **Asynchronous**: The method returns as soon as the rotation operation has
-              been successfully started, with the :py:attr:`IsMoving` property True.
+              been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
-              the :py:attr:`IsMoving` property becomes False. See :ref:`async_faq`
+              the :attr:`IsMoving` property becomes False. See :ref:`async_faq`
             * Calling MoveMechanical causes the TargetPosition property to change to
               the value of the Position parameter then starts rotation to TargetPosition.
               This moves without regard to the SyncOffset, that is, to the
@@ -406,7 +406,7 @@ class Rotator(Device):
 
         Notes:
             * Once this method has been called and the sync offset determined, both
-              the :py:meth:`MoveAbsolute()` method and the :py:attr:`Position`
+              the :meth:`MoveAbsolute()` method and the :attr:`Position`
               property will function in synced coordinates rather than mechanical
               coordinates. The sync offset will persist across driver starts and
               device reboots.

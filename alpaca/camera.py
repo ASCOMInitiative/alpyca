@@ -176,7 +176,7 @@ class Camera(Device):
 
     @property
     def BayerOffsetX(self) -> int:
-        """The X offset of the Bayer matrix, as defined in property :py:attr:`SensorType`
+        """The X offset of the Bayer matrix, as defined in property :attr:`SensorType`
 
         Raises:
 
@@ -207,7 +207,7 @@ class Camera(Device):
 
     @property
     def BayerOffsetY(self) -> int:
-        """The Y offset of the Bayer matrix, as defined in property :py:attr:`SensorType`
+        """The Y offset of the Bayer matrix, as defined in property :attr:`SensorType`
 
         Raises:
 
@@ -247,10 +247,10 @@ class Camera(Device):
 
         Notes:
             * Will default to 1 when the camera connection is established.
-            * If :py:attr:`CanAssymetricBin` is False, then the binning values must be
+            * If :attr:`CanAssymetricBin` is False, then the binning values must be
               the same. Setting this property will result in BinY being the same value.
             * Camera does not check for compatible subframe values when this property
-              is set; rather they are checked upon :py:meth:`StartExposure()`.
+              is set; rather they are checked upon :meth:`StartExposure()`.
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -280,10 +280,10 @@ class Camera(Device):
 
         Notes:
             * Will default to 1 when the camera connection is established.
-            * If :py:attr:`CanAssymetricBin` is False, then the binning values must be
+            * If :attr:`CanAssymetricBin` is False, then the binning values must be
               the same. Setting this property will result in BinY being the same value.
             * Camera does not check for compatible subframe values when this property
-              is set; rather they are checked upon :py:meth:`StartExposure()`.
+              is set; rather they are checked upon :meth:`StartExposure()`.
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -382,10 +382,10 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Some cameras support :py:meth:`AbortExposure()`, which allows the exposure to be
+            * Some cameras support :meth:`AbortExposure()`, which allows the exposure to be
               terminated before the exposure timer completes, *with the image being discarded*.
-              Returns True if :py:meth:`AbortExposure()` is available, False if not. See also
-              :py:meth:`StopExposure()`
+              Returns True if :meth:`AbortExposure()` is available, False if not. See also
+              :meth:`StopExposure()`
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -456,7 +456,7 @@ class Camera(Device):
 
     @property
     def CanGetCoolerPower(self) -> bool:
-        """The camera's cooler power level is available via :py:attr:`CoolerPower`
+        """The camera's cooler power level is available via :attr:`CoolerPower`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -481,7 +481,7 @@ class Camera(Device):
 
     @property
     def CanPulseGuide(self) -> bool:
-        """The camera supports pulse guiding via :py:meth:`PulseGuide()`
+        """The camera supports pulse guiding via :meth:`PulseGuide()`
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -515,7 +515,7 @@ class Camera(Device):
         Notes:
             * If True, the camera's cooler setpoint can be adjusted. If False, the
               camera either uses open-loop cooling or does not have the ability to
-              adjust temperature from software, and setting the :py:attr:`SetCCDTemperature`
+              adjust temperature from software, and setting the :attr:`SetCCDTemperature`
               property has no effect.
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
@@ -542,10 +542,10 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Some cameras support :py:meth:`StopExposure()`, which allows the exposure to be
+            * Some cameras support :meth:`StopExposure()`, which allows the exposure to be
               terminated before the exposure timer completes, *but will still read out the image*.
-              Returns True if :py:meth:`StopExposure()` is available, False if not. See also
-              :py:meth:`AbortExposure()`.
+              Returns True if :meth:`StopExposure()` is available, False if not. See also
+              :meth:`AbortExposure()`.
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -662,7 +662,7 @@ class Camera(Device):
 
     @property
     def ExposureMax(self) -> float:
-        """The maximum exposure time (sec) supported by :py:meth:`StartExposure()`.
+        """The maximum exposure time (sec) supported by :meth:`StartExposure()`.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -687,7 +687,7 @@ class Camera(Device):
 
     @property
     def ExposureMin(self) -> float:
-        """The minimum exposure time (sec) supported by :py:meth:`StartExposure()`.
+        """The minimum exposure time (sec) supported by :meth:`StartExposure()`.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -712,7 +712,7 @@ class Camera(Device):
 
     @property
     def ExposureResolution(self) -> float:
-        """The smallest increment in exposure time (sec) supported by :py:meth:`StartExposure()`.
+        """The smallest increment in exposure time (sec) supported by :meth:`StartExposure()`.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -721,7 +721,7 @@ class Camera(Device):
         Notes:
             * This can be used, for example, to specify the resolution of a user interface
               "spin control" used to dial in the exposure time.
-            * The duration provided to :py:meth:`StartExposure()` does not have to be an
+            * The duration provided to :meth:`StartExposure()` does not have to be an
               exact multiple of this number; the driver will choose the closest available
               value. Also in some cases the resolution may not be constant over the full
               range of exposure times; in this case the smallest increment will be chosen
@@ -754,9 +754,9 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * This function may in some cases interact with :py:attr:`ReadoutModes`; for
+            * This function may in some cases interact with :attr:`ReadoutModes`; for
               example, there may be modes where the Fast/Normal switch is meaningless.
-              In this case, it may be preferable to use the :py:attr:`ReadoutModes`
+              In this case, it may be preferable to use the :attr:`ReadoutModes`
               feature to control fast/normal switching.
 
         .. admonition:: Master Interfaces Reference
@@ -818,30 +818,30 @@ class Camera(Device):
             two modes of operation:
 
             * **Gains-Index:** The Gain property is the selected gain's index within
-              the :py:attr:`Gains` array of textual gain descriptions.
+              the :attr:`Gains` array of textual gain descriptions.
 
                 * In this mode the Gains method returns a *0-based* array of strings, which
                   describe available gain settings e.g. "ISO 200", "ISO 1600"
-                * :py:attr:`GainMin` and :py:attr:`GainMax` will throw a
+                * :attr:`GainMin` and :attr:`GainMax` will throw a
                   :py:class:`NotImplementedException`.
 
             * **Gains-Value:** The Gain property is a direct numeric representation
               of the camera's gain.
 
-                * In this mode the :py:attr:`GainMin` and :py:attr:`GainMax` properties must
+                * In this mode the :attr:`GainMin` and :attr:`GainMax` properties must
                   return integers specifying the valid range for Gain.
-                * The :py:attr:`Gains` array property will throw a
+                * The :attr:`Gains` array property will throw a
                   :py:class:`NotImplementedException`.
 
             A driver can support none, one or both gain modes depending on the camera's capabilities.
             However, only one mode can be active at any one moment because both modes share the
             Gain property to return the gain value. Your application can determine
-            which mode is operational by reading the :py:attr:`GainMin`, :py:attr:`GainMax`
+            which mode is operational by reading the :attr:`GainMin`, :attr:`GainMax`
             property and this Gain property. If a property can be read then its associated mode
             is active, if it throws a :py:class:`NotImplementedException` then the mode is not active.
 
         Important:
-            The :py:attr:`ReadoutMode` may in some cases affect the gain of the camera; if so,
+            The :attr:`ReadoutMode` may in some cases affect the gain of the camera; if so,
             the driver must ensure that the two properties do not conflict if both are used.
 
         .. admonition:: Master Interfaces Reference
@@ -861,21 +861,21 @@ class Camera(Device):
 
     @property
     def GainMax(self) -> int:
-        """Maximum gain value that this camera supports (see notes and :py:attr:`Gain`)
+        """Maximum gain value that this camera supports (see notes and :attr:`Gain`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Gain` property is not
+            NotImplementedException: If the :attr:`Gain` property is not
                 implemented or is operating in **gains-index** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Gain` is operating in **gain-value** mode:
+            When :attr:`Gain` is operating in **gain-value** mode:
 
-            * GainMax must return the camera's highest valid :py:attr:`Gain` setting
-            * The :py:attr:`Gains` property will throw **NotImplementedException**
+            * GainMax must return the camera's highest valid :attr:`Gain` setting
+            * The :attr:`Gains` property will throw **NotImplementedException**
 
-            GainMax and :py:attr:`GainMin` act together and that either both will
+            GainMax and :attr:`GainMin` act together and that either both will
             return values, or both will throw **NotImplementedException**.
 
             * It is recommended that this property be retrieved only after a connection is
@@ -896,21 +896,21 @@ class Camera(Device):
 
     @property
     def GainMin(self) -> int:
-        """Minimum gain value that this camera supports (see notes and :py:attr:`Gain`)
+        """Minimum gain value that this camera supports (see notes and :attr:`Gain`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Gain` property is not
+            NotImplementedException: If the :attr:`Gain` property is not
                 implemented or is operating in **gains-index** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Gain` is operating in **gain-value** mode:
+            When :attr:`Gain` is operating in **gain-value** mode:
 
-            * GainMin must return the camera's highest valid :py:attr:`Gain` setting
-            * The :py:attr:`Gains` property will throw **NotImplementedException**
+            * GainMin must return the camera's highest valid :attr:`Gain` setting
+            * The :attr:`Gains` property will throw **NotImplementedException**
 
-            GainMin and :py:attr:`GainMax` act together and that either both will
+            GainMin and :attr:`GainMax` act together and that either both will
             return values, or both will throw **NotImplementedException**.
 
             * It is recommended that this property be retrieved only after a connection is
@@ -931,19 +931,19 @@ class Camera(Device):
 
     @property
     def Gains(self) -> List[str]:
-        """List of Gain *names* supported by the camera (see notes and :py:attr:`Gain`)
+        """List of Gain *names* supported by the camera (see notes and :attr:`Gain`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Gain` property is not
+            NotImplementedException: If the :attr:`Gain` property is not
                 implemented or is operating in **gains-value** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Gain` is operating in the **gains-index** mode:
+            When :attr:`Gain` is operating in the **gains-index** mode:
 
             * The ``Gains`` property returns a list of available gain setting *names*.
-            * The :py:attr:`GainMax` and :py:attr:`GainMin` properties will throw
+            * The :attr:`GainMax` and :attr:`GainMin` properties will throw
               **NotImplementedException**.
 
             The returned gain names could, for example, be a list of ISO settings
@@ -978,7 +978,7 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            If HasShutter is False, the :py:meth:`StartExposure()` method will ignore the
+            If HasShutter is False, the :meth:`StartExposure()` method will ignore the
             Light parameter.
 
         .. admonition:: Master Interfaces Reference
@@ -999,7 +999,7 @@ class Camera(Device):
 
         Raises:
             NotConnectedException: If the device is not connected
-            NotImplementedException: If :py:attr:`CanSetCCDTemperature` is False
+            NotImplementedException: If :attr:`CanSetCCDTemperature` is False
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         .. admonition:: Master Interfaces Reference
@@ -1031,7 +1031,7 @@ class Camera(Device):
               faster ImageBytes format. In either case the returned nested list array
               contains standard Python int or float pixel values. See the
               |ImageBytes|.
-              See :py:attr:`ImageArrayInfo` for metadata covering the returned image data.
+              See :attr:`ImageArrayInfo` for metadata covering the returned image data.
 
             .. |ImageBytes| raw:: html
 
@@ -1057,7 +1057,7 @@ class Camera(Device):
         See Class :py:class:`ImageMetadata` for the properties available.
 
         Notes:
-            If no image has been retrieved via :py:attr:`ImageArray`,
+            If no image has been retrieved via :attr:`ImageArray`,
             this returns None.
 
         .. admonition:: Master Interfaces Reference
@@ -1080,13 +1080,13 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions.The device cannot
-                *successfully* complete the previous :py:meth:`Expose()` request
+                *successfully* complete the previous :meth:`Expose()` request
                 (see Attention below).
 
         Notes:
             * If ImageReady returns a valid False or True value, then the *non-blocking*
               process of acquiring an image is *proceeding normally* or has been *successful*.
-            * ImageReady will be False immediately upon return from :py:meth:`StartExposure()`.
+            * ImageReady will be False immediately upon return from :meth:`StartExposure()`.
               It will remain False until the exposure has been *successfully* completed and
               an image is ready for download.
 
@@ -1109,7 +1109,7 @@ class Camera(Device):
 
     @property
     def IsPulseGuiding(self) -> bool:
-        """Indicates that the camera is currently in a :py:meth:`PulseGuide()` operation.
+        """Indicates that the camera is currently in a :meth:`PulseGuide()` operation.
 
         Raises:
             NotConnectedException: If the device is not connected
@@ -1120,10 +1120,10 @@ class Camera(Device):
             * If IsPulseGuiding returns a valid True or False value, then the process of
               pulse-guiding is *proceeding normally* or has completed *successfully*,
               respectively.
-            * IsPulseGuiding will be True immediately upon return from :py:meth:`PulseGuide()`.
+            * IsPulseGuiding will be True immediately upon return from :meth:`PulseGuide()`.
               It will remain True until the requested pulse-guide interval has elapsed, and
               the pulse-guiding operation has been *successfully* completed. If
-              :py:meth:`PulseGuide()` returns with IsPulseGuiding = False, then you can
+              :meth:`PulseGuide()` returns with IsPulseGuiding = False, then you can
               assume that the operation *succeeded* with a very short pulse-guide interval.
 
         Attention:
@@ -1284,14 +1284,14 @@ class Camera(Device):
 
         Notes:
             * If binning is active, value is in binned pixels.
-            * Defaults to :py:attr:`CameraXSize` with :py:attr:`StartX` = 0
+            * Defaults to :attr:`CameraXSize` with :attr:`StartX` = 0
               (full frame) on initial camera startup.
 
         Attention:
-            * No error check is performed for incompatibilty with :py:attr:`BinX`,
-              and :py:attr:`StartX`, If these values are incompatible, you will
+            * No error check is performed for incompatibilty with :attr:`BinX`,
+              and :attr:`StartX`, If these values are incompatible, you will
               receive an **InvalidValueException** from a subsequent call to
-              :py:meth:`StartExposure()`.
+              :meth:`StartExposure()`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1318,14 +1318,14 @@ class Camera(Device):
 
         Notes:
             * If binning is active, value is in binned pixels.
-            * Defaults to :py:attr:`CameraYSize` with :py:attr:`StartY` = 0
+            * Defaults to :attr:`CameraYSize` with :attr:`StartY` = 0
               (full frame) on initial camera startup.
 
         Attention:
-            * No error check is performed for incompatibilty with :py:attr:`BinY`,
-              and :py:attr:`StartY`, If these values are incompatible, you will
+            * No error check is performed for incompatibilty with :attr:`BinY`,
+              and :attr:`StartY`, If these values are incompatible, you will
               receive an **InvalidValueException** from a subsequent call to
-              :py:meth:`StartExposure()`.
+              :meth:`StartExposure()`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1358,30 +1358,30 @@ class Camera(Device):
             two modes of operation:
 
             * **Offsets-Index:** The Offset property is the selected offset's index within
-              the :py:attr:`Offsets` array of textual offset descriptions.
+              the :attr:`Offsets` array of textual offset descriptions.
 
-                * In this mode the :py:attr:`Offsets` method returns a *0-based* array of
+                * In this mode the :attr:`Offsets` method returns a *0-based* array of
                   strings, which describe available offset settings.
-                * :py:attr:`OffsetMin` and :py:attr:`OffsetMax` will throw a
+                * :attr:`OffsetMin` and :attr:`OffsetMax` will throw a
                   :py:class:`NotImplementedException`.
 
             * **Offsets-Value:** The Offset property is a direct numeric representation
               of the camera's offset.
 
-                * In this mode the :py:attr:`OffsetMin` and :py:attr:`OffsetMax` properties must
+                * In this mode the :attr:`OffsetMin` and :attr:`OffsetMax` properties must
                   return integers specifying the valid range for Offset.
-                * The :py:attr:`Offsets` array property will throw a
+                * The :attr:`Offsets` array property will throw a
                   :py:class:`NotImplementedException`.
 
             A driver can support none, one or both offset modes depending on the camera's capabilities.
             However, only one mode can be active at any one moment because both modes share the
             Offset property to return the offset value. Your application can determine
-            which mode is operational by reading the :py:attr:`OffsetMin`, :py:attr:`OffsetMax`
+            which mode is operational by reading the :attr:`OffsetMin`, :attr:`OffsetMax`
             property and this Offset property. If a property can be read then its associated mode
             is active, if it throws a :py:class:`NotImplementedException` then the mode is not active.
 
         Important:
-            The :py:attr:`ReadoutMode` may in some cases affect the offset of the camera; if so,
+            The :attr:`ReadoutMode` may in some cases affect the offset of the camera; if so,
             the driver must ensure that the two properties do not conflict if both are used.
 
         .. admonition:: Master Interfaces Reference
@@ -1401,21 +1401,21 @@ class Camera(Device):
 
     @property
     def OffsetMax(self) -> int:
-        """Maximum offset value that this camera supports (see notes and :py:attr:`Offset`)
+        """Maximum offset value that this camera supports (see notes and :attr:`Offset`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Offset` property is not
+            NotImplementedException: If the :attr:`Offset` property is not
                 implemented or is operating in **offsets-index** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Offset` is operating in **offsets-value** mode:
+            When :attr:`Offset` is operating in **offsets-value** mode:
 
-            * ``OffsetMax`` must return the camera's highest valid :py:attr:`Offset` setting
-            * The :py:attr:`Offsets` property will throw **NotImplementedException**
+            * ``OffsetMax`` must return the camera's highest valid :attr:`Offset` setting
+            * The :attr:`Offsets` property will throw **NotImplementedException**
 
-            OffsetMax and :py:attr:`OffsetMin` act together and that either both will
+            OffsetMax and :attr:`OffsetMin` act together and that either both will
             return values, or both will throw **NotImplementedException**.
 
             * It is recommended that this property be retrieved only after a connection is
@@ -1436,21 +1436,21 @@ class Camera(Device):
 
     @property
     def OffsetMin(self) -> int:
-        """Minimum offset value that this camera supports (see notes and :py:attr:`Offset`)
+        """Minimum offset value that this camera supports (see notes and :attr:`Offset`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Offset` property is not
+            NotImplementedException: If the :attr:`Offset` property is not
                 implemented or is operating in **offsets-index** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Offset` is operating in **offsets-value** mode:
+            When :attr:`Offset` is operating in **offsets-value** mode:
 
-            * OffsetMin must return the camera's highest valid :py:attr:`Offset` setting
-            * The :py:attr:`Offsets` property will throw :py:class:`NotImplementedException`.
+            * OffsetMin must return the camera's highest valid :attr:`Offset` setting
+            * The :attr:`Offsets` property will throw :py:class:`NotImplementedException`.
 
-            OffsetMin and :py:attr:`OffsetMax` act together and that either both will
+            OffsetMin and :attr:`OffsetMax` act together and that either both will
             return values, or both will throw :py:class:`NotImplementedException`.
 
             * It is recommended that this property be retrieved only after a connection is
@@ -1471,19 +1471,19 @@ class Camera(Device):
 
     @property
     def Offsets(self) -> List[str]:
-        """List of Offset *names* supported by the camera (see notes and :py:attr:`Offset`)
+        """List of Offset *names* supported by the camera (see notes and :attr:`Offset`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`Offset` property is not
+            NotImplementedException: If the :attr:`Offset` property is not
                 implemented or is operating in **offsets-value** mode.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            When :py:attr:`Offset` is operating in the **offsets-index** mode:
+            When :attr:`Offset` is operating in the **offsets-index** mode:
 
             * The ``Offsets`` property returns a list of available offset setting *names*.
-            * The :py:attr:`OffsetMax` and :py:attr:`OffsetMin` properties will throw
+            * The :attr:`OffsetMax` and :attr:`OffsetMin` properties will throw
               :py:class:`NotImplementedException`.
 
             The returned offset names could, for example, be a list of ISO settings
@@ -1526,7 +1526,7 @@ class Camera(Device):
             * If valid, returns an integer between 0 and 100, where 0 indicates 0% progress
               (function just started) and 100 indicates 100% progress (i.e. completion).
             * At the discretion of the device, PercentCompleted may optionally be valid
-              when :py:attr:`CameraState` is in any or all of the following states:
+              when :attr:`CameraState` is in any or all of the following states:
 
                 * ``cameraExposing``
                 * ``cameraWaiting``
@@ -1608,19 +1608,19 @@ class Camera(Device):
 
         Raises:
             InvalidValueException: If the supplied value is not valid (index out of range)
-            NotImplementedException: If :py:attr:`CanFastReadout` is True.
+            NotImplementedException: If :attr:`CanFastReadout` is True.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * ReadoutMode is an index into the array :py:attr:`ReadoutModes`, and
+            * ReadoutMode is an index into the array :attr:`ReadoutModes`, and
               selects the desired readout mode for the camera. Defaults to 0 if not set.
             * It is strongly recommended, but not required, that cameras make the 0-index
               mode suitable for standard imaging operations, since it is the default.
 
         Important:
-            The :py:attr:`ReadoutMode` may in some cases affect the :py:attr:`Gain`
-            and/or :py:attr:`Offset` of the camera; if so, the camera must ensure
+            The :attr:`ReadoutMode` may in some cases affect the :attr:`Gain`
+            and/or :attr:`Offset` of the camera; if so, the camera must ensure
             that the two properties do not conflict if both are used.
 
         .. admonition:: Master Interfaces Reference
@@ -1640,17 +1640,17 @@ class Camera(Device):
 
     @property
     def ReadoutModes(self) -> List[str]:
-        """List of ReadoutMode *names* supported by the camera (see notes and :py:attr:`ReadoutMode`)
+        """List of ReadoutMode *names* supported by the camera (see notes and :attr:`ReadoutMode`)
 
         Raises:
-            NotImplementedException: If the :py:attr:`ReadoutMode` property is not
+            NotImplementedException: If the :attr:`ReadoutMode` property is not
                 implemented.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * Readout modes may be available from the camera, and if so then
-              :py:attr:`CanFastReadout` will be False. The two camera mode selection
+              :attr:`CanFastReadout` will be False. The two camera mode selection
               schemes are mutually exclusive.
             * This property provides an array of strings, each of which describes an
               available readout mode of the camera. At least one string will be present
@@ -1659,7 +1659,7 @@ class Camera(Device):
               entirely at the discretion of the camera. Please note that if the camera
               has many different modes of operation, then the most commonly adjusted
               settings will probably be in ReadoutModes; additional settings may be
-              provided using :py:meth:`SetupDialog()`.
+              provided using :meth:`SetupDialog()`.
             * To select a mode, set ReadoutMode to the index of the desired mode.
               The index is zero-based.
             * It is recommended that this property be retrieved only after a connection is
@@ -1781,14 +1781,14 @@ class Camera(Device):
 
         Notes:
             * If binning is active, value is in binned pixels.
-            * Defaults to 0 with :py:attr:`NumX` = :py:attr:`CameraXSize`
+            * Defaults to 0 with :attr:`NumX` = :attr:`CameraXSize`
               (full frame) on initial camera startup.
 
         Attention:
-            * No error check is performed for incompatibilty with :py:attr:`BinX`,
-              and :py:attr:`NumX`, If these values are incompatible, you will
+            * No error check is performed for incompatibilty with :attr:`BinX`,
+              and :attr:`NumX`, If these values are incompatible, you will
               receive an **InvalidValueException** from a subsequent call to
-              :py:meth:`StartExposure()`.
+              :meth:`StartExposure()`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1815,14 +1815,14 @@ class Camera(Device):
 
         Notes:
             * If binning is active, value is in binned pixels.
-            * Defaults to 0 with :py:attr:`NumY` = :py:attr:`CameraYSize`
+            * Defaults to 0 with :attr:`NumY` = :attr:`CameraYSize`
               (full frame) on initial camera startup.
 
         Attention:
-            * No error check is performed for incompatibilty with :py:attr:`BinY`,
-              and :py:attr:`NumY`, If these values are incompatible, you will
+            * No error check is performed for incompatibilty with :attr:`BinY`,
+              and :attr:`NumY`, If these values are incompatible, you will
               receive an **InvalidValueException** from a subsequent call to
-              :py:meth:`StartExposure()`.
+              :meth:`StartExposure()`.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -1874,7 +1874,7 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Unlike :py:meth:`StopExposure()` this method simply discards any
+            * Unlike :meth:`StopExposure()` this method simply discards any
               partially-acquired image data and returns the camera to idle.
             * Will not raise an exception if the camera is already idle.
 
@@ -1901,14 +1901,14 @@ class Camera(Device):
 
         Raises:
             NotImplementedException: If the camera does not support pulse guiding
-                (:py:attr:`CanPulseGuide` property is False)
+                (:attr:`CanPulseGuide` property is False)
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
             * **Asynchronous**: The method returns as soon pulse-guiding operation
-              has been *successfully* started with :py:attr:`IsPulseGuiding` property True.
-              However, you may find that :py:attr:`IsPulseGuiding` is False when you get
+              has been *successfully* started with :attr:`IsPulseGuiding` property True.
+              However, you may find that :attr:`IsPulseGuiding` is False when you get
               around to checking it if the 'pulse' is short. This is still a success if you
               get False back and not an exception. See :ref:`async_faq`
             * Some cameras have implemented this as a Synchronous (blocking) operation.
@@ -1935,7 +1935,7 @@ class Camera(Device):
     def StartExposure(self, Duration: float, Light: bool) -> None:
         """Start an exposure.
 
-        **Non-blocking**: Returns with :py:attr:`ImageReady` = False
+        **Non-blocking**: Returns with :attr:`ImageReady` = False
         if exposure has *successfully* been started. See :ref:`async_faq`
 
         Args:
@@ -1943,11 +1943,11 @@ class Camera(Device):
             Light: True for light frame, False for dark frame.
 
         Raises:
-            InvalidValueException: If Duration is invalid, or if :py:attr:`BinX`,
-                :py:attr:`BinY`, :py:attr:`NumX`, :py:attr:`NumY`, :py:attr:`StartX`,
-                and :py:attr:`StartY` form an illegal combination.
-            InvalidOperationException: If :py:attr:`CanAsymmetricBin` is False, yet
-                :py:attr:`BinX` is not equal to :py:attr:`BinY`.
+            InvalidValueException: If Duration is invalid, or if :attr:`BinX`,
+                :attr:`BinY`, :attr:`NumX`, :attr:`NumY`, :attr:`StartX`,
+                and :attr:`StartY` form an illegal combination.
+            InvalidOperationException: If :attr:`CanAsymmetricBin` is False, yet
+                :attr:`BinX` is not equal to :attr:`BinY`.
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions. You may get this
@@ -1955,10 +1955,10 @@ class Camera(Device):
                 complete the request.
 
         Notes:
-            * **Asynchronous** (non-blocking): Use :py:attr:`ImageReady`
+            * **Asynchronous** (non-blocking): Use :attr:`ImageReady`
               to determine if the exposure has been *successfully*
               completed. See :ref:`async_faq`
-            * Refer to :py:attr:`ImageReady` for additional info.
+            * Refer to :attr:`ImageReady` for additional info.
             * See the :ref:`Example` below.
 
         .. admonition:: Master Interfaces Reference
@@ -1978,13 +1978,13 @@ class Camera(Device):
 
         Raises:
             NotImplementedException: If the camera cannot stop an in-progress exposure
-                and save the already-acquired image data (:py:attr:`CanStopExposure` is False)
+                and save the already-acquired image data (:attr:`CanStopExposure` is False)
             NotConnectedException: If the device is not connected.
             InvalidOperationException: If not currently possible (e.g. during image download)
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Notes:
-            * Unlike :py:meth:`AbortExposure()` this method cuts an exposure short
+            * Unlike :meth:`AbortExposure()` this method cuts an exposure short
               while preserving the image data acquired so far, making it available
               to the app.
             * If an exposure is in progress, the readout process is initiated.

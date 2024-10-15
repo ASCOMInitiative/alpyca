@@ -26,13 +26,13 @@ background) has finished. There are two places where an async operation can
 fail:
 
 1. When you call the method that starts the operation, for example
-   :py:meth:`Focuser.Move <alpaca.focuser.Focuser.Move>`. If you get an
+   :meth:`Focuser.Move <alpaca.focuser.Focuser.Move>`. If you get an
    exception here, it means the device couldn't *start* the operation,
    for whatever reason. Common reasons include an out-of-range request
    or an unconnected device.
 2. Later you read the property that tells you whether the async operation
    has finished, for example
-   :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`. If you see
+   :attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`. If you see
    the value change to indicate that the operation has finished, you can be
    *100% certain that it completed successfully*. On the other hand, if you
    get an exception here
@@ -48,10 +48,10 @@ fail:
         C# language and acync/await to illustrate the so-called "dangers"
         (failing to await), the exact same principles apply here.
         In the example above, you really must use
-        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
+        :attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
         to determine completion. It is the 'await'
         in this cross-language/cross-platform environment. If you ignore
-        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and instead
+        :attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and instead
         “double-check” the results by comparing your request with the results,
         you run several risks, including
 
@@ -63,10 +63,10 @@ fail:
         to illustrate the so-called "dangers" (failing to await), the
         exact same principles apply here. In the example above, you really
         must use
-        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
+        :attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>`
         to determine completion. It is the 'await'
         in this cross-language/cross-platform environment. If you ignore
-        :py:attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and
+        :attr:`Focuser.IsMoving <alpaca.focuser.Focuser.IsMoving>` and
         instead “double-check” the results by comparing your request
         with the results, you run several risks, including
 
@@ -92,7 +92,7 @@ The :doc:`Dome Interface <alpaca.dome>` seems complex and confusing. Help me.
     [Q] **How can I tell if I'm connected to a roll-off roof or a "dumb"
     clamshell?**
 
-    [A] Look for :py:attr:`~alpaca.dome.Dome.CanSetAzimuth` to be False.
+    [A] Look for :attr:`~alpaca.dome.Dome.CanSetAzimuth` to be False.
     This means that there is no way to move the opening to the sky at all.
     The only functions available will be those related to opening and
     closing the roof or clamshell to provide access to the entire sky
@@ -100,11 +100,11 @@ The :doc:`Dome Interface <alpaca.dome>` seems complex and confusing. Help me.
 
     [Q] **How do I control a rotating dome with a simple shutter?**
 
-    [A] If :py:attr:`~alpaca.dome.Dome.CanSetAltitude` is False, then
+    [A] If :attr:`~alpaca.dome.Dome.CanSetAltitude` is False, then
     you have a common dome with a rotatable opening (e.g., a slit).
-    You can :py:meth:`~alpaca.dome.Dome.SlewToAzimuth()` to position
-    the slit, and of course :py:meth:`~alpaca.dome.Dome.OpenShutter()` and
-    :py:meth:`CloseShutter()`.
+    You can :meth:`~alpaca.dome.Dome.SlewToAzimuth()` to position
+    the slit, and of course :meth:`~alpaca.dome.Dome.OpenShutter()` and
+    :meth:`CloseShutter()`.
 
     [Q] **How can I adjust the location of the opening (slit, port,
     clamshell leaves) to account for the geometry and offset of
@@ -130,9 +130,9 @@ What is the meaning of "pointing state" in the docs for SideOfPier?
 -------------------------------------------------------------------
 
 In the docs for
-:py:attr:`Telescope.SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
+:attr:`Telescope.SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
 and
-:py:meth:`Telescope.DestinationSideOfPier() <alpaca.telescope.Telescope.DestinationSideOfPier>`,
+:meth:`Telescope.DestinationSideOfPier() <alpaca.telescope.Telescope.DestinationSideOfPier>`,
 for historical reasons, the name ``SideOfPier`` does not reflect its
 true meaning. The name will *not* be changed (so as to preserve
 compatibility), but the meaning has since become clear. *All* conventional
@@ -204,7 +204,7 @@ as follows:
 Astronomy software often needs to know which which pointing state the mount
 is in. Examples include setting guiding polarities and calculating dome
 opening azimuth/altitude. The meaning of the
-:py:attr:`Telescope.SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
+:attr:`Telescope.SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
 property, then is:
 
 +--------------+--------------------------------+
@@ -244,11 +244,11 @@ What is DestinationSideOfPier and why would I want to use it?
 -------------------------------------------------------------
 
 The
-:py:attr:`DestinationSideOfPier <alpaca.telescope.Telescope.DestinationSideOfPier>`
+:attr:`DestinationSideOfPier <alpaca.telescope.Telescope.DestinationSideOfPier>`
 property is provided for applications to manage pier flipping during automated
 image sequences. Basically you provide it with an RA and Dec, and it comes back
 telling you the pointing state
-:py:attr:`SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
+:attr:`SideOfPier <alpaca.telescope.Telescope.SideOfPier>`
 that would result  from a slew-to *at the present time*. Looking at the current
 SideOfPier and DestinationSideOfPier tells you if the mount would flip on a
 slew to those coordinates. This info is based on the given RA/Dec at the given
@@ -305,33 +305,33 @@ rate about the specified axis and continue *indefinitely*. This method
 must be called for each axis separately. The axis motions may run
 concurrently, each at their own rate. Set the rate for an axis to zero
 to restore the motion about that axis to the rate set by the
-:py:attr:`TrackingRate` property.
+:attr:`TrackingRate` property.
 Tracking motion (if enabled) is suspended during this mode of operation.
 
 **Notes:**
 
 * The movement rate must be within the value(s) obtained from a
   :py:class:`~alpaca.telescope.Rate` object in the
-  :py:meth:`~alpaca.telescope.Telescope.AxisRates()` list for the
+  :meth:`~alpaca.telescope.Telescope.AxisRates()` list for the
   desired axis.
 * The rate is a signed value with negative rates moving in the oposite
   direction to positive rates.
 * The values specified in
-  :py:meth:`~alpaca.telescope.Telescope.AxisRates()` are absolute,
+  :meth:`~alpaca.telescope.Telescope.AxisRates()` are absolute,
   unsigned values and apply to both directions, determined by the
   sign used in this command.
-* The value of :py:attr:`~alpaca.telescope.Telescope.Slewing` will be
+* The value of :attr:`~alpaca.telescope.Telescope.Slewing` will be
   True if the mount is moving about any of its axes as a result of this
   method being called. This can be used to simulate a handbox by initiating
   motion with the MouseDown event and stopping the motion with the
   MouseUp event.
 * When the motion is stopped by setting the rate to zero the mount
   will be set to the previous
-  :py:attr:`~alpaca.telescope.Telescope.TrackingRate` or to no movement,
+  :attr:`~alpaca.telescope.Telescope.TrackingRate` or to no movement,
   depending on the state of the
-  :py:attr:`~alpaca.telescope.Telescope.Tracking` property.
+  :attr:`~alpaca.telescope.Telescope.Tracking` property.
 * It may be possible to implement satellite tracking by using the
-  :py:meth:`~alpaca.telescope.Telescope.MoveAxis()` method to
+  :meth:`~alpaca.telescope.Telescope.MoveAxis()` method to
   move the scope in the required manner to track a satellite.
 
 
