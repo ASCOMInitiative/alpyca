@@ -1091,3 +1091,11 @@ auncher\winapi.py", line 68, in impl
     WHAT A RELIEF
     *************
     NOTE: :py:class: works in PDF already
+
+17-Oct-2024
+-----------
+* Back to  the Master Interfaces links for PDF. Telescope is done. Next Camera...ugh
+
+07-Nov-2024
+-----------
+* Master Interfaces links for PDF. Completed Camera.

@@ -39,6 +39,7 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 07-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 08-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -196,12 +197,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |BayerOffsetX|
+            .. only:: html
 
-            .. |BayerOffsetX| raw:: html
+                |BayerOffsetX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetX" target="_blank">
-                Camera.BayerOffsetX</a> (external)
+                .. |BayerOffsetX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetX" target="_blank">
+                    Camera.BayerOffsetX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.BayerOffsetX <https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetX>`_
         """
         return self._get("bayeroffsetx")
 
@@ -228,12 +235,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |BayerOffsetY|
+            .. only:: html
 
-            .. |BayerOffsetY| raw:: html
+                |BayerOffsetY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetY" target="_blank">
-                Camera.BayerOffsetY</a> (external)
+                .. |BayerOffsetY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetY" target="_blank">
+                    Camera.BayerOffsetY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.BayerOffsetY <https://ascom-standards.org/newdocs/camera.html#Camera.BayerOffsetY>`_
         """
         return self._get("bayeroffsety")
 
@@ -258,12 +271,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |BinX|
+            .. only:: html
 
-            .. |BinX| raw:: html
+                |BinX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BinX" target="_blank">
-                Camera.BinX</a> (external)
+                .. |BinX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BinX" target="_blank">
+                    Camera.BinX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.BinX <https://ascom-standards.org/newdocs/camera.html#Camera.BinX>`_
         """
         return self._get("binx")
     @BinX.setter
@@ -291,12 +310,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |BinY|
+            .. only:: html
 
-            .. |BinY| raw:: html
+                |BinY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BinY" target="_blank">
-                Camera.BinY</a> (external)
+                .. |BinY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.BinY" target="_blank">
+                    Camera.BinY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.BinY <https://ascom-standards.org/newdocs/camera.html#Camera.BinY>`_
         """
         return self._get("biny")
     @BinY.setter
@@ -314,12 +339,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CameraState|
+            .. only:: html
 
-            .. |CameraState| raw:: html
+                |CameraState|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraState" target="_blank">
-                Camera.CameraState</a> (external)
+                .. |CameraState| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraState" target="_blank">
+                    Camera.CameraState</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CameraState <https://ascom-standards.org/newdocs/camera.html#Camera.CameraState>`_
         """
         return CameraStates(self._get("camerastate"))
 
@@ -339,12 +370,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CameraXSize|
+            .. only:: html
 
-            .. |CameraXSize| raw:: html
+                |CameraXSize|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraXSize" target="_blank">
-                Camera.CameraXSize</a> (external)
+                .. |CameraXSize| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraXSize" target="_blank">
+                    Camera.CameraXSize</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CameraXSize <https://ascom-standards.org/newdocs/camera.html#Camera.CameraXSize>`_
         """
         return self._get("cameraxsize")
 
@@ -364,12 +401,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CameraYSize|
+            .. only:: html
 
-            .. |CameraYSize| raw:: html
+                |CameraYSize|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraYSize" target="_blank">
-                Camera.CameraYSize</a> (external)
+                .. |CameraYSize| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CameraYSize" target="_blank">
+                    Camera.CameraYSize</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CameraYSize <https://ascom-standards.org/newdocs/camera.html#Camera.CameraYSize>`_
         """
         return self._get("cameraysize")
 
@@ -393,12 +436,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanAbortExposure|
+            .. only:: html
 
-            .. |CanAbortExposure| raw:: html
+                |CanAbortExposure|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanAbortExposure" target="_blank">
-                Camera.CanAbortExposure</a> (external)
+                .. |CanAbortExposure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanAbortExposure" target="_blank">
+                    Camera.CanAbortExposure</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanAbortExposure <https://ascom-standards.org/newdocs/camera.html#Camera.CanAbortExposure>`_
         """
         return self._get("canabortexposure")
 
@@ -420,12 +469,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanAsymmetricBin|
+            .. only:: html
 
-            .. |CanAsymmetricBin| raw:: html
+                |CanAsymmetricBin|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanAsymmetricBin" target="_blank">
-                Camera.CanAsymmetricBin</a> (external)
+                .. |CanAsymmetricBin| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanAsymmetricBin" target="_blank">
+                    Camera.CanAsymmetricBin</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanAsymmetricBin <https://ascom-standards.org/newdocs/camera.html#Camera.CanAsymmetricBin>`_
         """
         return self._get("canasymmetricbin")
 
@@ -445,12 +500,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanFastReadout|
+            .. only:: html
 
-            .. |CanFastReadout| raw:: html
+                |CanFastReadout|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanFastReadout" target="_blank">
-                Camera.CanFastReadout</a> (external)
+                .. |CanFastReadout| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanFastReadout" target="_blank">
+                    Camera.CanFastReadout</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanFastReadout <https://ascom-standards.org/newdocs/camera.html#Camera.CanFastReadout>`_
         """
         return self._get("canfastreadout")
 
@@ -470,12 +531,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanGetCoolerPower|
+            .. only:: html
 
-            .. |CanGetCoolerPower| raw:: html
+                |CanGetCoolerPower|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanGetCoolerPower" target="_blank">
-                Camera.CanGetCoolerPower</a> (external)
+                .. |CanGetCoolerPower| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanGetCoolerPower" target="_blank">
+                    Camera.CanGetCoolerPower</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanGetCoolerPower <https://ascom-standards.org/newdocs/camera.html#Camera.CanGetCoolerPower>`_
         """
         return self._get("cangetcoolerpower")
 
@@ -495,12 +562,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanPulseGuide|
+            .. only:: html
 
-            .. |CanPulseGuide| raw:: html
+                |CanPulseGuide|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanPulseGuide" target="_blank">
-                Camera.CanPulseGuide</a> (external)
+                .. |CanPulseGuide| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanPulseGuide" target="_blank">
+                    Camera.CanPulseGuide</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanPulseGuide <https://ascom-standards.org/newdocs/camera.html#Camera.CanPulseGuide>`_
         """
         return self._get("canpulseguide")
 
@@ -524,12 +597,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetCCDTemperature|
+            .. only:: html
 
-            .. |CanSetCCDTemperature| raw:: html
+                |CanSetCCDTemperature|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanSetCCDTemperature" target="_blank">
-                Camera.CanSetCCDTemperature</a> (external)
+                .. |CanSetCCDTemperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanSetCCDTemperature" target="_blank">
+                    Camera.CanSetCCDTemperature</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanSetCCDTemperature <https://ascom-standards.org/newdocs/camera.html#Camera.CanSetCCDTemperature>`_
         """
         return self._get("cansetccdtemperature")
 
@@ -553,12 +632,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanStopExposure|
+            .. only:: html
 
-            .. |CanStopExposure| raw:: html
+                |CanStopExposure|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanStopExposure" target="_blank">
-                Camera.CanStopExposure</a> (external)
+                .. |CanStopExposure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CanStopExposure" target="_blank">
+                    Camera.CanStopExposure</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CanStopExposure <https://ascom-standards.org/newdocs/camera.html#Camera.CanStopExposure>`_
         """
         return self._get("canstopexposure")
 
@@ -574,12 +659,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CCDTemperature|
+            .. only:: html
 
-            .. |CCDTemperature| raw:: html
+                |CCDTemperature|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CCDTemperature" target="_blank">
-                Camera.CCDTemperature</a> (external)
+                .. |CCDTemperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CCDTemperature" target="_blank">
+                    Camera.CCDTemperature</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CCDTemperature <https://ascom-standards.org/newdocs/camera.html#Camera.CCDTemperature>`_
         """
         return self._get("ccdtemperature")
 
@@ -601,12 +692,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CoolerOn|
+            .. only:: html
 
-            .. |CoolerOn| raw:: html
+                |CoolerOn|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CoolerOn" target="_blank">
-                Camera.CoolerOn</a> (external)
+                .. |CoolerOn| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CoolerOn" target="_blank">
+                    Camera.CoolerOn</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CoolerOn <https://ascom-standards.org/newdocs/camera.html#Camera.CoolerOn>`_
         """
         return self._get("cooleron")
     @CoolerOn.setter
@@ -625,12 +722,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CoolerPower|
+            .. only:: html
 
-            .. |CoolerPower| raw:: html
+                |CoolerPower|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CoolerPower" target="_blank">
-                Camera.CoolerPower</a> (external)
+                .. |CoolerPower| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.CoolerPower" target="_blank">
+                    Camera.CoolerPower</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.CoolerPower <https://ascom-standards.org/newdocs/camera.html#Camera.CoolerPower>`_
         """
         return self._get("coolerpower")
 
@@ -651,12 +754,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ElectronsPerADU|
+            .. only:: html
 
-            .. |ElectronsPerADU| raw:: html
+                |ElectronsPerADU|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ElectronsPerADU" target="_blank">
-                Camera.ElectronsPerADU</a> (external)
+                .. |ElectronsPerADU| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ElectronsPerADU" target="_blank">
+                    Camera.ElectronsPerADU</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ElectronsPerADU <https://ascom-standards.org/newdocs/camera.html#Camera.ElectronsPerADU>`_
         """
         return self._get("electronsperadu")
 
@@ -676,12 +785,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ExposureMax|
+            .. only:: html
 
-            .. |ExposureMax| raw:: html
+                |ExposureMax|
+T
+                .. |ExposureMax| raw:: html
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMax" target="_blank">
-                Camera.ExposureMax</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMax" target="_blank">
+                    Camera.ExposureMax</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ExposureMax <https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMax>`_
         """
         return self._get("exposuremax")
 
@@ -701,12 +816,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ExposureMin|
+            .. only:: html
 
-            .. |ExposureMin| raw:: html
+                |ExposureMin|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMin" target="_blank">
-                Camera.ExposureMin</a> (external)
+                .. |ExposureMin| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMin" target="_blank">
+                    Camera.ExposureMin</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ExposureMin <https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMin>`_
         """
         return self._get("exposuremin")
 
@@ -734,12 +855,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ExposureResolution|
+            .. only:: html
 
-            .. |ExposureResolution| raw:: html
+                |ExposureResolution|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureResolution" target="_blank">
-                Camera.ExposureResolution</a> (external)
+                .. |ExposureResolution| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureResolution" target="_blank">
+                    Camera.ExposureResolution</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ExposureResolution <https://ascom-standards.org/newdocs/camera.html#Camera.ExposureResolution>`_
         """
 
         return self._get("exposureresolution")
@@ -762,12 +889,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FastReadout|
+            .. only:: html
 
-            .. |FastReadout| raw:: html
+                |FastReadout|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.FastReadout" target="_blank">
-                Camera.FastReadout</a> (external)
+                .. |FastReadout| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.FastReadout" target="_blank">
+                    Camera.FastReadout</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.FastReadout <https://ascom-standards.org/newdocs/camera.html#Camera.FastReadout>`_
         """
         return self._get("fastreadout")
     @FastReadout.setter
@@ -792,12 +925,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FullWellCapacity|
+            .. only:: html
 
-            .. |FullWellCapacity| raw:: html
+                |FullWellCapacity|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.FullWellCapacity" target="_blank">
-                Camera.FullWellCapacity</a> (external)
+                .. |FullWellCapacity| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.FullWellCapacity" target="_blank">
+                    Camera.FullWellCapacity</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.FullWellCapacity <https://ascom-standards.org/newdocs/camera.html#Camera.FullWellCapacity>`_
         """
 
         return self._get("fullwellcapacity")
@@ -847,12 +986,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Gain|
+            .. only:: html
 
-            .. |Gain| raw:: html
+                |Gain|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Gain" target="_blank">
-                Camera.Gain</a> (external)
+                .. |Gain| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Gain" target="_blank">
+                    Camera.Gain</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.Gain <https://ascom-standards.org/newdocs/camera.html#Camera.Gain>`_
         """
         return self._get("gain")
     @Gain.setter
@@ -885,12 +1030,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GainMax|
+            .. only:: html
 
-            .. |GainMax| raw:: html
+                |GainMax|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.GainMax" target="_blank">
-                Camera.GainMax</a> (external)
+                .. |GainMax| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.GainMax" target="_blank">
+                    Camera.GainMax</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.GainMax <https://ascom-standards.org/newdocs/camera.html#Camera.GainMax>`_
         """
         return self._get("gainmax")
 
@@ -920,12 +1071,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GainMin|
+            .. only:: html
 
-            .. |GainMin| raw:: html
+                |GainMin|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.GainMin" target="_blank">
-                Camera.GainMin</a> (external)
+                .. |GainMin| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.GainMin" target="_blank">
+                    Camera.GainMin</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.GainMin <https://ascom-standards.org/newdocs/camera.html#Camera.GainMin>`_
          """
         return self._get("gainmin")
 
@@ -960,12 +1117,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Gains|
+            .. only:: html
 
-            .. |Gains| raw:: html
+                |Gains|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Gains" target="_blank">
-                Camera.Gains</a> (external)
+                .. |Gains| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Gains" target="_blank">
+                    Camera.Gains</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.Gains <https://ascom-standards.org/newdocs/camera.html#Camera.Gains>`_
         """
         return self._get("gains")
 
@@ -984,12 +1147,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |HasShutter|
+            .. only:: html
 
-            .. |HasShutter| raw:: html
+                |HasShutter|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.HasShutter" target="_blank">
-                Camera.HasShutter</a> (external)
+                .. |HasShutter| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.HasShutter" target="_blank">
+                    Camera.HasShutter</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.HasShutter <https://ascom-standards.org/newdocs/camera.html#Camera.HasShutter>`_
         """
         return self._get("hasshutter")
 
@@ -1005,12 +1174,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |HeatSinkTemperature|
+            .. only:: html
 
-            .. |HeatSinkTemperature| raw:: html
+                |HeatSinkTemperature|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.HeatSinkTemperature" target="_blank">
-                Camera.HeatSinkTemperature</a> (external)
+                .. |HeatSinkTemperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.HeatSinkTemperature" target="_blank">
+                    Camera.HeatSinkTemperature</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.HeatSinkTemperature <https://ascom-standards.org/newdocs/camera.html#Camera.HeatSinkTemperature>`_
         """
         return self._get("heatsinktemperature")
 
@@ -1041,12 +1216,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ImageArray|
+            .. only:: html
 
-            .. |ImageArray| raw:: html
+                |ImageArray|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageArray" target="_blank">
-                Camera.ImageArray</a> (external)
+                .. |ImageArray| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageArray" target="_blank">
+                    Camera.ImageArray</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ImageArray <https://ascom-standards.org/newdocs/camera.html#Camera.ImageArray>`_
         """
         return self._get_imagedata("imagearray")
 
@@ -1063,12 +1244,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ImageArrayInfo|
+            .. only:: html
 
-            .. |ImageArrayInfo| raw:: html
+                |ImageArrayInfo|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageArrayInfo" target="_blank">
-                Camera.ImageArrayInfo</a> (external)
+                .. |ImageArrayInfo| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageArrayInfo" target="_blank">
+                    Camera.ImageArrayInfo</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ImageArrayInfo <https://ascom-standards.org/newdocs/camera.html#Camera.ImageArrayInfo>`_
         """
         return self.img_desc
 
@@ -1098,12 +1285,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ImageReady|
+            .. only:: html
 
-            .. |ImageReady| raw:: html
+                |ImageReady|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageReady" target="_blank">
-                Camera.ImageReady</a> (external)
+                .. |ImageReady| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ImageReady" target="_blank">
+                    Camera.ImageReady</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ImageReady <https://ascom-standards.org/newdocs/camera.html#Camera.ImageReady>`_
         """
         return self._get("imageready")
 
@@ -1134,12 +1327,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |IsPulseGuiding|
+            .. only:: html
 
-            .. |IsPulseGuiding| raw:: html
+                |IsPulseGuiding|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.IsPulseGuiding" target="_blank">
-                Camera.IsPulseGuiding</a> (external)
+                .. |IsPulseGuiding| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.IsPulseGuiding" target="_blank">
+                    Camera.IsPulseGuiding</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.IsPulseGuiding <https://ascom-standards.org/newdocs/camera.html#Camera.IsPulseGuiding>`_
         """
         return self._get("ispulseguiding")
 
@@ -1162,12 +1361,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |LastExposureDuration|
+            .. only:: html
 
-            .. |LastExposureDuration| raw:: html
+                |LastExposureDuration|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureDuration" target="_blank">
-                Camera.LastExposureDuration</a> (external)
+                .. |LastExposureDuration| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureDuration" target="_blank">
+                    Camera.LastExposureDuration</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.LastExposureDuration <https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureDuration>`_
         """
         return self._get("lastexposureduration")
 
@@ -1190,12 +1395,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |LastExposureStartTime|
+            .. only:: html
 
-            .. |LastExposureStartTime| raw:: html
+                |LastExposureStartTime|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureStartTime" target="_blank">
-                Camera.LastExposureStartTime</a> (external)
+                .. |LastExposureStartTime| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureStartTime" target="_blank">
+                    Camera.LastExposureStartTime</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.LastExposureStartTime <https://ascom-standards.org/newdocs/camera.html#Camera.LastExposureStartTime>`_
         """
         return self._get("lastexposurestarttime")
 
@@ -1215,12 +1426,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxADU|
+            .. only:: html
 
-            .. |MaxADU| raw:: html
+                |MaxADU|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxADU" target="_blank">
-                Camera.MaxADU</a> (external)
+                .. |MaxADU| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxADU" target="_blank">
+                    Camera.MaxADU</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.MaxADU <https://ascom-standards.org/newdocs/camera.html#Camera.MaxADU>`_
         """
         return self._get("maxadu")
 
@@ -1240,12 +1457,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxBinX|
+            .. only:: html
 
-            .. |MaxBinX| raw:: html
+                |MaxBinX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinX" target="_blank">
-                Camera.MaxBinX</a> (external)
+                .. |MaxBinX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinX" target="_blank">
+                    Camera.MaxBinX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.MaxBinX <https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinX>`_
         """
         return self._get("maxbinx")
 
@@ -1265,12 +1488,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxBinY|
+            .. only:: html
 
-            .. |MaxBinY| raw:: html
+                |MaxBinY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinY" target="_blank">
-                Camera.MaxBinY</a> (external)
+                .. |MaxBinY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinY" target="_blank">
+                    Camera.MaxBinY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.MaxBinY <https://ascom-standards.org/newdocs/camera.html#Camera.MaxBinY>`_
         """
         return self._get("maxbiny")
 
@@ -1296,12 +1525,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |NumX|
+            .. only:: html
 
-            .. |NumX| raw:: html
+                |NumX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.NumX" target="_blank">
-                Camera.NumX</a> (external)
+                .. |NumX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.NumX" target="_blank">
+                    Camera.NumX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.NumX <https://ascom-standards.org/newdocs/camera.html#Camera.NumX>`_
         """
         return self._get("numx")
     @NumX.setter
@@ -1330,12 +1565,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |NumY|
+            .. only:: html
 
-            .. |NumY| raw:: html
+                |NumY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.NumY" target="_blank">
-                Camera.NumY</a> (external)
+                .. |NumY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.NumY" target="_blank">
+                    Camera.NumY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.NumY <https://ascom-standards.org/newdocs/camera.html#Camera.NumY>`_
         """
         return self._get("numy")
     @NumY.setter
@@ -1387,12 +1628,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Offset|
+            .. only:: html
 
-            .. |Offset| raw:: html
+                |Offset|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Offset" target="_blank">
-                Camera.Offset</a> (external)
+                .. |Offset| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Offset" target="_blank">
+                    Camera.Offset</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.Offset <https://ascom-standards.org/newdocs/camera.html#Camera.Offset>`_
         """
         return self._get("offset")
     @Offset.setter
@@ -1425,12 +1672,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |OffsetMax|
+            .. only:: html
 
-            .. |OffsetMax| raw:: html
+                |OffsetMax|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMax" target="_blank">
-                Camera.OffsetMax</a> (external)
+                .. |OffsetMax| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMax" target="_blank">
+                    Camera.OffsetMax</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.OffsetMax <https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMax>`_
         """
         return self._get("offsetmax")
 
@@ -1460,12 +1713,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |OffsetMin|
+            .. only:: html
 
-            .. |OffsetMin| raw:: html
+                |OffsetMin|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMin" target="_blank">
-                Camera.OffsetMin</a> (external)
+                .. |OffsetMin| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMin" target="_blank">
+                    Camera.OffsetMin</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.OffsetMin <https://ascom-standards.org/newdocs/camera.html#Camera.OffsetMin>`_
          """
         return self._get("offsetmin")
 
@@ -1500,12 +1759,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Offsets|
+            .. only:: html
 
-            .. |Offsets| raw:: html
+                |Offsets|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Offsets" target="_blank">
-                Camera.Offsets</a> (external)
+                .. |Offsets| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.Offsets" target="_blank">
+                    Camera.Offsets</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.Offsets <https://ascom-standards.org/newdocs/camera.html#Camera.Offsets>`_
         """
         return self._get("offsets")
 
@@ -1543,12 +1808,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |PercentCompleted|
+            .. only:: html
 
-            .. |PercentCompleted| raw:: html
+                |PercentCompleted|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PercentCompleted" target="_blank">
-                Camera.PercentCompleted</a> (external)
+                .. |PercentCompleted| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PercentCompleted" target="_blank">
+                    Camera.PercentCompleted</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.PercentCompleted <https://ascom-standards.org/newdocs/camera.html#Camera.PercentCompleted>`_
         """
         return self._get("percentcompleted")
 
@@ -1568,12 +1839,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |PixelSizeX|
+            .. only:: html
 
-            .. |PixelSizeX| raw:: html
+                |PixelSizeX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeX" target="_blank">
-                Camera.PixelSizeX</a> (external)
+                .. |PixelSizeX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeX" target="_blank">
+                    Camera.PixelSizeX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.PixelSizeX <https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeX>`_
         """
         return self._get("pixelsizex")
 
@@ -1593,12 +1870,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |PixelSizeY|
+            .. only:: html
 
-            .. |PixelSizeY| raw:: html
+                |PixelSizeY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeY" target="_blank">
-                Camera.PixelSizeY</a> (external)
+                .. |PixelSizeY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeY" target="_blank">
+                    Camera.PixelSizeY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.PixelSizeY <https://ascom-standards.org/newdocs/camera.html#Camera.PixelSizeY>`_
         """
         return self._get("pixelsizey")
 
@@ -1626,12 +1909,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ReadoutMode|
+            .. only:: html
 
-            .. |ReadoutMode| raw:: html
+                |ReadoutMode|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutMode" target="_blank">
-                Camera.ReadoutMode</a> (external)
+                .. |ReadoutMode| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutMode" target="_blank">
+                    Camera.ReadoutMode</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ReadoutMode <https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutMode>`_
         """
         return self._get("readoutmode")
     @ReadoutMode.setter
@@ -1669,12 +1958,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ReadoutModes|
+            .. only:: html
 
-            .. |ReadoutModes| raw:: html
+                |ReadoutModes|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutModes" target="_blank">
-                Camera.ReadoutModes</a> (external)
+                .. |ReadoutModes| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutModes" target="_blank">
+                    Camera.ReadoutModes</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.ReadoutModes <https://ascom-standards.org/newdocs/camera.html#Camera.ReadoutModes>`_
         """
         return self._get("readoutmodes")
 
@@ -1712,12 +2007,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SensorName|
+            .. only:: html
 
-            .. |SensorName| raw:: html
+                |SensorName|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SensorName" target="_blank">
-                Camera.SensorName</a> (external)
+                .. |SensorName| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SensorName" target="_blank">
+                    Camera.SensorName</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.SensorName <https://ascom-standards.org/newdocs/camera.html#Camera.SensorName>`_
         """
         return self._get("sensorname")
 
@@ -1737,12 +2038,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SensorType|
+            .. only:: html
 
-            .. |SensorType| raw:: html
+                |SensorType|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SensorType" target="_blank">
-                Camera.SensorType</a> (external)
+                .. |SensorType| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SensorType" target="_blank">
+                    Camera.SensorType</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.SensorType <https://ascom-standards.org/newdocs/camera.html#Camera.SensorType>`_
         """
         return SensorType(self._get("sensortype"))
 
@@ -1759,12 +2066,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetCCDTemperature|
+            .. only:: html
 
-            .. |SetCCDTemperature| raw:: html
+                |SetCCDTemperature|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SetCCDTemperature" target="_blank">
-                Camera.SetCCDTemperature</a> (external)
+                .. |SetCCDTemperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SetCCDTemperature" target="_blank">
+                    Camera.SetCCDTemperature</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.SetCCDTemperature <https://ascom-standards.org/newdocs/camera.html#Camera.SetCCDTemperature>`_
         """
         return self._get("setccdtemperature")
     @SetCCDTemperature.setter
@@ -1793,12 +2106,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StartX|
+            .. only:: html
 
-            .. |StartX| raw:: html
+                |StartX|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartX" target="_blank">
-                Camera.StartX</a> (external)
+                .. |StartX| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartX" target="_blank">
+                    Camera.StartX</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.StartX <https://ascom-standards.org/newdocs/camera.html#Camera.StartX>`_
         """
         return self._get("startx")
     @StartX.setter
@@ -1827,12 +2146,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StartY|
+            .. only:: html
 
-            .. |StartY| raw:: html
+                |StartY|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartY" target="_blank">
-                Camera.StartY</a> (external)
+                .. |StartY| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartY" target="_blank">
+                    Camera.StartY</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.StartY <https://ascom-standards.org/newdocs/camera.html#Camera.StartY>`_
         """
         return self._get("starty")
     @StartY.setter
@@ -1853,12 +2178,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SubExposureDuration|
+            .. only:: html
 
-            .. |SubExposureDuration| raw:: html
+                |SubExposureDuration|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SubExposureDuration" target="_blank">
-                Camera.SubExposureDuration</a> (external)
+                .. |SubExposureDuration| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.SubExposureDuration" target="_blank">
+                    Camera.SubExposureDuration</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.SubExposureDuration <https://ascom-standards.org/newdocs/camera.html#Camera.SubExposureDuration>`_
         """
         return self._get("subexposureduration")
     @SubExposureDuration.setter
@@ -1881,12 +2212,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AbortExposure|
+            .. only:: html
 
-            .. |AbortExposure| raw:: html
+                |AbortExposure|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.AbortExposure" target="_blank">
-                Camera.AbortExposure()</a> (external)
+                .. |AbortExposure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.AbortExposure" target="_blank">
+                    Camera.AbortExposure()</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.AbortExposure() <https://ascom-standards.org/newdocs/camera.html#Camera.AbortExposure>`_
         """
         self._put("abortexposure")
 
@@ -1923,12 +2260,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |PulseGuide|
+            .. only:: html
 
-            .. |PulseGuide| raw:: html
+                |PulseGuide|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PulseGuide" target="_blank">
-                Camera.PulseGuide()</a> (external)
+                .. |PulseGuide| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.PulseGuide" target="_blank">
+                    Camera.PulseGuide()</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.PulseGuide() <https://ascom-standards.org/newdocs/camera.html#Camera.PulseGuide>`_
         """
         self._put("pulseguide", Direction=Direction, Duration=Duration)
 
@@ -1964,12 +2307,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StartExposure|
+            .. only:: html
 
-            .. |StartExposure| raw:: html
+                |StartExposure|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartExposure" target="_blank">
-                Camera.StartExposure()</a> (external)
+                .. |StartExposure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StartExposure" target="_blank">
+                    Camera.StartExposure()</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.StartExposure() <https://ascom-standards.org/newdocs/camera.html#Camera.StartExposure>`_
         """
         self._put("startexposure", Duration=Duration, Light=Light)
 
@@ -1994,12 +2343,18 @@ class Camera(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StopExposure|
+            .. only:: html
 
-            .. |StopExposure| raw:: html
+                |StopExposure|
 
-                <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StopExposure" target="_blank">
-                Camera.StopExposure()</a> (external)
+                .. |StopExposure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/camera.html#Camera.StopExposure" target="_blank">
+                    Camera.StopExposure()</a> (external)
+
+            .. only:: rinoh
+
+                `Camera.StopExposure() <https://ascom-standards.org/newdocs/camera.html#Camera.StopExposure>`_
         """
         self._put("stopexposure")
 
