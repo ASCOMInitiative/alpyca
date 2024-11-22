@@ -41,6 +41,7 @@
 #                 SensorDescription() to be 'SensorName' throughout.
 # 30-Jun-22 (dvn) 2.0.0-dev3 Fix capital 'P' in averageperiod get.
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -92,12 +93,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AveragePeriod|
+            .. only:: html
 
-            .. |AveragePeriod| raw:: html
+                |AveragePeriod|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.AveragePeriod" target="_blank">
-                ObservingConditions.AveragePeriod</a> (external)
+                .. |AveragePeriod| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.AveragePeriod" target="_blank">
+                    ObservingConditions.AveragePeriod</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.AveragePeriod <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.AveragePeriod>`_
         """
         return self._get("averageperiod")
 
@@ -113,12 +120,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CloudCover|
+            .. only:: html
 
-            .. |CloudCover| raw:: html
+                |CloudCover|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.CloudCover" target="_blank">
-                ObservingConditions.CloudCover</a> (external)
+                .. |CloudCover| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.CloudCover" target="_blank">
+                    ObservingConditions.CloudCover</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.CloudCover <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.CloudCover>`_
         """
         return self._get("cloudcover")
 
@@ -134,12 +147,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |DewPoint|
+            .. only:: html
 
-            .. |DewPoint| raw:: html
+                |DewPoint|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.DewPoint" target="_blank">
-                ObservingConditions.DewPoint</a> (external)
+                .. |DewPoint| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.DewPoint" target="_blank">
+                    ObservingConditions.DewPoint</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.DewPoint <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.DewPoint>`_
         """
         return self._get("dewpoint")
 
@@ -155,12 +174,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Humidity|
+            .. only:: html
 
-            .. |Humidity| raw:: html
+                |Humidity|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Humidity" target="_blank">
-                ObservingConditions.Humidity</a> (external)
+                .. |Humidity| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Humidity" target="_blank">
+                    ObservingConditions.Humidity</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.Humidity <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Humidity>`_
         """
         return self._get("humidity")
 
@@ -180,12 +205,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Pressure|
+            .. only:: html
 
-            .. |Pressure| raw:: html
+                |Pressure|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Pressure" target="_blank">
-                ObservingConditions.Pressure</a> (external)
+                .. |Pressure| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Pressure" target="_blank">
+                    ObservingConditions.Pressure</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.Pressure <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Pressure>`_
         """
         return self._get("pressure")
 
@@ -201,12 +232,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |RainRate|
+            .. only:: html
 
-            .. |RainRate| raw:: html
+                |RainRate|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.RainRate" target="_blank">
-                ObservingConditions.RainRate</a> (external)
+                .. |RainRate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.RainRate" target="_blank">
+                    ObservingConditions.RainRate</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.RainRate <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.RainRate>`_
         """
         return self._get("rainrate")
 
@@ -222,12 +259,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SkyBrightness|
+            .. only:: html
 
-            .. |SkyBrightness| raw:: html
+                |SkyBrightness|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyBrightness" target="_blank">
-                ObservingConditions.SkyBrightness</a> (external)
+                .. |SkyBrightness| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyBrightness" target="_blank">
+                    ObservingConditions.SkyBrightness</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.SkyBrightness <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyBrightness>`_
         """
         return self._get("skybrightness")
 
@@ -243,12 +286,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SkyQuality|
+            .. only:: html
 
-            .. |SkyQuality| raw:: html
+                |SkyQuality|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyQuality" target="_blank">
-                ObservingConditions.SkyQuality</a> (external)
+                .. |SkyQuality| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyQuality" target="_blank">
+                    ObservingConditions.SkyQuality</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.SkyQuality <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyQuality>`_
         """
         return self._get("skyquality")
 
@@ -264,12 +313,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SkyTemperature|
+            .. only:: html
 
-            .. |SkyTemperature| raw:: html
+                |SkyTemperature|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyTemperature" target="_blank">
-                ObservingConditions.SkyTemperature</a> (external)
+                .. |SkyTemperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyTemperature" target="_blank">
+                    ObservingConditions.SkyTemperature</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.SkyTemperature <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SkyTemperature>`_
         """
         return self._get("skytemperature")
 
@@ -285,12 +340,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StarFWHM|
+            .. only:: html
 
-            .. |StarFWHM| raw:: html
+                |StarFWHM|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.StarFWHM" target="_blank">
-                ObservingConditions.StarFWHM</a> (external)
+                .. |StarFWHM| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.StarFWHM" target="_blank">
+                    ObservingConditions.StarFWHM</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.StarFWHM <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.StarFWHM>`_
         """
         return self._get("starfwhm")
 
@@ -306,12 +367,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Temperature|
+            .. only:: html
 
-            .. |Temperature| raw:: html
+                |Temperature|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Temperature" target="_blank">
-                ObservingConditions.Temperature</a> (external)
+                .. |Temperature| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Temperature" target="_blank">
+                    ObservingConditions.Temperature</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.Temperature <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Temperature>`_
         """
         return self._get("temperature")
 
@@ -333,12 +400,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |WindDirection|
+            .. only:: html
 
-            .. |WindDirection| raw:: html
+                |WindDirection|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindDirection" target="_blank">
-                ObservingConditions.WindDirection</a> (external)
+                .. |WindDirection| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindDirection" target="_blank">
+                    ObservingConditions.WindDirection</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.WindDirection <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindDirection>`_
         """
         return self._get("winddirection")
 
@@ -354,12 +427,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |WindGust|
+            .. only:: html
 
-            .. |WindGust| raw:: html
+                |WindGust|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindGust" target="_blank">
-                ObservingConditions.WindGust</a> (external)
+                .. |WindGust| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindGust" target="_blank">
+                    ObservingConditions.WindGust</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.WindGust <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindGust>`_
         """
         return self._get("windgust")
 
@@ -375,12 +454,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |WindSpeed|
+            .. only:: html
 
-            .. |WindSpeed| raw:: html
+                |WindSpeed|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindSpeed" target="_blank">
-                ObservingConditions.WindSpeed</a> (external)
+                .. |WindSpeed| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindSpeed" target="_blank">
+                    ObservingConditions.WindSpeed</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.WindSpeed <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.WindSpeed>`_
         """
         return self._get("windspeed")
 
@@ -392,15 +477,18 @@ class ObservingConditions(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        .. admonition:: Master Interfaces Reference
-            :class: green
+            .. only:: html
 
-            |Refresh|
+                |Refresh|
 
-            .. |Refresh| raw:: html
+                .. |Refresh| raw:: html
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Refresh" target="_blank">
-                ObservingConditions.Refresh()</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Refresh" target="_blank">
+                    ObservingConditions.Refresh()</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.Refresh() <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.Refresh>`_
         """
         self._put("refresh")
 
@@ -422,12 +510,18 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SensorDescription|
+            .. only:: html
 
-            .. |SensorDescription| raw:: html
+                |SensorDescription|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SensorDescription" target="_blank">
-                ObservingConditions.SensorDescription()</a> (external)
+                .. |SensorDescription| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SensorDescription" target="_blank">
+                    ObservingConditions.SensorDescription</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.SensorDescription <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.SensorDescription>`_
         """
         return self._get("sensordescription", SensorName=SensorName)
 
@@ -449,11 +543,17 @@ class ObservingConditions(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TimeSinceLastUpdate|
+            .. only:: html
 
-            .. |TimeSinceLastUpdate| raw:: html
+                |TimeSinceLastUpdate|
 
-                <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.TimeSinceLastUpdate" target="_blank">
-                ObservingConditions.TimeSinceLastUpdate()</a> (external)
+                .. |TimeSinceLastUpdate| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.TimeSinceLastUpdate" target="_blank">
+                    ObservingConditions.TimeSinceLastUpdate</a> (external)
+
+            .. only:: rinoh
+
+                `ObservingConditions.TimeSinceLastUpdate <https://ascom-standards.org/newdocs/observingconditions.html#ObservingConditions.TimeSinceLastUpdate>`_
         """
         return self._get("timesincelastupdate", SensorName=SensorName)

@@ -39,6 +39,7 @@
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 06-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.docenum import DocIntEnum
@@ -111,12 +112,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Altitude|
+            .. only:: html
 
-            .. |Altitude| raw:: html
+                |Altitude|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Altitude" target="_blank">
-                Dome.Altitude</a> (external)
+                .. |Altitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Altitude" target="_blank">
+                    Dome.Altitude</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.Altitude <https://ascom-standards.org/newdocs/dome.html#Dome.Altitude>`_
         """
         return self._get("altitude")
 
@@ -138,12 +145,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AtHome|
+            .. only:: html
 
-            .. |AtHome| raw:: html
+                |AtHome|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AtHome" target="_blank">
-                Dome.AtHome</a> (external)
+                .. |AtHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AtHome" target="_blank">
+                    Dome.AtHome</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.AtHome <https://ascom-standards.org/newdocs/dome.html#Dome.AtHome>`_
         """
         return self._get("athome")
 
@@ -166,12 +179,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AtPark|
+            .. only:: html
 
-            .. |AtPark| raw:: html
+                |AtPark|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AtPark" target="_blank">
-                Dome.AtPark</a> (external)
+                .. |AtPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AtPark" target="_blank">
+                    Dome.AtPark</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.AtPark <https://ascom-standards.org/newdocs/dome.html#Dome.AtPark>`_
         """
         return self._get("atpark")
 
@@ -217,12 +236,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Azimuth|
+            .. only:: html
 
-            .. |Azimuth| raw:: html
+                |Azimuth|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Azimuth" target="_blank">
-                Dome.Azimuth</a> (external)
+                .. |Azimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Azimuth" target="_blank">
+                    Dome.Azimuth</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.Azimuth <https://ascom-standards.org/newdocs/dome.html#Dome.Azimuth>`_
         """
         return self._get("azimuth")
 
@@ -237,12 +262,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanFindHome|
+            .. only:: html
 
-            .. |CanFindHome| raw:: html
+                |CanFindHome|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanFindHome" target="_blank">
-                Dome.CanFindHome</a> (external)
+                .. |CanFindHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanFindHome" target="_blank">
+                    Dome.CanFindHome</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanFindHome <https://ascom-standards.org/newdocs/dome.html#Dome.CanFindHome>`_
         """
         return self._get("canfindhome")
 
@@ -257,12 +288,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanPark|
+            .. only:: html
 
-            .. |CanPark| raw:: html
+                |CanPark|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanPark" target="_blank">
-                Dome.CanPark</a> (external)
+                .. |CanPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanPark" target="_blank">
+                    Dome.CanPark</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanPark <https://ascom-standards.org/newdocs/dome.html#Dome.CanPark>`_
         """
         return self._get("canpark")
 
@@ -277,12 +314,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetAltitude|
+            .. only:: html
 
-            .. |CanSetAltitude| raw:: html
+                |CanSetAltitude|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAltitude" target="_blank">
-                Dome.CanSetAltitude</a> (external)
+                .. |CanSetAltitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAltitude" target="_blank">
+                    Dome.CanSetAltitude</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSetAltitude <https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAltitude>`_
         """
         return self._get("cansetaltitude")
 
@@ -297,12 +340,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetAzimuth|
+            .. only:: html
 
-            .. |CanSetAzimuth| raw:: html
+                |CanSetAzimuth|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAzimuth" target="_blank">
-                Dome.CanSetAzimuth</a> (external)
+                .. |CanSetAzimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAzimuth" target="_blank">
+                    Dome.CanSetAzimuth</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSetAzimuth <https://ascom-standards.org/newdocs/dome.html#Dome.CanSetAzimuth>`_
         """
         return self._get("cansetazimuth")
 
@@ -317,12 +366,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetPark|
+            .. only:: html
 
-            .. |CanSetPark| raw:: html
+                |CanSetPark|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetPark" target="_blank">
-                Dome.CanSetPark</a> (external)
+                .. |CanSetPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetPark" target="_blank">
+                    Dome.CanSetPark</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSetPark <https://ascom-standards.org/newdocs/dome.html#Dome.CanSetPark>`_
         """
         return self._get("cansetpark")
 
@@ -337,12 +392,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSetShutter|
+            .. only:: html
 
-            .. |CanSetShutter| raw:: html
+                |CanSetShutter|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetShutter" target="_blank">
-                Dome.CanSetShutter</a> (external)
+                .. |CanSetShutter| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSetShutter" target="_blank">
+                    Dome.CanSetShutter</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSetShutter <https://ascom-standards.org/newdocs/dome.html#Dome.CanSetShutter>`_
         """
         return self._get("cansetshutter")
 
@@ -369,12 +430,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSlave|
+            .. only:: html
 
-            .. |CanSlave| raw:: html
+                |CanSlave|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSlave" target="_blank">
-                Dome.CanSlave</a> (external)
+                .. |CanSlave| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSlave" target="_blank">
+                    Dome.CanSlave</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSlave <https://ascom-standards.org/newdocs/dome.html#Dome.CanSlave>`_
         """
         return self._get("canslave")
 
@@ -389,12 +456,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanSyncAzimuth|
+            .. only:: html
 
-            .. |CanSyncAzimuth| raw:: html
+                |CanSyncAzimuth|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSyncAzimuth" target="_blank">
-                Dome.CanSyncAzimuth</a> (external)
+                .. |CanSyncAzimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CanSyncAzimuth" target="_blank">
+                    Dome.CanSyncAzimuth</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CanSyncAzimuth <https://ascom-standards.org/newdocs/dome.html#Dome.CanSyncAzimuth>`_
         """
         return self._get("cansyncazimuth")
 
@@ -418,12 +491,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |ShutterStatus|
+            .. only:: html
 
-            .. |ShutterStatus| raw:: html
+                |ShutterStatus|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.ShutterStatus" target="_blank">
-                Dome.ShutterStatus</a> (external)
+                .. |ShutterStatus| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.ShutterStatus" target="_blank">
+                    Dome.ShutterStatus</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.ShutterStatus <https://ascom-standards.org/newdocs/dome.html#Dome.ShutterStatus>`_
         """
         return ShutterState(self._get("shutterstatus"))
 
@@ -449,12 +528,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Slaved|
+            .. only:: html
 
-            .. |Slaved| raw:: html
+                |Slaved|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Slaved" target="_blank">
-                Dome.Slaved</a> (external)
+                .. |Slaved| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Slaved" target="_blank">
+                    Dome.Slaved</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.Slaved <https://ascom-standards.org/newdocs/dome.html#Dome.Slaved>`_
         """
         return self._get("slaved")
     @Slaved.setter
@@ -513,12 +598,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |AbortSlew|
+            .. only:: html
 
-            .. |AbortSlew| raw:: html
+                |AbortSlew|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AbortSlew" target="_blank">
-                Dome.AbortSlew()</a> (external)
+                .. |AbortSlew| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.AbortSlew" target="_blank">
+                    Dome.AbortSlew()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.AbortSlew() <https://ascom-standards.org/newdocs/dome.html#Dome.AbortSlew>`_
         """
         self._put("abortslew")
 
@@ -555,12 +646,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CloseShutter|
+            .. only:: html
 
-            .. |CloseShutter| raw:: html
+                |CloseShutter|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CloseShutter" target="_blank">
-                Dome.CloseShutter()</a> (external)
+                .. |CloseShutter| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.CloseShutter" target="_blank">
+                    Dome.CloseShutter()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.CloseShutter() <https://ascom-standards.org/newdocs/dome.html#Dome.CloseShutter>`_
         """
         self._put("closeshutter")
 
@@ -585,12 +682,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FindHome|
+            .. only:: html
 
-            .. |FindHome| raw:: html
+                |FindHome|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.FindHome" target="_blank">
-                Dome.FindHome()</a> (external)
+                .. |FindHome| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.FindHome" target="_blank">
+                    Dome.FindHome()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.FindHome() <https://ascom-standards.org/newdocs/dome.html#Dome.FindHome>`_
         """
         self._put("findhome")
 
@@ -629,12 +732,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |OpenShutter|
+            .. only:: html
 
-            .. |OpenShutter| raw:: html
+                |OpenShutter|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.OpenShutter" target="_blank">
-                Dome.OpenShutter()</a> (external)
+                .. |OpenShutter| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.OpenShutter" target="_blank">
+                    Dome.OpenShutter()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.OpenShutter() <https://ascom-standards.org/newdocs/dome.html#Dome.OpenShutter>`_
         """
         self._put("openshutter")
 
@@ -668,12 +777,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Park|
+            .. only:: html
 
-            .. |Park| raw:: html
+                |Park|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Park" target="_blank">
-                Dome.Park()</a> (external)
+                .. |Park| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.Park" target="_blank">
+                    Dome.Park()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.Park() <https://ascom-standards.org/newdocs/dome.html#Dome.Park>`_
         """
         self._put("park")
 
@@ -690,12 +805,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetPark|
+            .. only:: html
 
-            .. |SetPark| raw:: html
+                |SetPark|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SetPark" target="_blank">
-                Dome.SetPark()</a> (external)
+                .. |SetPark| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SetPark" target="_blank">
+                    Dome.SetPark()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.SetPark() <https://ascom-standards.org/newdocs/dome.html#Dome.SetPark>`_
         """
         self._put("setpark")
 
@@ -736,12 +857,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewToAltitude|
+            .. only:: html
 
-            .. |SlewToAltitude| raw:: html
+                |SlewToAltitude|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAltitude" target="_blank">
-                Dome.SlewToAltitude()</a> (external)
+                .. |SlewToAltitude| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAltitude" target="_blank">
+                    Dome.SlewToAltitude()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.SlewToAltitude() <https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAltitude>`_
         """
         self._put("slewtoaltitude", Altitude=Altitude)
 
@@ -786,12 +913,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SlewToAzimuth|
+            .. only:: html
 
-            .. |SlewToAzimuth| raw:: html
+                |SlewToAzimuth|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAzimuth" target="_blank">
-                Dome.SlewToAzimuth()</a> (external)
+                .. |SlewToAzimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAzimuth" target="_blank">
+                    Dome.SlewToAzimuth()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.SlewToAzimuth() <https://ascom-standards.org/newdocs/dome.html#Dome.SlewToAzimuth>`_
         """
         self._put("slewtoazimuth", Azimuth=Azimuth)
 
@@ -808,12 +941,18 @@ class Dome(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SyncToAzimuth|
+            .. only:: html
 
-            .. |SyncToAzimuth| raw:: html
+                |SyncToAzimuth|
 
-                <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SyncToAzimuth" target="_blank">
-                Dome.SyncToAzimuth()</a> (external)
+                .. |SyncToAzimuth| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/dome.html#Dome.SyncToAzimuth" target="_blank">
+                    Dome.SyncToAzimuth()</a> (external)
+
+            .. only:: rinoh
+
+                `Dome.SyncToAzimuth() <https://ascom-standards.org/newdocs/dome.html#Dome.SyncToAzimuthm>`_
         """
         self._put("synctoazimuth", Azimuth=Azimuth)
 

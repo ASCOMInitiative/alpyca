@@ -41,6 +41,7 @@
 #                            Sync(), no changes to logic.
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members.
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -83,12 +84,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanReverse|
+            .. only:: html
 
-            .. |CanReverse| raw:: html
+                |CanReverse|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.CanReverse" target="_blank">
-                Rotator.CanReverse</a> (external)
+                .. |CanReverse| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.CanReverse" target="_blank">
+                    Rotator.CanReverse</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.CanReverse <https://ascom-standards.org/newdocs/rotator.html#Rotator.CanReverse>`_
         """
         return self._get("canreverse")
 
@@ -110,12 +117,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |IsMoving|
+            .. only:: html
 
-            .. |IsMoving| raw:: html
+                |IsMoving|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.IsMoving" target="_blank">
-                Rotator.IsMoving</a> (external)
+                .. |IsMoving| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.IsMoving" target="_blank">
+                    Rotator.IsMoving</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.IsMoving <https://ascom-standards.org/newdocs/rotator.html#Rotator.IsMoving>`_
         """
         return self._get("ismoving")
 
@@ -133,12 +146,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MechanicalPosition|
+            .. only:: html
 
-            .. |MechanicalPosition| raw:: html
+                |MechanicalPosition|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MechanicalPosition" target="_blank">
-                Rotator.MechanicalPosition</a> (external)
+                .. |MechanicalPosition| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MechanicalPosition" target="_blank">
+                    Rotator.MechanicalPosition</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.MechanicalPosition <https://ascom-standards.org/newdocs/rotator.html#Rotator.MechanicalPosition>`_
         """
         return self._get("mechanicalposition")
 
@@ -163,12 +182,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Position|
+            .. only:: html
 
-            .. |Position| raw:: html
+                |Position|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Position" target="_blank">
-                Rotator.Position</a> (external)
+                .. |Position| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Position" target="_blank">
+                    Rotator.Position</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.Position <https://ascom-standards.org/newdocs/rotator.html#Rotator.Position>`_
         """
         return self._get("position")
 
@@ -189,12 +214,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Reverse|
+            .. only:: html
 
-            .. |Reverse| raw:: html
+                |Reverse|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Reverse" target="_blank">
-                Rotator.Reverse</a> (external)
+                .. |Reverse| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Reverse" target="_blank">
+                    Rotator.Reverse</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.Reverse <https://ascom-standards.org/newdocs/rotator.html#Rotator.Reverse>`_
         """
         return self._get("reverse")
     @Reverse.setter
@@ -213,12 +244,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StepSize|
+            .. only:: html
 
-            .. |StepSize| raw:: html
+                |StepSize|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.StepSize" target="_blank">
-                Rotator.StepSize</a> (external)
+                .. |StepSize| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.StepSize" target="_blank">
+                    Rotator.StepSize</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.StepSize <https://ascom-standards.org/newdocs/rotator.html#Rotator.StepSize>`_
         """
         return self._get("stepsize")
 
@@ -234,12 +271,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TargetPosition|
+            .. only:: html
 
-            .. |TargetPosition| raw:: html
+                |TargetPosition|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.TargetPosition" target="_blank">
-                Rotator.TargetPosition</a> (external)
+                .. |TargetPosition| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.TargetPosition" target="_blank">
+                    Rotator.TargetPosition</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.TargetPosition <https://ascom-standards.org/newdocs/rotator.html#Rotator.TargetPosition>`_
         """
         return self._get("targetposition")
 
@@ -259,12 +302,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Halt|
+            .. only:: html
 
-            .. |Halt| raw:: html
+                |Halt|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Halt" target="_blank">
-                Rotator.Halt()</a> (external)
+                .. |Halt| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Halt" target="_blank">
+                    Rotator.Halt()</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.Halt() <https://ascom-standards.org/newdocs/rotator.html#Rotator.Halt>`_
         """
         self._put("halt")
 
@@ -301,12 +350,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Move|
+            .. only:: html
 
-            .. |Move| raw:: html
+                |Move|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Move" target="_blank">
-                Rotator.Move()</a> (external)
+                .. |Move| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Move" target="_blank">
+                    Rotator.Move()</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.Move() <https://ascom-standards.org/newdocs/rotator.html#Rotator.Move>`_
         """
         self._put("move", Position=Position)
 
@@ -340,12 +395,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MoveAbsolute|
+            .. only:: html
 
-            .. |MoveAbsolute| raw:: html
+                |MoveAbsolute|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveAbsolute" target="_blank">
-                Rotator.MoveAbsolute()</a> (external)
+                .. |MoveAbsolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveAbsolute" target="_blank">
+                    Rotator.MoveAbsolute()</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.MoveAbsolute() <https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveAbsolute>`_
         """
         self._put("moveabsolute", Position=Position)
 
@@ -382,12 +443,18 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MoveMechanical|
+            .. only:: html
 
-            .. |MoveMechanical| raw:: html
+                |MoveMechanical|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveMechanical" target="_blank">
-                Rotator.MoveMechanical()</a> (external)
+                .. |MoveMechanical| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveMechanical" target="_blank">
+                    Rotator.MoveMechanical()</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.MoveMechanical() <https://ascom-standards.org/newdocs/rotator.html#Rotator.MoveMechanical>`_
         """
         self._put("movemechanical", Position=Position)
 
@@ -414,11 +481,17 @@ class Rotator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Sync|
+            .. only:: html
 
-            .. |Sync| raw:: html
+                |Sync|
 
-                <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Sync" target="_blank">
-                Rotator.Sync()</a> (external)
+                .. |Sync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/rotator.html#Rotator.Sync" target="_blank">
+                    Rotator.Sync()</a> (external)
+
+            .. only:: rinoh
+
+                `Rotator.Sync() <https://ascom-standards.org/newdocs/rotator.html#Rotator.Sync>`_
         """
         self._put("sync", Position=Position)

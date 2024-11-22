@@ -37,6 +37,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 from alpaca.device import Device
 
@@ -79,11 +80,17 @@ class SafetyMonitor(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |IsSafe|
+            .. only:: html
 
-            .. |IsSafe| raw:: html
+                |IsSafe|
 
-                <a href="https://ascom-standards.org/newdocs/safetymonitor.html#SafetyMonitor.IsSafe" target="_blank">
-                SafetyMonitor.IsSafe</a> (external)
+                .. |IsSafe| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/safetymonitor.html#SafetyMonitor.IsSafe" target="_blank">
+                    SafetyMonitor.IsSafe</a> (external)
+
+            .. only:: rinoh
+
+                `SafetyMonitor.IsSafe <https://ascom-standards.org/newdocs/safetymonitor.html#SafetyMonitor.IsSafe>`_
         """
         return self._get("issafe")

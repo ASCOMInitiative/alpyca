@@ -38,6 +38,7 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -78,12 +79,18 @@ class FilterWheel(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |FocusOffsets|
+            .. only:: html
 
-            .. |FocusOffsets| raw:: html
+                |FocusOffsets|
 
-                <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.FocusOffsets" target="_blank">
-                FilterWheel.FocusOffsets</a> (external)
+                .. |FocusOffsets| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.FocusOffsets" target="_blank">
+                    FilterWheel.FocusOffsets</a> (external)
+
+            .. only:: rinoh
+
+                `FilterWheel.FocusOffsets <https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.FocusOffsets>`_
         """
         return self._get("focusoffsets")
 
@@ -104,12 +111,18 @@ class FilterWheel(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Names|
+            .. only:: html
 
-            .. |Names| raw:: html
+                |Names|
 
-                <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Names" target="_blank">
-                FilterWheel.Names</a> (external)
+                .. |Names| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Names" target="_blank">
+                    FilterWheel.Names</a> (external)
+
+            .. only:: rinoh
+
+                `FilterWheel.Names <https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Names>`_
         """
         return self._get("names")
 
@@ -136,12 +149,18 @@ class FilterWheel(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Position|
+            .. only:: html
 
-            .. |Position| raw:: html
+                |Position|
 
-                <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Position" target="_blank">
-                FilterWheel.Position</a> (external)
+                .. |Position| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Position" target="_blank">
+                    FilterWheel.Position</a> (external)
+
+            .. only:: rinoh
+
+                `FilterWheel.Position <https://ascom-standards.org/newdocs/filterwheel.html#FilterWheel.Position>`_
         """
         return self._get("position")
     @Position.setter

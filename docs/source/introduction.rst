@@ -17,7 +17,7 @@ Introduction and Quick Start
 .. only:: html
 
     This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
-    For more information see the |ascsite|, specifically the |devhelp| section, and the |master|.
+    For more information see the |ascsite|, specifically the |devhelp| section, and the |master2|.
 
 .. only:: rinoh or rst
 
@@ -216,7 +216,7 @@ Common Misconceptions and Confusions
     <a href="https://ascom-standards.org/AlpacaDeveloper/Index.htm" target="_blank">
     Alpaca Developers Info</a> (external)
 
-.. |master| raw:: html
+.. |master2| raw:: html
 
     <a href="https://ascom-standards.org/newdocs/#ascom-master-interfaces-alpaca-and-com"
     target="_blank">ASCOM Master Interfaces (Alpaca and COM)</a> (external)

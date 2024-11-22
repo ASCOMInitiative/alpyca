@@ -43,6 +43,7 @@
 # 21-Aug-22 (rbd) 2.0.2 Fix DriverVersion to return the string GitHub issue #4
 # 05-Mar-24 (rbd) 3.0.0 New members for Platform 7
 # 06-Mar-24 (rbd) 3.0.0 Add stubbed Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from threading import Lock
@@ -115,30 +116,43 @@ class Device:
 
         Raises:
             NotImplementedException: If no actions at all are supported
-            ActionNotImplementedException: If the driver does not support the requested
+            ActionNotImplementedException: If the driver does not support the
+            requested
                 ActionName. The supported action names are listed in
                 :attr:`SupportedActions`.
             NotConnectedException: If the device is not connected
             DriverException:An error occurred that is not described by
-                one of the more specific ASCOM exceptions.
-                The device did not *successfully* complete the request.
+                one of the more specific ASCOM exceptions. The device did not
+                *successfully* complete the request.
 
         Notes:
-            * This method, combined with :attr:`SupportedActions`, is the supported
-              mechanic for adding non-standard functionality.
+            * This method, combined with :attr:`SupportedActions`, is the
+              supported mechanic for adding non-standard functionality.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Action()``, find this specific
-            device's specification, and see ``Action()`` there.
+            .. only:: html
 
-            .. |master| raw:: html
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Action()``, find
+                this specific device's specification, and see ``Action()``
+                there.
 
-                <a href="https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions" target="_blank">
-                ASCOM Master Interface Definitions</a> (external)
+                .. |master| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions" target="_blank">
+                    ASCOM Master Interface Definitions</a> (external)
+
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Action()``, find
+                this specific device's specification, and see ``Action()``
+                there.
 
         """
         return self._put("action", Action=ActionName, Parameters=Parameters)["Value"]
@@ -166,9 +180,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``CommandBlind()``, find this specific
-            device's specification, and see ``CommandBlind()`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``CommandBlind()``, find
+                this specific device's specification, and see ``CommandBlind()``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``CommandBlind()``, find
+                this specific device's specification, and see ``CommandBlind()``
+                there.
 
         """
         self._put("commandblind", Command=Command, Raw=Raw)
@@ -199,9 +225,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``CommandBool()``, find this specific
-            device's specification, and see ``CommandBool()`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``CommandBlind()``, find
+                this specific device's specification, and see ``CommandBlind()``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``CommandBlind()``, find
+                this specific device's specification, and see ``CommandBlind()``
+                there.
 
         """
         return self._put("commandbool", Command=Command, Raw=Raw)["Value"]
@@ -232,9 +270,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``CommandString()``, find this specific
-            device's specification, and see ``CommandString()`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``CommandString()``, find
+                this specific device's specification, and see ``CommandString()``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``CommandString()``, find
+                this specific device's specification, and see ``CommandString()``
+                there.
 
         """
         return self._put("commandstring", Command=Command, Raw=Raw)["Value"]
@@ -280,9 +330,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Disconnect()``, find this specific
-            device's specification, and see ``Disconnect()`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Disconnect()``, find
+                this specific device's specification, and see ``Disconnect()``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Disconnect()``, find
+                this specific device's specification, and see ``Disconnect()``
+                there.
 
         """
         return self._put("disconnect")
@@ -307,9 +369,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Connecting``, find this specific
-            device's specification, and see ``Connecting`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Connecting``, find
+                this specific device's specification, and see ``Connecting``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Connecting``, find
+                this specific device's specification, and see ``Connecting``
+                there.
 
         """
         return self._get("connecting")
@@ -342,9 +416,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Connected``, find this specific
-            device's specification, and see ``Connected`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Connected``, find
+                this specific device's specification, and see ``Connected``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Connected``, find
+                this specific device's specification, and see ``Connected``
+                there.
 
         """
         return self._get("connected")
@@ -372,9 +458,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Description``, find this specific
-            device's specification, and see ``Description`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Description``, find
+                this specific device's specification, and see ``Description``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Description``, find
+                this specific device's specification, and see ``Description``
+                there.
 
         """
         return self._get("description")
@@ -392,9 +490,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``DeviceState``, find this specific
-            device's specification, and see ``DeviceState`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``DeviceState``, find
+                this specific device's specification, and see ``DeviceState``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``DeviceState``, find
+                this specific device's specification, and see ``DeviceState``
+                there.
 
         """
         response = self._get("devicestate")
@@ -426,9 +536,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``DriverInfo``, find this specific
-            device's specification, and see ``DriverInfo`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``DriverInfo``, find
+                this specific device's specification, and see ``DriverInfo``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``DriverInfo``, find
+                this specific device's specification, and see ``DriverInfo``
+                there.
 
         """
         return [i.strip() for i in self._get("driverinfo").split(",")]
@@ -454,9 +576,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``DriverVersion``, find this specific
-            device's specification, and see ``DriverVersion`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``DriverVersion``, find
+                this specific device's specification, and see ``DriverVersion``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``DriverVersion``, find
+                this specific device's specification, and see ``DriverVersion``
+                there.
 
         """
         return self._get("driverversion")
@@ -480,9 +614,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``InterfaceVersion``, find this specific
-            device's specification, and see ``InterfaceVersion`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``InterfaceVersion``, find
+                this specific device's specification, and see ``InterfaceVersion``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``InterfaceVersion``, find
+                this specific device's specification, and see ``InterfaceVersion``
+                there.
 
         """
         return int(self._get("interfaceversion"))
@@ -500,9 +646,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``Name``, find this specific
-            device's specification, and see ``Name`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``Name``, find
+                this specific device's specification, and see ``Name``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``Name``, find
+                this specific device's specification, and see ``Name``
+                there.
 
         """
         return self._get("name")
@@ -536,9 +694,21 @@ class Device:
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            Alpyca uses a common Device class but this is not available in the
-            |master|. To see the reference info for ``SupportedActions``, find this specific
-            device's specification, and see ``SupportedActions`` there.
+            .. only:: html
+
+                Alpyca uses a common Device class but this is not available in
+                the |master|. To see the reference info for ``SupportedActions``, find
+                this specific device's specification, and see ``SupportedActions``
+                there.
+
+            .. only:: rinoh
+
+                Alpyca uses a common Device class but this is not available in
+                the `ASCOM Master Interface Definitions
+                <https://ascom-standards.org/newdocs/interfaces.html#ascom-master-interface-definitions>`_
+                (external). To see the reference info for ``SupportedActions``, find
+                this specific device's specification, and see ``SupportedActions``
+                there.
 
         """
         return self._get("supportedactions")

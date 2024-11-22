@@ -40,6 +40,7 @@
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 07-Nov-22 (rbd) 2.0.3 Focuser.Stepsize is a float (GitHub issue #7)
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
+# 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -87,12 +88,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Absolute|
+            .. only:: html
 
-            .. |Absolute| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                Focuser.Absolute</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("absolute")
 
@@ -114,12 +121,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |IsMoving|
+            .. only:: html
 
-            .. |IsMoving| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.IsMoving" target="_blank">
-                Focuser.IsMoving</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Focuser.Absolute</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("ismoving")
 
@@ -138,12 +151,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxIncrement|
+            .. only:: html
 
-            .. |MaxIncrement| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxIncrement" target="_blank">
-                Focuser.MaxIncrement</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("maxincrement")
 
@@ -163,12 +182,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxStep|
+            .. only:: html
 
-            .. |MaxStep| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxStep" target="_blank">
-                Focuser.MaxStep</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("maxstep")
 
@@ -190,12 +215,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Position|
+            .. only:: html
 
-            .. |Position| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Position" target="_blank">
-                Focuser.Position</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("position")
 
@@ -212,12 +243,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StepSize|
+            .. only:: html
 
-            .. |StepSize| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.StepSize" target="_blank">
-                Focuser.StepSize</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("stepsize")
 
@@ -241,12 +278,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TempComp|
+            .. only:: html
 
-            .. |TempComp| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.TempComp" target="_blank">
-                Focuser.TempComp</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("tempcomp")
     @TempComp.setter
@@ -264,12 +307,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |TempCompAvailable|
+            .. only:: html
 
-            .. |TempCompAvailable| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.TempCompAvailable" target="_blank">
-                Focuser.TempCompAvailable</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("tempcompavailable")
 
@@ -291,12 +340,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Temperature|
+            .. only:: html
 
-            .. |Temperature| raw:: html
+                |Absolute|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Temperature" target="_blank">
-                Focuser.Temperature</a> (external)
+                .. |Absolute| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
+                    Absolute.Names</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
         return self._get("temperature")
 
@@ -316,12 +371,18 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Halt|
+            .. only:: html
 
-            .. |Halt| raw:: html
+                |Halt|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Halt" target="_blank">
-                Focuser.Halt()</a> (external)
+                .. |Halt| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Halt" target="_blank">
+                    Focuser.Halt()</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Halt() <https://ascom-standards.org/newdocs/focuser.html#Focuser.Halt>`_
         """
         self._put("halt")
 
@@ -366,11 +427,17 @@ class Focuser(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Move|
+            .. only:: html
 
-            .. |Move| raw:: html
+                |Move|
 
-                <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Move" target="_blank">
-                Focuser.Move()</a> (external)
+                .. |Move| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Move" target="_blank">
+                    Focuser.Move()</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.Move() <https://ascom-standards.org/newdocs/focuser.html#Focuser.Move>`_
         """
         self._put("move", Position=Position)
