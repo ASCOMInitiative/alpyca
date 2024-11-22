@@ -788,7 +788,7 @@ class Camera(Device):
             .. only:: html
 
                 |ExposureMax|
-T
+
                 .. |ExposureMax| raw:: html
 
                     <a href="https://ascom-standards.org/newdocs/camera.html#Camera.ExposureMax" target="_blank">
