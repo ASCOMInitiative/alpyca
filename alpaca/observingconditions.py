@@ -82,7 +82,7 @@ class ObservingConditions(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * AveragePeriod returns the time period (hours) over which sensor readings will be
               averaged. If the device is delivering instantaneous sensor readings this property
               will return a value of 0.0.
@@ -198,7 +198,7 @@ class ObservingConditions(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             Not "corrected to sea level" as often encountered in weather reports.
             The ConvertPressure() method may be used to get "sea level" pressure
 
@@ -391,7 +391,7 @@ class ObservingConditions(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Meterological standards** Wind direction is that from which the wind
               is blowing, measured in degrees clockwise from *true* North=0.0,
               East=90.0, South=180.0, West=270.0 If the wind velocity is 0 then
@@ -476,6 +476,9 @@ class ObservingConditions(Device):
             NotImplementedException: This method is not supported.
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
 
             .. only:: html
 

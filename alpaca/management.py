@@ -51,7 +51,7 @@ def __check_error(response: requests.Response) -> None:
     Args:
         response (Response): Response from Alpaca server to check.
 
-    Notes:
+    Note:
         * Raises AlpacaRequestExcepton if the server returns
           other than a 200 OK.
 
@@ -67,7 +67,7 @@ def __ipv6_safe_get(endpoint: str, addr: str) -> str:
             endpoint: The endpoint path starting with /
             addr: full address (IPV6 or IPv4) of server
 
-        Notes:
+        Note:
             * This is needed because the Pyton requests module creates HTTP
               requests with the Host: header containing the scope (%xxxx)
               for IPv6, and some servers see this as invalid and return
@@ -89,7 +89,7 @@ def apiversions(addr: str) -> List[int]:
     Raises:
         AlpacaRequestException: Method or parameter error, internal Alpaca server error
 
-    Notes:
+    Note:
         * Currently (April 2022) this will be [1]
 
     """
@@ -107,7 +107,7 @@ def description(addr: str) -> str:
     Raises:
         AlpacaRequestException: Method or parameter error, internal Alpaca server error
 
-    Notes:
+    Note:
         * This is the description of the server at the given `address:port`,
           which may serve multiple Alpaca devices.
 

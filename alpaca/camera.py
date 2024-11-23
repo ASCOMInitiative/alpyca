@@ -83,7 +83,7 @@ class ImageArrayElementTypes(DocIntEnum):
 class ImageMetadata:
     """Metadata describing the returned ImageArray data
 
-        Notes:
+        Note:
             * Constructed internally by the library during image retrieval.
             * See https://ascom-standards.org/Developer/AlpacaImageBytes.pdf
 
@@ -115,7 +115,7 @@ class ImageMetadata:
     def ImageElementType(self) -> ImageArrayElementTypes:
         """The data type of the pixels in originally acquired image
 
-        Notes:
+        Note:
             Within Python, the returned nested list(s) image pixels themselves
             will be either int or float.
         """
@@ -125,7 +125,7 @@ class ImageMetadata:
     def TransmissionElementType(self) -> ImageArrayElementTypes:
         """The ddta type of the pixels in the transmitted image bytes stream
 
-        Notes:
+        Note:
             Within Python, the returned image pixels themselves will be either int or float.
 
             To save transmission time camera may choose to use a smaller data
@@ -186,7 +186,7 @@ class Camera(Device):
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
             InvalidValueException: If not valid.
 
-        Notes:
+        Note:
             * The value returned will be in the range 0 to M-1 where M is the width of
               the Bayer matrix. The offset is relative to the 0,0 pixel in the sensor
               array, and does not change to reflect subframe settings.
@@ -224,7 +224,7 @@ class Camera(Device):
                 one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
             InvalidValueException: If not valid.
 
-        Notes:
+        Note:
             * The value returned will be in the range 0 to M-1 where M is the width of
               the Bayer matrix. The offset is relative to the 0,0 pixel in the sensor
               array, and does not change to reflect subframe settings.
@@ -258,7 +258,7 @@ class Camera(Device):
             InvalidValueException: If the given binning value is invalid
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Will default to 1 when the camera connection is established.
             * If :attr:`CanAssymetricBin` is False, then the binning values must be
               the same. Setting this property will result in BinY being the same value.
@@ -297,7 +297,7 @@ class Camera(Device):
             InvalidValueException: If the given binning value is invalid
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Will default to 1 when the camera connection is established.
             * If :attr:`CanAssymetricBin` is False, then the binning values must be
               the same. Setting this property will result in BinY being the same value.
@@ -362,7 +362,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -393,7 +393,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -424,7 +424,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Some cameras support :meth:`AbortExposure()`, which allows the exposure to be
               terminated before the exposure timer completes, *with the image being discarded*.
               Returns True if :meth:`AbortExposure()` is available, False if not. See also
@@ -459,7 +459,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If true, the camera can have different binning on the X and Y axes, as
               determined by BinX and BinY. If false, the binning must be equal on the X and Y axes.
             * It is recommended that this property be retrieved only after a connection is
@@ -492,7 +492,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -523,7 +523,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -554,7 +554,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -585,7 +585,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If True, the camera's cooler setpoint can be adjusted. If False, the
               camera either uses open-loop cooling or does not have the ability to
               adjust temperature from software, and setting the :attr:`SetCCDTemperature`
@@ -620,7 +620,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Some cameras support :meth:`StopExposure()`, which allows the exposure to be
               terminated before the exposure timer completes, *but will still read out the image*.
               Returns True if :meth:`StopExposure()` is available, False if not. See also
@@ -745,7 +745,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Some cameras have multiple gain modes, resulting in this value changing.
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
@@ -777,7 +777,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -808,7 +808,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -839,7 +839,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This can be used, for example, to specify the resolution of a user interface
               "spin control" used to dial in the exposure time.
             * The duration provided to :meth:`StartExposure()` does not have to be an
@@ -880,7 +880,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This function may in some cases interact with :attr:`ReadoutModes`; for
               example, there may be modes where the Fast/Normal switch is meaningless.
               In this case, it may be preferable to use the :attr:`ReadoutModes`
@@ -915,7 +915,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Reports the full well capacity of the camera in electrons, at the current
               camera settings (binning, SetupDialog settings, etc.).
             * It is recommended that this property be retrieved only after a connection is
@@ -952,7 +952,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             The Gain property is used to adjust the gain setting of the camera and has
             two modes of operation:
 
@@ -1014,7 +1014,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Gain` is operating in **gain-value** mode:
 
             * GainMax must return the camera's highest valid :attr:`Gain` setting
@@ -1055,7 +1055,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Gain` is operating in **gain-value** mode:
 
             * GainMin must return the camera's highest valid :attr:`Gain` setting
@@ -1096,7 +1096,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Gain` is operating in the **gains-index** mode:
 
             * The ``Gains`` property returns a list of available gain setting *names*.
@@ -1140,7 +1140,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             If HasShutter is False, the :meth:`StartExposure()` method will ignore the
             Light parameter.
 
@@ -1198,7 +1198,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The returned array is in row-major format, and typically must be transposed
               for use with *numpy* and *astropy* for creating FITS files. See the example
               below.
@@ -1237,7 +1237,7 @@ class Camera(Device):
 
         See Class :py:class:`ImageMetadata` for the properties available.
 
-        Notes:
+        Note:
             If no image has been retrieved via :attr:`ImageArray`,
             this returns None.
 
@@ -1270,7 +1270,7 @@ class Camera(Device):
                 *successfully* complete the previous :meth:`Expose()` request
                 (see Attention below).
 
-        Notes:
+        Note:
             * If ImageReady returns a valid False or True value, then the *non-blocking*
               process of acquiring an image is *proceeding normally* or has been *successful*.
             * ImageReady will be False immediately upon return from :meth:`StartExposure()`.
@@ -1309,7 +1309,7 @@ class Camera(Device):
             DriverException: An error occurred that is not described by
                 one of the more specific ASCOM exceptions. See Attention
                 below. The device did not *successfully* complete the request.
-        Notes:
+        Note:
             * If IsPulseGuiding returns a valid True or False value, then the process of
               pulse-guiding is *proceeding normally* or has completed *successfully*,
               respectively.
@@ -1354,7 +1354,7 @@ class Camera(Device):
                 one of the more specific ASCOM exceptions. See Attention
                 below. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This may differ from the exposure time requested due to shutter latency,
               camera timing precision, etc.
 
@@ -1388,7 +1388,7 @@ class Camera(Device):
                 one of the more specific ASCOM exceptions. See Attention
                 below. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             Reports the actual exposure UTC start date/time in the
             FITS-standard / ISO-8601 CCYY-MM-DDThh:mm:ss[.sss...] format.
 
@@ -1418,7 +1418,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1449,7 +1449,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1480,7 +1480,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1511,7 +1511,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If binning is active, value is in binned pixels.
             * Defaults to :attr:`CameraXSize` with :attr:`StartX` = 0
               (full frame) on initial camera startup.
@@ -1551,7 +1551,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If binning is active, value is in binned pixels.
             * Defaults to :attr:`CameraYSize` with :attr:`StartY` = 0
               (full frame) on initial camera startup.
@@ -1594,7 +1594,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             The Offset property is used to adjust the offset setting of the camera and has
             two modes of operation:
 
@@ -1656,7 +1656,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Offset` is operating in **offsets-value** mode:
 
             * ``OffsetMax`` must return the camera's highest valid :attr:`Offset` setting
@@ -1697,7 +1697,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Offset` is operating in **offsets-value** mode:
 
             * OffsetMin must return the camera's highest valid :attr:`Offset` setting
@@ -1738,7 +1738,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             When :attr:`Offset` is operating in the **offsets-index** mode:
 
             * The ``Offsets`` property returns a list of available offset setting *names*.
@@ -1787,7 +1787,7 @@ class Camera(Device):
                 one of the more specific ASCOM exceptions. See Attention
                 below. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If valid, returns an integer between 0 and 100, where 0 indicates 0% progress
               (function just started) and 100 indicates 100% progress (i.e. completion).
             * At the discretion of the device, PercentCompleted may optionally be valid
@@ -1831,7 +1831,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1862,7 +1862,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -1895,7 +1895,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * ReadoutMode is an index into the array :attr:`ReadoutModes`, and
               selects the desired readout mode for the camera. Defaults to 0 if not set.
             * It is strongly recommended, but not required, that cameras make the 0-index
@@ -1937,7 +1937,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Readout modes may be available from the camera, and if so then
               :attr:`CanFastReadout` will be False. The two camera mode selection
               schemes are mutually exclusive.
@@ -1981,7 +1981,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Returns the name (data sheet part number) of the sensor, e.g. ICX285AL.
               The format is to be exactly as shown on manufacturer data sheet,
               subject to the following rules:
@@ -2030,7 +2030,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is recommended that this property be retrieved only after a connection is
               established with the camera hardware, to ensure that the driver is
               aware of the capabilities of the specific camera model.
@@ -2092,7 +2092,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If binning is active, value is in binned pixels.
             * Defaults to 0 with :attr:`NumX` = :attr:`CameraXSize`
               (full frame) on initial camera startup.
@@ -2132,7 +2132,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If binning is active, value is in binned pixels.
             * Defaults to 0 with :attr:`NumY` = :attr:`CameraYSize`
               (full frame) on initial camera startup.
@@ -2204,7 +2204,7 @@ class Camera(Device):
             InvalidOperationException: If not currently possible (e.g. during image download)
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Unlike :meth:`StopExposure()` this method simply discards any
               partially-acquired image data and returns the camera to idle.
             * Will not raise an exception if the camera is already idle.
@@ -2242,7 +2242,7 @@ class Camera(Device):
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous**: The method returns as soon pulse-guiding operation
               has been *successfully* started with :attr:`IsPulseGuiding` property True.
               However, you may find that :attr:`IsPulseGuiding` is False when you get
@@ -2297,7 +2297,7 @@ class Camera(Device):
                 when reading IMageReady. The device did not *successfully*
                 complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use :attr:`ImageReady`
               to determine if the exposure has been *successfully*
               completed. See :ref:`async_faq`
@@ -2332,7 +2332,7 @@ class Camera(Device):
             InvalidOperationException: If not currently possible (e.g. during image download)
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Unlike :meth:`AbortExposure()` this method cuts an exposure short
               while preserving the image data acquired so far, making it available
               to the app.

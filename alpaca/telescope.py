@@ -197,7 +197,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The area takes into account any obstructions; it is the actual
               light-gathering area.
 
@@ -254,7 +254,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the correct property to use to determine *successful* completion of
               the (non-blocking) :meth:`FindHome()` operation. See :ref:`async_faq`
             * True if the telescope is stopped in the Home position. Can be True
@@ -289,7 +289,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the correct property to use to determine *successful* completion of
               the (non-blocking) :meth:`Park()` operation. See :ref:`async_faq`
             * True if the telescope is stopped in the Park position. Can be True
@@ -329,7 +329,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Azimuth is per the usual alt/az coordinate convention: degrees
               North-referenced, positive East/clockwise.
 
@@ -359,7 +359,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`FindHome()`
 
         .. admonition:: Master Interfaces Reference
@@ -388,7 +388,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`Park()`
 
         .. admonition:: Master Interfaces Reference
@@ -417,7 +417,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`PulseGuide`
 
         .. admonition:: Master Interfaces Reference
@@ -446,7 +446,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`DeclinationRate`
 
         .. admonition:: Master Interfaces Reference
@@ -475,7 +475,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`PulseGuide()`.
 
         .. admonition:: Master Interfaces Reference
@@ -504,7 +504,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`SetPark()`
 
         .. admonition:: Master Interfaces Reference
@@ -533,7 +533,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`SideOfPier`.
             * Will always be False for non-German mounts
 
@@ -563,7 +563,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`RightAscensionRate`.
 
         .. admonition:: Master Interfaces Reference
@@ -592,7 +592,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :attr:`Tracking`.
 
         .. admonition:: Master Interfaces Reference
@@ -621,7 +621,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`SlewToCoordinates()`, :meth:`SlewToCoordinatesAsync()`
               :meth:`SlewToTarget()`, and :meth:`SlewToTargetAsync()`.
 
@@ -656,7 +656,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * :attr:`CanSlew` will be True if CanSlewAsync is True.
             * See :meth:`SlewToCoordinatesAsync()`
               and :meth:`SlewToTargetAsync()`.
@@ -691,7 +691,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`SlewToAltAz()` and :meth:`SlewToAltAzAsync()`.
 
         Attention:
@@ -725,7 +725,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * :attr:`CanSlewAltAz` will be True if CanSlewAltAzAsync is True.
             * See :meth:`SlewToAltAzAsync()`.
 
@@ -759,7 +759,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`SyncToCoordinates()`.
 
         .. admonition:: Master Interfaces Reference
@@ -788,7 +788,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`SyncToAltAz()`.
 
         .. admonition:: Master Interfaces Reference
@@ -817,7 +817,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`Unpark()` and :meth:`Park()`.
 
         .. admonition:: Master Interfaces Reference
@@ -847,7 +847,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Declination will be in the equinox given by the current value of
               :attr:`EquatorialSystem`.
 
@@ -879,7 +879,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * DeclinationRate is an offset from 0 (no change in declination), given in arc seconds
               per SI (atomic) second. (Please note that the units of :attr:`RightAscensionRate`
               are in (sidereal) seconds of RA per *sidereal* second).
@@ -932,7 +932,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If the driver does not know whether the attached telescope does its
               own refraction, and if the driver does not itself calculate refraction,
               this property (if implemented) will raise
@@ -973,7 +973,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :py:class:`EquatorialCoordinateType`.
             * Most mounts use topocentric coordinates. Some high-end research
               mounts use J2000 coordinates.
@@ -1033,7 +1033,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the rate for both hardware/relay guiding and for
               :meth:`PulseGuide()`.
             * The mount may not support separate right ascension and declination
@@ -1072,7 +1072,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the rate for both hardware/relay guiding and for
               :meth:`PulseGuide()`.
             * The mount may not support separate right ascension and declination
@@ -1113,7 +1113,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
           * A pulse guide command may be so short that you won't see this equal to True.
             If you can read False after calling :meth:`PulseGuide()`, then you know it
             completed *successfully*. See :ref:`async_faq`
@@ -1176,7 +1176,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * RightAscensionRate is an offset from 0 (no change in Right Ascension). Note that
               a mount that is tracking sidereally is pointing to an *unchanging* right ascension.
               See |RARateFAQ|
@@ -1233,7 +1233,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking) if writing SideOfPier to force a
               pointing state change (e.g. GEM flip): Use the :attr:`Slewing` property
               to monitor the operation. When the pointing state change has been
@@ -1273,7 +1273,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * It is required for a driver to calculate this from the system clock if
               the mount has no accessible source of sidereal time.
             * Local Apparent Sidereal Time is the sidereal time used for pointing
@@ -1312,7 +1312,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Some mounts supply this via input to their control systems, in
               other scenarios the application will set this on initialization.
             * If a change is made via SiteElevation, most mounts will save the value
@@ -1354,7 +1354,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is geodetic (map) latitude, degrees, WGS84, positive North.
             * Some mounts supply this via input to their control systems, in
               other scenarios the application will set this on initialization.
@@ -1397,7 +1397,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is geodetic (map) longitude, degrees, WGS84, **positive East**.
             * Some mounts supply this via input to their control systems, in
               other scenarios the application will set this on initialization.
@@ -1440,7 +1440,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the correct property to use to determine *successful* completion of
               a (non-blocking) :meth:`SlewToCoordinatesAsync()`, :meth:`SlewToTargetAsync()`,
               :meth:`SlewToCoordinatesAsync()`, or by writing to :attr:`SideOfPier`
@@ -1522,7 +1522,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is a pre-set target coordinate for :meth:`SlewToTargetAsync()`
               and :meth:`SyncToTarget()`
             * Target coordinates are for the current :attr:`EquatorialSystem`.
@@ -1562,7 +1562,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is a pre-set target coordinate for :meth:`SlewToTargetAsync()`
               and :meth:`SyncToTarget()`
             * Target coordinates are for the current :attr:`EquatorialSystem`.
@@ -1598,7 +1598,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * When on, the mount will use the last selected :attr:`TrackingRate`.
             * Even if the mount doesn't support changing this, it will report the
               current state.
@@ -1638,7 +1638,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Even if the mount doesn't support changing this, it will report the
               current state.
             * If this is any rate other than :py:class:`~DriveRates.driveSidereal` then
@@ -1674,7 +1674,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * At a minimum, this list will contain an item for
               :py:class:`~DriveRates.driveSidereal`
 
@@ -1716,7 +1716,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Changing time by writing to this property can be done with either a
               Python datetime value or an ISO 8601 string, for example
               ``2022-04-22T20:21:01.123+00:00``.
@@ -1767,7 +1767,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * See :meth:`MoveAxis()` for details.
             * An empty list will be returned if :meth:`MoveAxis()` is not supported.
             * Returned rates will always be positive, it is up to you to choose the
@@ -1858,7 +1858,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Effective only after an asynchronous slew/move call to
               :meth:`SlewToTargetAsync()`, :meth:`SlewToCoordinatesAsync()`,
               :meth:`SlewToAltAzAsync()`, or :meth:`MoveAxis()`.
@@ -1898,7 +1898,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`AtHome` property
               to monitor the operation. When the mount has
               *successfully* reached its home position, :attr:`Slewing`
@@ -1941,7 +1941,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to determine if the mount is moving, however you must explicitly
               call MoveAxis() with a zero rate to stop motion about the given axis.
@@ -1984,7 +1984,7 @@ class Telescope(Device):
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`AtPark` property
               to monitor the operation. When the the park position has been
               *successfully* reached, :attr:`AtPark` becomes True, and
@@ -2025,7 +2025,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected.
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous**: The method returns as soon the pulse-guiding operation
               has been *successfully* started, with :attr:`IsPulseGuiding` property True.
               However, you may find that :attr:`IsPulseGuiding` is False when you get
@@ -2110,7 +2110,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested coordinates have been
               *successfully* reached, :attr:`Slewing` becomes False.
@@ -2159,7 +2159,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested coordinates have been
               *successfully* reached, :attr:`Slewing` becomes False.
@@ -2207,7 +2207,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the target coordinates have been
               *successfully* reached, :attr:`Slewing` becomes False.
@@ -2341,7 +2341,7 @@ class Telescope(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Unparking a mount that is not parked is harmless and will always be
               successful.
 

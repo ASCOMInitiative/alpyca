@@ -308,7 +308,7 @@ to restore the motion about that axis to the rate set by the
 :attr:`TrackingRate` property.
 Tracking motion (if enabled) is suspended during this mode of operation.
 
-**Notes:**
+**Notes**
 
 * The movement rate must be within the value(s) obtained from a
   :py:class:`~alpaca.telescope.Rate` object in the

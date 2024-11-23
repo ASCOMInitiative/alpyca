@@ -42,6 +42,7 @@
 # 07-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
 # 08-Mar-24 (rbd) 3.0.0 Clarify switch vs driver vs device etc. No
 #                 logic changes.
+# 23-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -73,20 +74,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Number of switches managed by this device. Switches are numbered from 0
               to MaxSwitch - 1.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxSwitch|
+            .. only:: html
 
-            .. |MaxSwitch| raw:: html
+                |MaxSwitch|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitch" target="_blank">
-                Switch.MaxSwitch</a> (external)
+                .. |MaxSwitch| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitch" target="_blank">
+                    Switch.MaxSwitch</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.MaxSwitch <https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitch>`_
         """
         return self._get("maxswitch")
 
@@ -102,7 +108,7 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * Examples of switches that cannot be written to include a
               limit switch or a sensor.
@@ -110,13 +116,18 @@ class Switch(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanAsync|
+            .. only:: html
 
-            .. |CanAsync| raw:: html
+                |CanAsync|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanAsync" target="_blank">
-                Switch.CanAsync()</a> (external)
+                .. |CanAsync| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanAsync" target="_blank">
+                    Switch.CanAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.CanAsync() <https://ascom-standards.org/newdocs/switch.html#Switch.CanAsync>`_
         """
         return self._get("canasync", Id=Id)
 
@@ -132,7 +143,7 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * On return, the next call to :meth:`StateChangeComplete` for this switch
               will raise an :py:class:`OperationCancelledException`; thereafter calls
               to :meth:`StateChangeComplete` for the switch will return ``False``.
@@ -141,13 +152,18 @@ class Switch(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CancelAsync|
+            .. only:: html
 
-            .. |CancelAsync| raw:: html
+                |CancelAsync|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CancelAsync" target="_blank">
-                Switch.CancelAsync()</a> (external)
+                .. |CancelAsync| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CancelAsync" target="_blank">
+                    Switch.CancelAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.CancelAsync() <https://ascom-standards.org/newdocs/switch.html#Switch.CancelAsync>`_
         """
         return self._put("cancelasync", Id=Id)
 
@@ -162,7 +178,7 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * Examples of witches that cannot be written to include a
               limit switch or a sensor.
@@ -170,13 +186,18 @@ class Switch(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CanWrite|
+            .. only:: html
 
-            .. |CanWrite| raw:: html
+                |CanWrite|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanWrite" target="_blank">
-                Switch.CanWrite()</a> (external)
+                .. |CanWrite| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.CanWrite" target="_blank">
+                    Switch.CanWrite()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.CanWrite() <https://ascom-standards.org/newdocs/switch.html#Switch.CanWrite>`_
         """
         return self._get("canwrite", Id=Id)
 
@@ -191,20 +212,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GetSwitch|
+            .. only:: html
 
-            .. |GetSwitch| raw:: html
+                |GetSwitch|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitch" target="_blank">
-                Switch.GetSwitch()</a> (external)
+                .. |GetSwitch| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitch" target="_blank">
+                    Switch.GetSwitch()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.GetSwitch() <https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitch>`_
         """
         return self._get("getswitch", Id=Id)
 
@@ -219,19 +245,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GetSwitchDescription|
+            .. only:: html
 
-            .. |GetSwitchDescription| raw:: html
+                |GetSwitchDescription|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchDescription" target="_blank">
-                Switch.GetSwitchDescription()</a> (external)
+                .. |GetSwitchDescription| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchDescription" target="_blank">
+                    Switch.GetSwitchDescription()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.GetSwitchDescription() <https://ascom-standards.org/newdocs/switch.html#GetSwitchDescription.MaxSwitch>`_
         """
         return self._get("getswitchdescription", Id=Id)
 
@@ -246,19 +277,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GetSwitchName|
+            .. only:: html
 
-            .. |GetSwitchName| raw:: html
+                |GetSwitchName|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchName" target="_blank">
-                Switch.GetSwitchName()</a> (external)
+                .. |GetSwitchName| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchName" target="_blank">
+                    Switch.GetSwitchName()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.GetSwitchName() <https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchName>`_
         """
         return self._get("getswitchname", Id=Id)
 
@@ -273,20 +309,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |GetSwitchValue|
+            .. only:: html
 
-            .. |GetSwitchValue| raw:: html
+                |GetSwitchValue|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchValue" target="_blank">
-                Switch.GetSwitchValue()</a> (external)
+                .. |GetSwitchValue| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchValue" target="_blank">
+                    Switch.GetSwitchValue()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.GetSwitchValue() <https://ascom-standards.org/newdocs/switch.html#Switch.GetSwitchValue>`_
         """
         return self._get("getswitchvalue", Id=Id)
 
@@ -301,19 +342,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxSwitchValue|
+            .. only:: html
 
-            .. |MaxSwitchValue| raw:: html
+                |MaxSwitchValue|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitchValue" target="_blank">
-                Switch.MaxSwitchValue()</a> (external)
+                .. |MaxSwitchValue| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitchValue" target="_blank">
+                    Switch.MaxSwitchValue()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.MaxSwitchValue() <https://ascom-standards.org/newdocs/switch.html#Switch.MaxSwitchValue>`_
         """
         return self._get("maxswitchvalue", Id=Id)
 
@@ -328,19 +374,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MinSwitchValue|
+            .. only:: html
 
-            .. |MinSwitchValue| raw:: html
+                |MinSwitchValue|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MinSwitchValue" target="_blank">
-                Switch.MinSwitchValue()</a> (external)
+                .. |MinSwitchValue| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.MinSwitchValue" target="_blank">
+                    Switch.MinSwitchValue()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.MinSwitchValue() <https://ascom-standards.org/newdocs/switch.html#Switch.MinSwitchValue>`_
         """
         return self._get("minswitchvalue", Id=Id)
 
@@ -357,7 +408,7 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): The method returns as soon as the state change
               operation has been successfully started, with :meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
@@ -368,12 +419,18 @@ class Switch(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetAsync|
+            .. only:: html
 
-            .. |SetAsync| raw:: html
+                |SetAsync|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsync" target="_blank">
-                Switch.SetAsync()</a> (external)
+                .. |SetAsync| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsync" target="_blank">
+                    Switch.SetAsync()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SetAsync() <https://ascom-standards.org/newdocs/switch.html#Switch.SetAsync>`_
         """
         self._put("setasync", Id=Id, State=State)
 
@@ -393,7 +450,7 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): The method returns as soon as the state change
               operation has been successfully started, with :meth:`StateChangeComplete` for
               switch ``Id = False``. After the state change has completed
@@ -404,12 +461,18 @@ class Switch(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetAsyncValue|
+            .. only:: html
 
-            .. |SetAsyncValue| raw:: html
+                |SetAsyncValue|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsyncValue" target="_blank">
-                Switch.SetAsyncValue()</a> (external)
+                .. |SetAsyncValue| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetAsyncValue" target="_blank">
+                    Switch.SetAsyncValue()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SetAsyncValue() <https://ascom-standards.org/newdocs/switch.html#Switch.SetAsyncValue>`_
         """
         self._put("setasyncvalue", Id=Id, Value=Value)
 
@@ -425,10 +488,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            .. only:: html
+
+                |SetSwitch|
+
+                .. |SetSwitch| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitch" target="_blank">
+                    Switch.SetSwitch()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SetSwitch() <https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitch>`_
         """
         self._put("setswitch", Id=Id, State=State)
 
@@ -444,19 +522,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetSwitchName|
+            .. only:: html
 
-            .. |SetSwitchName| raw:: html
+                |SetSwitchName|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchName" target="_blank">
-                Switch.SetSwitchName()</a> (external)
+                .. |SetSwitchName| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchName" target="_blank">
+                    Switch.SetSwitchName()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SetSwitchName() <https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchName>`_
         """
         self._put("setswitchname", Id=Id, Name=Name)
 
@@ -475,19 +559,25 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
             * On is True, Off is False.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SetSwitchValue|
+            .. only:: html
 
-            .. |SetSwitchValue| raw:: html
+                |SetSwitchValue|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchValue" target="_blank">
-                Switch.SetSwitchValue()</a> (external)
+                .. |SetSwitchValue| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchValue" target="_blank">
+                    Switch.SetSwitchValue()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SetSwitchValue() <https://ascom-standards.org/newdocs/switch.html#Switch.SetSwitchValue>`_
         """
         self._put("setswitchvalue", Id=Id, Value=Value)
 
@@ -506,18 +596,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |StateChangeComplete|
+            .. only:: html
 
-            .. |StateChangeComplete| raw:: html
+                |StateChangeComplete|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.StateChangeComplete" target="_blank">
-                Switch.StateChangeComplete()</a> (external)
+                .. |StateChangeComplete| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.StateChangeComplete" target="_blank">
+                    Switch.StateChangeComplete()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.StateChangeComplete() <https://ascom-standards.org/newdocs/switch.html#Switch.StateChangeComplete>`_
         """
         return self._get("statechangecomplete", Id=Id)
 
@@ -532,18 +628,24 @@ class Switch(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Step size is the difference between successive values of the device.
             * Switches are numbered from 0 to :attr:`MaxSwitch` ``- 1``.
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |SwitchStep|
+            .. only:: html
 
-            .. |SwitchStep| raw:: html
+                |SwitchStep|
 
-                <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SwitchStep" target="_blank">
-                Switch.SwitchStep()</a> (external)
+                .. |SwitchStep| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/switch.html#Switch.SwitchStep" target="_blank">
+                    Switch.SwitchStep()</a> (external)
+
+            .. only:: rinoh
+
+                `Switch.SwitchStep() <https://ascom-standards.org/newdocs/switch.html#Switch.SwitchStep>`_
         """
         return self._get("switchstep", Id=Id)

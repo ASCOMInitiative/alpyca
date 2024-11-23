@@ -68,7 +68,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     Raises:
        To be determined.
 
-    Notes:
+    Note:
         * This function uses IPV4
         * UDP protocol using multicasts and restricted to the LAN/VLAN is used to perform the query.
         * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
@@ -134,7 +134,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
     Raises:
        To be determined.
 
-    Notes:
+    Note:
         * This function uses IPV6
         * UDP protocol, restricted link-local addresses to the LAN/VLAN attached to each
           interface, is used to perform the query. Does not query global IPv6.

@@ -71,7 +71,7 @@ class FilterWheel(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The offset values in this list are in the same order as the filters in the wheel
             * The number of available filters can be determined from the length of the list.
             * If focuser offsets are not available, then the list will contain zeroes.
@@ -102,7 +102,7 @@ class FilterWheel(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The names in this lisat are in the same order as the filters in the wheel
             * The number of available filters can be determined from the length of the list.
             * If focuser offsets are not available, then the lost will contain generic names
@@ -139,7 +139,7 @@ class FilterWheel(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             **Asynchronous** (non-blocking): Writing to Position returns as soon as the
             filter change operation has been *successfully* started. Position
             will return -1 while the change is in progress. After the requested position

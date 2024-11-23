@@ -80,43 +80,10 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             True means the focuser is capable of absolute position; that is, being
             commanded to a specific step location. False means this is a
             relative positioning focuser.
-
-        .. admonition:: Master Interfaces Reference
-            :class: green
-
-            .. only:: html
-
-                |Absolute|
-
-                .. |Absolute| raw:: html
-
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
-
-            .. only:: rinoh
-
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
-        """
-        return self._get("absolute")
-
-    @property
-    def IsMoving(self) -> bool:
-        """The focuser is currently moving to a new position
-
-        Raises:
-            NotConnectedException: If the device is not connected
-            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
-
-        Notes:
-            * This is the correct property to use to determine *successful* completion of
-              a (non-blocking) :meth:`Move` request. IsMoving will be True
-              immediately upon returning from a :meth:`Move` call, and will
-              remain True until *successful* completion, at which time ``IsMoving`` will
-              become False.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -134,6 +101,39 @@ class Focuser(Device):
 
                 `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
         """
+        return self._get("absolute")
+
+    @property
+    def IsMoving(self) -> bool:
+        """The focuser is currently moving to a new position
+
+        Raises:
+            NotConnectedException: If the device is not connected
+            DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
+
+        Note:
+            * This is the correct property to use to determine *successful* completion of
+              a (non-blocking) :meth:`Move` request. IsMoving will be True
+              immediately upon returning from a :meth:`Move` call, and will
+              remain True until *successful* completion, at which time ``IsMoving`` will
+              become False.
+
+        .. admonition:: Master Interfaces Reference
+            :class: green
+
+            .. only:: html
+
+                |IsMoving|
+
+                .. |IsMoving| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.IsMoving" target="_blank">
+                    Focuser.IsMoving</a> (external)
+
+            .. only:: rinoh
+
+                `Focuser.IsMoving <https://ascom-standards.org/newdocs/focuser.html#Focuser.IsMoving>`_
+        """
         return self._get("ismoving")
 
     @property
@@ -144,7 +144,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * For most focusers this is the same as the :attr:`MaxStep` property. This is
               normally used to limit the increment display in the host software.
 
@@ -153,16 +153,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |MaxIncrement|
 
-                .. |Absolute| raw:: html
+                .. |MaxIncrement| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxIncrement" target="_blank">
+                    Focuser.MaxIncrement</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.MaxIncrement <https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxIncrement>`_
         """
         return self._get("maxincrement")
 
@@ -174,7 +174,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The focuser can step between 0 and MaxStep. If an attempt is made to
               move the focuser beyond these limits, it will automatically stop at
               the limit.
@@ -184,16 +184,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |MaxStep|
 
-                .. |Absolute| raw:: html
+                .. |MaxStep| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxStep" target="_blank">
+                    Focuser.MaxStep</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.MaxStep <https://ascom-standards.org/newdocs/focuser.html#Focuser.MaxStep>`_
         """
         return self._get("maxstep")
 
@@ -207,7 +207,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Do not use this as a way to determine if a (non-blocking) :meth:`Move()`
               has completed. The Position may transit through the requested position
               before finally settling. Use the :attr:`IsMoving` property.
@@ -217,16 +217,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |Position|
 
-                .. |Absolute| raw:: html
+                .. |Position| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Position" target="_blank">
+                    Focuser.Position</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.Position <https://ascom-standards.org/newdocs/focuser.html#Focuser.Position>`_
         """
         return self._get("position")
 
@@ -245,16 +245,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |StepSize|
 
-                .. |Absolute| raw:: html
+                .. |StepSize| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.StepSize" target="_blank">
+                    Focuser.StepSize</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.StepSize <https://ascom-standards.org/newdocs/focuser.html#Focuser.StepSize>`_
         """
         return self._get("stepsize")
 
@@ -269,7 +269,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Setting TempComp to True puts the focuser into temperature tracking mode;
               setting it to False will turn off temperature tracking.
             * If :attr:`TempCompAvailable` is False this property will always
@@ -280,16 +280,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |TempComp|
 
-                .. |Absolute| raw:: html
+                .. |TempComp| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.TempComp" target="_blank">
+                    Focuser.TempComp</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.TempComp <https://ascom-standards.org/newdocs/focuser.html#Focuser.TempComp>`_
         """
         return self._get("tempcomp")
     @TempComp.setter
@@ -309,16 +309,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |TempCompAvailable|
 
-                .. |Absolute| raw:: html
+                .. |TempCompAvailable| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.TempCompAvailable" target="_blank">
+                    Focuser.TempCompAvailable</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.TempCompAvailable <https://ascom-standards.org/newdocs/focuser.html#Focuser.TempCompAvailable>`_
         """
         return self._get("tempcompavailable")
 
@@ -331,7 +331,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Historically (prior to 2019) no units were specified for this property.
               You should assume this this is in degrees Celsius but old devices may
               supply temperature in other units. By now (2022) however devices should be
@@ -342,16 +342,16 @@ class Focuser(Device):
 
             .. only:: html
 
-                |Absolute|
+                |Temperature|
 
-                .. |Absolute| raw:: html
+                .. |Temperature| raw:: html
 
-                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute" target="_blank">
-                    Absolute.Names</a> (external)
+                    <a href="https://ascom-standards.org/newdocs/focuser.html#Focuser.Temperature" target="_blank">
+                    Focuser.Temperature</a> (external)
 
             .. only:: rinoh
 
-                `Focuser.Absolute <https://ascom-standards.org/newdocs/focuser.html#Focuser.Absolute>`_
+                `Focuser.Temperature <https://ascom-standards.org/newdocs/focuser.html#Focuser.Temperature>`_
         """
         return self._get("temperature")
 
@@ -363,7 +363,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * You should try to call this method aftr initialization to see if halting is
               supported by your device. You can use this info to possibly disable a Halt
               button in your user interface.
@@ -409,7 +409,7 @@ class Focuser(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): The method returns as soon as the focus
               change operation has been *successfully* started, with the :attr:`IsMoving`
               property True. After the requested position is *successfully* reached and

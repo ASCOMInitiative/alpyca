@@ -93,19 +93,25 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The brightness value will be 0 when :attr:`CalibratorState` is
               :py:class:`~CalibratorStatus.Off`
 
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |Brightness|
+            .. only:: html
 
-            .. |Brightness| raw:: html
+                |Brightness|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.Brightness" target="_blank">
-                CoverCalibrator.Brightness</a> (external)
+                .. |Brightness| raw:: html
+
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.Brightness" target="_blank">
+                    CoverCalibrator.Brightness</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.Brightness <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.Brightness>`_
         """
         return self._get("brightness")
 
@@ -127,13 +133,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CalibratorChanging|
+            .. only:: html
 
-            .. |CalibratorChanging| raw:: html
+                |CalibratorChanging|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorChanging" target="_blank">
-                CoverCalibrator.CalibratorChanging</a> (external)
+                .. |CalibratorChanging| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorChanging" target="_blank">
+                    CoverCalibrator.CalibratorChanging</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CalibratorChanging <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorChanging>`_
         """
         return self._get('calibratorchanging')
 
@@ -145,7 +156,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If no calibrator is present, the state will be
               :py:class:`~CalibratorStatus.NotPresent`. You will not receive a
               :py:class:`~alpaca.exceptions.NotImplementedException`.
@@ -166,13 +177,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CalibratorState|
+            .. only:: html
 
-            .. |CalibratorState| raw:: html
+                |CalibratorState|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorState" target="_blank">
-                CoverCalibrator.CalibratorState</a> (external)
+                .. |CalibratorState| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorState" target="_blank">
+                    CoverCalibrator.CalibratorState</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CalibratorState <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorState>`_
         """
         return CalibratorStatus(self._get("calibratorstate"))
 
@@ -194,13 +210,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CoverMoving|
+            .. only:: html
 
-            .. |CoverMoving| raw:: html
+                |CoverMoving|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverMoving" target="_blank">
-                CoverCalibrator.CoverMoving</a> (external)
+                .. |CoverMoving| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverMoving" target="_blank">
+                    CoverCalibrator.CoverMoving</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CoverMoving <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverMoving>`_
         """
         return self._get('covermoving')
 
@@ -212,7 +233,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If no cover is present, the state will be
               :py:class:`~CoverStatus.NotPresent`. You will not receive a
               :py:class:`~alpaca.exceptions.NotImplementedException`.
@@ -231,13 +252,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CoverState|
+            .. only:: html
 
-            .. |CoverState| raw:: html
+                |CoverState|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverState" target="_blank">
-                CoverCalibrator.CoverState</a> (external)
+                .. |CoverState| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverState" target="_blank">
+                    CoverCalibrator.CoverState</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CoverState <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CoverState>`_
             """
         return CoverStatus(self._get("coverstate"))
 
@@ -251,7 +277,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is a mandatory property if a calibrator device is present
               (:attr:`CalibratorState` is other than
               :py:class:`~CalibratorStatus.NotPresent`)
@@ -264,13 +290,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |MaxBrightness|
+            .. only:: html
 
-            .. |MaxBrightness| raw:: html
+                |MaxBrightness|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.MaxBrightness" target="_blank">
-                CoverCalibrator.MaxBrightness</a> (external)
+                .. |MaxBrightness| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.MaxBrightness" target="_blank">
+                    CoverCalibrator.MaxBrightness</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.MaxBrightness <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.MaxBrightness>`_
         """
         return self._get("maxbrightness")
 
@@ -287,7 +318,7 @@ class CoverCalibrator(Device):
                 one of the more specific ASCOM exceptions. The device did not
                 *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): If the calibrator requires time
               to safely stabilise after use, :attr:`CalibratorChanging` will
               become ``True`` and :attr:`CalibratorState` will return
@@ -299,13 +330,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CalibratorOff|
+            .. only:: html
 
-            .. |CalibratorOff| raw:: html
+                |CalibratorOff|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOff" target="_blank">
-                CoverCalibrator.CalibratorOff()</a> (external)
+                .. |CalibratorOff| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOff" target="_blank">
+                    CoverCalibrator.CalibratorOff()</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CalibratorOff() <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOff>`_
         """
         self._put("calibratoroff")
 
@@ -323,7 +359,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): If the calibrator requires time
               to safely stabilise after use, :attr:`CalibratorChanging` will
               become ``True`` and :attr:`CalibratorState` will return
@@ -344,13 +380,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CalibratorOn|
+            .. only:: html
 
-            .. |CalibratorOn| raw:: html
+                |CalibratorOn|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOn" target="_blank">
-                CoverCalibrator.CalibratorOn()</a> (external)
+                .. |CalibratorOn| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOn" target="_blank">
+                    CoverCalibrator.CalibratorOn()</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CalibratorOn() <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CalibratorOn>`_
         """
         self._put("calibratoron", Brightness=BrightnessVal)
 
@@ -365,7 +406,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): :attr:`CoverState` indicates the
               status of the operation once CloseCover() returns. It will be
               :py:class:`~CoverStatus.Moving` immediately after the return of
@@ -379,13 +420,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |CloseCover|
+            .. only:: html
 
-            .. |CloseCover| raw:: html
+                |CloseCover|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CloseCover" target="_blank">
-                CoverCalibrator.CloseCover()</a> (external)
+                .. |CloseCover| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CloseCover" target="_blank">
+                    CoverCalibrator.CloseCover()</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.CloseCover() <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.CloseCover>`_
         """
         self._put("closecover")
 
@@ -398,7 +444,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This will  stop any cover movement as soon as possible and
               set a :attr:`CoverState` of :py:class:`~CoverStatus.Open`,
               :py:class:`~CoverStatus.Closed` or :py:class:`~CoverStatus.Unknown`
@@ -409,13 +455,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |HaltCover|
+            .. only:: html
 
-            .. |HaltCover| raw:: html
+                |HaltCover|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.HaltCover" target="_blank">
-                CoverCalibrator.HaltCover()</a> (external)
+                .. |HaltCover| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.HaltCover" target="_blank">
+                    CoverCalibrator.HaltCover()</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.HaltCover() <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.HaltCover>`_
         """
         self._put("haltcover")
 
@@ -430,7 +481,7 @@ class CoverCalibrator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): :attr:`CoverState` indicates the
               status of the operation once OpenCover() returns. It will be
               :py:class:`~CoverStatus.Moving` immediately after the return of
@@ -444,13 +495,18 @@ class CoverCalibrator(Device):
         .. admonition:: Master Interfaces Reference
             :class: green
 
-            |OpenCover|
+            .. only:: html
 
-            .. |OpenCover| raw:: html
+                |OpenCover|
 
-                <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.OpenCover" target="_blank">
-                CoverCalibrator.OpenCover()</a> (external)
+                .. |OpenCover| raw:: html
 
+                    <a href="https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.OpenCover" target="_blank">
+                    CoverCalibrator.OpenCover()</a> (external)
+
+            .. only:: rinoh
+
+                `CoverCalibrator.OpenCover() <https://ascom-standards.org/newdocs/covercalibrator.html#CoverCalibrator.OpenCover>`_
         """
         self._put("opencover")
 

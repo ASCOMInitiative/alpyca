@@ -36,42 +36,29 @@ font_color=#294ea3
 [code block]
 background_color=#ffffcc
 
-[object signature]
-background_color=#ddddff
-
-; Reference:
-; https://www.mos6581.org/rinohtype/master/style/rinoh.structure.AdmonitionStyle.html#rinoh.structure.AdmonitionStyle
-; This makes all admonitions this light green and boxed and in one piece.
-; This covers the Master Interfaces References boxes and the rest too.
-; I know this is a complete crock with respect to precedence of styles!!
-; It solved my problem and so I don't care.
-[admonition]
-background_color=#d0ffd0
+[builtin admonition:Admonition]
 inline_title=false
-border=$(thin_black_stroke)
-padding_left=8pt
-padding_right=8pt
-same_page=true
 
 [attention admonition]
-base=boxed builtin admonition
 background_color=#ffff99
 
 [caution admonition]
-base=boxed builtin admonition
 background_color=#ffcc66
 
 [warning admonition]
-base=boxed builtin admonition
 background_color=#ffcc66
 
-[tip admonition]
-base=boxed builtin admonition
-background_color=#ffc0cb
+[object signature]
+background_color=ddddff
 
-; I eliminated use of Notes: which only works in HTML and not PDF, after a long battle trying
-; to get rinoh to see 'notes" like 'note'.
+;
+; Actually the Alpyca docs use "Notes:" and it's not picked up
+; here. If you change the source to "Note:" then it works.
+; I have an open question on how to make Notes: a synonym for
+; "Note" but I suspect it is happening within Sphinx before
+; the rinoh Sphinx-Builder gets 'hold of it.
+;
 [note admonition]
-base=boxed builtin admonition
-background_color=#f8f8ff
+background_color=#e6e6ff
+
 

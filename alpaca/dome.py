@@ -87,7 +87,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The specified altitude (*referenced to the dome center/equator*) is of the
               opening to the sky through which the optics receive light.
             * It is up to the dome control and driver to determine how best to locate the
@@ -131,7 +131,7 @@ class Dome(Device):
     def AtHome(self) -> bool:
         """The dome is in the home position.
 
-        Notes:
+        Note:
             This is normally used following a findhome() operation. The value is reset
             with any azimuth slew operation that moves the dome away from the home
             position. athome() may also become true durng normal slew operations, if the
@@ -170,7 +170,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             Set only following a park() operation and reset with any slew operation.
 
         Returns:
@@ -208,7 +208,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Azimuth has the usual sense of True North zero and increasing clockwise
               i.e. 90 East, 180 South, 270 West.
             * The specified azimuth (*referenced to the dome center/equator*) is of the
@@ -415,7 +415,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * If this is True, then the exposed Dome interface is part of an integrated
               mount/dome control system that offers automatic slaving.
 
@@ -481,7 +481,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This property is the correct way to monitor an in-progress shutter
               movement. It will be :py:class:`~ShutterState.shutterOpening'
               immediately after returning from an :meth:`OpenShutter()` call,
@@ -556,7 +556,7 @@ class Dome(Device):
                 a previous movement request. This exception may be encountered
                 on any call to the device.
 
-        Notes:
+        Note:
             * This is the correct property to use to determine *successful* completion of
               a (non-blocking) :meth:`SlewToAzimuth()` and/or :meth:`SlewToAltitude()`
               request. Slewing will be True immediately upon returning from either of these
@@ -588,7 +588,7 @@ class Dome(Device):
                 request itself fails in some way. This exception may be encountered
                 on any call to the device.
 
-        Notes:
+        Note:
             * When this call succeeds, :attr:`Slewing` will become False, and slaving
               will have stopped as indicate by :attr:`Slaved` becoming False.
             * By "any part of the dome" is meant the dome itself, the roof, a shutter,
@@ -626,7 +626,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): :attr:`ShutterStatus` is the correct
               property to use for monitoring an in-progress shutter movement. A transition to
               :py:class:`~ShutterState.shutterClosed` indicates a *successfully
@@ -672,7 +672,7 @@ class Dome(Device):
             SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`AtHome` property
               to monitor the operation. When the the home position is has been
               *successfully* reached, :attr:`Azimuth` is synchronized to the appropriate value,
@@ -710,7 +710,7 @@ class Dome(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): :attr:`ShutterStatus` is the correct
               property to use for monitoring an in-progress shutter movement. A
               transition to :py:class:`~ShutterState.shutterOpen` indicates a
@@ -766,7 +766,7 @@ class Dome(Device):
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`AtPark` property
               to monitor the operation. When the the park position has been
               *successfully* reached, :attr:`Azimuth` is synchronized to the
@@ -837,7 +837,7 @@ class Dome(Device):
             SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested Altitude has been
               *successfully* reached, :attr:`Slewing` becomes False.
@@ -889,7 +889,7 @@ class Dome(Device):
             SlavedException: If :attr:`Slaved` is True
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous** (non-blocking): Use the :attr:`Slewing` property
               to monitor the operation. When the the requested Azimuth has been
               *successfully* reached, :attr:`Slewing` becomes False.

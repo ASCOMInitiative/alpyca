@@ -77,7 +77,7 @@ class Device:
             api_version: Alpaca API version.
             base_url: Basic URL to easily append with commands.
 
-        Notes: Sets a random number for ClientID that lasts
+        Note: Sets a random number for ClientID that lasts
 
         """
         self.address = address
@@ -125,7 +125,7 @@ class Device:
                 one of the more specific ASCOM exceptions. The device did not
                 *successfully* complete the request.
 
-        Notes:
+        Note:
             * This method, combined with :attr:`SupportedActions`, is the
               supported mechanic for adding non-standard functionality.
 
@@ -402,7 +402,7 @@ class Device:
         Raises:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * The ``Connected`` property sets and reports the state of connection to
               the device hardware. For a hub this means that ``Connected`` will be
               ``True`` when the first driver connects and will only be set to False
@@ -448,7 +448,7 @@ class Device:
             NotConnectedException: If the device status is unavailable
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This describes the *device*, not the driver. See the :attr:`DriverInfo`
               property for information on the ASCOM driver.
             * The description length will be a maximum of 64 characters so
@@ -524,7 +524,7 @@ class Device:
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This describes the *driver* not the device. See the :attr:`Description`
               property for information on the device itself
             * The return is a Python list of strings, the total length of which may be
@@ -566,7 +566,7 @@ class Device:
                 one of the more specific ASCOM exceptions.
                 The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This must be in the form "n.n". It should not to be confused with the
               :attr:`InterfaceVersion` property, which is the version of this
               specification supported by the driver. **Note:** on systems with a comma
@@ -604,7 +604,7 @@ class Device:
         Raises:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is a single integer indicating the version of this specific
               ASCOM universal interface definition. For example, for ICameraV3,
               this will be 3. It should not to be confused with the
@@ -677,7 +677,7 @@ class Device:
         Raises:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This method, combined with :meth:`Action`, is the supported
               mechanic for adding non-standard functionality.
             * SupportedActions is a "discovery" mechanism that enables clients to know
@@ -783,7 +783,7 @@ class Device:
         Args:
             response (Response): Response from Alpaca server to check.
 
-        Notes:
+        Note:
             * Depending on the error number, the appropriate ASCOM exception type
               will be raised. See the ASCOM Alpaca API Reference for the reserved
               error codes and their corresponding exceptions. NOTE that DriverException

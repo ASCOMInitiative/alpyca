@@ -76,7 +76,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * For IRotatorV3 drivers and later(:attr:`InterfaceVersion` >= 3)
               CanReverse is always True.
             * For more info on reversal see the :attr:`Reverse` property.
@@ -107,7 +107,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * This is the correct property to use to determine *successful* completion of
               a (non-blocking) :meth:`Move()` request. IsMoving will be True
               immediately upon returning from a :meth:`Move()` call, and will
@@ -140,7 +140,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             Value is in degrees counterclockwise from the rotator's mechanical index.
 
         .. admonition:: Master Interfaces Reference
@@ -169,7 +169,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Position is in degrees counterclockwise
             * The :meth:`Sync()` method may used to make Position indicate
               equatorial position angle. This can account for not only an offset
@@ -205,7 +205,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             Rotation is normally in degrees counterclockwise as viewed
             from behind the rotator, looking toward the sky. This corresponds
             to the direction of equatorial position angle. Set this property True
@@ -263,7 +263,7 @@ class Rotator(Device):
     def TargetPosition(self) -> float:
         """The destination angle for :meth:`Move()` and MoveAbsolute().
 
-        Notes:
+        Note:
             This will contain the new Position, including any :meth:`Sync()`
             offset, immediately upon return from a call to :meth:`Move()` or
             :meth:`MoveAbsolute()`.
@@ -294,7 +294,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * You should try to call this method aftr initialization to see if halting is
               supported by your device. You can use this info to possibly disable a Halt
               button in your user interface.
@@ -337,7 +337,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
@@ -382,7 +382,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
@@ -428,7 +428,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * **Asynchronous**: The method returns as soon as the rotation operation has
               been successfully started, with the :attr:`IsMoving` property True.
               After the requested angle is successfully reached and motion stops,
@@ -471,7 +471,7 @@ class Rotator(Device):
             NotConnectedException: If the device is not connected
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
-        Notes:
+        Note:
             * Once this method has been called and the sync offset determined, both
               the :meth:`MoveAbsolute()` method and the :attr:`Position`
               property will function in synced coordinates rather than mechanical

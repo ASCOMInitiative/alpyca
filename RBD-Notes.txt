@@ -1099,3 +1099,11 @@ auncher\winapi.py", line 68, in impl
 07-Nov-2024
 -----------
 * Master Interfaces links for PDF. Completed Camera.
+
+23-Nov-2024
+-----------
+* Finally other classes completed over last few weeks. Stray 'T' in text cost me half a day ha ha.
+* Also did the .rst class container docs for PDF vs HTML. Geeze.
+* Changed all Notes: headings to Note: so would render into colored boxes in PDF.
+* Adjust the PDF stylesheet to make the admonition boxes all bordered with padding and separated titles.
+* Trying to get the Master Interfaces References admonition box to render green. I GOT IT.
