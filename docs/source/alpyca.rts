@@ -53,6 +53,9 @@ padding_left=8pt
 padding_right=8pt
 same_page=true
 
+[builtin admonition:Admonition]
+inline_title=false
+
 [attention admonition]
 base=boxed builtin admonition
 background_color=#ffff99
