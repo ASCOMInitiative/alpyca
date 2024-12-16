@@ -23,7 +23,7 @@ served device(s).
 
 Example::
 
-    from alpaca.import discovery
+    from alpaca import discovery
 
     svrs = discovery.search_ipv4()  # Note there is an IPv6 function as well
     print(svrs)
