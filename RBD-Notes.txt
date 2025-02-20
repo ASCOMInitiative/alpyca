@@ -873,7 +873,7 @@ auncher\winapi.py", line 68, in impl
   + Poetry build to capture that
 === READY FOR POETRY PUBLISH ===
 
-07-Oct-2024
+07-Oct-2024  ** PUBLISHED **
 -----------
 * Merge platform 7 branch with master. In VSCode, switch to Master. Then Merge platform 7.
   - delete a sad story of Git jibberish. Caused by presence of 4 Thunder Test Cnfiguration files on Master.
@@ -882,7 +882,9 @@ auncher\winapi.py", line 68, in impl
 * Updated the Git remote which was old - pointing to the repo from last year!! Why did anything work ha ha?
 * Publish to rel PyPi -- Invalid auth!!
   - poetry config pypi-token.pypi ... whatever ... -> OK
+  -----------------------------------------
   - poetry publish -> OK! Shows on PyPi OK.
+  -----------------------------------------
 
 08-Oct-2024
 -----------
@@ -1107,3 +1109,8 @@ auncher\winapi.py", line 68, in impl
 * Changed all Notes: headings to Note: so would render into colored boxes in PDF.
 * Adjust the PDF stylesheet to make the admonition boxes all bordered with padding and separated titles.
 * Trying to get the Master Interfaces References admonition box to render green. I GOT IT.
+
+20-Feb-2024
+-----------
+* ALERT: For the PyTest tests to work, you must be on the virtual environment .venv.
+* Create Develop branch and change to That
