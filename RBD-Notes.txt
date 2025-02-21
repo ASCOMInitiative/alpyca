@@ -1110,7 +1110,15 @@ auncher\winapi.py", line 68, in impl
 * Adjust the PDF stylesheet to make the admonition boxes all bordered with padding and separated titles.
 * Trying to get the Master Interfaces References admonition box to render green. I GOT IT.
 
-20-Feb-2024
+20-Feb-2025
 -----------
 * ALERT: For the PyTest tests to work, you must be on the virtual environment .venv.
 * Create Develop branch and change to That
+
+21-Feb-2025
+-----------
+* Clone alpyca onto RPi 5. Install required packages requests: netifaces, python-dateutil, pytz (some for PyTest or dev snippets)
+* Try PyTest, Linux-OmniSim 0.4 does not return full info on xmlprofile endpoint, only uniquid. I must not have the latest OmniSim for Linux-aarch64.
+  - Windows one 0.4.1-rc.1+309d2a70c9d9b053654b9e6a0dc3d027ec928936 64bit returns complete xmlprofile.
+  - Cannot run PyTest till I get latest OmniSim for RPi 64.
+* Make a copy of my (untracked) test snippets file devtest.py and also the demo from docs as QuickTest.py.
