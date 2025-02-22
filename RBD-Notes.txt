@@ -1122,3 +1122,8 @@ auncher\winapi.py", line 68, in impl
   - Windows one 0.4.1-rc.1+309d2a70c9d9b053654b9e6a0dc3d027ec928936 64bit returns complete xmlprofile.
   - Cannot run PyTest till I get latest OmniSim for RPi 64.
 * Make a copy of my (untracked) test snippets file devtest.py and also the demo from docs as QuickTest.py.
+
+22-Feb-2025
+-----------
+* PyTest fixtures in conftest.py - Make OmniSim address symbolic, and use the 0.4.1 OmniSim on Windows.
+* ALL PYTESTS PASS
