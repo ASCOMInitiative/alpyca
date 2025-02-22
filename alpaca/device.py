@@ -44,9 +44,11 @@
 # 05-Mar-24 (rbd) 3.0.0 New members for Platform 7
 # 06-Mar-24 (rbd) 3.0.0 Add stubbed Master Interfaces refs to all members
 # 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
+# 22-Feb-25 (rbd) 3.1.0 Connect()/Disconnect emulation for pre Platform 7
+#                       devices.
 # -----------------------------------------------------------------------------
 
-from threading import Lock
+from threading import Lock, Timer
 from typing import List
 import requests
 import random
@@ -92,6 +94,13 @@ class Device:
             self.device_number
         )
         self.rqs = requests.Session()
+        #
+        # Variables for Connect()/Disconnect() emulation on
+        # pre Platform 7 devices.
+        #
+        self.conn_lock = Lock()
+        self.fake_connecting = False
+
 
     # ------------------------------------------------
     # CLASS VARIABLES - SHARED ACROSS DEVICE INSTANCES
@@ -99,6 +108,18 @@ class Device:
     _client_id = random.randint(0, 65535)
     _client_trans_id = 1
     _ctid_lock = Lock()
+    _plat7_intvers = {  # InterfaceVersion of Platform 7 devices (with async)
+        'camera' :  4,
+        'covercalibrator' : 2,
+        'dome' : 3,
+        'filterwheel' : 3,
+        'focuser' : 4,
+        'observingconditions' : 2,
+        'rotator' : 4,
+        'safetymonitor' : 3,
+        'switch' : 3,
+        'telescope' : 4
+    }
     # ------------------------------------------------
 
     def Action(self, ActionName: str, *Parameters) -> str:
@@ -311,7 +332,24 @@ class Device:
             device's specification, and see ``Connect()`` there.
 
         """
-        return self._put("connect")
+
+        def __sync_conn():
+            self.conn_lock.acquire()
+            self.fake_connecting = True
+            self.conn_lock.release()
+            self.Connected = True           # Calls device synchronously
+            self.conn_lock.acquire()
+            self.fake_connecting = False
+            self.conn_lock.release()
+            self.con_disc_timer.cancel()
+
+        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+            self.con_disc_timer = Timer(120, __sync_conn)
+            self.con_disc_timer.setName('Sync connection')
+            self.con_disc_timer.start()
+            return True                     # Totally fake, may fail later
+        else:
+            return self._put("connect")
 
     def Disconnect(self) -> None:
         """Disconnect from the device **asynchronously**.
@@ -386,7 +424,13 @@ class Device:
                 there.
 
         """
-        return self._get("connecting")
+        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+            self.conn_lock.acquire()
+            x = self.fake_connecting
+            self.conn_lock.release()
+            return x
+        else:
+            return self._get("connecting")
 
     @property
     def Connected(self) -> bool:
