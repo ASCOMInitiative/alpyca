@@ -48,7 +48,9 @@
 #                       devices.
 # -----------------------------------------------------------------------------
 
-from threading import Lock, Timer
+from threading import Lock, Timer, Thread
+import time #TODO TESTING ONLY
+import sys
 from typing import List
 import requests
 import random
@@ -99,7 +101,14 @@ class Device:
         # pre Platform 7 devices.
         #
         self.conn_lock = Lock()
+        self.fake_conn_thread = None
         self.fake_connecting = False
+        self.fake_disconnecting = False
+        self.fake_already_connected = False
+        self.fake_already_disconnected = False
+        self.fake_conn_exception = None
+        self.driver_interface_version = None
+
 
 
     # ------------------------------------------------
@@ -322,7 +331,10 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
-            **Non-Blocking** Use :attr:`Connecting` to indicate completion.
+            * **Non-Blocking** Use :attr:`Connecting` to indicate completion.
+            * Natively present only in Platform 7 (2024) devices, but this
+              library emulates Connect()/Disconnect()/Connecting mechanic
+              for older devices.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -333,23 +345,62 @@ class Device:
 
         """
 
+        #
+        # Runs in separate thread started below
+        # - - - - - - - -
         def __sync_conn():
-            self.conn_lock.acquire()
-            self.fake_connecting = True
-            self.conn_lock.release()
-            self.Connected = True           # Calls device synchronously
+            ##print('conn thread starts')
+            try:
+                ##print('Set Connected=True')
+                raise DriverException(number=0x500, message='Test connect failure')
+                self.Connected = True           # Calls device synchronously
+                time.sleep(5)                   # TODO TEST
+                #print('-> completed OK')
+                self.conn_lock.acquire()
+                self.fake_already_connected = True
+                #print('also fake_already_connected -> True')
+                self.conn_lock.release()        #
+                #
+                # Thanks to Peter S - The interface version may change after
+                # connecting!! Cache the new one if changed!!
+                # (we already got it making the emulation decision)
+                try:
+                    v =  int(self._get("interfaceversion"))
+                except:                         # V1 drivers don't implement this property
+                    v = 1
+                if v != self.driver_interface_version:
+                    #print('InterfaceVersion changed to {v}')
+                    self.driver_interface_version = v
+            except Exception as e:              # Catch the Connected = True exception
+                self.conn_lock.acquire()
+                self.fake_conn_exception = e
+                self.fake_already_connected = False
+                self.conn_lock.release()
+                #print(f'Connect failed: {type(e).__name__} {e.args}')
             self.conn_lock.acquire()
             self.fake_connecting = False
             self.conn_lock.release()
-            self.con_disc_timer.cancel()
+            #print('conn thread ends')
+            return
+        # - - - - - - - -
 
         if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
-            self.con_disc_timer = Timer(120, __sync_conn)
-            self.con_disc_timer.setName('Sync connection')
-            self.con_disc_timer.start()
-            return True                     # Totally fake, may fail later
+            #print(f'Read InterfaceVersion = {self.InterfaceVersion}')
+            self.conn_lock.acquire()
+            ac = self.fake_already_connected
+            self.conn_lock.release()
+            if(not ac):
+                self.conn_lock.acquire()
+                #print('fake_connecting -> True')
+                self.fake_connecting = True
+                self.conn_lock.release()
+                self.fake_conn_thread = Thread(target=__sync_conn, name='Connect emulation')
+                self.fake_conn_thread.start()
+            #else:
+                #print('Already Connected, skip Connect()')
+            return True                         # Totally fake, may fail later
         else:
-            return self._put("connect")
+            return self._put("connect")         # Real Connect()
 
     def Disconnect(self) -> None:
         """Disconnect from the device **asynchronously**.
@@ -363,7 +414,10 @@ class Device:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         Note:
-            **Non-Blocking** Use :attr:`~Device.Connecting` to indicate completion.
+            * **Non-Blocking** Use :attr:`~Device.Connecting` to indicate completion.
+            * Natively present only in Platform 7 (2024) devices, but this
+              library emulates Connect()/Disconnect()/Connecting mechanic
+              for older devices.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -385,7 +439,50 @@ class Device:
                 there.
 
         """
-        return self._put("disconnect")
+        #
+        # Runs in separate thread started below
+        # - - - - - - - -
+        def __sync_disconn():
+            #print('disconn thread starts')
+            try:
+                #print('Set Connected=False')
+                self.Connected = False           # Calls device synchronously
+                time.sleep(5)                   # TODO TEST
+                #print('-> completed OK')
+                self.conn_lock.acquire()        # PROTECT THIS WHOLE THING
+                self.fake_already_disconnected = True
+                #print('also fake_already_disconnected -> True')
+                self.conn_lock.release()        #
+            except Exception as e:              # Catch the Connected = True exception
+                self.conn_lock.acquire()
+                self.fake_conn_exception = e
+                self.fake_already_disconnected = False
+                self.conn_lock.release()
+                #print(f'Disconnect failed: {type(e).__name__} {e.args}')
+            self.conn_lock.acquire()
+            self.fake_disconnecting = False
+            self.conn_lock.release()
+            #print('discthread ends')
+            return
+        # - - - - - - - -
+
+        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+            #print(f'Read InterfaceVersion = {self.InterfaceVersion}')
+            self.conn_lock.acquire()
+            ac = self.fake_already_disconnected
+            self.conn_lock.release()
+            if(not ac):
+                self.conn_lock.acquire()
+                #print('fake_disconnecting -> True')
+                self.fake_disconnecting = True
+                self.conn_lock.release()
+                self.fake_conn_thread = Thread(target=__sync_disconn, name='Disconnect emulation')
+                self.fake_conn_thread.start()
+            #else:
+                #print('Already Disconnected, skip Disconnect()')
+            return True                         # Totally fake, may fail later
+        else:
+            return self._put("disconnect")
 
     @property
     def Connecting(self) -> bool:
@@ -401,8 +498,9 @@ class Device:
             * Use this property to determine when an (async)
               :meth:`Connect` or :meth:`Disconnect` has completed,
               at which time it will transition from ``True`` to ``False``.
-            * Present only in Platform 7 (2024) devices. Check the device's
-              :attr:`InterfaceVersion`.
+            * Natively present only in Platform 7 (2024) devices, but this
+              library emulates Connect()/Disconnect()/Connecting mechanic
+              for older devices.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -425,10 +523,19 @@ class Device:
 
         """
         if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+            if self.fake_conn_exception != None:
+                e = self.fake_conn_exception
+                #print(f'Re-raising: {type(e).__name__} {e.args[0]}')
+                # Must construct a new Exception to come from this place
+                x = type(e)                     # Magic to make a new copy of this class
+                y = x(errno=0x500, message=e.args[0])  # Instantiate from here
+                raise y                         # and raise it!
             self.conn_lock.acquire()
             x = self.fake_connecting
+            y = self.fake_disconnecting
             self.conn_lock.release()
-            return x
+            #print(f'Fake_connecting is {x} Fake Disconnecting is {y}')
+            return x or y
         else:
             return self._get("connecting")
 
@@ -654,6 +761,9 @@ class Device:
               this will be 3. It should not to be confused with the
               :attr:`DriverVersion` property, which is the major.minor version
               of the driver for  this device.
+            * This value is cached internally after first retrieval since it is
+              repeatedly used if emulating Connect/Disconnect semantics on older
+              (pre - Platform 7) devioces.
 
         .. admonition:: Master Interfaces Reference
             :class: green
@@ -675,7 +785,18 @@ class Device:
                 there.
 
         """
-        return int(self._get("interfaceversion"))
+        #
+        # Cache this for Connect/Disconnect decision making
+        #
+        if self.driver_interface_version == None:
+            try:
+                v =  int(self._get("interfaceversion"))
+            except:                     # V1 drivers don't implement this property
+                v = 1
+            self.driver_interface_version = v
+            return v
+        else:
+            return self.driver_interface_version
 
     @property
     def Name(self) -> str:

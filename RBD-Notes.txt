@@ -1126,4 +1126,23 @@ auncher\winapi.py", line 68, in impl
 22-Feb-2025
 -----------
 * PyTest fixtures in conftest.py - Make OmniSim address symbolic, and use the 0.4.1 OmniSim on Windows.
-* ALL PYTESTS PASS
+* ALL PYTESTS PASS on Pi5 and also W10 systems.
+
+23-Feb-2025
+-----------
+* Implementing async Connect()/Disconnect()/Connecting for pre-Platform 7 devices, per
+  https://ascomtalk.groups.io/g/ASCOMCoreTeam/topic/adding_simulated_connect_to/111235515
+  and using as a model
+  https://github.com/ASCOMInitiative/ASCOMPlatform/blob/main/ASCOM.DriverAccess/AscomDriver.cs
+  which catched exceptions on Connected = True and throws on the next Connecting Read.
+* Concerns (this addition is for low-skill programmers)
+  - What if programmer loops 'while not connectED' or something? Reading Connected while async
+    Connected = True is in progress?
+  - Should Connect() instantly return if reading Connected returns True? Throw right there
+    if device returns an exception?
+  - Cache Connected for subsequent skipping of Connect() only not if client wants the real state.
+* Looks good except exception handling still needs testing
+* ALERT - DO DOCS OUTSIDE OF VENV ON W10
+* HTML builds fine on Program Files\Python311
+* PDF builds fine on Program Files\Python311 also -- WOOHOO
+
