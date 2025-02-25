@@ -32,12 +32,12 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = 'Alpyca: API Library for Alpaca'
-copyright = '2022-2024, ASCOM Initiative, MIT License'
+copyright = '2022-2025, ASCOM Initiative, MIT License'
 author = 'Bob Denny'
 
 # The full version, including alpha/beta/rc tags
-version = '3.0.0'
-release = '3.0.0'
+version = '3.1.0'
+release = '3.1.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -147,7 +147,7 @@ html_style = 'css/ascom.css'
 rinoh_documents = [dict(doc='index',                # top-level file (index.rst)
                         target='alpyca',            # output file (alpyca.pdf)
                         title='Alpyca Library',
-                        subtitle='Release 3.0.0',
+                        subtitle='Release 3.1.0',
                         author='Robert B. Denny <rdenny@dc3.com>',
                         logo='alpaca1000.png',
                         template='alpyca.rtt')]

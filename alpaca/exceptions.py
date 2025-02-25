@@ -37,111 +37,202 @@
 # 02-May-22 (rbd) Initial Edit
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 05-Mar-24 (rbd) 3.0.0 For Platform 7 add OperationCancelledException.
+# 24-Feb-25 (rbd) 3.1.0 Fix DriverException and AlpacaRequestException for
+#                       specified error number. Add number as exception
+#                       attribute, Make message and number as named exception
+#                       properties. Add str(exception) support. Enhance
+#                       documentation.
 # -----------------------------------------------------------------------------
 
 class ActionNotImplementedException(Exception):
-    """Numeric value: 0x040C (1036)"""
+    """Exception thrown by a device when it receives an unknown command through
+    the Action method.
+
+    Properties:
+        - number (int): Constant 0x040C (1036)
+        - message (str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x40C
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x40C, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class AlpacaRequestException(Exception):
     """Raised by the device's Alpaca server for unknown or illegal requests.
 
-    The number is the HTTP response code (4xx or 5xx) and the message
-    is a concatenation of the server's response text and the URL.
-
+    Properties:
+        - number (int): The HTTP response code (4xx or 5xx)
+        - message (str): The concatenation of the server's response text and the URL.
     """
     def __init__(
         self,
         number: int,
         message: str
     ):
-        super().__init__(message)
+        self.number = number
+        self.message = message
+        super().__init__(number, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
+
 
 class DriverException(Exception):
-    """Numeric value: 0x500 - 0xFFF
+    """Generic driver exception. See note below.
 
-    The number is assigned by the driver and will be a number from 0x500 - 0xFFF
-
+    Properties:
+        - number (int): Assigned by the device and will be a number from 0x500 - 0xFFF
+        - message (str): Text of the error message
     """
     def __init__(
         self,
         number: int,
         message: str
     ):
-        super().__init__(message)
+        self.number = number
+        self.message = message
+        super().__init__(number, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class InvalidOperationException(Exception):
-    """Numeric value: 0x40B (1035)"""
+    """Thrown by the device to reject a command from the client.
+
+    Properties:
+        - number (int): Constant 0x40B (1035)
+        - message (str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x40B
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x40B, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class InvalidValueException(Exception):
-    """Numeric value: 0x401 (1025)"""
+    """Exception to report an invalid value supplied to a device.
+
+    Properties:
+        - number (int): Constant 0x401 (1025)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x401
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x401, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class NotConnectedException(Exception):
-    """Numeric value: 0x407 (1031)
+    """An operation is attempted that requires communication with the device, but the device
+    is disconnected.
+
+    Properties:
+        - number (int): Constant 0x407 (1031)
+        - message(str): Text of the error message
 
     This refers to the driver not being connected to the
     device. It is not for network outages or bad URLs.
-
     """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x407
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x407, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class NotImplementedException(Exception):
-    """Numeric value: 0x400 (1024)"""
+    """Property or method is not implemented in the device
+
+    Properties:
+        - number (int): Constant 0x400 (1024)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x400
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x400, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class OperationCancelledException(Exception):
-    """Numeric value: 0x40E (1038)"""
+    """An (asynchronous) in-progress operation has been cancelled.
+
+    Properties:
+        - number (int): Constant 0x40E (1038)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x40E
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x40E, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class ParkedException(Exception):
-    """Numeric value: 0x408 (1032)"""
+    """Movement (or other invalid operation) was attempted while the
+    device was in a parked state.
+
+    Properties:
+        - number (int): Constant 0x408 (1032)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x408
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x408, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 class SlavedException(Exception):
-    """Numeric value: 0x409 (1033)"""
+    """Movement (or other invalid operation) was attempted while the
+    device was in slaved mode. This applies primarily to Dome drivers.
+
+    Properties:
+        - number (int): Constant 0x409 (1033)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x409
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x409, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 
 # Replaced with DriverException per agreement 30-Apr-2022
 # class UnknownAscomException(Exception):
@@ -162,11 +253,20 @@ class SlavedException(Exception):
 #         super().__init__(f'Unknown code {number}: {message}')
 
 class ValueNotSetException(Exception):
-    """Numeric value: 0x402 (1026)"""
+    """No value has yet been set for this property.
+
+    Properties:
+        - number (int): Constant 0x402 (1026)
+        - message(str): Text of the error message
+    """
     def __init__(
         self,
         message: str
     ):
         self.number = 0x402
-        super().__init__(message)
+        self.message = message
+        super().__init__(0x402, message)
+
+    def __str__(self):
+        return f'{self.message} (Error Code: 0x{self.number:x})'
 

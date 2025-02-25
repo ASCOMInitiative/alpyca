@@ -384,7 +384,7 @@ class Device:
             return
         # - - - - - - - -
 
-        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+        if self.InterfaceVersion < self._plat7_intvers[self.device_type]:
             #print(f'Read InterfaceVersion = {self.InterfaceVersion}')
             self.conn_lock.acquire()
             ac = self.fake_already_connected
@@ -466,7 +466,7 @@ class Device:
             return
         # - - - - - - - -
 
-        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+        if self.InterfaceVersion < self._plat7_intvers[self.device_type]:
             #print(f'Read InterfaceVersion = {self.InterfaceVersion}')
             self.conn_lock.acquire()
             ac = self.fake_already_disconnected
@@ -522,13 +522,14 @@ class Device:
                 there.
 
         """
-        if True: #self.InterfaceVersion < self._plat7_intvers[self.device_type]:
+        if self.InterfaceVersion < self._plat7_intvers[self.device_type]:
             if self.fake_conn_exception != None:
                 e = self.fake_conn_exception
-                #print(f'Re-raising: {type(e).__name__} {e.args[0]}')
+                #print(f'Originally: {type(e).__name__} {e.args[1]}')
                 # Must construct a new Exception to come from this place
                 x = type(e)                     # Magic to make a new copy of this class
-                y = x(errno=0x500, message=e.args[0])  # Instantiate from here
+                y = x(number=e.args[0], message=e.args[1])  # Instantiate from here
+                #print(f'Re-Raising {str(y)}')   # Use new str() support
                 raise y                         # and raise it!
             self.conn_lock.acquire()
             x = self.fake_connecting

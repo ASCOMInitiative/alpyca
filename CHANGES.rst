@@ -1,3 +1,11 @@
+Version 3.1.0
+=============
+
+- Add logic to emulate asynchronous ``Connect()``, ``Disconnect()``, and ``Connecting`` API for older pre-Platform 7
+  devices.
+- Enhance Exception Classes with error code attribute, named properties ``number`` and ``message`` and add support
+  for printing exception instances via ``str(exception)``. See the Exception Classes documentation for details.
+
 Version 3.0.0
 =============
 

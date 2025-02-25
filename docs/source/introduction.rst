@@ -17,7 +17,8 @@ Introduction and Quick Start
 .. only:: html
 
     This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
-    For more information see the |ascsite|, specifically the |devhelp| section, and the |master2|.
+    For more information see the |ascsite|, specifically the |devhelp| section, the |alpacaapi|,
+    and |master2|.
 
 .. only:: rinoh or rst
 
@@ -26,21 +27,22 @@ Introduction and Quick Start
     `ASCOM Initiative web site <https://ascom-standards.org/index.htm>`_,
     specifically the
     `Alpaca Developers Info <https://ascom-standards.org/AlpacaDeveloper/Index.htm>`_
-    section, and the
-    `Alpaca API Reference (PDF) <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_.
+    section, the
+    `Alpaca API Reference <https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html>`_,
+    and the
+    `ASCOM Master Interfaces (Alpaca and COM) <https://ascom-standards.org/newdocs/>`_.
 
 .. _intro-stat:
 
 Status of This Document
 -----------------------
 The descriptions of the ASCOM Standard interfaces implemented in Alpyca are
-our best efforts as of February 2024, including the results of over a year of
+our best efforts as of February 2025, including the results of over a year of
 discussion and decisions, ultimately resulting in the new interface revisions
 in the ASCOM Platform 7. None of these changes are breaking. They are additions
 needed to support asynchronous operations for Alpaca, and clarifications of existing
 documentation to specificallly describe already asynchronous interface members.
-For details see `Release Notes for Interfaces as of ASCOM Platform 7
-<https://ascom-standards.org/newdocs/relnotes.html#release-notes-for-interfaces-as-of-ascom-platform-7>`_
+For details see the Release notes in the Master Interfaces document liked above.
 
 .. note::
     Changes to the interfaces are *not* breaking. Your code using this
@@ -102,31 +104,32 @@ Simple Example
 Then execute this little program::
 
     import time
-    from alpaca.telescope import *      # Multiple Classes including Enumerations
-    from alpaca.exceptions import *     # Or just the exceptions you want to catch
+    from alpaca.telescope import *              # Multiple Classes including Enumerations
+    from alpaca.exceptions import *             # Or just the exceptions you want to catch
 
-    T = Telescope('localhost:32323', 0) # Local Omni Simulator
+    T = Telescope('localhost:32323', 0)         # Local Omni Simulator
     try:
-        T.Connect()                     # Asynchronous in Platform 7
+        T.Connect()                             # Asynchronous in Platform 7
         while t.Connecting:
             time.sleep(0.5)
         print(f'Connected to {T.Name}')
         print(T.Description)
-        T.Tracking = True               # Needed for slewing (see below)
+        T.Tracking = True                       # Needed for slewing (see below)
         print('Starting slew...')
         T.SlewToCoordinatesAsync(T.SiderealTime + 2, 50)    # 2 hrs east of meridian
         while(T.Slewing):
-            time.sleep(5)               # What do a few seconds matter?
+            time.sleep(5)                       # What do a few seconds matter?
         print('... slew completed successfully.')
         print(f'RA={T.RightAscension} DE={T.Declination}')
         print('Turning off tracking then attempting to slew...')
         T.Tracking = False
-        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)    # 5 deg slew N
+        T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)  # 5 deg slew N
         # This will fail for tracking being off
         print("... you won't get here!")
-    except Exception as e:              # Should catch specific InvalidOperationException
-        print(f'Slew failed: {str(e)}')
-    finally:                            # Assure that you disconnect
+    except Exception as e:                      # Should catch specific InvalidOperationException
+        print(f'Caught {type(e).__name__}')
+        print(f'  Slew failed: {e.message}')    # Using exception named properties
+    finally:                                    # Assure that you disconnect
         print("Disconnecting...")
         T.Connected = False
 
@@ -138,10 +141,32 @@ Results::
     ... slew completed successfully.
     RA=10.939969572854931 DE=50
     Turning off tracking then attempting to slew...
-    Slew failed: SlewToCoordinatesAsync is not allowed when tracking is False
+    Caught InvalidOperationException
+      Slew failed: SlewToCoordinatesAsync is not allowed when tracking is False
     Disconnecting...
     done
 
+Enhancement: Emulation of Platform 7 Async Connection API
+---------------------------------------------------------
+If you connect to a device whose ``InterfaceVersion`` indicates that it is older
+and does not support the new asynchronous API of Platform 7 as described in the
+Release Notes of the Master Interfaces Document linked above, this library will
+provide emulation of those calls internally. If ``Connect()`` or
+``Disconnect()`` fail after the call returns, the exception will be delivered on
+the next read of ``Connecting``.
+
+.. warning::
+    If you don't read ``Connecting`` at least once after calling ``Connect()``
+    or ``Disconnect()`` you may miss an exception indicating that the operation
+    failed.
+
+.. note::
+    This emulation feature is provided to help beginners who aren't yet aware of the
+    additional asynchronous features added to devices for Alpaca in Platform 7.
+    Older drivers will still not support the other features as described in
+    the Release Notes of the Master Interfaces Document linked above. It is up to
+    you to check the ``InterfaceVersion`` to make sure your device supports
+    the new Platform 7 features.
 
 Member Capitalization
 ---------------------
@@ -218,8 +243,13 @@ Common Misconceptions and Confusions
 
 .. |master2| raw:: html
 
-    <a href="https://ascom-standards.org/newdocs/#ascom-master-interfaces-alpaca-and-com"
+    <a href="https://ascom-standards.org/newdocs"
     target="_blank">ASCOM Master Interfaces (Alpaca and COM)</a> (external)
+
+.. |alpacaapi| raw:: html
+
+    <a href="https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html" target="_blank">
+    Alpaca API Reference (external)
 
 .. |supforum| raw:: html
 
