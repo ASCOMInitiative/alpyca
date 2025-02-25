@@ -352,9 +352,7 @@ class Device:
             ##print('conn thread starts')
             try:
                 ##print('Set Connected=True')
-                raise DriverException(number=0x500, message='Test connect failure')
                 self.Connected = True           # Calls device synchronously
-                time.sleep(5)                   # TODO TEST
                 #print('-> completed OK')
                 self.conn_lock.acquire()
                 self.fake_already_connected = True
@@ -447,7 +445,6 @@ class Device:
             try:
                 #print('Set Connected=False')
                 self.Connected = False           # Calls device synchronously
-                time.sleep(5)                   # TODO TEST
                 #print('-> completed OK')
                 self.conn_lock.acquire()        # PROTECT THIS WHOLE THING
                 self.fake_already_disconnected = True
