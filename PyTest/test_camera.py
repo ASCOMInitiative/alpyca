@@ -42,15 +42,16 @@ def test_props(device, settings, disconn):
     assert d.PixelSizeY == s['PixelSizeY']
     v = s['ReadoutModes']
     assert d.ReadoutModes == v.split(',')       # Array comparison
+    assert s['SensorName'] != None, 'Empty SensorName'
     assert d.SensorName == s['SensorName']
     assert d.SensorType == SensorType(s['SensorType'])
 
 def test_cooler(device, settings, disconn):
     d = device
     s = settings
-    assert s['HasCooler'], 'OmniSim Has Cooler must be ON'
-    assert d.CanSetCCDTemperature, 'OmniSim Can Set CCD Temperature must be ON'
-    assert d.CanGetCoolerPower, 'OmniSim Can Get Cooler Power must be ON'
+    assert s['HasCooler'], 'Has Cooler is False'
+    assert d.CanSetCCDTemperature, 'CanSetTemp is OFF'
+    assert d.CanGetCoolerPower, 'CanSetPower is OFF'
 
 @pytest.mark.skipif((c_sets['GainMode'] != 1 or c_sets['OffsetMode'] != 1), reason='Requires OmniSim Gain and Offset modes to be "Named"')
 def test_named_gains_offsets(device, settings, disconn):
