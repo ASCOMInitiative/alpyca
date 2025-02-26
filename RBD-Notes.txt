@@ -1145,4 +1145,13 @@ auncher\winapi.py", line 68, in impl
 * ALERT - DO DOCS OUTSIDE OF VENV ON W10
 * HTML builds fine on Program Files\Python311
 * PDF builds fine on Program Files\Python311 also -- WOOHOO
+* Add checks in Camera unit tests for setting OmniSim Defaults on Camera.
 
+25-Feb-2025
+-----------
+* Implement rigorous Exceptions unit test test_exceptions -- PASSED
+* Remove old bypass for Telescope unit test OmniSim CamSetPierside being stuck at False
+* Remove old bypass for Telescope unit test for SlewSettleTime stuck at 0
+* Remove old bypass for Telescope unit test for GuideRateRightAscension stuck
+  + GuideRateDeclination still broken filed OmniSim Issue #16
+* With the above, ALL PYTESTS PASS

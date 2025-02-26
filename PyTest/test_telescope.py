@@ -27,7 +27,7 @@ def test_props(device, settings, disconn):
     assert d.CanSetDeclinationRate == s['CanSetEquRates']
     assert d.CanSetGuideRates == s['CanSetGuideRates']
     assert d.CanSetPark == s['CanSetPark']
-#    assert d.CanSetPierSide == s['CanSetPointingState']    #BUGBUG d.CanSetPierSide stuck on False
+    assert d.CanSetPierSide == s['CanSetPointingState']
     assert d.CanSetRightAscensionRate == s['CanSetEquRates']
     assert d.CanSetTracking == s['CanSetTracking']
     assert d.CanSlew == s['CanSlew']
@@ -43,7 +43,7 @@ def test_props(device, settings, disconn):
     assert d.SiteLatitude == s['Latitude']
     assert d.SiteLongitude == s['Longitude']
     d.SlewSettleTime = 5
-    # assert d.SlewSettleTime == 5      # BUGBUG 0.1.2 OmniSim stuck at settle time 0
+    assert d.SlewSettleTime == 5
     d.SlewSettleTime = 0
     assert d.SlewSettleTime == 0
     print("  Tracking rates from OmniSim are simple Python Dict [0, 3, 1, 2]")
@@ -226,9 +226,9 @@ def test_pulse_guiding(device, settings, disconn):
     assert d.CanSetGuideRates, "OmniSim must have Guide Rates enabled"
     print("  Set and check some guide rates")
     d.GuideRateRightAscension = 0.001
-    #assert d.GuideRateRightAscension == 0.001  #BUGBUG? Stuck
+    assert d.GuideRateRightAscension == 0.001  #BUGBUG? Stuck
     d.GuideRateDeclnation = 0.002
-    #assert d.GuideRateDeclination == 0.002     #BUGBUG? Stuck
+    # Issue #16 assert d.GuideRateDeclination == 0.002     #BUGBUG? Stuck
     print("  Do a PulseGuide North and check that it ends in prescribed time")
     d.PulseGuide(GuideDirections.guideNorth, 500)
     assert d.IsPulseGuiding
