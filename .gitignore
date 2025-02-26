@@ -67,6 +67,8 @@ ipython_config.py
 .env
 .venv
 .venvdocs
+.venv_nf2
+.venv_nfpl
 env/
 venv/
 ENV/

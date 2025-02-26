@@ -10,6 +10,11 @@
 # Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/ASCOMInitiative/alpyca
 #
+# About netifaces 0.11.0 package: This is now abandonware, Issue #17 requests
+# a change. I looked at netifaces2 but it is incompatible (long story) but
+# netifaces-plus appears to be a fork of the original al45tair/netifaces and
+# it appears to work.
+#
 # -----------------------------------------------------------------------------
 # MIT License
 #
@@ -71,7 +76,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     Note:
         * This function uses IPV4
         * UDP protocol using multicasts and restricted to the LAN/VLAN is used to perform the query.
-        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
+        * See section 4 of the `Alpaca API Reference <https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html>`_
           for Discovery details.
 
     """
@@ -93,14 +98,20 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                     if netifaces.AF_INET == interfacedata:             # Consider only those with IPv4
                         for ip in netifaces.ifaddresses(interface)[netifaces.AF_INET]:  # Each IPv4 address on this interface
                             addr = ip['addr']
-                            if(addr ==  '127.0.0.1'):
-                                sock.sendto(AlpacaDiscovery.encode(),
-                                            ('127.255.255.255', port))
-                            elif('broadcast' in ip):
+                            # Unknown why I did this, since 127.0.0.1 also comes back with
+                            # 'broadcast' : 127.255.255.255 which is what we want.
+                            # if(addr ==  '127.0.0.1'):
+                            #     sock.sendto(AlpacaDiscovery.encode(),
+                            #                 ('127.255.255.255', port))
+                            # elif('broadcast' in ip):
+                            if('broadcast' in ip):
                                 sock.sendto(AlpacaDiscovery.encode(),
                                             (ip['broadcast'], port))
                             # I know this is inefficient, but this way we can filter
-                            # out any of our local addresses (adapters).
+                            # out any of our local addresses (adapters). NOTE:
+                            # A broadcast to our local real address (not localhost)
+                            # will not result in a response, will cause a TimeoutError
+                            # and will hit the except:
                             while True:
                                 try:
                                     pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
@@ -112,7 +123,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                                     if ipp not in addrs:        # Avoid dupes if numquery > 1
                                         addrs.append(ipp)
                                 except:
-                                    break
+                                    break                       # leave while True (to next for)
     finally:
         sock.close()
     return addrs
@@ -139,7 +150,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
         * UDP protocol, restricted link-local addresses to the LAN/VLAN attached to each
           interface, is used to perform the query. Does not query global IPv6.
         * ISATAP addresses are specifically excluded.
-        * See section 4 of the `Alpaca API Reference <https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf>`_
+        * See section 4 of the `Alpaca API Reference <https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html>`_
           for Discovery details.
 
     """
