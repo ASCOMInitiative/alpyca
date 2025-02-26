@@ -1182,4 +1182,5 @@ auncher\winapi.py", line 68, in impl
   - Downgrading enum-tools (0.12.0 -> 0.9.0.post1)
   - Created new poetry.lock of course. And these are for Python >3.9.
   - Tests complete again. OK.
-* Checkpoint Commit
+* Checkpoint Commit (7bfc30f) * More documentation, tweak CHANGES and README for
+  updated sample showing new exception handling

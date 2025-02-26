@@ -54,8 +54,8 @@ Output::
 
 .. |apiref| raw:: html
 
-    <a href="https://github.com/ASCOMInitiative/ASCOMRemote/raw/master/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf"
-    target="_blank">Alpaca API Reference (PDF)</a> (external)
+    <a href="https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html"
+    target="_blank">Alpaca API Reference</a> (external)
 
 .. automodule:: alpaca.management
    :members:

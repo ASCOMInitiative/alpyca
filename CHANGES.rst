@@ -5,6 +5,9 @@ Version 3.1.0
   devices.
 - Enhance Exception Classes with error code attribute, named properties ``number`` and ``message`` and add support
   for printing exception instances via ``str(exception)``. See the Exception Classes documentation for details.
+- New Unit Test for Exceptions to assure attributes, properties, and codes.
+- Several links in documentation updated, other clarifications in docs.
+- Require Python 3.9 or later, no more Python 3.7, Windows 7, ancient Linux, etc.
 
 Version 3.0.0
 =============

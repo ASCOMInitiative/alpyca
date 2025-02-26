@@ -1,4 +1,4 @@
-# alpyca 3.0.0 (ASCOM Platform 7)
+# alpyca 3.1.0 (ASCOM Platform 7)
 
 ## Python 3.9+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
@@ -26,15 +26,6 @@ The package installs from [PyPi](https://pypi.org/) as
 ```sh
 pip install alpyca
 ```
-
-or if you have the source code in a tar file, extract it and run (with **Python 3**)
-
-```sh
-python setup.py install
-```
-
-The dependencies listed above (and others they may depend on) are automatically
-installed with alpyca.
 
 ## Current Status & Documentation
 
@@ -102,8 +93,9 @@ program using Alpaca:
         T.SlewToCoordinatesAsync(T.SiderealTime + 2, 55)    # 5 deg slew N
         # This will fail for tracking being off
         print("... you won't get here!")
-    except Exception as e:              # Should catch specific InvalidOperationException
-        print(f'Slew failed: {str(e)}')
+    except Exception as e:                      # Should catch specific InvalidOperationException
+        print(f'Caught {type(e).__name__}')
+        print(f'  Slew failed: {e.message}')    # Using exception named properties
     finally:                            # Assure that you disconnect
         print("Disconnecting...")
         T.Disconnect()
@@ -118,7 +110,8 @@ program using Alpaca:
     ... slew completed successfully.
     RA=10.939969572854931 DE=50
     Turning off tracking then attempting to slew...
-    Slew failed: SlewToCoordinatesAsync is not allowed when tracking is False
+    Caught InvalidOperationException
+      Slew failed: SlewToCoordinatesAsync is not allowed when tracking is False
     Disconnecting...
     done
 ```
