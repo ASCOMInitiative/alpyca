@@ -1,6 +1,6 @@
 # alpyca 3.0.0 (ASCOM Platform 7)
 
-## Python 3.7+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
+## Python 3.9+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
 <img align="right" width="210" height="166" hspace="20" vspace="20" src="https://ascom-standards.org/alpyca/readme-assets/AlpacaLogo210.png">
 
@@ -12,7 +12,7 @@ Windows ASCOM PLatform. Alpaca does not depend on Windows.
 
 ## Requirements
 
-This package runs under Python 3.7 or later. It is compatible with most Linux distros, Windows , and MacOS.
+This package runs under Python 3.9 or later. It is compatible with most Linux distros, Windows , and MacOS.
 Dependencies are minimal: [requests](https://pypi.org/project/requests/),
 [netifaces](https://pypi.org/project/netifaces/),
 [typing-extensions](https://pypi.org/project/typing-extensions/),

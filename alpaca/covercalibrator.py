@@ -7,7 +7,7 @@
 # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 #           Ethan Chappel <ethan.chappel@gmail.com>
 #
-# Python Compatibility: Requires Python 3.7 or later
+# Python Compatibility: Requires Python 3.9 or later
 # Doc Environment: Sphinx v5.0.2 with autodoc, autosummary, napoleon, and autoenum
 # GitHub: https://github.com/ASCOMInitiative/alpyca
 #

@@ -51,7 +51,7 @@ For details see the Release notes in the Master Interfaces document liked above.
 
 Installation
 ------------
-Requires Python 3.7 or later. The package installs from PyPi as::
+Requires Python 3.9 or later. The package installs from PyPi as::
 
     pip install alpyca
 

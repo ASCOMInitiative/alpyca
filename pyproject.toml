@@ -24,7 +24,7 @@ packages = [
 "ASCOM Developer Forum" = "https://ascomtalk.groups.io/g/Developer/"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 requests = "^2.27.1"
 netifaces = "^0.11.0"
 typing-extensions = "^4.2.0"

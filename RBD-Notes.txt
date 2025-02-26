@@ -1155,3 +1155,18 @@ auncher\winapi.py", line 68, in impl
 * Remove old bypass for Telescope unit test for GuideRateRightAscension stuck
   + GuideRateDeclination still broken filed OmniSim Issue #16
 * With the above, ALL PYTESTS PASS
+
+26-Feb-2025
+-----------
+* Tests of replacements for netifaces 0.11.0 by making temporary .venvs with netifaces2 and
+  netifaces-plus.
+  - netifaces2 failed compatibility, the dicts of IP addresses do not have 'broadcast'
+    elements plus I see differences in its attributes and properties in the debugger.
+  - netifaces-plus, the subject of Issue #17 looks identical!! Awaiting confirmation from the
+    submitter that it installs as pip install netifaces-plus on W11 Python13. If so I'm going
+    with it.
+* DECISION: GO  TO PYTHON 3.9 (No more Win7, Older RPi Bulldog OK)
+* Reviewing Poetry operations before changing the netifaces -> netifaces-plus. Back to 14-Sep-2024.
+  - Change Python version to > 3.9
+  - Update dependencies for Alpyca in [tool.poetry.dependencies]
+  - Re run the Unit tests to make sure they work with the new dependencies -- ALL PASS
