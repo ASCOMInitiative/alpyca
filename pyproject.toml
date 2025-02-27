@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "alpyca"
-version = "3.0.0"
+version = "3.1.0"
 description = "API library for all ASCOM Alpaca devices, management, and discovery"
 authors = ["Robert B. Denny <rdenny@dc3.com>"]
 license = "LICENSE"
@@ -25,11 +25,11 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
-requests = "^2.27.1"
-netifaces = "^0.11.0"
-typing-extensions = "^4.2.0"
+requests = "^2.32.1"
+netifaces-plus = "^0.12.4"
+typing-extensions = "^4.12.0"
 python-dateutil = "^2.8.2"
-enum-tools = "^0.9.0"
+enum-tools = "^0.12.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.1.2"
