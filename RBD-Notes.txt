@@ -1200,3 +1200,24 @@ auncher\winapi.py", line 68, in impl
   - Poetry update
      - Updating enum-tools (0.9.0.post1 -> 0.12.0)
     Perfect. All set for build/publish.
+* ---------- OHHHHHHH ------------
+  I just found this on GitHub looking at netifaces-plus issue #6
+  https://github.com/tsukumijima/netifaces-plus/issues/6#issuecomment-2429078149
+  He's abandoning this too!!!
+  > SUGGEST MOVING TO 'ifaddr' WHICH IS ALL PYTHON. Oh boy this could be tricky.
+  Guess what: In the PyPi listing https://pypi.org/project/ifaddr/
+    it says s of ifaddr 0.2.0 we implement the equivalent of netifaces.interfaces().
+    It’s available through ifaddr.netifaces.interfaces().
+    WTH? Let's give this a whirl!!
+    NOPE on ifaddr.netifaces.interfaces() it just gives us the GUID of the interface
+       as a string. Continue with ifaddr and whatever else we can find
+* Progress. It seems to be working on IPv4!! IPv6 not working. I lost track of what
+  is going wrong after shooting in the dark in several directions. TOMORROW!!
+
+01-Mar-2025
+-----------
+* Lots of work and tail chasing on Discovery. Then I made a mess of the Git repo while
+  flipping back and forth between 2 RPis and my W10 system. It appears my old W7 system
+  is not receiving the IPv6 proadcasts, but it's fine on IPV4. At present IPV4 appears
+  good on Linux and on W10 with ifaddr. Some slime to skip probable dead interfaces
+  but it looks OK.
