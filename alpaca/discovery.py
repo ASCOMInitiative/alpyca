@@ -13,7 +13,7 @@
 # About netifaces 0.11.0 package: This is now abandonware, Issue #17 requests
 # a change. I looked at netifaces2 but it is incompatible (long story) but
 # netifaces-plus appears to be a fork of the original al45tair/netifaces and
-# it appears to work.
+# it appears to work. This 0.3.1 edit has been tested with netifaces-plus.
 #
 # -----------------------------------------------------------------------------
 # MIT License
@@ -44,9 +44,13 @@
 #                 default timeout is 2 sec.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Aug-22 (rbd) 2.0.2 Fix multicast to 127.0.0.1 GitHub Issue #6
+# 01-Mar-25 (rbd) 3.1.0 Save this with improvements resulting from tests aimed
+#                       at eventually moving to use of ifaddr instead of
+#                       netifaces. See improved comments.
 # -----------------------------------------------------------------------------
 
 import json
+import time
 import socket
 import netifaces
 import platform
@@ -55,7 +59,6 @@ from typing import List
 port = 32227
 AlpacaDiscovery = "alpacadiscovery1"
 AlpacaResponse = "AlpacaPort"
-
 
 def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     """Discover Alpaca device servers on the IPV4 LAN/VLAN
@@ -98,22 +101,22 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                     if netifaces.AF_INET == interfacedata:             # Consider only those with IPv4
                         for ip in netifaces.ifaddresses(interface)[netifaces.AF_INET]:  # Each IPv4 address on this interface
                             addr = ip['addr']
-                            # Unknown why I did this, since 127.0.0.1 also comes back with
-                            # 'broadcast' : 127.255.255.255 which is what we want.
-                            # if(addr ==  '127.0.0.1'):
-                            #     sock.sendto(AlpacaDiscovery.encode(),
-                            #                 ('127.255.255.255', port))
-                            # elif('broadcast' in ip):
-                            if('broadcast' in ip):
+                            print(ip)
+                            if('broadcast' in ip):                  # Windows this includes localhost
                                 sock.sendto(AlpacaDiscovery.encode(),
                                             (ip['broadcast'], port))
+                            elif('peer' in ip):                     # Linux localhost tagged 'peer'
+                                sock.sendto(AlpacaDiscovery.encode(),
+                                            (ip['peer'], port))
+                            #
                             # I know this is inefficient, but this way we can filter
-                            # out any of our local addresses (adapters). NOTE:
-                            # A broadcast to our local real address (not localhost)
-                            # will not result in a response, will cause a TimeoutError
-                            # and will hit the except:
-                            while True:
+                            # out any of our local addresses (adapters). Plus we need to
+                            # keep trying to receive responses from possible multiple
+                            # servers out there till there are no more.
+                            #
+                            while True:                     # Keep receiving from devices until timeout
                                 try:
+                                    time.sleep(timeout / 5)     # Give at least a bit of time to respond
                                     pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
                                     remport = json.loads(pinfo.decode())["AlpacaPort"]
                                     remip, p = rem
@@ -123,7 +126,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                                     if ipp not in addrs:        # Avoid dupes if numquery > 1
                                         addrs.append(ipp)
                                 except:
-                                    break                       # leave while True (to next for)
+                                    break                       # No more responses from the broadcast
     finally:
         sock.close()
     return addrs
