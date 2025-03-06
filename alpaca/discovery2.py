@@ -44,7 +44,7 @@
 #                 default timeout is 2 sec.
 # 13-May-22 (rbd) 2.0.0-dev1 Project now called "Alpyca" - no logic changes
 # 21-Aug-22 (rbd) 2.0.2 Fix multicast to 127.0.0.1 GitHub Issue #6
-# 28-Feb-25 (rbd) 3.1.0 Fix Issue #17 by ditching netifaces and friends, and
+# 06-Mar-25 (rbd) 3.1.0 Fix Issue #17 by ditching netifaces and friends, and
 #                       using ifaddr while detecting inactive IPs another way.
 # -----------------------------------------------------------------------------
 
@@ -115,17 +115,17 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                         n = sock.sendto(AlpacaDiscovery.encode(),(str(net.broadcast_address), port))
                         time.sleep(timeout / 10)            # Give the server a bit of time to respond
                     while True:
-                            try:
-                                pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
-                                remport = json.loads(pinfo.decode())["AlpacaPort"]
-                                remip, p = rem
-                                if(remip == ip.ip and remip != '127.0.0.1'):
-                                    continue                # avoid router loop back to ourselves
-                                ipp = f"{remip}:{remport}"
-                                if ipp not in addrs:        # Avoid dupes if numquery > 1
-                                    addrs.append(ipp)
-                            except:
-                                break                       # leave while True (to next for)
+                        try:
+                            pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
+                            remport = json.loads(pinfo.decode())["AlpacaPort"]
+                            remip, p = rem
+                            if(remip == ip.ip and remip != '127.0.0.1'):
+                                continue                # avoid router loop back to ourselves
+                            ipp = f"{remip}:{remport}"
+                            if ipp not in addrs:        # Avoid dupes if numquery > 1
+                                addrs.append(ipp)
+                        except:
+                            break                       # leave while True (to next for)
 
 
     finally:
@@ -186,11 +186,12 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                         addr = ''
             if(addr == ''):
                 continue
-            print(f'got [{addr}]')
-            # if (not addr.startswith('fe80') or
-            #         addr.startswith('fe80::5efe') or
-            #         addr.startswith('fe80::200:5efe')):
-            #     continue
+            # print(f'local adapter on [{addr}]')
+            if (not addr.startswith('fe80') or
+                    addr.startswith('fe80::5efe') or
+                    addr.startswith('fe80::200:5efe')):
+                    #print("ISATAP?")
+                continue
             try:
                 sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
                 if my_plat == 'Linux':
@@ -206,8 +207,9 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                 else:
                     dest = 'ff12::a1:9aca'
                 sock.sendto(AlpacaDiscovery.encode(), (dest, port))
+                time.sleep(timeout / 2)                     # Give at least a bit of time to respond
                 while True:
-                    try:
+                    try:                                    # Keep trying till no more new replies (times out)
                         pinfo, rem = sock.recvfrom(1024)    # buffer size is 1024 bytes
                         remport = json.loads(pinfo.decode())["AlpacaPort"]
                         remip = rem[0]

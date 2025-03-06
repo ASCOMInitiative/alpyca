@@ -1218,6 +1218,11 @@ auncher\winapi.py", line 68, in impl
 -----------
 * Lots of work and tail chasing on Discovery. Then I made a mess of the Git repo while
   flipping back and forth between 2 RPis and my W10 system. It appears my old W7 system
-  is not receiving the IPv6 proadcasts, but it's fine on IPV4. At present IPV4 appears
+  is not receiving the IPv6 broadcasts, but it's fine on IPV4. At present IPV4 appears
   good on Linux and on W10 with ifaddr. Some slime to skip probable dead interfaces
-  but it looks OK.
+  on IPv4 but it looks OK.
+
+06-Mar-2025
+-----------
+* Work on IPV6 and it's looking good. The problem with the W7 system was a ghost. It'sad
+  OK.
