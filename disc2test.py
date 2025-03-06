@@ -1,6 +1,6 @@
 from alpaca import discovery2, management
 
-svrs = discovery2.search_ipv4(1,1)
+svrs = discovery2.search_ipv6(1,1)
 print(svrs)
 for svr in svrs:
    print(f"At {svr}")
