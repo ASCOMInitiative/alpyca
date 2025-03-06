@@ -94,7 +94,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     try:
         sock.bind(('0.0.0.0', 0))  # listen to any on a temporary port
     except:
-        print('failure to bind')
+        # print('failure to bind')
         sock.close()
         raise
 
@@ -109,12 +109,12 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                             continue
                         if octets[0] == '169' and octets[1] == '254':
                             continue                        # APIPA address, skip
-                        print(ip.ip)
+                        # print(ip.ip)
                         net = ipaddress.IPv4Network(f'{ip.ip}/{ip.network_prefix}', strict = False)
                         # print(net.broadcast_address)
                         n = sock.sendto(AlpacaDiscovery.encode(),(str(net.broadcast_address), port))
-                        time.sleep(timeout / 10)            # Give the server a bit of time to respond
-                    while True:
+                        time.sleep(timeout / 2)            # Give the server(s) a bit of time to respond
+                    while True:                         # Loop through response(s) till times out
                         try:
                             pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
                             remport = json.loads(pinfo.decode())["AlpacaPort"]
@@ -166,14 +166,13 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                 if(ip.is_IPv6):
                     addr = ip.ip[0]
                     scope = ip.ip[2]
-                    # Can't bind socket to ::1 and successfully send.
                     # Reject everything but real link-local, including
                     # the ISATAP addresses.
-                    # if (not addr.startswith('fe80') or
-                    #         addr.startswith('fe80::5efe') or
-                    #         addr.startswith('fe80::200:5efe')):
-                    #     addr = ''
-                    #     continue
+                    if (not addr.startswith('fe80') or
+                            addr.startswith('fe80::5efe') or
+                            addr.startswith('fe80::200:5efe')):
+                        addr = ''
+                        continue
                 # This slime checks the IPV4 address of this adapter, and if it
                 # is an APIPA address (169.254.*.*), we skip this adapter as we
                 # did above. I don't know of another way to determine whether
@@ -187,11 +186,6 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
             if(addr == ''):
                 continue
             # print(f'local adapter on [{addr}]')
-            if (not addr.startswith('fe80') or
-                    addr.startswith('fe80::5efe') or
-                    addr.startswith('fe80::200:5efe')):
-                    #print("ISATAP?")
-                continue
             try:
                 sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
                 if my_plat == 'Linux':
@@ -209,19 +203,19 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                 sock.sendto(AlpacaDiscovery.encode(), (dest, port))
                 time.sleep(timeout / 2)                     # Give at least a bit of time to respond
                 while True:
-                    try:                                    # Keep trying till no more new replies (times out)
+                    try:                                    # Loop through response(s) till times out
                         pinfo, rem = sock.recvfrom(1024)    # buffer size is 1024 bytes
                         remport = json.loads(pinfo.decode())["AlpacaPort"]
                         remip = rem[0]
-                        print(f'remote IP is {remip}')
+                        # print(f'remote IP is {remip}')
                         if(addr.startswith(remip)):
-                            print(' This is us, loopback.')
+                            # print(' This is us, loopback.')
                             ipp = f"[::1]:{remport}"        # Substitute loopback
                         else:
                             ipp = f"[{remip}%{scope}]:{remport}"    # External Alpaca
-                        print(f'Rcvd from {ipp}')
+                        # print(f'Rcvd from {ipp}')
                         if ipp not in addrs:                # Avoid dupes if numquery > 1
-                            print(f'Adding {ipp}')
+                            # print(f'Adding {ipp}')
                             addrs.append(ipp)
                     except:
                         break
