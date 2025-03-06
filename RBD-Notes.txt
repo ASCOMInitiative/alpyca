@@ -1224,5 +1224,8 @@ auncher\winapi.py", line 68, in impl
 
 06-Mar-2025
 -----------
-* Work on IPV6 and it's looking good. The problem with the W7 system was a ghost. It'sad
-  OK.
+* Work on IPV6 and it's looking good. The problem with the W7 system was a ghost. It's
+  OK. Now tested on Linux and Windows, sees 3 servers (OmniSim) running on W10, W7, and
+  RPi. Ready to switch over and get field test. Replace discovery.py with new code in
+  discovery2.py, remove discovery2.py and disc2test.py. Remove netifaces-plus and psutil
+  from the .venv. Remove disc2test from launch.json. Sync repo on W10 and Linux.
