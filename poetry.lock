@@ -171,6 +171,17 @@ files = [
 all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2)"]
 
 [[package]]
+name = "ifaddr"
+version = "0.2.0"
+description = "Cross-platform network interface and IP address enumeration library"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ifaddr-0.2.0-py3-none-any.whl", hash = "sha256:085e0305cfe6f16ab12d72e2024030f5d52674afad6911bb1eee207177b8a748"},
+    {file = "ifaddr-0.2.0.tar.gz", hash = "sha256:cc0cbfcaabf765d44595825fb96a99bb12c79716b73b44330ea38ee2b0c4aed4"},
+]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -179,81 +190,6 @@ python-versions = ">=3.7"
 files = [
     {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
     {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
-]
-
-[[package]]
-name = "netifaces-plus"
-version = "0.12.4"
-description = "Portable network interface information (Supports Python 3.6 and higher)"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "netifaces_plus-0.12.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:842d29ae1e32c9d6b881587c4ed1d9fff1685cf72344bc78d702239321e218f8"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:cc2d28891460e23ae25ed45991b028ccc8de09916cd0cfd06657b4cf35d88940"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:4225dc607f09176b3063b1859a7e54cc28e81b7eaf89772d21ae88b077a11387"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5e98f461e85a5fc43b603dc313c98e6ccaa3a904075c8423cacd34a6bfab41d7"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:d41108eb7f77a4f1804b34910e9ee3188485ec4f18f8220a96c343016b251a0b"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1d6f00df3221c1dad142c686e96fd21b8492ea90f1eb69a9441275a5f7d64a8f"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-win32.whl", hash = "sha256:0310a84124882cdead2163a2f61bf44e20cf2513c4bc30f8ca1c1f9fe7cadd0c"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-win_amd64.whl", hash = "sha256:24be6643288abc1ce4f08f1107d7cad1636897260a971d99233c1f26e2c576cd"},
-    {file = "netifaces_plus-0.12.4-cp310-cp310-win_arm64.whl", hash = "sha256:ede0f44055ca84777b2130fe83606e3e039fc1db1a7fcd8ebaf4d09bff3982f8"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:79f7a32252de7652164decf23f99cec12758f72ba93cb3b8ad31eece7ddfbc9d"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:28b863a1bde98d1203364f037b98f591fb973d8445e08a3207639d35933105ca"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6dd225a26261927957534a3e425660c48a590eaee5fad6909431dc586bae02b0"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6fb147913437852e4dce911542c153b5bcf5f42713b5d71c1ef3b10da0578021"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:8a1ffddb90bf67f52341e8802d132976d55699c6e58dd2cf3bd4351df6a4f9c9"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:66f5a0d3b5d7475eaf920d277579d49556be9b4435f3b884dbe2f10904e824da"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-win32.whl", hash = "sha256:403b54c456c97225ca82c5032abaef63c7ca26cdecba3ab9ecfc0eba052ffe79"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-win_amd64.whl", hash = "sha256:f128a7b6bcbe211f64af3769c4d987afbf78980b487c696cba0407ce671e7a77"},
-    {file = "netifaces_plus-0.12.4-cp311-cp311-win_arm64.whl", hash = "sha256:8235064ae471b1c525505cd41555ea0550f5c2ae5725bedaf2b1f9becc5a3e75"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:e1d54499d800d7adb0a67b8c01e8a2c0ecb615c6b30b1c5793e5115f88dd9281"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:8a60b5f2e27245af4a5cf7159fb4216032127bb6f487b1640a1e9c01a9ef0d09"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:33b248de485a6cf9c404719298233dc62e487f64f4e1685dfe3b0a311d9f37fa"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:194cd03660075b8beb48e28ba1833fa73fd92611ab8b4e0e158220dd2b4fedb8"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:2a9dc8ad7d329b7d4f0fdc09a4d960d115dd639391c820368fd728c7f91e68d9"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4420bfa46c6f778e0b5b2b7ab6cd57a5836825f517cb9b7afa7b9fe26ccdda61"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-win32.whl", hash = "sha256:38bb6da724d3a4c8d569fa42c404d522f843cdee7be19fea7e5a5901ebdb44de"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-win_amd64.whl", hash = "sha256:3332120b61fa565be9fc3b4cbb6990aa81e7d5ad3d249a17fb2ede65ad8dc13a"},
-    {file = "netifaces_plus-0.12.4-cp312-cp312-win_arm64.whl", hash = "sha256:82ceeaa77dbbe9aa2fd82fffee74782361f0a76f7a0abd365261b799cad4601b"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:96d82ed88b4a463ba372820992068db1962b1b7861ff189f8e4062d5c1ca2403"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:1201c41f7b82a383caa80f5e0ba0ef51599672985b0f88a3ca3c6112bb953d2e"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:5daa17e47099936f754380fc9e7e224fe0c15e9d6801418c89d155aec47c53e4"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f79041f1ee09bc5b33b92e9b42a597ab90331edeb45c9c9548cb417d722d0280"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:6abeae9d7bb3bece4b6a02ccffe14ed5551e5900040124c8abd4dfdadebd95eb"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6a3f421cebfde0041868b268fde61ad2cc53ae9c2c7f82d749b1093547ad3f13"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-win32.whl", hash = "sha256:43c5ba94d59ca7a2b7acda71be610843b0e5198e06641afcf697e552f753126e"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-win_amd64.whl", hash = "sha256:aefd50ba694d9ce1ff14f984e6a0b70b4704e57bea3ae0e301072653f95cdccf"},
-    {file = "netifaces_plus-0.12.4-cp313-cp313-win_arm64.whl", hash = "sha256:570021176d7b617cf7a9ed837cde97b6757a4009c293383970e442b51ecdc8dc"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:7479db005abc4973af7d369a3153eb99f27290b1455fc5edccc182967437782b"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c8c520356986d7fea5be17abcf3fd3f9101941cb4c880d8e972d7bb0ff5963f9"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:def6353b0044f5919c5e5adefa972b8dcbb2f6b14b139024cca857e319c02e1b"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:eb4cc09a969f87173d539641bc3e76fa8810f80dd8bcac0cfa6a020bd07c752c"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-win32.whl", hash = "sha256:de4991ed26473e31f1558e8fae95f16c58a4f06a9cf486e84e2f41112728ed99"},
-    {file = "netifaces_plus-0.12.4-cp36-cp36m-win_amd64.whl", hash = "sha256:316282986e4c7a77124f87e9d6248933f958b4aaa44906fa4739f90f1cbc0026"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:774b151308792c67aa0e3c1ce8596ba3fd81cfca0e3ad4c743c66931963ed80d"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bbea1494b869e22ac6fa28f1ebf30de21222a0b438cdb027d2755fc9fdd0d1f6"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:65abddf4169cd9b8fcd83b9e91c24fa55cbff0071a717e2768eed24902f88ef6"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fcccfb1af7129cf8518169f9b9566b58982b6794cd93a4ed24ad95af5595186b"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-win32.whl", hash = "sha256:ba5ad79bd3e49385cab92c339e92816b65b49845979afb1c562be31000bf1bba"},
-    {file = "netifaces_plus-0.12.4-cp37-cp37m-win_amd64.whl", hash = "sha256:637a1cfb126fdca217cfdf3561e0a27b8645d67f28fe0b7c0b639c90db33f464"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:2a29c4de35ff8a8ad3570d5857ffd0523d15b08bf9ce2ec1f9e6302742971f1f"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:4b3922e09d516d6ce5102fee998e45bf285cfde272b0e54ce18152b9d6fbb81f"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:28c3d9f5248e6fe218177c82e2dbde27998525b75a31032e05f7e07972defec3"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e164428892c15ede16240ce5534d75d901f868841bf97565f0b30529ac08999b"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:f11fd8a3fd51254211cdb844f0d633f7883d34109b18be19eae6568b7188658d"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:97e5cd7694d9b940a047b48f7cc6b38b8b7f4be39868b0af9eed88e245c0b0a3"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-win32.whl", hash = "sha256:95d06979d7d9db1b4f66dd1649a1e500b3c040c286a3385a6d49e0480e81eac6"},
-    {file = "netifaces_plus-0.12.4-cp38-cp38-win_amd64.whl", hash = "sha256:6b7d4e899d16869c6bf71730f165c213c8b17b86c2b8a9a3a8f279cd4b901694"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:1460d225cda414a2996ffac1db90255eff76759036416fcdbeea7b11d105eefd"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:d1851ad3d47ae03ced0fa8e41ba983abddb19007e734109d4fbc4d71de9a9820"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:0fd855364d6fbfb3c371a35dd42e9be93f7571152c044aab78b2c58a6eea5195"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8352879b5c51666db63791e9b12fa8b1677163cd9f6b4ac77a256c4dee00578d"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-manylinux_2_17_armv7l.manylinux2014_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:e07be2f099c4b4b01d5a07913e31ceab04c1f20b6cb589b85289891ebac10104"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4b93c8afa1ce9cd8d75c288078faf463ef966536586a8ce516f06aed2d8d9530"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-win32.whl", hash = "sha256:13cd183ffebd2ea4310a4563a1093232242052c86b49d0440b9d37a4f0baedc2"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-win_amd64.whl", hash = "sha256:7d7346cdf107c454817a3dfd976cfa9dcfda1a8f36f45bcd8a9dec5cca0d1b6e"},
-    {file = "netifaces_plus-0.12.4-cp39-cp39-win_arm64.whl", hash = "sha256:00a7292822f1c32d89b0900f9dd4c7c82938042aa3a837ef3c9c2e7ecfa26fc0"},
-    {file = "netifaces_plus-0.12.4.tar.gz", hash = "sha256:ef9634e83572b41655a3512ef3eaa936c2a9c2bbefc66bfe03db898e19d73895"},
 ]
 
 [[package]]
@@ -447,4 +383,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "b616448d77700fa4b4fb210fe55c24a6ce19ee1837a98d0418568ac4f16f2f17"
+content-hash = "97f920af6813818d9d87dae96ea62b6529746da31b820bc9b57fba7ae6747362"

@@ -1229,3 +1229,11 @@ auncher\winapi.py", line 68, in impl
   RPi. Ready to switch over and get field test. Replace discovery.py with new code in
   discovery2.py, remove discovery2.py and disc2test.py. Remove netifaces-plus and psutil
   from the .venv. Remove disc2test from launch.json. Sync repo on W10 and Linux.
+
+07-Mar-2025
+-----------
+* Update Poetry data
+  - Remove netifaces-plus
+  - Add ifaddr
+  - Poetry Update ... no changes.
+

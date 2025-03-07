@@ -26,10 +26,10 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.9"
 requests = "^2.32.1"
-netifaces-plus = "^0.12.4"
 typing-extensions = "^4.12.0"
 python-dateutil = "^2.8.2"
 enum-tools = "^0.12.0"
+ifaddr = "^0.2.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.1.2"
