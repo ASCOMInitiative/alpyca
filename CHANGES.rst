@@ -8,6 +8,7 @@ Version 3.1.0
 - New Unit Test for Exceptions to assure attributes, properties, and codes.
 - Several links in documentation updated, other clarifications in docs.
 - Require Python 3.9 or later, no more Python 3.7, Windows 7, ancient Linux, etc.
+- Change discovery to use ``ifaddr`` instead of ``netifaces``.
 
 Version 3.0.0
 =============

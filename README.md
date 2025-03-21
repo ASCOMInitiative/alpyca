@@ -1,4 +1,4 @@
-# alpyca 3.1.0 (ASCOM Platform 7)
+# alpyca 3.1.0 (Discovery update)
 
 ## Python 3.9+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
@@ -29,8 +29,8 @@ pip install alpyca
 
 ## Current Status & Documentation
 
-This version 3.0.0. This release incorporates the additions to the ASCOM Interfaces that
-were introduced with ASCOM Platform 7.
+This version 3.1.0. This release changes discovey to use ``ifaddr`` instead
+of netifaces.
 
 The documentation is extensive and available online as **[Alpyca: API Library
 for Alpaca](https://ascom-standards.org/alpyca/)** as well as a **[PDF Document
