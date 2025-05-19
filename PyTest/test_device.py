@@ -18,7 +18,7 @@ def test_device(device, disconn):
     print(f"  DriverInfo:       {device.DriverInfo}")
     assert device.DriverInfo == ['SafetyMonitor Simulator Drivers']
     print(f"  DriverVersion:    {device.DriverVersion}")
-    assert device.DriverVersion == '0.4'  # Some day not hardwired. New 0.3 OmniSim.
+    assert device.DriverVersion == '0.5'  # Some day not hardwired. New 0.3 OmniSim.
     print(f"  InterfaceVersion: {device.InterfaceVersion}")
     assert device.InterfaceVersion == 3
     print(f"  Name:             {device.Name}")

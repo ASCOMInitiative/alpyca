@@ -46,6 +46,7 @@
 # 22-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # 22-Feb-25 (rbd) 3.1.0 Connect()/Disconnect emulation for pre Platform 7
 #                       devices.
+# 18-May-25 (rbd) 3.1.1 GitHub Issue  #19. Force 'localhost' to use IPv4
 # -----------------------------------------------------------------------------
 
 from threading import Lock, Timer, Thread
@@ -73,6 +74,7 @@ class Device:
         Attributes:
             address: Domain name or IP address of Alpaca server.
                 Can also specify port number if needed.
+                ``localhost`` forced to be IPv4 ``127.0.0.1``
             device_type: One of the recognised ASCOM device types
                 e.g. telescope (must be lower case).
             device_number: Zero based device number as set on the server (0 to
@@ -81,10 +83,12 @@ class Device:
             api_version: Alpaca API version.
             base_url: Basic URL to easily append with commands.
 
-        Note: Sets a random number for ClientID that lasts
+        Note:
+            * Sets a random number for ClientID that lasts
+            * 'localhost' is forced to use IPv4 for device usage
 
         """
-        self.address = address
+        self.address = address.replace('localhost', '127.0.0.1') # Force localhost to be IPV4
         self.device_type = device_type.lower()
         self.device_number = device_number
         self.api_version = API_VERSION

@@ -1,4 +1,4 @@
-# alpyca 3.1.0
+# alpyca 3.1.1
 
 ## Python 3.9+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
@@ -29,7 +29,7 @@ pip install alpyca
 
 ## Current Status & Documentation
 
-This version 3.1.0. See
+This version 3.1.1. See
 **[CHANGES.rst](https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst)**
 (on GitHub) for change log.
 

@@ -1274,3 +1274,16 @@ auncher\winapi.py", line 68, in impl
    - Uploading alpyca-3.1.0-py3-none-any.whl 100%
    - Uploading alpyca-3.1.0.tar.gz 100%
 * Uh oh merge Develop into Master, quickstart
+
+18-May-2025
+-----------
+* Alpyca Issue #19 and AlpycaDevice Issue #19 (latter as yet unsolved)
+* Force 'localhost' to use 127.0.0.1 instead of [::1]
+* Update other files, docs, README, CHANGES for 3.1.1 (device.py)
+* Rebuild docs
+* Unit test test_device.py for 0.5 version of OmniSim
+**** ALPYCA ON VENV MASTER ****
+* poetry update
+* Unit tests OK
+* Commit 3.1.1 checkpoint
+* ------------- NEED BUILD, PUBLISH, ANNOUNCE ON FORUMS ------------------
