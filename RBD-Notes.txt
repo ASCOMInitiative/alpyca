@@ -1286,4 +1286,24 @@ auncher\winapi.py", line 68, in impl
 * poetry update
 * Unit tests OK
 * Commit 3.1.1 checkpoint
-* ------------- NEED BUILD, PUBLISH, ANNOUNCE ON FORUMS ------------------
+* ------------- NEED MAKE DOCCS, BUILD, PUBLISH, ANNOUNCE ON FORUMS ------------------
+
+2?-May-2025
+-----------
+* Git Cleanup
+  - Delete local Platform7 branch
+  - Delete local Develop branch
+  - > git fetch --prune
+    (https://stackoverflow.com/questions/38512124/how-to-remove-branches-already-deleted-on-github-that-still-show-up-in-vs-code)
+
+26-May-2025
+-----------
+* Add missing Note: to DriverException
+* Make docs (Whew! I might have forgotten this!!!)
+* poetry build
+* poetry publish -r testpypi
+  Publishing alpyca (3.1.1) to testpypi
+  - Uploading alpyca-3.1.1-py3-none-any.whl 100%
+
+  HTTPSConnectionPool(host='test.pypi.org', port=443): Read timed out. (read timeout=15)
+  (again, WTF?)

@@ -3,6 +3,7 @@ Version 3.1.1
 
 - Force 'localhost' to use IPv4.
 - Update ``device`` unit test to work with Onmi Simulator V0.5
+- Add missing Note to DriverException
 
 Version 3.1.0
 =============

@@ -42,6 +42,7 @@
 #                       attribute, Make message and number as named exception
 #                       properties. Add str(exception) support. Enhance
 #                       documentation.
+# 26-May-25 (rbd) 3.1.1 Add missing note to DriverException
 # -----------------------------------------------------------------------------
 
 class ActionNotImplementedException(Exception):
@@ -89,6 +90,15 @@ class DriverException(Exception):
     Properties:
         - number (int): Assigned by the device and will be a number from 0x500 - 0xFFF
         - message (str): Text of the error message
+
+    Note:
+        This is the generic driver exception. Drivers are permitted to directly
+        throw these exceptions. This exception should only be thrown if there is
+        no other more appropriate exception as listed here are already defined.
+        These specific exceptions should be thrown where appropriate rather
+        than using the more generic DriverException. Conform will not accept
+        DriverExceptions where more appropriate exceptionsare already defined.
+
     """
     def __init__(
         self,
