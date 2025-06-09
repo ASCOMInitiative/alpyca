@@ -1701,9 +1701,7 @@ class Telescope(Device):
         """(Read/Write) The UTC date/time of the mount's internal clock. See Notes.
 
         You may write either a Python datetime (tz=UTC) or an ISO 8601 string
-        for example::
-
-            ``2022-04-22T20:21:01.123+00:00``
+        for example: ``2022-04-22T20:21:01.123 Z``
 
         Raises:
             InvalidValueException: if an illegal ISO 8601 string or a bad Python
@@ -1719,12 +1717,13 @@ class Telescope(Device):
         Note:
             * Changing time by writing to this property can be done with either a
               Python datetime value or an ISO 8601 string, for example
-              ``2022-04-22T20:21:01.123+00:00``.
+              ``2022-04-22T20:21:01.123 Z``.
+            * The date/time must be UTC not Local.
             * Even if the mount doesn't support changing this, it will report the
               current UTC date/time. The value may be derived from the system clock
               by the driver if the mount doesn't provide it.
-            * If the UTC date/time is being derived from the system clock, you will
-              not be able to write this  (you'll get
+            * If the mount's UTC date/time is being derived from the system clock,
+              you will not be able to write this  (you'll get
               :py:class:`~exceptions.NotImplementedException`).
 
         .. admonition:: Master Interfaces Reference

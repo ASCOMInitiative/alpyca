@@ -4,6 +4,7 @@ Version 3.1.1
 - Force 'localhost' to use IPv4.
 - Update ``device`` unit test to work with Onmi Simulator V0.5
 - Add missing Note to DriverException
+- ``Telescope.UTCDate`` documentation corrected to specify ``Z`` flag in ISO-8601
 
 Version 3.1.0
 =============
