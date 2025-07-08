@@ -110,7 +110,7 @@ Then execute this little program::
     T = Telescope('localhost:32323', 0)         # Local Omni Simulator
     try:
         T.Connect()                             # Asynchronous in Platform 7
-        while t.Connecting:
+        while T.Connecting:
             time.sleep(0.5)
         print(f'Connected to {T.Name}')
         print(T.Description)
