@@ -1717,7 +1717,8 @@ class Telescope(Device):
         Note:
             * Changing time by writing to this property can be done with either a
               Python datetime value or an ISO 8601 string, for example
-              ``2022-04-22T20:21:01.123 Z``.
+              ``2022-04-22T20:21:01.123Z``. Note that the `Z` is required; numerical offset
+              forms may be confused between local and UTC times.
             * The date/time must be UTC not Local.
             * Even if the mount doesn't support changing this, it will report the
               current UTC date/time. The value may be derived from the system clock

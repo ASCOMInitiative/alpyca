@@ -1307,3 +1307,7 @@ auncher\winapi.py", line 68, in impl
 
   HTTPSConnectionPool(host='test.pypi.org', port=443): Read timed out. (read timeout=15)
   (again, WTF?)
+
+06-Aug-2025
+-----------
+* Holy Catfish - I published the 3.1.1 docs already before publishing the 3.1.1 package. And now I have som,e more issues to deal with. This will end up being 3.1.2 with 3.1.1 unpublished. 
