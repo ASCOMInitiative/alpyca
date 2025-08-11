@@ -1286,7 +1286,7 @@ auncher\winapi.py", line 68, in impl
 * poetry update
 * Unit tests OK
 * Commit 3.1.1 checkpoint
-* ------------- NEED MAKE DOCCS, BUILD, PUBLISH, ANNOUNCE ON FORUMS ------------------
+* ------------- NEED MAKE DOCS, BUILD, PUBLISH, ANNOUNCE ON FORUMS ------------------
 
 2?-May-2025
 -----------
@@ -1310,4 +1310,19 @@ auncher\winapi.py", line 68, in impl
 
 06-Aug-2025
 -----------
-* Holy Catfish - I published the 3.1.1 docs already before publishing the 3.1.1 package. And now I have som,e more issues to deal with. This will end up being 3.1.2 with 3.1.1 unpublished. 
+* Holy Catfish - I published the 3.1.1 docs already before publishing the 3.1.1 package. And now I have some more issues to deal with. This will end up being 3.1.2 with 3.1.1 unpublished.
+
+11-Aug-2025
+-----------
+* Wrapping up 3.1.1. Addressed Issues #20 and #21. Updated CHANGES.
+* Make docs
+* poetry update again for dependencies.
+* Run unit tests (had to change OmniSim back to 0.5)
+  -- NOTE 0.5 needs to have switch 0 and switch 3 named Switch0 and Switch3, both CanAsync, 3 sec duration.
+* Poetry build
+* Publishing to testpypi failed. Apparently my previous publish to testpypi actually succeeded. Damn it.
+* Oh what the hell. Just publish to PyPi and if there is a problem THEN make it 3.1.2.
+* poetry publish -> SUCCESS
+ - Uploading alpyca-3.1.1-py3-none-any.whl 100%
+ - Uploading alpyca-3.1.1.tar.gz 100%
+
