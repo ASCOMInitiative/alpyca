@@ -40,6 +40,8 @@
 # 21-Jul-22 (rbd) 2.0.1 Resolve TODO reviews
 # 07-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
 # 08-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
+# 11-Aug-25 (rbd) 3.1.1 For GitHub Issue #20 fix JSON image transfer, and
+#                       raise_alpaca_if()
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -2514,6 +2516,5 @@ def raise_alpaca_if(n, m):
         raise ActionNotImplementedException(m)
     elif n >= 0x500 and n <= 0xFFF:
         raise DriverException(n, m)
-    else:
-        # Per request Apr-2022 include otherwise unassigned numbers in DriverExeception
+    elif n > 0:  # Include otherwise unassigned numbers in DriverExeception
         raise DriverException(n, m)
