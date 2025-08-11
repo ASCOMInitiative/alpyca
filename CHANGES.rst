@@ -1,10 +1,15 @@
 Version 3.1.1
 =============
 
-- Force 'localhost' to use IPv4.
+- Force 'localhost' to use IPv4 per
+  `GitHub Issue #19 <https://github.com/ASCOMInitiative/alpyca/issues/19>`_
 - Update ``device`` unit test to work with Onmi Simulator V0.5
 - Add missing Note to DriverException
 - ``Telescope.UTCDate`` documentation corrected to specify ``Z`` flag in ISO-8601
+- Fix retrieval of older JSON image data per
+  `GitHub Issue #20 <https://github.com/ASCOMInitiative/alpyca/issues/20>`_
+- Fix Connect() error reporting when the device is not reachable, per
+  `GitHub Issue #21 <https://github.com/ASCOMInitiative/alpyca/issues/21>`_
 
 Version 3.1.0
 =============

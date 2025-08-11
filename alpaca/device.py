@@ -47,6 +47,7 @@
 # 22-Feb-25 (rbd) 3.1.0 Connect()/Disconnect emulation for pre Platform 7
 #                       devices.
 # 18-May-25 (rbd) 3.1.1 GitHub Issue  #19. Force 'localhost' to use IPv4
+# 11-Aug-25 (rbd) 3.1.1 GitHub Issue #20. Connecting to unreachable device.
 # -----------------------------------------------------------------------------
 
 from threading import Lock, Timer, Thread
@@ -528,10 +529,8 @@ class Device:
                 e = self.fake_conn_exception
                 #print(f'Originally: {type(e).__name__} {e.args[1]}')
                 # Must construct a new Exception to come from this place
-                x = type(e)                     # Magic to make a new copy of this class
-                y = x(number=e.args[0], message=e.args[1])  # Instantiate from here
                 #print(f'Re-Raising {str(y)}')   # Use new str() support
-                raise y                         # and raise it!
+                raise type(e)(*e.args)          # Tricky, from Issue #21
             self.conn_lock.acquire()
             x = self.fake_connecting
             y = self.fake_disconnecting
