@@ -46,6 +46,7 @@
 # 21-Aug-22 (rbd) 2.0.2 Fix multicast to 127.0.0.1 GitHub Issue #6
 # 06-Mar-25 (rbd) 3.1.0 Fix Issue #17 by ditching netifaces and friends, and
 #                       using ifaddr while detecting inactive IPs another way.
+# 13-Aug-25 (rbd) 3.1.2 Add trace option
 # -----------------------------------------------------------------------------
 
 import time
@@ -62,7 +63,7 @@ AlpacaDiscovery = "alpacadiscovery1"
 AlpacaResponse = "AlpacaPort"
 
 
-def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
+def search_ipv4(numquery: int=2, timeout: int=2, trace: bool=False) -> List[str]:
     """Discover Alpaca device servers on the IPV4 LAN/VLAN
 
     Returns a list of strings of the form ``ipaddress:port``,
@@ -74,6 +75,8 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
         numquery: Number of discovery queries to send (default 2)
         timeout: Time (sec.) to allow for responses to each
             discovery query. Optional, defaults to 2 seconds.
+        trace: Output a trace of the discovery process. Optional,
+            defaults to False.
 
     Raises:
        To be determined.
@@ -94,7 +97,7 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
     try:
         sock.bind(('0.0.0.0', 0))  # listen to any on a temporary port
     except:
-        # print('failure to bind')
+        if trace: print('failure to bind')
         sock.close()
         raise
 
@@ -104,14 +107,15 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
             for adapter in ifaddr.get_adapters():
                 for ip in adapter.ips:
                     if(ip.is_IPv4):
+                        if trace: print(f'Found local adapter {ip.ip}')
                         octets = ip.ip.split('.')
                         if(len(octets) != 4):               # Quality check
                             continue
                         if octets[0] == '169' and octets[1] == '254':
                             continue                        # APIPA address, skip
-                        # print(ip.ip)
+                        if trace: print(f'Accepted local adapter {ip.ip}, send discovery query')
                         net = ipaddress.IPv4Network(f'{ip.ip}/{ip.network_prefix}', strict = False)
-                        # print(net.broadcast_address)
+                        if trace: print(f'Send on bcst address {net.broadcast_address}')
                         n = sock.sendto(AlpacaDiscovery.encode(),(str(net.broadcast_address), port))
                         time.sleep(timeout / 2)            # Give the server(s) a bit of time to respond
                     while True:                         # Loop through response(s) till times out
@@ -119,20 +123,22 @@ def search_ipv4(numquery: int=2, timeout: int=2) -> List[str]:
                             pinfo, rem = sock.recvfrom(1024)  # buffer size is 1024 bytes
                             remport = json.loads(pinfo.decode())["AlpacaPort"]
                             remip, p = rem
+                            if trace: print(f'Got back remote {remip}')
                             if(remip == ip.ip and remip != '127.0.0.1'):
+                                if trace: print(f'Reject {remip} to avoid loop')
                                 continue                # avoid router loop back to ourselves
                             ipp = f"{remip}:{remport}"
+                            if trace: print(f'Accepted discovered {ipp}')
                             if ipp not in addrs:        # Avoid dupes if numquery > 1
+                                if trace: print(f'Not dupe so add {ipp}')
                                 addrs.append(ipp)
                         except:
                             break                       # leave while True (to next for)
-
-
     finally:
         sock.close()
     return addrs
 
-def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
+def search_ipv6(numquery: int=2, timeout: int=2, trace: bool=False) -> List[str]:
     """Discover Alpaca device servers on the IPV6 LAN/VLAN
 
     Returns a list of strings of the form ``[ipv6address%intfc]:port``,
@@ -144,6 +150,8 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
         numquery: Number of discovery queries to send (default 2)
         timeout: Time (sec.) to allow for responses to the discovery
             query. Optional, defaults to 2 seconds.
+        trace: Output a trace of the discovery process. Optional,
+            defaults to False.
 
     Raises:
        To be determined.
@@ -164,6 +172,7 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
             addr = ''
             for ip in adapter.ips:
                 if(ip.is_IPv6):
+                    if trace: print(f'Found local adapter [{ip.ip}]')
                     addr = ip.ip[0]
                     scope = ip.ip[2]
                     # Reject everything but real link-local, including
@@ -184,8 +193,9 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                     if octets[0] == '169' and octets[1] == '254':
                         addr = ''
             if(addr == ''):
+                if trace: print('Rejected, probable IPv4 APIPA address {ip.ip}')
                 continue
-            # print(f'local adapter on [{addr}]')
+            if trace: print(f'Accepted local adapter on [{addr}], send discovry query')
             try:
                 sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
                 if my_plat == 'Linux':
@@ -207,15 +217,15 @@ def search_ipv6(numquery: int=2, timeout: int=2) -> List[str]:
                         pinfo, rem = sock.recvfrom(1024)    # buffer size is 1024 bytes
                         remport = json.loads(pinfo.decode())["AlpacaPort"]
                         remip = rem[0]
-                        # print(f'remote IP is {remip}')
+                        if trace: print(f'Response from remote IP [{remip}]')
                         if(addr.startswith(remip)):
-                            # print(' This is us, loopback.')
+                            if trace: print(' This is us, loopback.')
                             ipp = f"[::1]:{remport}"        # Substitute loopback
                         else:
                             ipp = f"[{remip}%{scope}]:{remport}"    # External Alpaca
-                        # print(f'Rcvd from {ipp}')
+                        if trace: print(f'Accepted from [{ipp}]')
                         if ipp not in addrs:                # Avoid dupes if numquery > 1
-                            # print(f'Adding {ipp}')
+                            if trace: print(f'Not dupe, adding [{ipp}]')
                             addrs.append(ipp)
                     except:
                         break

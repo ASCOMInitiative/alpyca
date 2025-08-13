@@ -1,3 +1,8 @@
+Version 3.1.2
+==============
+
+- Add trace option to discovery
+
 Version 3.1.1
 =============
 
