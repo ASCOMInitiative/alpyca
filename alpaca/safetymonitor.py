@@ -57,7 +57,8 @@ class SafetyMonitor(Device):
         self,
         address: str,
         device_number: int,
-        protocol: str = "http"
+        protocol: str = "http",
+        defaulttimeout: float = 5.0
     ):
         """Initialize the SafetyMonitor object.
 
@@ -65,9 +66,10 @@ class SafetyMonitor(Device):
             address (str): IP address and port of the device (x.x.x.x:pppp)
             device_number (int): The index of the device (usually 0)
             protocol (str, optional): Only if device needs https. Defaults to "http".
+            defaulttimeout: Default timeout for this device connection. Default to 5.0 seconds.
 
         """
-        super().__init__(address, "safetymonitor", device_number, protocol)
+        super().__init__(address, "safetymonitor", device_number, protocol, defaulttimeout)
 
     @property
     def IsSafe(self) -> bool:

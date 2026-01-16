@@ -68,7 +68,8 @@ class Device:
         address: str,
         device_type: str,
         device_number: int,
-        protocol: str
+        protocol: str,
+        defaulttimeout: float = 5.0
     ):
         """Initialize Device object.
 
@@ -83,6 +84,7 @@ class Device:
             protocol: Protocol (http vs https) used to communicate with Alpaca server.
             api_version: Alpaca API version.
             base_url: Basic URL to easily append with commands.
+            defaulttimeout: Default timeout for this device connection. Default to 5.0 seconds.
 
         Note:
             * Sets a random number for ClientID that lasts
@@ -93,6 +95,7 @@ class Device:
         self.device_type = device_type.lower()
         self.device_number = device_number
         self.api_version = API_VERSION
+        self.defaulttimeout = defaulttimeout
         self.base_url = "%s://%s/api/v%d/%s/%d" % (
             protocol,       # not needed later
             self.address,
@@ -883,15 +886,17 @@ class Device:
 # HTTP/JSON Communications
 # ========================
 
-    def _get(self, attribute: str, tmo=5.0, **data) -> str:
+    def _get(self, attribute: str, tmo=-1, **data) -> str:
         """Send an HTTP GET request to an Alpaca server and check response for errors.
 
         Args:
             attribute (str): Attribute to get from server.
-            tmo (optional) Timeout for HTTP (default = 5 sec)
+            tmo (optional) Timeout for HTTP (default = 5 sec or set at init)
             **data: Data to send with request.
 
         """
+        if (tmo==-1):
+          tmo = self.defaulttimeout
         # Make Host: header safe for IPv6
         if(self.address.startswith('[') and not self.address.startswith('[::1]')):
             hdrs = {'Host': f'{self.address.split("%")[0]}]'}
@@ -913,15 +918,17 @@ class Device:
         self.__check_error(response)
         return response.json()["Value"]
 
-    def _put(self, attribute: str, tmo=5.0, **data) -> str:
+    def _put(self, attribute: str, tmo=-1, **data) -> str:
         """Send an HTTP PUT request to an Alpaca server and check response for errors.
 
         Args:
             attribute (str): Attribute to put to server.
-            tmo (optional) Timeout for HTTP (default = 5 sec)
+            tmo (optional) Timeout for HTTP (default = 5 sec or set at init)
             **data: Data to send with request.
 
         """
+        if (tmo==-1):
+          tmo = self.defaulttimeout
         # Make Host: header safe for IPv6
         if(self.address.startswith('[') and not self.address.startswith('[::1]')):
             hdrs = {'Host': f'{self.address.split("%")[0]}]'}

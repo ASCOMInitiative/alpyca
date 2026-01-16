@@ -119,7 +119,8 @@ class Telescope(Device):
         self,
         address: str,
         device_number: int,
-        protocol: str = "http"
+        protocol: str = "http",
+        defaulttimeout: float = 5.0
     ):
         """Initialize the Telescope object.
 
@@ -127,12 +128,13 @@ class Telescope(Device):
             address (str): IP address and port of the device (x.x.x.x:pppp)
             device_number (int): The index of the device (usually 0)
             protocol (str, optional): Only if device needs https. Defaults to "http".
+            defaulttimeout: Default timeout for this device connection. Default to 5.0 seconds.
 
         Raises:
             DriverException: An error occurred that is not described by one of the more specific ASCOM exceptions. The device did not *successfully* complete the request.
 
         """
-        super().__init__(address, "telescope", device_number, protocol)
+        super().__init__(address, "telescope", device_number, protocol, defaulttimeout)
 
     @property
     def AlignmentMode(self) -> AlignmentModes:
