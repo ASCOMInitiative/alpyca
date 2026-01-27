@@ -14,13 +14,13 @@
         :align: right
 
     =======================
-    Welcome to Alpyca 3.1.1
+    Welcome to Alpyca 3.1.2
     =======================
 
 .. only:: rinoh or rst
 
     =======================
-    Welcome to Alpyca 3.1.1
+    Welcome to Alpyca 3.1.2
     =======================
 
 This document describes the Alpyca package, a Python API client library for
@@ -47,7 +47,7 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.1.1, a maintenance release. For release notes
+        This is version 3.1.2, a maintenance release. For release notes
         see |changes| on the |github|.
 
     For background see |about| on the |ascsite|. As an astronomy developer
@@ -73,7 +73,7 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.0.0, a major release for ASCOM Platform 7.
+        This is version 3.1.2, a maintenance release.
         For release notes see `the CHANGES document
         <https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst>`_ on
         the `Alpyca GitHub repository

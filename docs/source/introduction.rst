@@ -37,7 +37,7 @@ Introduction and Quick Start
 Status of This Document
 -----------------------
 The descriptions of the ASCOM Standard interfaces implemented in Alpyca are
-our best efforts as of February 2025, including the results of over a year of
+our best efforts as of January 2026, including the results of over a year of
 discussion and decisions, ultimately resulting in the new interface revisions
 in the ASCOM Platform 7. None of these changes are breaking. They are additions
 needed to support asynchronous operations for Alpaca, and clarifications of existing

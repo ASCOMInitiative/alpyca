@@ -1,6 +1,9 @@
 Version 3.1.2
 ==============
 
+- Incorporate improvements to Camera, including new ``ImageArrayRaw`` accessor to the array, given in
+  `Pull Request #24 <https://github.com/ASCOMInitiative/alpyca/pull/24>`_. Unit tests
+  with Omni Simulator 0.5 complete successfully.
 - Add trace option to discovery
 
 Version 3.1.1
@@ -8,7 +11,7 @@ Version 3.1.1
 
 - Force 'localhost' to use IPv4 per
   `GitHub Issue #19 <https://github.com/ASCOMInitiative/alpyca/issues/19>`_
-- Update ``device`` unit test to work with Onmi Simulator V0.5
+- Update ``device`` unit test to work with Omni Simulator V0.5
 - Add missing Note to DriverException
 - ``Telescope.UTCDate`` documentation corrected to specify ``Z`` flag in ISO-8601
 - Fix retrieval of older JSON image data per
