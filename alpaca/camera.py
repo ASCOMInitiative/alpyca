@@ -1252,11 +1252,6 @@ class Camera(Device):
               |ImageBytes|.
               See :attr:`ImageArrayInfo` for metadata covering the returned image data.
 
-            .. |ImageBytes| raw:: html
-
-                <a href="https://github.com/ASCOMInitiative/ASCOMRemote/raw/main/Documentation/ASCOM%20Alpaca%20API%20Reference.pdf" target="_blank">
-                    Alpaca API Reference</a> (external)
-
         .. admonition:: Master Interfaces Reference
             :class: green
 
