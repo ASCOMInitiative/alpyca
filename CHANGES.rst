@@ -2,8 +2,11 @@ Version 3.1.2
 ==============
 
 - Incorporate improvements to Camera, including new ``ImageArrayRaw`` accessor to the array, given in
-  `Pull Request #24 <https://github.com/ASCOMInitiative/alpyca/pull/24>`_. Unit tests
-  with Omni Simulator 0.5 complete successfully.
+  `Pull Request #24 <https://github.com/ASCOMInitiative/alpyca/pull/24>`_. Thank you to
+  Cédric Foellmi <cedric@onekiloparsec.dev> for this.
+- Docs updated to include new method
+- Update dependencies to Jan 2026
+- Unit tests with Omni Simulator 0.5 complete successfully.
 - Add trace option to discovery
 
 Version 3.1.1

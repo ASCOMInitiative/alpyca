@@ -1331,4 +1331,39 @@ auncher\winapi.py", line 68, in impl
 * Wrapping up the real 3.1.2. Addresses Issue #23 via PR from onekiloparsec
 * Pytest all OK (after enabling shutter for Dome ha ha)
 
+27-Jan-2026
+-----------
+* Wrestling with rinoh PDF builder. Found duplicate external link for ImageBytes in Camera doc.
+  Fixed. Now docs build in HTML and PDF.
+* poetry update for dependencies
+  - Updating certifi (2025.8.3 -> 2026.1.4)
+  - Updating charset-normalizer (3.4.3 -> 3.4.4)
+  - Updating idna (3.10 -> 3.11)
+  - Updating packaging (25.0 -> 26.0)
+  - Updating typing-extensions (4.14.1 -> 4.15.0)
+  - Updating urllib3 (2.5.0 -> 2.6.3)
+  - Updating requests (2.32.4 -> 2.32.5)
 
+* Run unit tests on OmniSim 5, validate updated dependencies. OK.
+* poetry build
+  - Building sdist
+  - Built alpyca-3.1.1.tar.gz
+  - Building wheel
+  - Built alpyca-3.1.1-py3-none-any.whl
+* poetry publish -r testpypi ... FAILED
+  - 400 File already exists ('alpyca-3.1.1-py3-none-any.whl'
+  - DUH!!! I still have it marked 3.1.1 in pyproject.toml **IDIOT**
+    Furthermore I had the repo and issues links in pyproject.toml pointing to BobDenny
+* Update pyproject.toml (!!!)
+* poetry build
+  - Building sdist
+  - Built alpyca-3.1.2.tar.gz
+  - Building wheel
+  - Built alpyca-3.1.2-py3-none-any.whl
+* poetry publish -t testpypi
+Publishing alpyca (3.1.2) to testpypi
+  - Uploading alpyca-3.1.2-py3-none-any.whl 100%
+  - Uploading alpyca-3.1.2.tar.gz 100%
+* Try to update in alpyca-test, installation fails for enum tools it says >= 0.12.0 ans < 0.13.0
+  meaning ONLY 0.12.0. But in pyproject.toml is specifies enum-tools = "^0.12.0" and I have 0.13.0
+  installed. WTF??? OK that's it for today.

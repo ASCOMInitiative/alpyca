@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "alpyca"
-version = "3.1.1"
+version = "3.1.2"
 description = "API library for all ASCOM Alpaca devices, management, and discovery"
 authors = ["Robert B. Denny <rdenny@dc3.com>"]
 license = "LICENSE"
 readme = "README.md"
 documentation = "https://ascom-standards.org/alpyca/index.html"
-repository = "https://github.com/BobDenny/alpyca"
+repository = "https://github.com/ASCOMInitiative/alpyca"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -19,14 +19,14 @@ packages = [
 ]
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/BobDenny/alpyca/issues"
+"Bug Tracker" = "https://github.com/ASCOMInitiative/alpyca/issues"
 "ASCOM Initiative" = "https://ascom-standards.org/"
 "ASCOM Developer Forum" = "https://ascomtalk.groups.io/g/Developer/"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-requests = "^2.32.4"
-typing-extensions = "^4.12.0"
+requests = "^2.32.5"
+typing-extensions = "^4.15.0"
 python-dateutil = "^2.8.2"
 enum-tools = "^0.12.0"
 ifaddr = "^0.2.0"
