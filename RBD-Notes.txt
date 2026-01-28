@@ -1361,9 +1361,21 @@ auncher\winapi.py", line 68, in impl
   - Building wheel
   - Built alpyca-3.1.2-py3-none-any.whl
 * poetry publish -t testpypi
-Publishing alpyca (3.1.2) to testpypi
-  - Uploading alpyca-3.1.2-py3-none-any.whl 100%
-  - Uploading alpyca-3.1.2.tar.gz 100%
-* Try to update in alpyca-test, installation fails for enum tools it says >= 0.12.0 ans < 0.13.0
+	Publishing alpyca (3.1.2) to testpypi
+	  - Uploading alpyca-3.1.2-py3-none-any.whl 100%
+	  - Uploading alpyca-3.1.2.tar.gz 100%
+* Try to update in alpyca-test, installation fails for enum tools it says >= 0.12.0 and < 0.13.0
   meaning ONLY 0.12.0. But in pyproject.toml is specifies enum-tools = "^0.12.0" and I have 0.13.0
   installed. WTF??? OK that's it for today.
+  
+28-Jan-2026
+-----------
+* What was I thinking? I just deleted alpyca from my test project's venv, then 
+  -- pip install -i https://test.pypi.org/simple/ alpyca
+     and it said 3.1.1 already installed, even though 3.1.2 is the latest shown on testpypi?!?!?!?!?
+  -- pip install -i https://test.pypi.org/simple/ alpyca==3.1.2 to FORCE 3.1.2 and it installed 3.1.2 wihout any error with enum-tools 0.12.0. Now what happens if I try to update enum-tools? It did that without error as well. GREMLINS!!
+* Smoke test (SampleTest.py) runs OK. This looks likke it is ready to publish.
+* poetry publish
+	Publishing alpyca (3.1.2) to PyPI
+	 - Uploading alpyca-3.1.2-py3-none-any.whl 100%
+	 - Uploading alpyca-3.1.2.tar.gz 100%
