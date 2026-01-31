@@ -6,6 +6,8 @@
 # -----------------------------------------------------------------------------
 # Edit History:
 # 22-Feb-2025   rbd     Make simulator address symbolic
+# 30-Jan-2026   rbd     Add get_setting() to retrieve setting and set_setting()
+#                       to change an OmniSim setting via via OmniSim JSON API
 # -----------------------------------------------------------------------------
 import pytest
 import time
@@ -33,8 +35,22 @@ def device(request):
         time.sleep(0.5)
     print(f"Setup: Connected to OmniSim {n} at {simaddr} OK")
     return d
+
+@pytest.fixture(scope="module")
+def disconn(request):
+    global d
+    yield
+    #d.Connected = False
+    d.Disconnect()
+    n = getattr(request.module, "dev_name")
+    print(f"Teardown: {n} Disconnected")
+
+# ------------------------------------
+# 'xmlprofile' Settings Data Endpoints
+# ------------------------------------
 #
-# Grabs the settings for the device from the OmniSim settings data *once*.
+# Grabs the settings data for the device from the OmniSim
+# xmlprofile endpoint *once*. Builds a dictionary.
 #
 @pytest.fixture(scope="module")
 def settings(request):
@@ -56,17 +72,9 @@ def settings(request):
     print(f"Setup: {n} OminSim Settings retrieved")
     return s
 
-@pytest.fixture(scope="module")
-def disconn(request):
-    global d
-    yield
-    #d.Connected = False
-    d.Disconnect()
-    n = getattr(request.module, "dev_name")
-    print(f"Teardown: {n} Disconnected")
-
 #
-# Common function to get settings for @pytest.mark.skipif() decorators
+# Common function to get settings via xmlprofile for
+# @pytest.mark.skipif() decorators
 #
 def get_settings(device: str):
     resp = requests.get(f'http://{simaddr}/simulator/v1/{device}/0/xmlprofile?ClientID=0&ClientTransactionID=0')
@@ -84,3 +92,27 @@ def get_settings(device: str):
             except:
                 s[k] = v                    # Punt ... string
     return s
+
+#
+# ----------------
+# OmniSim JSON API
+# ----------------
+#
+# When supported by the OmniSim for a device, use this mechanic.
+# --------------------------------------------------------------
+#
+def get_setting(device:str, setting:str):
+    d = device.lower()
+    s = setting.lower()
+    resp = requests.get(f'http://{simaddr}/simulator/v1/{d}/0/{s}?ClientID=0&ClientTransactionID=0')
+    s = json.loads(resp.text)['Value']
+    return s
+
+def set_setting(device:str, setting:str, value):
+    d = device.lower()
+    s = setting.lower()
+    body = { s: value,
+            "ClientID" : 0,
+            "ClientTransactionID" : 0
+    }
+    resp = requests.put(f'http://{simaddr}/simulator/v1/{d}/0/{s}', data=body, files={})
