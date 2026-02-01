@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
-# conftest - Implements PyTest fixtures for Alpyce unit tests
+# conftest - Implements PyTest fixtures for Alpyca unit tests
 #
 # # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 # -----------------------------------------------------------------------------

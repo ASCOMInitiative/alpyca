@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
-# conftest - Implements PyTest module for testing SafetyMonitor
+# test_safetymonitor.py - Implements PyTest module for testing SafetyMonitor
 #
 # # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 # -----------------------------------------------------------------------------

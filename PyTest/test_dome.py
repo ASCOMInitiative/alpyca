@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
-# conftest - Implements PyTest module for testing Dome
+# test_dome.py - Implements PyTest module for testing Dome
 #
 # # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
 # -----------------------------------------------------------------------------

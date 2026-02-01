@@ -32,12 +32,12 @@ enum-tools = "^0.12.0"
 ifaddr = "^0.2.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.1.2"
-pytz = "^2022.1"
+pytest = "^9.0.1"
+pytz = "^2025.2"
 
 [tool.pytest.ini_options]
-minversion = "7.0"
-addopts = "--setupshow -rA"
+minversion = "9.0"
+addopts = "--setup-show -rA"
 testpaths = [
     "PyTest"
 ]
