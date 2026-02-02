@@ -1,4 +1,13 @@
-# PyTest Unit tests for IFocuserV3
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# test_focuser.py - Implements PyTest module for testing Focuser
+#
+# # Author:   Robert B. Denny <rdenny@dc3.com> (rbd)
+# -----------------------------------------------------------------------------
+# Edit History:
+# 02-Feb-2026   rbd     Change to using the OmniSim JSON API for settings
+#                       Use JSON API to assure correct Dome configuration
+# -----------------------------------------------------------------------------
 import pytest
 import conftest
 import time
@@ -6,26 +15,26 @@ import time
 from alpaca.focuser import Focuser
 dev_name = "Focuser"
 
-def test_props(device, settings, disconn):
+def test_props(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
-    s = settings
-    print("Test Focuser properties")
-    assert d.Absolute == s["Absolute"]
-    assert d.MaxIncrement == s["MaxIncrement"]
-    assert d.MaxStep == s["MaxStep"]
-    assert d.StepSize == s["StepSize"]
-    assert d.TempCompAvailable == s["TempCompAvailable"]
-    assert d.TempComp == s["TempComp"]
-    assert s['TempProbe'], "Simulator must have the Temperature Probe enabled"
+    print('Test Focuser properties, Enable temp probe')
+    conftest.set_setting(dev_name, 'TempProbe', True)
     print(f"Temp is variable currently {d.Temperature}")
+    assert d.Absolute == conftest.get_setting(dev_name,'Absolute')
+    assert d.MaxIncrement == conftest.get_setting(dev_name,'MaxIncrement')
+    assert d.MaxStep == conftest.get_setting(dev_name,'MaxStep')
+    assert d.StepSize == conftest.get_setting(dev_name,'StepSize')
+    assert d.TempCompAvailable == conftest.get_setting(dev_name,'TempCompAvailable')
+    assert d.TempComp == conftest.get_setting(dev_name,'TempComp')
 
-def test_motion(device, settings, disconn):
+def test_motion(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
-    s = settings
-    print("Test Focuser motion and Halt")
-    assert d.Absolute, "Simulator must have Absolute mode ON"
-    assert s['Synchronous'] == False, "Simulator must have Synchronous OFF"
-    assert s['CanHalt'], "Simulator must have Halt() enabled"
+    print("Test Focuser motion and Halt. Set Absolute and disable Synchronous")
+    conftest.set_setting(dev_name, 'Absolute', True)
+    conftest.set_setting(dev_name, 'Synchronous', False)
+    conftest.set_setting(dev_name, 'CanHalt', True)
     newpos = int(d.MaxStep / 2)
     print(f"Test: Absolute mode - Start Move from {d.Position} to {newpos}")
     d.Move(newpos)

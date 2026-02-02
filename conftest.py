@@ -115,4 +115,8 @@ def set_setting(device:str, setting:str, value):
             "ClientID" : 0,
             "ClientTransactionID" : 0
     }
-    resp = requests.put(f'http://{simaddr}/simulator/v1/{d}/0/{s}', data=body, files={})
+    requests.put(f'http://{simaddr}/simulator/v1/{d}/0/{s}', data=body, files={})
+
+def reset_dev(device:str):
+    print(f'Resetting {device} to defaults')
+    requests.put(f'http://{simaddr}/simulator/v1/{device}/0/reset?ClientID=0&ClientTransactionID=0')

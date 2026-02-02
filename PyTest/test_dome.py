@@ -7,6 +7,8 @@
 # Edit History:
 # 30-Jan-2026   rbd     Change to using the OmniSim JSON API for settings
 #                       Use JSON API to assure correct Dome configuration
+# 02-Feb-2026   rbd     Oops, remove references to the old settings fixture
+#                       Reset the simulated device to defaults before each test
 # -----------------------------------------------------------------------------
 import pytest
 import conftest
@@ -16,9 +18,9 @@ from alpaca.dome import Dome
 from alpaca.dome import ShutterState
 dev_name = "Dome"
 
-def test_props(device, settings, disconn):
+def test_props(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
-    s = settings
     print("Test properties:")
     assert d.CanFindHome == conftest.get_setting(dev_name, "CanFindHome")
     assert d.CanPark == conftest.get_setting(dev_name, "CanPark")
@@ -31,6 +33,7 @@ def test_props(device, settings, disconn):
     assert d.CanSyncAzimuth == conftest.get_setting(dev_name, "CanSyncAzimuth")
 
 def test_shutter(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
     print("Test shutter motion (set can-flag):")
     conftest.set_setting(dev_name, 'CanSetShutter', True)
@@ -59,6 +62,7 @@ def test_shutter(device, disconn):
     assert d.ShutterStatus == ShutterState.shutterClosed
 
 def test_altaz(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
     print("Test alt/az motion (set can-flags):")
     # assert d.CanSetAzimuth, 'OmniSim must have Azimuth (rotation) enabled'
@@ -88,8 +92,8 @@ def test_altaz(device, disconn):
     assert d.Azimuth == 90
     print(f'. OK, azimuth is {d.Azimuth}')
 
-
 def test_park(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
     print("Test parking (set can-flags):")
     conftest.set_setting(dev_name, 'CanSetAzimuth', True)
@@ -132,6 +136,7 @@ def test_park(device, disconn):
     assert d.Azimuth == 120
 
 def test_home(device, disconn):
+    conftest.reset_dev(dev_name)
     d = device
     print("Test homing (set can-flags):")
     conftest.set_setting(dev_name, 'CanSetAzimuth', True)
