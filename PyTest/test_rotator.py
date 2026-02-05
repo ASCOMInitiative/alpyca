@@ -5,23 +5,21 @@ import platform
 from alpaca.rotator import Rotator
 dev_name = "Rotator"
 
-def test_reversal(device, settings, disconn):
+def test_reversal(device, disconn):
     d = device
-    s = settings
     print("Test Rotator reversal properties")
-    assert d.CanReverse == s['CanReverse']
+    assert d.CanReverse == conftest.get_setting(dev_name,'CanReverse')
     assert d.CanReverse, "CanReverse must be enabled in OmniSim"
-    d.Reverse = s['Reverse']
-    assert d.Reverse == s['Reverse']
+    d.Reverse = conftest.get_setting(dev_name,'Reverse')
+    assert d.Reverse == conftest.get_setting(dev_name,'Reverse')
     print(f'Reverse is {d.Reverse}, changing to {not d.Reverse}')
     old = d.Reverse
     d.Reverse = not d.Reverse
     assert d.Reverse !=  old
     assert d.StepSize == 0.75  # BUG Fixed value in OmniSim (Shows 0.8)
 
-def test_offset(device, settings, disconn):
+def test_offset(device, disconn):
     d = device
-    s = settings
     print("Test Rotator offset and sync features")
     d.Sync(d.MechanicalPosition + 10.123)
     x = abs(d.MechanicalPosition + 10.123 - d.Position)
@@ -30,9 +28,8 @@ def test_offset(device, settings, disconn):
     x = abs(d.MechanicalPosition - 8.321 - d.Position)
     assert x < 0.01 or x > 359.8
 
-def test_motion(device, settings, disconn):
+def test_motion(device, disconn):
     d = device
-    s = settings
     print("Test Rotator motion")
     print("  Move to mechanical 90")
     d.MoveMechanical(90.0)
