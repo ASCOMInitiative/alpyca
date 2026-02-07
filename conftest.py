@@ -29,7 +29,6 @@ def device(request):
     print(f'Setup: for {n}')
     c = getattr(sys.modules[f"alpaca.{n.lower()}"], n)  # Creates a device class by string name :-)
     d =  c(f'{simaddr}', 0)                       # Created an instance of the class
-    #d.Connected = True
     d.Connect()
     while d.Connecting:
         time.sleep(0.5)
@@ -40,7 +39,6 @@ def device(request):
 def disconn(request):
     global d
     yield
-    #d.Connected = False
     d.Disconnect()
     n = getattr(request.module, "dev_name")
     print(f"Teardown: {n} Disconnected")
