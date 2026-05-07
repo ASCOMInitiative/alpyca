@@ -128,7 +128,7 @@ acquire a short image, download and make a local FITS file::
         pass
     try:
         hdr['OFFSET'] = c.Offset
-        if type(c.Offset == int):
+        if type(c.Offset) == int:
             hdr['PEDESTAL'] = c.Offset
     except:
         pass
