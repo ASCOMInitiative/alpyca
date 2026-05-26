@@ -705,7 +705,7 @@ class Device:
                 there.
 
         """
-        return [i.strip() for i in self._get("driverinfo").split(",")]
+        return [i.strip() for i in self._get("driverinfo", "").split(",")]
 
     @property
     def DriverVersion(self) -> str:
