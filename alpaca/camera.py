@@ -2538,7 +2538,7 @@ class Camera(Device):
         #
         # IMAGEBYTES
         #
-        if ct == 'application/imagebytes':
+        if 'application/imagebytes' in ct:
             a = self._build_imagedata_array(response)
             return self._build_imagedata_nested_list_array(a)
         #
@@ -2562,7 +2562,7 @@ class Camera(Device):
         """
         response = self._fetch_imagedata_response(attribute, **data)
         ct = response.headers.get('content-type')  # case insensitive
-        if ct == 'application/imagebytes':
+        if 'application/imagebytes' in ct:
             return self._build_imagedata_array(response)
         else:
             raise InvalidValueException(
