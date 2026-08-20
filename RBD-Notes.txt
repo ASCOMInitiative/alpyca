@@ -1360,17 +1360,17 @@ auncher\winapi.py", line 68, in impl
   - Built alpyca-3.1.2.tar.gz
   - Building wheel
   - Built alpyca-3.1.2-py3-none-any.whl
-* poetry publish -t testpypi
+* poetry publish -r testpypi
 	Publishing alpyca (3.1.2) to testpypi
 	  - Uploading alpyca-3.1.2-py3-none-any.whl 100%
 	  - Uploading alpyca-3.1.2.tar.gz 100%
 * Try to update in alpyca-test, installation fails for enum tools it says >= 0.12.0 and < 0.13.0
   meaning ONLY 0.12.0. But in pyproject.toml is specifies enum-tools = "^0.12.0" and I have 0.13.0
   installed. WTF??? OK that's it for today.
-  
+
 28-Jan-2026
 -----------
-* What was I thinking? I just deleted alpyca from my test project's venv, then 
+* What was I thinking? I just deleted alpyca from my test project's venv, then
   -- pip install -i https://test.pypi.org/simple/ alpyca
      and it said 3.1.1 already installed, even though 3.1.2 is the latest shown on testpypi?!?!?!?!?
   -- pip install -i https://test.pypi.org/simple/ alpyca==3.1.2 to FORCE 3.1.2 and it installed 3.1.2 wihout any error with enum-tools 0.12.0. Now what happens if I try to update enum-tools? It did that without error as well. GREMLINS!!
@@ -1379,3 +1379,293 @@ auncher\winapi.py", line 68, in impl
 	Publishing alpyca (3.1.2) to PyPI
 	 - Uploading alpyca-3.1.2-py3-none-any.whl 100%
 	 - Uploading alpyca-3.1.2.tar.gz 100%
+
+17-Aug-2026
+-----------
+* Alpyca Issue #28. Make correction to camera.py, but on the UnitTests branch.
+* Brave! Merge UnitTests branch into master. This should be good for new PyTest with OmniSim 0.5 JSON features.
+* Now I can't get the PyTest stuff to work. The test routines can't import pytest (according to pylance)!!!
+  -- Update pytest module to 9.1.1 ???
+  -- Check pyproject.toml and it allows pytest ^9.0.1
+  -- The "helpful" error is "The python test process was terminated before it could exit on its own, the process errored with: Code: 1, Signal: null for workspace d:\dev\astro\ASCOM Alpaca\Alpyca"
+  -- VSCode has lost the .venv recognition. Set it back to the correct poetry 3.1.1 venv. and restart. OK now.
+  -- Typing 'pytest' at the terminal (.venv) is now performing all of the tests successfully!!
+* Update version in pyproject.toml to 3.1.3
+* cd to docs, update docs, build HTML and rinoh (PDF), test locally
+* Poetry update reports that my current version of pytest requires Python 3.10. Rather than back down on pytest I now require Python 3.10.
+  -- Update pyproject.toml to require Python ^3.10, pytest 9.1.1 which I now have.
+* Poetry update, OK this time.
+    Package operations: 0 installs, 9 updates, 0 removals
+
+      - Updating certifi (2026.1.4 -> 2026.7.22): Pending...
+      - Updating certifi (2026.1.4 -> 2026.7.22): Downloading... 0%
+      - Updating certifi (2026.1.4 -> 2026.7.22): Downloading... 100%
+      - Updating certifi (2026.1.4 -> 2026.7.22): Installing...
+      - Updating certifi (2026.1.4 -> 2026.7.22)
+      - Updating charset-normalizer (3.4.4 -> 3.5.1)
+      - Updating idna (3.11 -> 3.18)
+      - Updating iniconfig (2.1.0 -> 2.3.0)
+      - Updating packaging (26.0 -> 26.3)
+      - Updating pygments (2.19.2 -> 2.21.0)
+      - Updating typing-extensions (4.15.0 -> 4.16.0)
+      - Updating urllib3 (2.6.3 -> 2.7.0)
+      - Updating requests (2.32.5 -> 2.34.2)
+
+    Writing lock file
+* Re-run the unit tests. OK.
+* poetry build
+    Building alpyca (3.1.3)
+      - Building sdist
+      - Built alpyca-3.1.3.tar.gz
+      - Building wheel
+      - Built alpyca-3.1.3-py3-none-any.whl
+* poetry publish -r testpypi
+    Publishing alpyca (3.1.3) to testpypi
+      - Uploading alpyca-3.1.3-py3-none-any.whl 100%
+      - Uploading alpyca-3.1.3.tar.gz 100%
+* In the alpyca-test workspace
+  -- pip install -i https://test.pypi.org/simple/ alpyca
+        Looking in indexes: https://test.pypi.org/simple/
+        Requirement already satisfied: alpyca in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (2.0.4)
+        Requirement already satisfied: enum-tools<0.10.0,>=0.9.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (0.9.0.post1)
+        Requirement already satisfied: netifaces<0.12.0,>=0.11.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (0.11.0)
+        Requirement already satisfied: python-dateutil<3.0.0,>=2.8.2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (2.8.2)
+        Requirement already satisfied: requests<3.0.0,>=2.27.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (2.28.2)
+        Requirement already satisfied: typing-extensions<5.0.0,>=4.2.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (4.5.0)
+        Requirement already satisfied: pygments>=2.6.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from enum-tools<0.10.0,>=0.9.0->alpyca) (2.14.0)
+        Requirement already satisfied: six>=1.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from python-dateutil<3.0.0,>=2.8.2->alpyca) (1.16.0)
+        Requirement already satisfied: charset-normalizer<4,>=2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (3.1.0)
+        Requirement already satisfied: idna<4,>=2.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (3.4)
+        Requirement already satisfied: urllib3<1.27,>=1.21.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (1.26.15)
+        Requirement already satisfied: certifi>=2017.4.17 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (2022.12.7)
+  -- pip install -i https://test.pypi.org/simple/ alpyca==3.1.3
+        Looking in indexes: https://test.pypi.org/simple/
+        Collecting alpyca==3.1.3
+          Downloading https://test-files.pythonhosted.org/packages/36/9b/0be7cdcbdb118d0aa96293e69a1aff18fa80a1adaf1476bbadc172c0091a/alpyca-3.1.3-py3-none-any.whl.metadata (9.0 kB)
+        INFO: pip is looking at multiple versions of alpyca to determine which version is compatible with other requirements. This could take a while.
+        ERROR: Could not find a version that satisfies the requirement enum-tools<0.13.0,>=0.12.0 (from alpyca) (from versions: none)
+        ERROR: No matching distribution found for enum-tools<0.13.0,>=0.12.0
+     Same as before on 28-Jan-2026 with this crap. In pyproject.toml I do not have enum-tools=0.12.0, it is ^0.12.0 damn it.
+  -- pip install ==--upgrade -i https://test.pypi.org/simple/ alpyca  == HOLY SHIT ==
+        Looking in indexes: https://test.pypi.org/simple/
+        Requirement already satisfied: alpyca in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (2.0.4)
+        Collecting alpyca
+          Using cached https://test-files.pythonhosted.org/packages/36/9b/0be7cdcbdb118d0aa96293e69a1aff18fa80a1adaf1476bbadc172c0091a/alpyca-3.1.3-py3-none-any.whl.metadata (9.0 kB)
+        INFO: pip is looking at multiple versions of alpyca to determine which version is compatible with other requirements. This could take a while.
+          Using cached https://test-files.pythonhosted.org/packages/50/51/ccc7edc4cc878bb5e4533c813ce193aa8971d824f53d824ec00bef9b18a5/alpyca-3.1.2-py3-none-any.whl.metadata (9.1 kB)
+          Using cached https://test-files.pythonhosted.org/packages/40/a7/740398e5a47195251d77beddac17885bc372dbd5410588716a7162d73036/alpyca-3.1.1-py3-none-any.whl.metadata (9.1 kB)
+          Downloading https://test-files.pythonhosted.org/packages/1e/db/d5b57dbf973086b8fc4e58a4ba5faff683f5683a8abfabacbf2bc1bec0b1/alpyca-3.1.0-py3-none-any.whl.metadata (9.1 kB)
+          Using cached https://test-files.pythonhosted.org/packages/a1/c9/a6c7384232b62b98ba451c07600b4eb7f5bb2dab18c9d8d7e0e9eaf82eb2/alpyca-3.0.0-py3-none-any.whl.metadata (8.5 kB)
+        Requirement already satisfied: enum-tools<0.10.0,>=0.9.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (0.9.0.post1)
+        Requirement already satisfied: netifaces<0.12.0,>=0.11.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (0.11.0)
+        Requirement already satisfied: python-dateutil<3.0.0,>=2.8.2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (2.8.2)
+        Requirement already satisfied: requests<3.0.0,>=2.27.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (2.28.2)
+        Requirement already satisfied: typing-extensions<5.0.0,>=4.2.0 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca) (4.5.0)
+        Requirement already satisfied: pygments>=2.6.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from enum-tools<0.10.0,>=0.9.0->alpyca) (2.14.0)
+        Requirement already satisfied: six>=1.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from python-dateutil<3.0.0,>=2.8.2->alpyca) (1.16.0)
+        Requirement already satisfied: charset-normalizer<4,>=2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (3.1.0)
+        Requirement already satisfied: idna<4,>=2.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (3.4)
+        Requirement already satisfied: urllib3<1.27,>=1.21.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (1.26.15)
+        Requirement already satisfied: certifi>=2017.4.17 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.27.1->alpyca) (2022.12.7)
+        Using cached https://test-files.pythonhosted.org/packages/a1/c9/a6c7384232b62b98ba451c07600b4eb7f5bb2dab18c9d8d7e0e9eaf82eb2/alpyca-3.0.0-py3-none-any.whl (77 kB)
+        Installing collected packages: alpyca
+          Attempting uninstall: alpyca
+            Found existing installation: alpyca 2.0.4
+            Uninstalling alpyca-2.0.4:
+              Successfully uninstalled alpyca-2.0.4
+        Successfully installed alpyca-3.0.0
+  -- pip install --upgrade -i https://test.pypi.org/simple/ alpyca==3.1.3
+        Collecting alpyca==3.1.3
+          Using cached https://test-files.pythonhosted.org/packages/36/9b/0be7cdcbdb118d0aa96293e69a1aff18fa80a1adaf1476bbadc172c0091a/alpyca-3.1.3-py3-none-any.whl.metadata (9.0 kB)
+        INFO: pip is looking at multiple versions of alpyca to determine which version is compatible with other requirements. This could take a while.
+        ERROR: Could not find a version that satisfies the requirement enum-tools<0.13.0,>=0.12.0 (from alpyca) (from versions: none)
+        ERROR: No matching distribution found for enum-tools<0.13.0,>=0.12.0
+     == What next??? == I checked test.pypi.org and it shows 3.1.3 (except some README errors which I'll fix)
+* poetry build (to pick up README Corrections)
+    Building alpyca (3.1.3)
+      - Building sdist
+      - Built alpyca-3.1.3.tar.gz
+      - Building wheel
+      - Built alpyca-3.1.3-py3-none-any.whl
+* Now WTF with testpypi ???
+  -- pyproject.toml shows
+      [tool.poetry.dependencies]
+      python = "^3.10"
+      requests = "^2.32.5"
+      typing-extensions = "^4.15.0"
+      python-dateutil = "^2.8.2"
+      enum-tools = "^0.12.0"   <== Greater than or equal
+      ifaddr = "^0.2.0"
+  -- poetry.lock shows
+      [[package]]
+      name = "enum-tools"
+      version = "0.12.0"
+      description = "Tools to expand Python's enum module."
+      optional = false
+      python-versions = ">=3.6"
+      files = [
+          {file = "enum_tools-0.12.0-py3-none-any.whl", hash = "sha256:d69b019f193c7b850b17d9ce18440db7ed62381571409af80ccc08c5218b340a"},
+          {file = "enum_tools-0.12.0.tar.gz", hash = "sha256:13ceb9376a4c5f574a1e7c5f9c8eb7f3d3fbfbb361cc18a738df1a58dfefd460"},
+      ]
+  -- OH I have 0.12.0 of enum-tools installed??? Wait!
+* Update enum-tools to 0.13.0, then
+* poetry update
+      Package operations: 0 installs, 1 update, 0 removals
+
+        - Downgrading enum-tools (0.13.0 -> 0.12.0)
+  OK, WTF is going on??? I gotta get to the bottom of this.
+  -- Change pyproject.toml to enum-tools = "0.*"
+  -- Update local enum tools back to 0.13.0
+* Poetry update
+      No dependencies to install or update
+  I'm thinking the leading 0. version is causing problems. Let's build and try to publish again.
+* poetry build
+    Building alpyca (3.1.3)
+      - Building sdist
+      - Built alpyca-3.1.3.tar.gz
+      - Building wheel
+      - Built alpyca-3.1.3-py3-none-any.whl
+* TOO BAD I cannot publish again to testpypi. I'm screwed. NOW WHAT??? I've been here before. Instead I'll try installing from the local whl.
+* pip install d:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      pip install "d:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl"
+      Processing d:\dev\astro\ascom alpaca\alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      Requirement already satisfied: enum-tools==0.* in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from alpyca==3.1.3) (0.13.0)
+      Requirement already satisfied: ifaddr<0.3.0,>=0.2.0 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from alpyca==3.1.3) (0.2.0)
+      Requirement already satisfied: python-dateutil<3.0.0,>=2.8.2 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from alpyca==3.1.3) (2.9.0.post0)
+      Requirement already satisfied: requests<3.0.0,>=2.32.5 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from alpyca==3.1.3) (2.34.2)
+      Requirement already satisfied: typing-extensions<5.0.0,>=4.15.0 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from alpyca==3.1.3) (4.16.0)
+      Requirement already satisfied: pygments>=2.6.1 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from enum-tools==0.*->alpyca==3.1.3) (2.21.0)
+      Requirement already satisfied: six>=1.5 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from python-dateutil<3.0.0,>=2.8.2->alpyca==3.1.3) (1.17.0)
+      Requirement already satisfied: charset_normalizer<4,>=2 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (3.5.1)
+      Requirement already satisfied: idna<4,>=2.5 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (3.18)
+      Requirement already satisfied: urllib3<3,>=1.26 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (2.7.0)
+      Requirement already satisfied: certifi>=2023.5.7 in d:\dev\astro\ascom alpaca\alpyca\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (2026.7.22)
+      Installing collected packages: alpyca
+      Successfully installed alpyca-3.1.3
+   OK!! It looks like my build is valid. Back to alpyca-test workspace
+* Now remove it from our development .venv!!
+* Over to alpyca-test workspace.
+* pip install d:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      pip install "D:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl"
+      Processing d:\dev\astro\ascom alpaca\alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      Requirement already satisfied: enum-tools==0.* in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca==3.1.3) (0.9.0.post1)
+      Collecting ifaddr<0.3.0,>=0.2.0 (from alpyca==3.1.3)
+        Using cached ifaddr-0.2.0-py3-none-any.whl.metadata (4.9 kB)
+      Requirement already satisfied: python-dateutil<3.0.0,>=2.8.2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from alpyca==3.1.3) (2.8.2)
+      Collecting requests<3.0.0,>=2.32.5 (from alpyca==3.1.3)
+        Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+      Collecting typing-extensions<5.0.0,>=4.15.0 (from alpyca==3.1.3)
+        Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+      Requirement already satisfied: pygments>=2.6.1 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from enum-tools==0.*->alpyca==3.1.3) (2.14.0)
+      Requirement already satisfied: six>=1.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from python-dateutil<3.0.0,>=2.8.2->alpyca==3.1.3) (1.16.0)
+      Requirement already satisfied: charset_normalizer<4,>=2 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (3.1.0)
+      Requirement already satisfied: idna<4,>=2.5 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (3.4)
+      Requirement already satisfied: urllib3<3,>=1.26 in d:\dev\astro\ascom alpaca\alpyca-test\.venv\lib\site-packages (from requests<3.0.0,>=2.32.5->alpyca==3.1.3) (1.26.15)
+      Collecting certifi>=2023.5.7 (from requests<3.0.0,>=2.32.5->alpyca==3.1.3)
+        Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+      Using cached ifaddr-0.2.0-py3-none-any.whl (12 kB)
+      Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+      Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+      Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+      Installing collected packages: ifaddr, typing-extensions, certifi, requests, alpyca
+        Attempting uninstall: typing-extensions
+          Found existing installation: typing_extensions 4.5.0
+          Uninstalling typing_extensions-4.5.0:
+            Successfully uninstalled typing_extensions-4.5.0
+        Attempting uninstall: certifi
+          Found existing installation: certifi 2022.12.7
+          Uninstalling certifi-2022.12.7:
+            Successfully uninstalled certifi-2022.12.7
+        Attempting uninstall: requests
+          Found existing installation: requests 2.28.2
+          Uninstalling requests-2.28.2:
+            Successfully uninstalled requests-2.28.2
+        Attempting uninstall: alpyca
+          Found existing installation: alpyca 3.0.0
+          Uninstalling alpyca-3.0.0:
+            Successfully uninstalled alpyca-3.0.0
+      Successfully installed alpyca-3.1.3 certifi-2026.7.22 ifaddr-0.2.0 requests-2.34.2 typing-extensions-4.16.0
+* pip list
+      Package            Version
+      ------------------ -----------
+      alpyca             3.1.3
+      certifi            2026.7.22
+      charset-normalizer 3.1.0
+      enum-tools         0.9.0.post1
+      idna               3.4
+      ifaddr             0.2.0
+      netifaces          0.11.0
+      pip                23.3.1
+      Pygments           2.14.0
+      python-dateutil    2.8.2
+      requests           2.34.2
+      setuptools         67.6.1
+      six                1.16.0
+      typing_extensions  4.16.0
+      urllib3            1.26.15
+  MOST ARE ANCIENT!!!! Look at enum-tools!!!!! WTF??? This is NUTS!!!!!!
+* Now what???
+* Create a new .venv2 and update pip in .venv2 to 26.2.1
+* Now in the virgin .venv2
+  pip install d:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      Processing D:\dev\astro\ASCOM Alpaca\Alpyca\dist\alpyca-3.1.3-py3-none-any.whl
+      Collecting enum-tools==0.* (from alpyca==3.1.3)
+        Using cached enum_tools-0.13.0-py3-none-any.whl.metadata (8.0 kB)
+      Collecting ifaddr<0.3.0,>=0.2.0 (from alpyca==3.1.3)
+        Using cached ifaddr-0.2.0-py3-none-any.whl.metadata (4.9 kB)
+      Collecting python-dateutil<3.0.0,>=2.8.2 (from alpyca==3.1.3)
+        Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+      Collecting requests<3.0.0,>=2.32.5 (from alpyca==3.1.3)
+        Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+      Collecting typing-extensions<5.0.0,>=4.15.0 (from alpyca==3.1.3)
+        Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+      Collecting pygments>=2.6.1 (from enum-tools==0.*->alpyca==3.1.3)
+        Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+      Collecting six>=1.5 (from python-dateutil<3.0.0,>=2.8.2->alpyca==3.1.3)
+        Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+      Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.32.5->alpyca==3.1.3)
+        Using cached charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl.metadata (46 kB)
+      Collecting idna<4,>=2.5 (from requests<3.0.0,>=2.32.5->alpyca==3.1.3)
+        Using cached idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+      Collecting urllib3<3,>=1.26 (from requests<3.0.0,>=2.32.5->alpyca==3.1.3)
+        Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+      Collecting certifi>=2023.5.7 (from requests<3.0.0,>=2.32.5->alpyca==3.1.3)
+        Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+      Using cached enum_tools-0.13.0-py3-none-any.whl (22 kB)
+      Using cached ifaddr-0.2.0-py3-none-any.whl (12 kB)
+      Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+      Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+      Using cached charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl (206 kB)
+      Using cached idna-3.18-py3-none-any.whl (65 kB)
+      Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+      Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
+      Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+      Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 15.7 MB/s  0:00:00
+      Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+      Installing collected packages: ifaddr, urllib3, typing-extensions, six, pygments, idna, charset_normalizer, certifi, requests, python-dateutil, enum-tools, alpyca
+      Successfully installed alpyca-3.1.3 certifi-2026.7.22 charset_normalizer-3.5.1 enum-tools-0.13.0 idna-3.18 ifaddr-0.2.0 pygments-2.21.0 python-dateutil-2.9.0.post0 requests-2.34.2 six-1.17.0 typing-extensions-4.16.0 urllib3-2.7.0
+* WINNER!!! Remove the .venv and .venv3 from alpyca-test workspace. This is it.
+* Run the sample test. Looks like this build is good. One last pass on the README!!
+* Now to check conditions for Issue #28. I made a test program in C:\Users\rdenn\Documents\Python Alpaca Tests
+  -- Install Alpyca 3.1.3 with the local wheel
+  -- ALL OK
+
+18-Aug-2026
+-----------
+* PR #27 https://github.com/ASCOMInitiative/alpyca/pull/27 already applied camera.py fix, manually applying fix to device.py.
+* PR #26 https://github.com/ASCOMInitiative/alpyca/pull/26 for typo in alpaca.camera.rst, manually applying
+* Run Unit Tests. OK
+* Build HTML & PDF docs, OK
+
+20-Aug-2026
+-----------
+* Ran Conform on NINA Alpaca Camera with Omni Sim on the back. Since the MWTest.py script runs fine with the Onmi Simulator, I'm going to chalk this up as a timing bug in the NINA Camera reflector exposed by the MWTest script.
+* Already built with poetry and tests with the local wheel alpyca-3.1.3-py3-none-any.whl, ready to publish after looking at README again!!
+* The VSCode Esbonio won't preview RST outside the docs (like CHANGES, and the others are flawed. used https://w3speedup.com/tools/re-structured-text-live-preview/). Looking good!
+* *************************************************
+* poetry publish
+    Publishing alpyca (3.1.3) to PyPI
+    - Uploading alpyca-3.1.3-py3-none-any.whl 100%
+    - Uploading alpyca-3.1.3.tar.gz 100%
+* *************************************************

@@ -1,3 +1,16 @@
+Version 3.1.3
+=============
+
+- Fix ``Camera.ImageBytes`` to detect `Content-Type: application/imagebytes`` with additional qualifiers
+  such as `charset`, per
+  `Issue #28 <https://github.com/ASCOMInitiative/alpyca/issues/28>`_
+  and for handling empty `DeviceInfo` returns, both within
+  `Pull Request #27 <https://github.com/ASCOMInitiative/alpyca/pull/27>`_. Thank you to
+  Michael Wuertenberger <michael.wuertenberger@t-online.de> for these.
+- Fix typo in Camera sample code per
+  `Pull Request #26 <https://github.com/ASCOMInitiative/alpyca/pull/26>`_.
+- Require Python 3.10 or later
+
 Version 3.1.2
 ==============
 

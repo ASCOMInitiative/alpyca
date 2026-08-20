@@ -1,23 +1,24 @@
-# alpyca 3.1.2
+# alpyca 3.1.3
 
-## Python 3.9+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
+## Python 3.10+ API library for all [ASCOM Alpaca](https://ascom-standards.org/Developer/Alpaca.htm) universal interfaces
 
-<img align="right" width="210" height="166" hspace="20" vspace="20" src="https://ascom-standards.org/alpyca/readme-assets/AlpacaLogo210.png">
+<img align="right" width="210" height="166" hspace="20" vspace="20" alt="Alpaca Logo" src="https://ascom-standards.org/alpyca/readme-assets/AlpacaLogo210.png">
 
 Produced by the [ASCOM Initiative](https://ascom-standards.org/), and derived from Ethan Chappel's
 Alpyca 1.0.0. Ethan kindly released the name **Alpyca** to the ASCOM Initiative, hence this expanded
-package started life as Version 2.0. With 3.0.0 it has been expanded to support the additions in
+package started life as Version 2.0. Beginning with 3.0.0 it has been expanded to support the additions in
 ASCOM Platform 7. **NOTE** This package runs on Linux, MacOS, and Windows. It has no depencence on the
 Windows ASCOM PLatform. Alpaca does not depend on Windows.
 
 ## Requirements
 
-This package runs under Python 3.9 or later. It is compatible with most Linux distros, Windows , and MacOS.
+This package runs under Python 3.10 or later. It is compatible with most Linux distros, Windows , and MacOS.
 Dependencies are minimal: [requests](https://pypi.org/project/requests/),
 [netifaces](https://pypi.org/project/netifaces/),
 [typing-extensions](https://pypi.org/project/typing-extensions/),
-[python-dateutil](https://pypi.org/project/python-dateutil/), and
-[enum-tools](https://pypi.org/project/enum-tools/).
+[python-dateutil](https://pypi.org/project/python-dateutil/),
+[enum-tools](https://pypi.org/project/enum-tools/), and
+[ifaddr](https://pypi.org/project/ifaddr/).
 
 ## Installation
 
@@ -29,7 +30,7 @@ pip install alpyca
 
 ## Current Status & Documentation
 
-This version 3.1.2. See
+This version 3.1.3. See
 **[CHANGES.rst](https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst)**
 (on GitHub) for change log.
 

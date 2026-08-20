@@ -16,9 +16,9 @@ Introduction and Quick Start
 
 .. only:: html
 
-    This package provides access to ASCOM compatible astronomy devices via the Alpaca network protocol.
-    For more information see the |ascsite|, specifically the |devhelp| section, the |alpacaapi|,
-    and |master2|.
+    This package provides access to ASCOM compatible astronomy devices via the
+    Alpaca network protocol. For more information see the |ascsite|,
+    specifically the |devhelp| section, the |alpacaapi|, and the |master2|.
 
 .. only:: rinoh or rst
 
@@ -31,13 +31,12 @@ Introduction and Quick Start
     `Alpaca API Reference <https://ascom-standards.org/AlpacaDeveloper/ASCOMAlpacaAPIReference.html>`_,
     and the
     `ASCOM Master Interfaces (Alpaca and COM) <https://ascom-standards.org/newdocs/>`_.
-
 .. _intro-stat:
 
 Status of This Document
 -----------------------
 The descriptions of the ASCOM Standard interfaces implemented in Alpyca are
-our best efforts as of January 2026, including the results of over a year of
+our best efforts as of August 2026, including the results of over a year of
 discussion and decisions, ultimately resulting in the new interface revisions
 in the ASCOM Platform 7. None of these changes are breaking. They are additions
 needed to support asynchronous operations for Alpaca, and clarifications of existing

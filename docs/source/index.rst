@@ -14,19 +14,19 @@
         :align: right
 
     =======================
-    Welcome to Alpyca 3.1.2
+    Welcome to Alpyca 3.1.3
     =======================
 
 .. only:: rinoh or rst
 
     =======================
-    Welcome to Alpyca 3.1.2
+    Welcome to Alpyca 3.1.3
     =======================
 
 This document describes the Alpyca package, a Python API client library for
 ASCOM Alpaca, produced by the ASCOM Initiative, and derived from Ethan
 Chappel's Alpyca 1.0.0. Ethan kindly released the name **Alpyca** to the ASCOM
-Initiative, hence this expanded package starts life as Version 2.0.
+Initiative, hence this expanded package started life as Version 2.0.
 
 The package provides all of the ASCOM Standard universal interfaces to
 astronomical devices using the Alpaca network protocol. As an application
@@ -47,7 +47,7 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.1.2, a maintenance release. For release notes
+        This is version 3.1.3, a maintenance release. For release notes
         see |changes| on the |github|.
 
     For background see |about| on the |ascsite|. As an astronomy developer
@@ -73,7 +73,7 @@ independent of the particular make/model of device.
         **Start Here:** :doc:`introduction`
 
     .. Note::
-        This is version 3.1.2, a maintenance release.
+        This is version 3.1.3, a maintenance release.
         For release notes see `the CHANGES document
         <https://github.com/ASCOMInitiative/alpyca/blob/master/CHANGES.rst>`_ on
         the `Alpyca GitHub repository

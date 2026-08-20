@@ -42,6 +42,9 @@
 # 08-Nov-24 (rbd) 3.0.1 For PDF rendering no change to logic
 # 11-Aug-25 (rbd) 3.1.1 For GitHub Issue #20 fix JSON image transfer, and
 #                       raise_alpaca_if()
+# 17-Aug-26 (rbd) 3.1.3 For GitHub issue #28 and Pull Request #27 (after the
+#                       fact) allow Content-Type to include'; charset=xxx'
+#                       (legal) and other possible noise.
 # -----------------------------------------------------------------------------
 
 from alpaca.device import Device
@@ -2538,7 +2541,7 @@ class Camera(Device):
         #
         # IMAGEBYTES
         #
-        if ct == 'application/imagebytes':
+        if 'application/imagebytes' in ct:  # May have charset as well (typ)
             a = self._build_imagedata_array(response)
             return self._build_imagedata_nested_list_array(a)
         #
@@ -2562,7 +2565,7 @@ class Camera(Device):
         """
         response = self._fetch_imagedata_response(attribute, **data)
         ct = response.headers.get('content-type')  # case insensitive
-        if ct == 'application/imagebytes':
+        if 'application/imagebytes' in ct:
             return self._build_imagedata_array(response)
         else:
             raise InvalidValueException(

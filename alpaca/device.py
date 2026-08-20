@@ -48,6 +48,7 @@
 #                       devices.
 # 18-May-25 (rbd) 3.1.1 GitHub Issue  #19. Force 'localhost' to use IPv4
 # 11-Aug-25 (rbd) 3.1.1 GitHub Issue #20. Connecting to unreachable device.
+# 18-Aug-26 (rbd) 3.1.3 GitHub Pull Request #27 manually applied locally
 # -----------------------------------------------------------------------------
 
 from threading import Lock, Timer, Thread
@@ -705,7 +706,7 @@ class Device:
                 there.
 
         """
-        return [i.strip() for i in self._get("driverinfo").split(",")]
+        return [i.strip() for i in self._get("driverinfo", "").split(",")]
 
     @property
     def DriverVersion(self) -> str:
