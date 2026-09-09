@@ -42,6 +42,8 @@
 #                 text for pierWest and pierUnknown (GitHub issue #5)
 # 08-Mar-24 (rbd) 3.0.0 Add Master Interfaces refs to all members
 # 13-Oct-24 (rbd) 3.0.1 For PDF rendering no change to logic
+# 09-Sep-26 (rbd) 3.0.2 Doc only, make Park() on a parked mount harmless per
+#                 master spec.
 # -----------------------------------------------------------------------------
 
 from datetime import datetime
@@ -1978,7 +1980,6 @@ class Telescope(Device):
             NotImplementedException: If the mount does not support parking.
                 In this case :attr:`CanPark` will be False.
             NotConnectedException: If the device is not connected
-            ParkedException: If :attr:`AtPark` is True
             SlavedException: If :attr:`Slaved` is True
             DriverException:An error occurred that is not described by
                 one of the more specific ASCOM exceptions.
@@ -1989,7 +1990,8 @@ class Telescope(Device):
               to monitor the operation. When the the park position has been
               *successfully* reached, :attr:`AtPark` becomes True, and
               :attr:`Slewing` becomes False.  See :ref:`async_faq`
-            * An app should check :attr:`AtPark` before calling Park().
+            * Parking a mount that is already parked (:attr:`AtPark` = True) is
+              harmless and must always be successful.
 
         .. admonition:: Master Interfaces Reference
             :class: green

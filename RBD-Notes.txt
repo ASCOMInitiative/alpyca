@@ -1669,3 +1669,4 @@ auncher\winapi.py", line 68, in impl
     - Uploading alpyca-3.1.3-py3-none-any.whl 100%
     - Uploading alpyca-3.1.3.tar.gz 100%
 * *************************************************
+* Publish updated documentation HTML & PDF
